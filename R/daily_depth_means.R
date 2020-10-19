@@ -7,7 +7,7 @@
 #'
 #' Utilizes the `xts` package.
 #'
-#' @param data data frame of (list columns)
+#' @param data data frame of site id, data/time, depth, and measurement (e.g., temperature).
 #' @param col_siteid Column name, SiteID
 #' @param col_datetime Column name, Date and Time
 #' @param col_depth Column name, Depth

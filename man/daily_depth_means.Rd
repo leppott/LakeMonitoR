@@ -7,7 +7,7 @@
 daily_depth_means(data, col_siteid, col_datetime, col_depth, col_measure)
 }
 \arguments{
-\item{data}{data frame of (list columns)}
+\item{data}{data frame of site id, data/time, depth, and measurement (e.g., temperature).}
 
 \item{col_siteid}{Column name, SiteID}
 

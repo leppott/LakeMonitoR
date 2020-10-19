@@ -1,10 +1,16 @@
 NEWS
 ================
-<Erik.Leppo@tetratech.com> and <tim.martin@state.mn.us>
+<Erik.Leppo@tetratech.com> and <Tim.Martin@state.mn.us>
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-19 10:24:16
+    #> Last Update: 2020-10-19 16:26:57
+
+# LakeMonitoR 0.0.1.9003
+
+Released - 2020-10-19
+
+  - Add stratification function.
 
 # LakeMonitoR 0.0.1.9002
 
