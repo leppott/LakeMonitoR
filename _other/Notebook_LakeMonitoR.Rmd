@@ -59,7 +59,7 @@ After creating the package reload it after restarting R within RStudio (Control+
 
 ```{r, eval=FALSE}
 # Restart R within RStudio:  Ctrl + Shift + F10
-myPkg <- "baytrendsmap"
+myPkg <- "LakeMonitoR"
 library(myPkg, character.only = TRUE)
 help(package=(myPkg))
 
@@ -72,8 +72,13 @@ pkgdown::build_site()
 
 ```
 
-## Including Data
-All data should have already been created.
+### Data Documentation
+Use promptData to get data.r listing for columns.  Short cuts creating documentation.
+
+```{r DocData}
+promptData(laketemp)
+```
+
 
 ## Error Checking
 Need to use testthat but not to that stage yet.

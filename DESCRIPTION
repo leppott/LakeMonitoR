@@ -1,12 +1,15 @@
 Package: LakeMonitoR
 Type: Package
 Title: Suite of Functions and Tools for Lake Monitoring
-Version: 0.0.1.9001
+Version: 0.0.1.9002
 Author: Erik W Leppo, Tim Martin
 Maintainer: Erik W Leppo <Erik.Leppo@tetratech.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Tools for analyzing lake depth profiles.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
+Imports:
+    xts

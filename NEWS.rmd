@@ -19,6 +19,22 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.0.1.9002
+===========
+Released - 2020-10-19
+
+* Update daily_depth_means function.
+* Add data file, laketemp_ddm (output of daily_depth_means function).
+
+LakeMonitoR 0.0.1.9001
+===========
+Released - 2020-10-16
+
+* Add laketemp data
+* Add functions.
+    + daily_depth_means
+    + lake_strat
+
 LakeMonitoR 0.0.1.9001
 ===========
 Released - 2020-10-16
