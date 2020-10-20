@@ -37,7 +37,7 @@ library(xts)
 data <- laketemp
 
 # Filter by any QC fields
-data <- data[(data$FlagV=='P'), ]
+data <- data[data$FlagV == "P", ]
 
 # name columns
 col_siteid   <- "SiteID"

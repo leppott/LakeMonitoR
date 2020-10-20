@@ -5,9 +5,9 @@
 \alias{laketemp_ddm}
 \title{Lake temperature, daily depth means}
 \format{
-A data frame with 756 observations on the following 3 variables.
+A data frame with 9,639 observations on the following 3 variables.
  \describe{
-   \item{\code{Date}}{a Date, February 2017}
+   \item{\code{Date}}{a Date, January 2017 to January 2018}
    \item{\code{Depth}}{a numeric vector of depths (meters)}
    \item{\code{Measurement}}{a numeric vector of temperature (degrees C)}
  }
@@ -16,7 +16,7 @@ A data frame with 756 observations on the following 3 variables.
 laketemp_ddm
 }
 \description{
-Lake profile temperature data created from `laketemp` using
+Lake profile temperature data created from `LakeMonitoR::laketemp` using
 `LakeMonitoR::daily_depth_means`.
 }
 \keyword{datasets}

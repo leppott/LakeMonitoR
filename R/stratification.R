@@ -34,10 +34,9 @@
 #' @examples
 #' # data
 #' data <- laketemp_ddm
-#' data <- read.csv(file.path(".", "data-raw", "laketemp_ddm2.csv"))
 #'
 #' # Columns
-#' col_siteid  <- "SiteID"
+#' #col_siteid  <- "SiteID"
 #' col_date    <- "Date"
 #' col_depth   <- "Depth"
 #' col_measure <- "Measurement"

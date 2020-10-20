@@ -1,10 +1,10 @@
 #' Lake temperature data
 #'
-#' Example data containing one month (February 2017) of lake profile
+#' Example data containing one year (January 2017 to January 2018) of lake profile
 #' temperature data.  Includes QC flag columns.
 #'
 #'@format
-#'\describe{A data frame with 13440 observations on the following 12 variables.
+#'\describe{A data frame with 171,414 observations on the following 12 variables.
 #'  \item{\code{DOWLKNUM}}{DOW Lake Number}
 #'  \item{\code{SiteID}}{Site ID}
 #'  \item{\code{Date_Time}}{Date and Time}
@@ -23,12 +23,12 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Lake temperature, daily depth means
 #'
-#' Lake profile temperature data created from `laketemp` using
+#' Lake profile temperature data created from `LakeMonitoR::laketemp` using
 #' `LakeMonitoR::daily_depth_means`.
 #'
-#' @format A data frame with 756 observations on the following 3 variables.
+#' @format A data frame with 9,639 observations on the following 3 variables.
 #'  \describe{
-#'    \item{\code{Date}}{a Date, February 2017}
+#'    \item{\code{Date}}{a Date, January 2017 to January 2018}
 #'    \item{\code{Depth}}{a numeric vector of depths (meters)}
 #'    \item{\code{Measurement}}{a numeric vector of temperature (degrees C)}
 #'  }

@@ -19,6 +19,15 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.0.1.9004
+===========
+Released - 2020-10-19
+
+* Update data-raw and data with full records.
+    + Use full raw data.
+    + Zip raw data file.
+* Update data.R
+
 LakeMonitoR 0.0.1.9003
 ===========
 Released - 2020-10-19

@@ -35,7 +35,10 @@ data_ddm <- daily_depth_means(data, col_siteid, col_datetime, col_depth, col_mea
 #View(data.import)
 # QC check
 dim(data_ddm)
+# Feb only
 # 28 days * 27 depths = 756 rows
+# Full data set
+# 9639 rows
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 2. Save as RDA for use in package####
