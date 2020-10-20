@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-20 07:39:02
+    #> Last Update: 2020-10-20 07:42:41
+
+# LakeMonitoR 0.0.1.9006
+
+Released - 2020-10-20
+
+  - Remove docs (pkgdown) from gitignore
 
 # LakeMonitoR 0.0.1.9005
 
