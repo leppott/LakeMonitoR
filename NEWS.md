@@ -4,11 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-20 07:35:15
+    #> Last Update: 2020-10-20 07:39:02
+
+# LakeMonitoR 0.0.1.9005
+
+Released - 2020-10-20
+
+  - Add pkgdown documentation.
 
 # LakeMonitoR 0.0.1.9004
 
-Released - 2020-10-19
+Released - 2020-10-20
 
   - Update data-raw and data with full records.
       - Use full raw data.
