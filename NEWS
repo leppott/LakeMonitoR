@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-20 07:42:41
+    #> Last Update: 2020-10-20 07:57:14
+
+# LakeMonitoR 0.1.0
+
+Released - 2020-10-20
+
+  - Interim version.
+      - Both functions fully operational.
+  - Update pkgdown.
 
 # LakeMonitoR 0.0.1.9006
 
