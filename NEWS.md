@@ -4,7 +4,16 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-20 07:57:14
+    #> Last Update: 2020-10-22 13:48:06
+
+# LakeMonitoR 0.1.0.9001
+
+Released - 2020-10-22
+
+  - Add Shiny app.
+      - File upload only.
+  - runShiny.R
+      - Add function to run shiny app.
 
 # LakeMonitoR 0.1.0
 
