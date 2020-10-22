@@ -72,6 +72,13 @@ pkgdown::build_site()
 
 ```
 
+Reinstall from GitHub before upload Shiny app.
+```{r, eval=FALSE}
+library(devtools)
+install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
+```
+
+
 ### Data Documentation
 Use promptData to get data.r listing for columns.  Short cuts creating documentation.
 

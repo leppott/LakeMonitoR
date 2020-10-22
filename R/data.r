@@ -34,3 +34,14 @@
 #'  }
 "laketemp_ddm"
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' Lake temperature, hypsography
+#'
+#' Lake profile depth (m) contour area (m2) for use with rLakeAnalyzer metrics.
+#'
+#' @format A data frame with 31 observations on the following 2 variables.
+#'  \describe{
+#'    \item{\code{Contour_Depth}}{contour depths (meters)}
+#'    \item{\code{Area}}{a numeric vector of area (square meters)}
+#'  }
+"lakehypso"
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -9,7 +9,7 @@ Aid analysis of temperature and dissolved oxygen depth profiles from lakes.
 # Installation
 ```
 library(devtools)
-install_github("leppott\LakeMonitoR", force = TRUE, build_vignettes = TRUE)
+install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
 ```
 
 # Issues

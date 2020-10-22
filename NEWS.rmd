@@ -19,6 +19,20 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9002
+===========
+Released - 2020-10-22
+
+* ReadMe.md
+    + Fix typo in  install_github example code.
+* Add function export_rLakeAnalyzer
+    + Convert data frame to rLakeAnalyzer input format.
+* DESCRIPTION
+    + Imports: reshape2
+    + Suggests: rLakeAnalyzer and ggplot2
+* Data.R
+    + Add lakehypso
+
 LakeMonitoR 0.1.0.9001
 ===========
 Released - 2020-10-22

@@ -4,7 +4,21 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-22 13:48:06
+    #> Last Update: 2020-10-22 16:00:52
+
+# LakeMonitoR 0.1.0.9002
+
+Released - 2020-10-22
+
+  - ReadMe.md
+      - Fix typo in install\_github example code.
+  - Add function export\_rLakeAnalyzer
+      - Convert data frame to rLakeAnalyzer input format.
+  - DESCRIPTION
+      - Imports: reshape2
+      - Suggests: rLakeAnalyzer and ggplot2
+  - Data.R
+      - Add lakehypso
 
 # LakeMonitoR 0.1.0.9001
 
