@@ -39,6 +39,9 @@ shinyServer(function(input, output) {
       return(NULL)
     }##IF~is.null~END
 
+    # Disable download button if load a new file
+    shinyjs::disable("b_downloadData")
+
     #message(getwd())
 
     # Add "Results" folder if missing
@@ -59,7 +62,7 @@ shinyServer(function(input, output) {
                            , stringsAsFactors = FALSE)
 
     # Write to "Results" folder - Import as TSV
-    fn_input <- file.path(".", "Results", "data_import.tsv")
+    fn_input <- file.path(".", "Results", "data_import_measure.tsv")
     write.table(df_input, fn_input, row.names=FALSE, col.names=TRUE, sep="\t")
 
     # Copy to "Results" folder - Import "as is"
@@ -68,156 +71,324 @@ shinyServer(function(input, output) {
     return(df_input)
 
   }##expression~END
-  , filter="top", options=list(scrollX=TRUE)
+  , filter="top"
+  , options=list(scrollX=TRUE
+                 , pageLength = 5
+                 , lengthMenu = c(5, 10, 25, 50, 100, 250, 500, 1000))
+  , caption = "Measured Values"
   )##output$df_import_DT~END
 
+  # df_import2 ####
+  output$df_import2_DT <- renderDT({
+    # input$df_import will be NULL initially. After the user selects
+    # and uploads a file, it will be a data frame with 'name',
+    # 'size', 'type', and 'datapath' columns. The 'datapath'
+    # column will contain the local filenames where the data can
+    # be found.
+
+    inFile2 <- input$fn_input2
+
+    if (is.null(inFile2)){
+      return(NULL)
+    }##IF~is.null~END
+
+    # Disable download button if load a new file
+    shinyjs::disable("b_downloadData")
+    # only activates if try to display the file.
+
+    #message(getwd())
+
+    # Add "Results" folder if missing
+    boo_Results <- dir.exists(file.path(".", "Results"))
+    if(boo_Results == FALSE){
+      dir.create(file.path(".", "Results"))
+    }
+
+    # will not remove files.
+
+    # Read user imported file
+    df_input2 <- read.table(inFile2$datapath
+                           , header = TRUE
+                           , sep = input$sep2
+                           , quote = "\""
+                           , stringsAsFactors = FALSE)
+
+    # Write to "Results" folder - Import as TSV
+    fn_input2 <- file.path(".", "Results", "data_import2_area.tsv")
+    write.table(df_input2, fn_input2, row.names=FALSE, col.names=TRUE, sep="\t")
+
+    # Copy to "Results" folder - Import "as is"
+    file.copy(input$fn_input2$datapath, file.path(".", "Results", input$fn_input2$name))
+
+    return(df_input2)
+
+  }##expression~END
+  , filter="top"
+  , options=list(scrollX=TRUE
+                 , pageLength = 5
+                 , lengthMenu = c(5, 10, 25, 50, 100, 250, 500, 1000))
+  , caption = "Area"
+  )##output$df_import2_DT~END
+
   # b_Calc ####
-  # Calculate IBI (metrics and scores) from df_import
+  # Calculate metrics on imported data
   # add "sleep" so progress bar is readable
   observeEvent(input$b_Calc, {
      shiny::withProgress({
       #
+      boo_DEBUG <- FALSE
       # Number of increments
-      n_inc <- 6
+      n_inc <- 4
+      n_step <- 0
 
-      # sink output
+      # b_Calc, Step 1, Initialize ####
+      # Increment the progress bar, and update the detail text.
+      n_step <- n_step + 1
+      prog_detail <- paste0("Step ", n_step, "; Initialize log file.")
+      incProgress(1/n_inc, detail = prog_detail)
+      Sys.sleep(0.25)
+
+      # b_Calc, *sink* ####
       #fn_sink <- file.path(".", "Results", "results_log.txt")
       file_sink <- file(file.path(".", "Results", "results_log.txt"), open = "wt")
       sink(file_sink, type = "output", append = TRUE)
       sink(file_sink, type = "message", append = TRUE)
       # Log
-      message("Results Log from MBSStools Shiny App")
+      message("Results Log from LakeMonitoR Shiny App")
       message(Sys.time())
+      # appUser <- Sys.getenv('USERNAME')
+      # message(paste0("Username = ", appUser))
+      # Not meaningful when run online via Shiny.io
       inFile <- input$fn_input
-      message(paste0("file = ", inFile$name))
+      message(paste0("file, measurement = ", inFile$name))
+      inFile2 <- input$fn_input2
+      message(paste0("file, area = ", inFile$name))
+      message("If area file is null then only stratification metrics are calculated.")
 
-
+      # b_Calc, Step 2, Daily Depth Means and Stratification ####
       # Increment the progress bar, and update the detail text.
-      incProgress(1/n_inc, detail = "Data, Initialize")
+      n_step <- n_step + 1
+      prog_detail <- paste0("Step ", n_step, "; Stratification.")
+      incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(0.25)
 
       #df_data <- 'df_import_DT'
       # Read in saved file (known format)
       df_data <- NULL  # set as null for IF QC check prior to import
-      fn_input <- file.path(".", "Results", "data_import.tsv")
+      fn_input <- file.path(".", "Results", "data_import_measure.tsv")
       df_data <- read.delim(fn_input, stringsAsFactors = FALSE, sep="\t")
 
       # QC, FAIL if TRUE
       if (is.null(df_data)){
+        message("No data file provided.")
         return(NULL)
       }
 
-      #appUser <- Sys.getenv('USERNAME')
-      # Not meaningful when run online via Shiny.io
-
-      # Increment the progress bar, and qc_taxa
-      incProgress(1/n_inc, detail = "QC, Taxa")
-      Sys.sleep(0.25)
-      # qc_taxa
-      myIndex <- input$MMI
-      myCommunity <- Community[match(myIndex, MMIs)]
-      # Log
-      message(paste0("Community = ", myCommunity))
-      message(paste0("QC taxa = ", input$QC_Type))
-
-      if(myCommunity == "fish"){
-        df_mt  <- df_mt_fish
-      } else if (myCommunity == "bugs"){
-        df_mt  <- df_mt_bugs
+      # Calc Strat
+      if(boo_DEBUG == FALSE){
+        # data
+        df_calc <- df_data
+        # Columns
+        col_date    <- input$col_msr_datetime #"Date_Time"
+        col_depth   <- input$col_msr_depth #"Depth_m"
+        col_measure <- input$col_msr_msr #"Water_Temp_C"
+        # Ensure date time is POSIX
+        dt_format <- "%Y-%m-%d %H:%M"
+        tz_temp   <- "GMT"
+        df_calc[, col_date] <- as.POSIXct(df_calc[, col_date]
+                                          , format = dt_format
+                                          , tz = tz_temp)
+        # Add dummy site ID, assume all same site
+        col_siteid <- "SiteID"
+        df_calc[, col_siteid] <- "shiny"
       } else {
-        # Nothing
-      }## IF ~ community ~ END
+        # data
+        df_calc <- laketemp_ddm
+        # Columns
+        col_siteid  <- "SiteID"
+        col_date    <- "Date"
+        col_depth   <- "Depth"
+        col_measure <- "Measurement"
 
-      df_data_qc <- qc_taxa(df_data, df_mt, myCommunity, input$QC_Type)
-      # INDEX.NAME to Index.Name
-      names(df_data_qc)[names(df_data_qc) %in% "INDEX.NAME"] <- "Index.Name"
-      # QC
-      # write.csv(df_data, file.path(".", "Results", "results_data.csv"))
-      # write.csv(df_data_qc, file.path(".", "Results", "results_data_qc.csv"))
+      }##IF ~ boo_DEBUG ~ END
 
-      # Increment the progress bar, and update the detail text.
-      incProgress(1/n_inc, detail = "Calculate, Metrics")
+      # show "data"
+      print("Input Data")
+      message(fn_input)
+      print(head(df_calc))
+      print(str(df_calc))
+
+      # Calculate daily_depth_means
+      # Otherwise stratification fails if have time.
+      df_ddm <- LakeMonitoR::daily_depth_means(df_calc, "SiteID", col_date, col_depth, col_measure)
+      print("QC, Calculate daily depth means")
+      print(head(df_ddm))
+      # save ddm
+      fn_ddm <- file.path(".", "Results", "data_ddm.csv")
+      write.csv(df_ddm, fn_ddm, row.names = FALSE)
+
+      # Calculate Stratification
+      col_strat_date    <- "Date"
+      col_strat_depth   <- "Depth"
+      col_strat_measure <- "Measurement"
+      ls_strat <- LakeMonitoR::stratification(df_ddm
+                                              , col_strat_date
+                                              , col_strat_depth
+                                              , col_strat_measure
+                                              , min_days = 20 )
+      # Save Results
+      # Results, Stratification Dates
+      fn_strat_dates <- file.path(".", "Results", "strat_dates.csv")
+      write.csv(ls_strat$Stratification_Dates, fn_strat_dates, row.names = FALSE)
+      # Results, Stratification Events
+      fn_strat_events <- file.path(".", "Results", "strat_events.csv")
+      write.csv(ls_strat$Stratification_Events, fn_strat_events, row.names = FALSE)
+
+      # Sink info
+      print("Stratification, Dates (head)")
+      print(head(ls_strat$Stratification_Dates))
+      print("Stratification, Events (head)")
+      print(head(ls_strat$Stratification_Events))
+
+      # Clean up
+      rm(df_calc)
+
+
+      # b_Calc, Step 3, Schmidt, rLA ####
+      # Increment the progress bar, and qc_taxa
+      n_step <- n_step + 1
+      prog_detail <- paste0("Step ", n_step, "; rLakeAnalyzer stats")
+      incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(0.25)
 
-      # calculate values and scores in a single step.
-      #  and save each file
+      #df_data2 <- 'df_import2_DT'
+      # Read in saved file (known format)
+      df_data2 <- NULL  # set as null for IF QC check prior to import
+      fn_input2 <- file.path(".", "Results", "data_import2_area.tsv")
+      df_data2 <- read.delim(fn_input2, stringsAsFactors = FALSE, sep="\t")
 
-      #myIndex <- input$MMI
-      thresh <- MBSStools::metrics_scoring
-      myMetrics <- as.character(droplevels(unique(thresh[thresh[,"Index.Name"]==myIndex,"MetricName.Other"])))
-      #
-     # myCommunity <- Community[match(myIndex, MMIs)]
-      myCol_Strata <- col_Strata[match(myIndex, MMIs)]
+      # QC, FAIL if TRUE
+      if (is.null(df_data2)){
+        message("No area data provided.  No rLakeAnalyzer analyses performed.")
+        #return(NULL)
+      } else {
+        message(fn_input2)
+        print(head(df_data2))
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Convert Data for use with rLakeAnalyzer
+        if(boo_DEBUG == FALSE){
+          # Data
+          df_ddm <- df_ddm
+          df_area <- df_data2
+          # Columns, date listed first
+          col_area_depth <- input$col_area_depth #"Depth"
+          col_area_area <- input$col_area_area
+        } else{
+          # Data
+          df_ddm <- laketemp_ddm
+          df_area <- data.frame(depths=c(3,6,9), areas=c(300,200,100))
+        }## IF ~ boo_DEBUG ~ END
+        # date to date format
+        df_ddm[, "Date"] <- as.Date(df_ddm[, "Date"])
+        # Run function
+        col_rLA_depth <- "Depth"
+        col_rLA_data <- c("Date", "Measurement")
+        col_rLA  <- c("datetime", "wtr")
+        df_rLA <- LakeMonitoR::export_rLakeAnalyzer(df_ddm
+                                                    , col_rLA_depth
+                                                    , col_rLA_data
+                                                    , col_rLA)
+        print("rLA export")
+        print(head(df_rLA))
+        # Save
+        write.csv(df_rLA, "data_rLA.csv", row.names = FALSE)
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # use rLakeAnalyzer
+        # Filter Data for only temperature
+        col_wtr <- colnames(df_rLA)[grepl("wtr_", colnames(df_rLA))]
+        df_rLA_wtr <- df_rLA[, c("datetime", col_wtr)]
+        # Date format
+        df_rLA_wtr$datetime <- as.POSIXct(df_rLA_wtr$datetime)
 
-      # Log
-      message(paste0("IBI = ", input$MMI))
-
-      df_metval <- MBSStools::metric.values(df_data_qc, myCommunity, myMetrics)
-      #
-      # Save
-      # fn_metval <- file.path(".", "Results", "results_metval.tsv")
-      # write.table(df_metval, fn_metval, row.names = FALSE, col.names = TRUE, sep="\t")
-      fn_metval <- file.path(".", "Results", "results_metval.csv")
-      write.csv(df_metval, fn_metval, row.names = FALSE)
-      #
-      # QC - upper case Index.Name
-      names(df_metval)[grepl("Index.Name", names(df_metval))] <- "INDEX.NAME"
+        # Bathymetry data frame
+        df_rLA_bath <- df_area[, c(col_area_depth, col_area_area)]
+        # rLA expected column names
+        names(df_rLA_bath) <- c("depths", "areas")
 
 
 
+        # Generate Heat Map
+        fn_hm <- file.path(".", "Results", "rLA_plot_heatmap.png")
+        grDevices::png(fn_hm)
+          rLakeAnalyzer::wtr.heat.map(df_rLA_wtr)
+        grDevices::dev.off()
+        # Generate Schmidt Plot
+        # fn_sp <- file.path(".", "Results", "rLA_plot_Schmidt.png")
+        # grDevices::png(fn_sp)
+        #   rLakeAnalyzer::schmidt.plot(df_rLA_wtr, df_rLA_bath)
+        # grDevices::dev.off()
+        # Generate Schmidt Stability Values
+        # df_rLA_Schmidt <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr, df_rLA_bath)
+        # fn_rLA_Schmidt <- file.path(".", "Results", "rLA_Schmidt.csv")
+        # write.csv(df_rLA, "data_rLA.csv", row.names = FALSE)
+
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Plot original data in ggplot
+        data_plot <- df_data
+        data_plot[, col_date] <- as.POSIXct(data_plot[, col_date]
+                                          , format = dt_format
+                                          , tz = tz_temp)
+        # col_date    <- "Date"
+        # col_depth   <- "Depth"
+        # col_measure <- "Measurement"
+        # "set" the columns
+
+
+        # Plot, Create
+        p <- ggplot2::ggplot(data_plot, ggplot2::aes_string(x=col_date, y=col_measure)) +
+          ggplot2::geom_point(ggplot2::aes_string(color=col_depth)) +
+          ggplot2::scale_color_continuous(trans="reverse") +
+          ggplot2::labs(title = "Depth Profile"
+                        , x = "Date"
+                        , y = "Temperature (Celsius)"
+                        , color = "Depth (m)") +
+          ggplot2::theme_light()
+        # Plot, Save
+        fn_p <- file.path(".", "Results", "plot_depth_profile.png")
+        ggplot2::ggsave(fn_p)
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #  # could also do plot of events
+        #  data_plot <- ls_strat$Stratification_Dates
+        #  data_plot <- data_plot[data_plot$Stratified == TRUE, ]
+        #  data_plot$Julian <- format(data_plot$Date, "%j")
+        #  data_plot$Year <- format(data_plot$Date, "%Y")
+        #  # data_plot$start_md <- format(data_plot$Start_Date, "%m-%d")
+        #  # data_plot$end_md <- format(data_plot$End_Date, "%m-%d")
+        #
+        #  p_events <- ggplot(data_plot, aes(x = Date, y = Year)) +
+        #              geom_line(size = 2) +
+        #              scale_x_date(date_labels="%b"
+        #                           , date_breaks  ="1 month"
+        #                           , limits = c(as.Date("2017-01-01"), as.Date("2017-12-31"))) +
+        #              labs(title = "Statification Events", x = "Month") +
+        #              theme_light()
+        #
+        #  #a <- unique(data_plot$Year)
+        # # b <- format(seq( as.Date("2020-01-01"), as.Date("2020-12-31"), by="+1 day"), "%m-%d")
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      }## IF ~ is.null(df_data2) ~ END
+
+
+      # b_Calc, Step 4, Zip Results ####
       # Increment the progress bar, and update the detail text.
-      incProgress(1/n_inc, detail = "Calculate, Scores")
-      Sys.sleep(0.25)
-
-      # Metric Scores
-      #
-      df_metsc <- MBSStools::metric.scores(df_metval, myMetrics, "INDEX.NAME"
-                                           , myCol_Strata, thresh)
-      # Add Narrative
-      myBreaks <- c(1:5)
-      myLabels <- c("Very Poor", "Poor", "Fair", "Good")
-      df_metsc$IBI_Nar <- cut(df_metsc$IBI
-                              , breaks=myBreaks
-                              , labels=myLabels
-                              , include.lowest=TRUE
-                              , right=FALSE
-                              , ordered_result=TRUE)
-      # Save
-      # fn_metsc <- file.path(".", "Results", "results_metsc.tsv")
-      # write.table(df_metsc, fn_metsc, row.names = FALSE, col.names = TRUE, sep="\t")
-      fn_metsc <- file.path(".", "Results", "results_metsc.csv")
-      write.csv(df_metsc, fn_metsc, row.names = FALSE)
-
-
-
-      # Increment the progress bar, and update the detail text.
-      incProgress(1/n_inc, detail = "Create, Plot")
-      Sys.sleep(0.25)
-
-      # Plot
-      p1 <- ggplot(df_metsc, aes(IBI), fill=myCol_Strata, shape=myCol_Strata) +
-                  geom_dotplot(aes_string(fill=myCol_Strata), method="histodot", binwidth = 1/5) +
-                  #geom_dotplot(aes_string(fill=myCol_Strata)) +
-                  labs(x=myIndex) +
-                  geom_vline(xintercept = 3) +
-                  scale_x_continuous(limits = c(1, 5)) +
-                  # scale_fill_discrete(name="STRATA"
-                  #                     , breaks=c("COASTAL", "EPIEDMONT", "HIGHLAND")) +
-                  theme(axis.title.y=element_blank()
-                        , axis.ticks.y=element_blank()
-                        , axis.text.y=element_blank())
-      fn_p1 <- file.path(".", "Results", "results_plot_IBI.jpg")
-      ggplot2::ggsave(fn_p1, p1)
-
-
-
-      # Increment the progress bar, and update the detail text.
-      incProgress(1/n_inc, detail = "Create, Zip")
+      n_step <- n_step + 1
+      prog_detail <- paste0("Step ", n_step, "; Create, Zip.")
+      incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(0.25)
 
       # Create zip file
       fn_4zip <- list.files(path = file.path(".", "Results")
-                            , pattern = "^results_"
+                            , pattern = "*"
                             , full.names = TRUE)
       zip(file.path(".", "Results", "results.zip"), fn_4zip)
 
@@ -225,130 +396,26 @@ shinyServer(function(input, output) {
       shinyjs::enable("b_downloadData")
 
       # #
-      message(paste0("Working Directory = ", getwd()))
-      # return(myMetric.Values)
       # end sink
       #flush.console()
       sink() # console
       sink() # message
       #
      }##expr~withProgress~END
-     , message = "Calculating IBI"
+     , message = "Calculating:"
      )##withProgress~END
     }##expr~ObserveEvent~END
-  )##observeEvent~b_CalcIBI~END
-
-  # df_metric_values ####
-  # output$df_metric_values <- DT::renderDT({
-  #   # input$df_metric_values will be NULL initially. After the user
-  #   # calculates an IBI, it will be a data frame with 'name',
-  #   # 'size', 'type', and 'datapath' columns. The 'datapath'
-  #   # column will contain the local filenames where the data can
-  #   # be found.
-  #
-  #   # If haven't imported a file keep blank
-  #   inFile <- input$fn_input
-  #
-  #   if (is.null(inFile)){
-  #     return(NULL)
-  #   }##IF~is.null~END
-  #
-  #   # Read in saved file (known format)
-  #   df_met_val <- NULL
-  #   fn_met_val <- file.path(".", "Results", "results_metval.tsv")
-  #   df_met_val <- read.delim(fn_input, stringsAsFactors = FALSE, sep="\t")
-  #
-  #   boo_met_val <- file.exists(fn_met_val)
-  #
-  #   if (boo_met_val==FALSE){
-  #     return(NULL)
-  #   }
-  #
-  #   return(df_met_val)
-  #
-  # }##expr~END
-  # , filter="top", options=list(scrollX=TRUE)
-  # )##output$df_import~END
-
-  # # df_metric_scores ####
-  # output$df_metric_scores <- renderDT({
-  #   # input$df_metric_scores will be NULL initially. After the user
-  #   # calculates an IBI, it will be a data frame with 'name',
-  #   # 'size', 'type', and 'datapath' columns. The 'datapath'
-  #   # column will contain the local filenames where the data can
-  #   # be found.
-  #
-  #   # If haven't imported a file keep blank
-  #   inFile <- input$fn_input
-  #
-  #   if (is.null(inFile)){
-  #     return(NULL)
-  #   }##IF~is.null~END
-  #
-  #   # Read in saved file (known format)
-  #   df_met_sc <- NULL
-  #   fn_met_sc <- file.path(".", "Results", "results_metsc.tsv")
-  #   df_met_sc <- read.delim(fn_input, stringsAsFactors = FALSE, sep="\t")
-  #   boo_met_sc <- file.exists(fn_met_sc)
-  #
-  #   if (boo_met_sc==FALSE){
-  #     return(NULL)
-  #   } else {
-  #     return(df_met_sc)
-  #   }
-  #
-  # }##expr~END
-  # , filter="top", options=list(scrollX=TRUE)
-  # )##output$df_import~END
-
-
-  # # plot_IBI ####
-  # #output$plot_IBI <- renderPlotly(ggplotly(plot_BIBI))
-  # output$plot_IBI <- renderImage({
-  #   #
-  #   # If haven't imported a file keep blank
-  #   inFile <- input$fn_input
-  #
-  #   fn_plot <- file.path(".", "Results", "plot_IBI.jpg")
-  #   boo_plot <- file.exists(fn_plot)
-  #
-  #
-  #   if (is.null(inFile)==TRUE){# || boo_plot==FALSE){
-  #     return(NULL)
-  #   }##IF~is.null~END
-  #
-  #   # if (boo_plot==FALSE){
-  #   #   return(NULL)
-  #   # }
-  #
-  #   return(list(src = fn_plot
-  #               , filetype = "image/jpeg"
-  #               , width = 800
-  #               )
-  #         )##return~END
-  #
-  # }##expr~END
-  # , deleteFile=FALSE
-  # )##renderImage~END
+  )##observeEvent~b_Calc~END
 
 
   # b_downloadData ####
-
-  # disable button unless have zip file
-  # Enable in b_Calc instead
-  # observe({
-  #   fn_zip_toggle <- paste0("results", ".zip")
-  #   shinyjs::toggleState(id="b_downloadData", condition = file.exists(file.path(".", "Results", fn_zip_toggle)) == TRUE)
-  # })##~toggleState~END
-
-
-  # Downloadable csv of selected dataset
+  # Download of results
   output$b_downloadData <- downloadHandler(
     # use index and date time as file name
     #myDateTime <- format(Sys.time(), "%Y%m%d_%H%M%S")
 
     filename = function() {
-      paste(input$MMI, "_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".zip", sep = "")
+      paste("LakeMonitoR", "_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".zip", sep = "")
     },
     content = function(fname) {##content~START
      # tmpdir <- tempdir()
