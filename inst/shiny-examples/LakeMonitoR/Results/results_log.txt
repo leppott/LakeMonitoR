@@ -1,0 +1,98 @@
+[1] "Input Data"
+  SiteID           Date_Time Water_Temp_C Depth_m
+1  shiny 2017-01-19 07:00:00        1.371     8.5
+2  shiny 2017-01-19 08:00:00        1.371     8.5
+3  shiny 2017-01-19 09:00:00        1.371     8.5
+4  shiny 2017-01-19 10:00:00        1.371     8.5
+5  shiny 2017-01-19 11:00:00        1.371     8.5
+6  shiny 2017-01-19 12:00:00        1.371     8.5
+'data.frame':	171024 obs. of  4 variables:
+ $ SiteID      : chr  "shiny" "shiny" "shiny" "shiny" ...
+ $ Date_Time   : POSIXct, format: "2017-01-19 07:00:00" "2017-01-19 08:00:00" "2017-01-19 09:00:00" ...
+ $ Water_Temp_C: num  1.37 1.37 1.37 1.37 1.37 ...
+ $ Depth_m     : num  8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 ...
+NULL
+[1] "QC, Calculate daily depth means"
+        Date Depth Measurement
+1 2017-01-19     2   0.9607059
+2 2017-01-19     3   1.0710000
+3 2017-01-19     4   1.0985000
+4 2017-01-19     5   1.1395000
+5 2017-01-19     6   1.1844706
+6 2017-01-19     7   1.2525000
+[1] "Stratification, Dates (head)"
+        Date Stratified
+1 2017-01-19      FALSE
+2 2017-01-20      FALSE
+3 2017-01-21      FALSE
+4 2017-01-22      FALSE
+5 2017-01-23      FALSE
+6 2017-01-24      FALSE
+[1] "Stratification, Events (head)"
+  Start_Date   End_Date Year Time_Span
+1 2017-06-05 2017-10-16 2017  133 days
+  |                                                                                                         |                                                                                                 |   0%  |                                                                                                         |...................                                                                              |  20%
+  ordinary text without R code
+
+  |                                                                                                         |.......................................                                                          |  40%
+label: Options (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                                                         |..........................................................                                       |  60%
+  ordinary text without R code
+
+  |                                                                                                         |..............................................................................                   |  80%
+label: LastUpdate (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                                                         |.................................................................................................| 100%
+  ordinary text without R code
+
+
+"C:/PROGRA~1/Pandoc/pandoc" +RTS -K512m -RTS NEWS.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output NEWS.md --standalone --atx-headers --template "C:\Programs\R\R-4.0.2\library\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
+"C:/PROGRA~1/Pandoc/pandoc" +RTS -K512m -RTS NEWS.md --to html4 --from gfm --output NEWS.html --standalone --self-contained --highlight-style pygments --template "C:\Programs\R\R-4.0.2\library\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Programs\R\R-4.0.2\library\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW 
+[1] TRUE
+[1] TRUE
+Writing NAMESPACE
+Writing NAMESPACE
+         checking for file 'C:\Users\Erik.Leppo\OneDrive - Tetra Tech, Inc\MyDocs_OneDrive\GitHub\LakeMonitoR/DESCRIPTION' ...  v  checking for file 'C:\Users\Erik.Leppo\OneDrive - Tetra Tech, Inc\MyDocs_OneDrive\GitHub\LakeMonitoR/DESCRIPTION' (334ms)
+      -  preparing 'LakeMonitoR': (633ms)
+   checking DESCRIPTION meta-information ...     checking DESCRIPTION meta-information ...   v  checking DESCRIPTION meta-information
+      -  checking for LF line-endings in source and make files and shell scripts (404ms)
+      -  checking for empty or unneeded directories
+  Removed empty directory      Removed empty directory 'LakeMonitoR/inst/external'
+      -  building 'LakeMonitoR_0.1.0.9004.tar.gz'
+     
+Running "C:/Programs/R/R-40~1.2/bin/i386/Rcmd.exe" INSTALL \
+  "C:\Users\ERIK~1.LEP\AppData\Local\Temp\Rtmpuew2SR/LakeMonitoR_0.1.0.9004.tar.gz" --install-tests 
+-\|/-\* installing to library 'C:/Programs/R/R-4.0.2/library'
+|* installing *source* package 'LakeMonitoR' ...
+/** using staged installation
+-** R
+\** data
+|*** moving datasets to lazyload DB
+/-\|/-\|/-** inst
+\** byte-compile and prepare package for lazy loading
+|/-** help
+\*** installing help indices
+|  converting help for package     finding HTML links .../'LakeMonitoR'
+- done
+\    |daily_depth_means                       html  /
+-    export_rLakeAnalyzer                    html  \
+|    lakehypso                               html  /
+-    laketemp                                html  \
+|    laketemp_ddm                            html  /
+-    runShiny                                html  \
+|    stratification                          html  /
+-** building package indices
+\|** testing if installed package can be loaded from temporary location
+/*** arch - i386
+-\*** arch - x64
+|/** testing if installed package can be loaded from final location
+-*** arch - i386
+\|*** arch - x64
+/-** testing if installed package keeps a record of temporary installation path
+\* DONE (LakeMonitoR)
+|/ 

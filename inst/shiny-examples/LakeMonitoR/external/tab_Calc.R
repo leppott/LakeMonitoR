@@ -22,7 +22,7 @@ function(){
                , h4("3. Calculate")
                , textInput("strat_min_days", label = "Stratification, minimum days", value = 20)
                , p("Must view data tabs to the right before clicking calculate below.")
-               , actionButton("b_Calc", "Calculate")
+               , shinyjs::disabled(actionButton("b_Calc", "Calculate"))
                #
                , h4("4. Download Results")
                # Button
@@ -39,7 +39,7 @@ function(){
                            , tabPanel("Data, Import, Measured Values"
                                       , DT::dataTableOutput('df_import_DT')
                            )
-                           , tabPanel("Data, Import, Area"
+                           , tabPanel("Data, Import, Lakes Areas"
                                       , DT::dataTableOutput('df_import2_DT')
                            )
                )##tabsetPanel~END

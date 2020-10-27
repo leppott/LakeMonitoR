@@ -4,12 +4,21 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-26 14:56:00
+    #> Last Update: 2020-10-27 14:31:01
+
+# LakeMonitoR 0.1.0.9004
+
+Released - 2020-10-27
+
+  - Shiny, server.R
+      - Add error checking for column names and upload files, Issue \#1
 
 # LakeMonitoR 0.1.0.9003
 
-Released - 2020-10-26 \* Update Shiny app. \* Add example files for
-Shiny app.
+Released - 2020-10-26
+
+  - Update Shiny app.
+  - Add example files for Shiny app.
 
 # LakeMonitoR 0.1.0.9002
 
