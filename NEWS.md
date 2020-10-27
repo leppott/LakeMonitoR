@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-27 14:31:01
+    #> Last Update: 2020-10-27 14:42:35
+
+# LakeMonitoR 0.1.0.9005
+
+Released - 2020-10-27
+
+  - Shiny, ui.R
+      - Update version number in header.
 
 # LakeMonitoR 0.1.0.9004
 
