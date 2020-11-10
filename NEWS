@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-10-27 14:42:35
+    #> Last Update: 2020-11-10 10:27:02
+
+# LakeMonitoR 0.1.0.9006
+
+Released - 2020-11-10
+
+  - Add package help file.
 
 # LakeMonitoR 0.1.0.9005
 
