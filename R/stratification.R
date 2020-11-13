@@ -69,6 +69,9 @@ stratification <- function(data
 
   Dates <- sort(unique(data[, col_date]))
 
+  # QC days to numeric
+  min_days <- as.numeric(min_days)
+
   # for calculations
   StratificationAnalysis <- NULL
   meandata <- NULL

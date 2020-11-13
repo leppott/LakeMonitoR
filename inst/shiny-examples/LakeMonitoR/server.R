@@ -182,6 +182,14 @@ shinyServer(function(input, output) {
       inFile2 <- input$fn_input2
       message(paste0("file, area = ", inFile$name))
       message("If area file is null then only stratification metrics are calculated.")
+      # Input variables
+      message("\nInput variables:")
+      message(paste0("Measurement, Date Time: ", input$col_msr_datetime))
+      message(paste0("Measurement, Depth (m): ", input$col_msr_depth))
+      message(paste0("Measurement, Measurement: ", input$col_msr_msr))
+      message(paste0("Area, Depth (m): ", input$col_area_depth))
+      message(paste0("Area, Area (m2): ", input$col_area_area))
+      message(paste0("Calculate, minimum days: ", input$strat_min_days))
 
       # b_Calc, Step 2, QC Measured Values ####
       # Increment the progress bar, and update the detail text.
@@ -324,7 +332,7 @@ shinyServer(function(input, output) {
                                               , col_strat_date
                                               , col_strat_depth
                                               , col_strat_measure
-                                              , min_days = 20 )
+                                              , min_days = input$strat_min_days)
       # Save Results
       # Results, Stratification Dates
       fn_strat_dates <- file.path(".", "Results", "strat_dates.csv")

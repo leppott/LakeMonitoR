@@ -19,9 +19,19 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
-LakeMonitoR 0.1.0.9006
+LakeMonitoR 0.1.0.9008
 ===========
-Released - 2020-11-10
+Released - 2020-11-13
+* server.R
+    + Add inputs to sink.
+    + Min days input wasn't getting used.
+    + Min days input to numeric.
+* stratification.R
+    + Convert min_days to numeric as a QC check.
+
+LakeMonitoR 0.1.0.9007
+===========
+Released - 2020-11-13
 * stratification.R
     + Add number of days to column name in output, Issue #3.
 * check

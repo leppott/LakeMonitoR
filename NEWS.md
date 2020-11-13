@@ -4,11 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-11-13 13:25:47
+    #> Last Update: 2020-11-13 14:59:35
 
-# LakeMonitoR 0.1.0.9006
+# LakeMonitoR 0.1.0.9008
 
-Released - 2020-11-10 \* stratification.R + Add number of days to column
+Released - 2020-11-13 \* server.R + Add inputs to sink. + Min days input
+wasn’t getting used. + Min days input to numeric. \* stratification.R +
+Convert min\_days to numeric as a QC check.
+
+# LakeMonitoR 0.1.0.9007
+
+Released - 2020-11-13 \* stratification.R + Add number of days to column
 name in output, Issue \#3. \* check + Add and declare packages for
 functions in DESCRIPTION and code.
 

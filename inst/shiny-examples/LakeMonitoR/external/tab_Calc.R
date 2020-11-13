@@ -20,7 +20,7 @@ function(){
                , textInput("col_area_area", label = "Input, Area, Area (m2)", placeholder = "Area")
                #
                , h4("3. Calculate")
-               , textInput("strat_min_days", label = "Stratification, minimum days", value = 20)
+               , numericInput("strat_min_days", label = "Stratification, minimum days", value = 20)
                , p("Must view data tabs to the right before clicking calculate below.")
                , shinyjs::disabled(actionButton("b_Calc", "Calculate"))
                #
