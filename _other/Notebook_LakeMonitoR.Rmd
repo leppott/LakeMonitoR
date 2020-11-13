@@ -10,7 +10,7 @@ Package related code.
 ## Vignette
 ```{r, eval=FALSE}
 # generate Vignette
-library(baytrendsmap)
+library(LakeMonitoR)
 library(devtools)
 devtools::build_vignettes()
 ```
@@ -84,6 +84,12 @@ Use promptData to get data.r listing for columns.  Short cuts creating documenta
 
 ```{r DocData}
 promptData(laketemp)
+```
+
+**code coverage**
+```{r CodeCoverage}
+#library(covr)
+covr::report()
 ```
 
 

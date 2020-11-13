@@ -16,9 +16,7 @@ stratification(data, col_date, col_depth, col_measure, min_days = 20)
 \item{col_measure}{Column name, measurement for calculation}
 
 \item{min_days}{Minimum number of consecutive days to be classified as
-stratification.  Default = 20.
-Column names of Contour_Depth and Area.
-Default = NULL}
+stratification.  Default = 20.}
 }
 \value{
 List of 2 data frames.

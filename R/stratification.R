@@ -22,8 +22,8 @@
 #' @param min_days Minimum number of consecutive days to be classified as
 #' stratification.  Default = 20.
 # @param df_hypso Data frame of hypsometry for lake.
-#' Column names of Contour_Depth and Area.
-#' Default = NULL
+# Column names of Contour_Depth and Area.
+# Default = NULL
 #'
 #'
 #' @return List of 2 data frames.
@@ -190,7 +190,7 @@ stratification <- function(data
 
   # Results 1
   # Rename Stratification
-  names(Stratification) <- c(col_date, "Stratified")
+  names(Stratification) <- c(col_date, paste0("Stratified_", min_days))
 
   # Results 2
   # reshape

@@ -49,7 +49,7 @@ daily_depth_means <- function(data, col_siteid, col_datetime, col_depth, col_mea
   data <- data.frame(data[, c(col_siteid, col_datetime, col_depth, col_measure)])
 
   # na.omit, just in case
-  data <- na.omit(data[, c(col_siteid, col_datetime, col_depth, col_measure)])
+  data <- stats::na.omit(data[, c(col_siteid, col_datetime, col_depth, col_measure)])
 
   #Find the maximum and minimum depths in the dataset and round them to the nearest whole number
   #Create a list with each whole number in between those two numbers (including the max and min)
@@ -74,7 +74,7 @@ daily_depth_means <- function(data, col_siteid, col_datetime, col_depth, col_mea
     depth.mean.xts <- xts::apply.daily(depth.xts, mean)
     depthmean <- data.frame(col_fun_date = index(depth.mean.xts)
                             , col_fun_depth = i
-                            , col_fun_measure = coredata(depth.mean.xts))
+                            , col_fun_measure = zoo::coredata(depth.mean.xts))
     meandepths <- rbind(meandepths, depthmean)
   }## FOR ~ i ~ END
 
@@ -91,7 +91,7 @@ daily_depth_means <- function(data, col_siteid, col_datetime, col_depth, col_mea
     Daysubset <- meandepths[meandepths[, col_fun_date] == j, ]
     rowcount <- as.numeric(nrow(Daysubset))
     if (rowcount > 1){
-      interpolated <- approx(Daysubset[, col_fun_depth], Daysubset[, col_fun_measure]
+      interpolated <- stats::approx(Daysubset[, col_fun_depth], Daysubset[, col_fun_measure]
                              , method = "linear"
                              , xout = Standard_Depths)
       Standardized.row <- data.frame(col_fun_date = unique(Daysubset[, col_fun_date])

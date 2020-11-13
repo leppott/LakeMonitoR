@@ -1,0 +1,369 @@
+---
+title: "rLakeAnalyzer Examples"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rLakeAnalyzer Examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.dim = c(8, 6)/1.5
+  #out.width = "50%"
+)
+library(LakeMonitoR)
+```
+
+# Purpose
+Show users how to use functions in rLakeAnalyzer from LakeMonitor.
+
+In most cases are using examples provided by rLakeAnalyzer.
+
+# rLakeAnalyzer
+
+## Help
+```{r help, echo = FALSE}
+library(rLakeAnalyzer)
+print(lsf.str("package:rLakeAnalyzer"))
+```
+## approx.bathy
+Estimate hypsography curve
+
+```{r approx.bathy}
+Voldev.ex <- approx.bathy(Zmax = 25, Zmean = 12, lkeArea = 39400000, method = "voldev")
+Voldevshallow.ex <- approx.bathy(Zmax = 25, Zmean = 6, lkeArea = 39400000, method = "voldev")
+Cone.ex <- approx.bathy(Zmax = 25, lkeArea = 39400000, method = "cone")
+
+# plot depth-area curves
+plot(Cone.ex$depths ~ Cone.ex$Area.at.z, xlab = "Area (m^3)", ylab = "Depth (m)")
+points(Voldev.ex$depths ~ Voldev.ex$Area.at.z, col = "red")
+points(Voldevshallow.ex$depths ~ Voldevshallow.ex$Area.at.z, col = "blue")
+```
+
+
+## buoyancy.freq
+Calculate buoyancy frequency
+```{r buoyancy.freq}
+# A vector of water temperatures
+wtr <- c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
+	15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
+
+#A vector defining the depths
+depths <- c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
+	17, 18, 19, 20)
+
+b.f <- buoyancy.freq(wtr, depths)
+
+plot(b.f, attr(b.f, 'depths'), type='b'
+     , ylab='Depth', xlab='Buoyancy Frequency'
+     , ylim=c(max(depths), min(depths)))
+
+```
+
+## center.buoyancy
+Calculate the center of buoyancy
+```{r center.buoyancy}
+# A vector of water temperatures
+wtr <- c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
+	15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
+
+#A vector defining the depths
+depths <- c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
+	17, 18, 19, 20)
+
+c.b <- center.buoyancy(wtr, depths)
+c.b
+```
+
+## epi.temperature
+Get volumetrically averaged epilimnion temp
+```{r epi.temperature}
+## No Example
+```
+
+## hypo.temperature
+Get volumetrically averaged hypolimnion temp
+```{r hypo.temperature}
+##No Example
+```
+
+## internal.energy
+Internal energy function (Joules)
+
+```{r internal.energy}
+bthA   <-	c(1000,900,864,820,200,10)
+bthD	 <-	c(0,2.3,2.5,4.2,5.8,7)
+
+wtr	   <-	c(28,27,26.4,26,25.4,24,23.3)
+depths <-	c(0,1,2,3,4,5,6)
+
+cat('Internal Energy for input is: ')
+cat(internal.energy(wtr, depths, bthA, bthD))
+```
+
+## lake.number
+Calculate Lake Number
+```{r lake.number}
+bthA	<-	c(1000,900,864,820,200,10)
+bthD	<-	c(0,2.3,2.5,4.2,5.8,7)
+uStar	<-	c(0.0032,0.0024)
+St	  <-	c(140,153)
+metaT	<-	c(1.34,1.54)
+metaB	<-	c(4.32,4.33)
+averageHypoDense	<-	c(999.3,999.32)
+cat('Lake Number for input vector is: ')
+cat(lake.number( bthA, bthD, uStar, St, metaT, metaB, averageHypoDense) )
+```
+
+## layer.density
+Returns the average density of a layer between two depths.
+```{r layer.density}
+top     <- 2
+bottom  <- 6
+wtr     <- c(25.2,25.1,24.1,22.0,19.8,15.3,12.0,11.1)
+depths  <- c(0,1,2,3,4,5,6,7) 
+bthA    <- c(10000,8900,5000,3500,2000,1000,300,10)
+bthD    <- c(0,1,2,3,4,5,6,7)
+layer.density(top,bottom,wtr,depths,bthA,bthD)
+```
+
+## layer.temperature
+Returns the average temperature of a layer between two depths.
+```{r layer.temperature}
+# Supply input data
+top     <- 2
+bottom  <- 6
+wtr     <- c(25.2,25.1,24.1,22.0,19.8,15.3,12.0,11.1)
+depths  <- c(0,1,2,3,4,5,6,7) 
+bthA    <- c(10000,8900,5000,3500,2000,1000,300,10)
+bthD    <- c(0,1,2,3,4,5,6,7)
+
+#Return the average temperature of the water column between 2 and 6 meters.
+layer.temperature(top,bottom,wtr,depths,bthA,bthD)
+```
+
+## meta.depths
+Calculate the Top and Bottom Depths of the Metalimnion
+```{r meta.depths}
+wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
+15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
+
+depths = c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
+			 17, 18, 19, 20)
+			 
+m.d = meta.depths(wtr, depths, slope=0.1, seasonal=FALSE)
+cat('The top depth of the metalimnion is:', m.d[1])
+cat('The bottom depth of the metalimnion is:', m.d[2])
+
+```
+
+## schmidt.stability
+Calculate the Schmidt stability
+```{r schmidt.stability}
+bthA    <- c(1000,900,864,820,200,10)
+bthD    <- c(0,2.3,2.5,4.2,5.8,7)
+
+wtr	    <- c(28,27,26.4,26,25.4,24,23.3)
+depths	<- c(0,1,2,3,4,5,6)
+
+cat('Schmidt stability for input is: ')
+cat(schmidt.stability(wtr, depths, bthA, bthD))
+```
+
+## thermo.depth
+Calculate depth of the thermocline from a temperature profile
+```{r thermo.depth}
+# A vector of water temperatures
+wtr <- c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
+		15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
+
+#A vector defining the depths
+depths <- c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
+   17, 18, 19, 20)
+
+t.d <- thermo.depth(wtr, depths, seasonal=FALSE)
+
+cat('The thermocline depth is:', t.d)
+```
+
+## ts.buoyancy.freq
+Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile
+```{r ts.buoyancy.freq}
+#Get the path for the package example file included
+wtr.path <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+
+#Load data for example lake, Sparkilng Lake, Wisconsin.
+sp.wtr <- load.ts(wtr.path)
+
+N2  <- ts.buoyancy.freq(sp.wtr, seasonal=FALSE)
+SN2 <- ts.buoyancy.freq(sp.wtr, seasonal=TRUE)
+
+plot(N2, type='l', ylab='Buoyancy Frequency', xlab='Date')
+lines(SN2, col='red')
+```
+
+## ts.center.buoyancy
+Calculates the center of buoyancy for multiple temperature profiles
+```{r ts.center.buoyancy}
+#Get the path for the package example file included
+wtr.path <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+
+#Load data for example lake, Sparkilng Lake, Wisconsin.
+sp.wtr <- load.ts(wtr.path)
+ 
+#calculate and plot the thermocline depth
+t.d <- ts.thermo.depth(sp.wtr)
+
+center.N2 = ts.center.buoyancy(sp.wtr)
+
+plot(center.N2, type='l', ylab='Depth (m)', xlab='Date', ylim=c(19,0), lwd = 1.5)
+lines(t.d, type='l', col='red', lwd = 1.5)
+legend(x = t.d[3,1], y = .25,
+   c('center of buoyancy','thermocline depth'),
+   lty=c(1,1),
+   lwd=c(1.5,1.5),col=c("black","red"), bty = "n")
+```
+
+## ts.internal.energy
+Calculate physical indices for a timeseries
+```{r ts.internal.energy}
+# No Example
+```
+
+## ts.lake.number
+Calculate physical indices for a timeseries
+```{r ts.lake.number}
+# No Example
+```
+
+## ts.layer.temperature
+Calculate volume-weighted average water temperature across a range of depths for a timeseries
+```{r ts.layer.temperature}
+#Get the path for the package example file included
+wtr.path   <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+bathy.path <- system.file('extdata', 'Sparkling.bth', package="rLakeAnalyzer")
+
+#Load data for example lake, Sparkilng lake, in Wisconsin.
+sp.wtr   <- load.ts(wtr.path)
+sp.bathy <- load.bathy(bathy.path)
+
+
+l.t <- ts.layer.temperature(sp.wtr, 0, 18, sp.bathy)
+plot(l.t$datetime, l.t$layer.temp, type='l', 
+      ylab='Volumetrically averaged lake temperature', xlab='Date')
+```
+
+## ts.meta.depths
+Calculate physical indices for a timeseries
+```{r ts.meta.depths}
+#Get the path for the package example file included
+exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+
+#Load
+sparkling.temp <- load.ts(exampleFilePath)
+
+#calculate and plot the metalimnion depths
+m.d <- ts.meta.depths(sparkling.temp)
+
+plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
+lines(m.d$datetime, m.d$bottom, col='red')
+```
+
+## ts.schmidt.stability
+Calculate physical indices for a timeseries
+```{r ts.schmidt.stability}
+# No Example
+```
+
+## ts.thermo.depth
+Calculate physical indices for a timeseries
+```{r ts.thermo.depth}
+#Get the path for the package example file included
+exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+
+#Load
+sparkling.temp <- load.ts(exampleFilePath)
+
+
+#calculate and plot the thermocline depth
+t.d <- ts.thermo.depth(sparkling.temp)
+
+plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
+```
+
+## ts.uStar
+Calculate physical indices for a timeseries
+```{r ts.uStar}
+# No Example
+```
+
+## ts.wedderburn.number
+Calculate Wedderburn number for a timeseries
+```{r ts.wedderburn.number}
+#Get the path for the package example file included
+wtr.path   <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+wnd.path   <- system.file('extdata', 'Sparkling.daily.wnd', package="rLakeAnalyzer")
+bathy.path <- system.file('extdata', 'Sparkling.bth', package="rLakeAnalyzer")
+
+#Load data for example lake, Sparkilng lake, in Wisconsin.
+sp.wtr   <-  load.ts(wtr.path)
+sp.wnd   <- load.ts(wnd.path)
+sp.bathy <- load.bathy(bathy.path)
+
+sp.area = 64e4  #Area of Sparkling lake in m^2
+wnd.height = 2  #Height of Sparkling lake anemometer
+
+w.n <- ts.wedderburn.number(sp.wtr, sp.wnd, wnd.height, sp.bathy, sp.area)
+plot(w.n$datetime, w.n$wedderburn.number, type='l', ylab='Wedderburn Number', xlab='Date')
+```
+
+## uStar
+Calculates the water friction velocity, uStar
+```{r uStar}
+wndSpeed  <- c(5.1,6.3,6.3,5.2,7,7.2)
+wndHeight	<-	2
+averageEpiDense	<- c(14,15,14.2,13,12,12)
+
+cat('uStar for input vector is: ')
+cat(uStar(wndSpeed,wndHeight,averageEpiDense))
+```
+
+## water.density
+Estimate Water Density
+```{r water.density}
+#Plot water density for water between 1 and 30 deg C
+dens <- water.density(1:30)
+plot(1:30, dens, xlab="Temp(deg C)", ylab="Density(kg/m^3)")
+```
+
+## wedderburn.number
+Calculates Wedderburn Number for a lake
+```{r wedderburn.number}
+delta_rho <- c(3.1,1.5)
+metaT     <- c(5.5,2.4)
+uSt       <- c(0.0028,0.0032)
+Ao        <- c(80300,120000)
+AvHyp_rho <- c(999.31,999.1)
+wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
+```
+
+## whole.lake.temperature
+Get volumetrically averaged whole lake temperature
+```{r whole.lake.temperature}
+# No Example
+```
+
+## wtr.layer
+Exploration of lake water column layers
+```{r wtr.layer}
+data("latesummer")
+df1 <- wtr.layer(depth=latesummer$depth, measure = latesummer$temper)
+df1$mld
+df1$segments
+
+wtr.layer(data = latesummer, depth=depth, measure = temper, nseg=4)
+```
+
