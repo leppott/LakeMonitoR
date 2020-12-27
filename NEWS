@@ -4,7 +4,27 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-11-13 14:59:35
+    #> Last Update: 2020-12-27 12:14:16
+
+# LakeMonitoR 0.1.0.9009
+
+Released - 2020-12-27
+
+  - docs: ReadMe, Add license badge
+  - docs: ReadMe, Add CodeFactor badge
+  - docs: ReadMe, Add lifecyle badge
+  - docs: ReadMe, Add maintenance badge
+  - docs: ReadMe, Add issues badge
+  - docs: ReadMe, Add release badge
+  - docs: ReadMe, Add download badge
+  - docs: ReadMe, Add codecov badge
+  - ci: Add GitHub Action, CI
+  - docs: ReadMe, Add CMD Check badge
+  - ci: Add GitHub Action, pkgdown
+  - docs: Remove docs folder from main branch
+  - docs: GitHub redirect web page to gh-pages branch
+  - ci: Add GitHub Action, test coverage
+  - docs: ReadMe, rework md as rmd
 
 # LakeMonitoR 0.1.0.9008
 
