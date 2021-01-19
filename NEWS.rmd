@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9010
+===========
+Released - 2021-01-19
+
+* tests: Add test for daily_depth_means
+
 LakeMonitoR 0.1.0.9009
 ===========
 Released - 2020-12-27

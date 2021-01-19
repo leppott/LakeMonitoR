@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-12-27 12:14:16
+    #> Last Update: 2021-01-19 13:21:25
+
+# LakeMonitoR 0.1.0.9010
+
+Released - 2021-01-19
+
+  - tests: Add test for daily\_depth\_means
 
 # LakeMonitoR 0.1.0.9009
 

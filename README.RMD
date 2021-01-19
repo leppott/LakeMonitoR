@@ -40,7 +40,6 @@ Suite of functions and tools for lake monitoring.
 library(devtools)
 install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
 ```
-```
 
 # Purpose
 Aid analysis of temperature and dissolved oxygen depth profiles from lakes.
