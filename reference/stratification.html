@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9011</span>
       </span>
     </div>
 
@@ -183,7 +183,11 @@ time span for each stratification event.</p>
 <span class='va'>col_measure</span> <span class='op'>&lt;-</span> <span class='st'>"Measurement"</span>
 
 <span class='co'># Calculate Stratification</span>
-<span class='va'>ls_strat</span> <span class='op'>&lt;-</span> <span class='fu'>stratification</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>col_date</span>, <span class='va'>col_depth</span>, <span class='va'>col_measure</span>, min_days <span class='op'>=</span> <span class='fl'>20</span> <span class='op'>)</span>
+<span class='va'>ls_strat</span> <span class='op'>&lt;-</span> <span class='fu'>stratification</span><span class='op'>(</span><span class='va'>data</span>
+                           , <span class='va'>col_date</span>
+                           , <span class='va'>col_depth</span>
+                           , <span class='va'>col_measure</span>
+                           , min_days <span class='op'>=</span> <span class='fl'>20</span> <span class='op'>)</span>
 
 <span class='co'># Results, Stratification Dates</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>ls_strat</span><span class='op'>$</span><span class='va'>Stratification_Dates</span><span class='op'>)</span>
