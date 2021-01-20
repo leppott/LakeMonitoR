@@ -4,7 +4,16 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-19 21:58:05
+    #> Last Update: 2021-01-19 22:06:33
+
+# LakeMonitoR 0.1.0.9013
+
+Released - 2021-01-19
+
+  - refactor: Remove unneeded concatenation of a constant
+      - export\_rLakeAnalyzer
+  - refactor: Replace 1:foo(bar) with seq\_len(foo(bar))
+      - stratification
 
 # LakeMonitoR 0.1.0.9012
 

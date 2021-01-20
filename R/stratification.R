@@ -148,11 +148,11 @@ stratification <- function(data
     startdates <- stratdates[stratdates$Event == "Start", ]
     enddates <- stratdates[stratdates$Event == "End", ]
     if(nrow(startdates)>0){
-      startdates["Seq"] <- seq(1:nrow(startdates))
+      startdates["Seq"] <- seq(seq_len(nrow(startdates)))
     }
     if(nrow(enddates) > 0){
       if (stratdates[1, 2] == "Start"){
-        enddates["Seq"] <- c(1:nrow(enddates))
+        enddates["Seq"] <- seq_len(nrow(enddates))
       }else{
         erows <- nrow(enddates) - 1
         enddates["Seq"] <- c(0:erows)
