@@ -42,7 +42,11 @@
 #' col_measure <- "Measurement"
 #'
 #' # Calculate Stratification
-#' ls_strat <- stratification(data, col_date, col_depth, col_measure, min_days = 20 )
+#' ls_strat <- stratification(data
+#'                            , col_date
+#'                            , col_depth
+#'                            , col_measure
+#'                            , min_days = 20 )
 #'
 #' # Results, Stratification Dates
 #' head(ls_strat$Stratification_Dates)
@@ -171,10 +175,12 @@ stratification <- function(data
     for (i in (0:nrow(startdates))){
       startstrat <- startdates[startdates$Seq == i, ]
       endstrat <- enddates[enddates$Seq == i, ]
-      timespan <- difftime(startstrat[, col_date], endstrat[, col_date], units = "days")
+      timespan <- difftime(startstrat[, col_date]
+                           , endstrat[, col_date]
+                           , units = "days")
       stratspanrow <- data.frame("Start_Date" = startstrat[, col_date]
                                  ,"End_Date" = endstrat[, col_date]
-                                 #,"Year" = lubridate::year(startstrat[, col_date])
+                            #,"Year" = lubridate::year(startstrat[, col_date])
                                  ,"Year" = format(startstrat[, col_date], "%Y")
                                  ,"Time_Span" = (timespan*-1))
       stratspan <- rbind(stratspan, stratspanrow)
@@ -186,7 +192,8 @@ stratification <- function(data
   enddates["Date2"] <- enddates[, col_date]
 
   stratificationdates <- rbind(startdates, enddates)
-  stratificationdates <- stratificationdates[order(stratificationdates[, col_date]), ]
+  stratificationdates <- stratificationdates[order(stratificationdates[
+                                                                 , col_date]), ]
 
   # ERIK ####
   # short cut rest of code and output this information
@@ -223,8 +230,10 @@ stratification <- function(data
 #       analysisdate <- analysisdate[!is.na(analysisdate[, col_measure]), ]
 #
 #       if (nrow(analysisdate) > 1){
-#         #Read in hypsography data. Currently it is looking for a csv file for each Lake, named Lake_Hypso_Profile.csv
-#         hypsodir <- paste0("D:/Users/timarti1/Desktop/",L,"_Hypso_Profile.csv")
+#         #Read in hypsography data. Currently it is looking for a csv file for
+# each Lake, named Lake_Hypso_Profile.csv
+#         hypsodir <- paste0("D:/Users/timarti1/Desktop/"
+# ,L,"_Hypso_Profile.csv")
 #         hypso <- read.csv(hypsodir,header=TRUE)
 #         hypso$Contour_Depth <- as.numeric(hypso$Contour_Depth)
 #         hypso$Area <- as.numeric(hypso$Area)
@@ -258,7 +267,8 @@ stratification <- function(data
 #                                     , "Date" = unique(analysisdate$Date)
 #                                     , "Year" = year(analysisdate$Date)
 #                                     , "Epi_Temp" = epitemp
-#                                     , "Hypo_Temp" = hypotemp,"Thermo_Depth"=thermo
+#                                     , "Hypo_Temp" = hypotemp,"Thermo_Depth"=
+# thermo
 #                                     , "Meta_Top_Depth" = meta[1]
 #                                     , "Meta_Bottom_Depth" = meta[2]
 #                                     , "Schmidt" = schmidt
@@ -270,7 +280,8 @@ stratification <- function(data
 #     combined <- NULL
 #     combined <- left_join(layercalcs, stratspan)
 #     StratificationAnalysis <- rbind(StratificationAnalysis, combined)
-#     StratificationAnalysis <- StratificationAnalysis[!duplicated(StratificationAnalysis$Date), ]
+#     StratificationAnalysis <- StratificationAnalysis[!duplicated(
+# StratificationAnalysis$Date), ]
 #
 #   }## IF ~ is.null(hypso) ~ END
 #
@@ -366,29 +377,15 @@ stratification <- function(data
 #
 #   StratificationAnalysis$Start_Date <- NULL
 #   StratificationAnalysis$End_Date <- NULL
-#   StratificationAnalysis <- left_join(StratificationAnalysis, meandata,by = c("Lake","Year"))
+#   StratificationAnalysis <- left_join(StratificationAnalysis, meandata,by =
+# c("Lake","Year"))
 #
 #   # RETURN ####
 #   #Change output location
-#   #write.csv(StratificationAnalysis,"D:/Users/timarti1/Desktop/Sparkling_Calc.csv",row.names = F)
+#   #write.csv(StratificationAnalysis
+# ,"D:/Users/timarti1/Desktop/Sparkling_Calc.csv",row.names = F)
 #   return(StratificationAnalysis)
 #
 #
 #
 # }## FUNCTION ~ END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

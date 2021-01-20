@@ -19,6 +19,40 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+
+LakeMonitoR 0.1.0.9011
+===========
+Released - 2021-01-19
+
+* style: Remove blank lines at end of script
+    + daily_depth_means
+    + data
+    + exort_rLakeAnalyzer
+    + LakeMonitoR
+    + runShiny
+    + stratification
+* style: Trim lines to 80 characters
+    + runShiny
+    + daily_depth_means
+    + data
+    + export_rLakeAnalyzer 
+    + stratification
+* refactor: Add items to .Rbuildignore and .gitignore
+    + _other folder
+    + NEWS.rmd
+    + README.RMD
+* refactor: Remove docs folder
+    + Using GitHub Action to build pkgdown site
+    + Switch setting to use gh-pages branch
+* tests: Add two tests for stratification (dates and events)
+* tests: Add test for export_rLakeAnalyzer
+* docs: Add all extra export_rLakeAnalyzer examples to dontrun
+    + Comment out failing schmidt.plot()
+* refactor: Add missing parameters to function call
+    + dir_export
+    + fn_export
+* docs: Update DESCRIPTION license
+    
 LakeMonitoR 0.1.0.9010
 ===========
 Released - 2021-01-19

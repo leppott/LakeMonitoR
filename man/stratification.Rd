@@ -51,7 +51,11 @@ col_depth   <- "Depth"
 col_measure <- "Measurement"
 
 # Calculate Stratification
-ls_strat <- stratification(data, col_date, col_depth, col_measure, min_days = 20 )
+ls_strat <- stratification(data
+                           , col_date
+                           , col_depth
+                           , col_measure
+                           , min_days = 20 )
 
 # Results, Stratification Dates
 head(ls_strat$Stratification_Dates)

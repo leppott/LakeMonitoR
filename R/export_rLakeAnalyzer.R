@@ -1,14 +1,17 @@
 #' @title Export data for rLakeAnalyzer package
 #'
-#' @description Creates a date frame (and file export) from depth profile data in
-#' the format used by the rLakeAnalyzer package.
+#' @description Creates a date frame (and file export) from depth profile data
+#' in the format used by the rLakeAnalyzer package.
 #'
-#' @details The rLakeAnalyzer package is not included in the LakeMonitoR package.  But an example is provided.
+#' @details The rLakeAnalyzer package is not included in the LakeMonitoR
+#' package.  But an example is provided.
 #'
-#' To run the example rLakeAnalyzer calculations you will need the rLakeAnalyzer package (from CRAN).
+#' To run the example rLakeAnalyzer calculations you will need the rLakeAnalyzer
+#' package (from CRAN).
 #'
-#' The rLakeAnalyzer format is "datetime" in the format of "yyyy-mm-dd HH:MM:SS" followed by columns of data.
-#' The header of these data columns is "Param_Depth"; e.g., wtr_0.5 is water temperature (deg C) at 0.5 meters.
+#' The rLakeAnalyzer format is "datetime" in the format of "yyyy-mm-dd HH:MM:SS"
+#' followed by columns of data.  The header of these data columns is
+#' "Param_Depth"; e.g., wtr_0.5 is water temperature (deg C) at 0.5 meters.
 #'
 #' * doobs = Dissolved Oxygen Concentration (mg/L)
 #'
@@ -29,10 +32,14 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @param df_data Data frame to be converted for use with rLakeAnalyzer.
 #' @param col_depth Column name for "depth" in df_data.  Default = "Depth"
-#' @param col_data Column names in df_data to transform for use with rLakeAnalyzer.  Date time must be the first entry.
-#' @param col_rLA Column names to use with rLakeAnalyzer.  See details for accepted entries.  datetime must be the first entry.
-#' @param dir_export Directory for export data.  Default = current working directory.
-#' @param fn_export File name of result to be exported.  If no name provided the data frame will not be exported.  Default = NULL.
+#' @param col_data Column names in df_data to transform for use with
+#' rLakeAnalyzer.  Date time must be the first entry.
+#' @param col_rLA Column names to use with rLakeAnalyzer.  See details for
+#' accepted entries.  datetime must be the first entry.
+#' @param dir_export Directory for export data.
+#' Default = current working directory.
+#' @param fn_export File name of result to be exported.  If no name provided the
+#'  data frame will not be exported.  Default = NULL.
 #'
 #' @return Returns a data frame with daily mean values by date.
 #'
@@ -52,7 +59,7 @@
 #'
 #' \dontrun{
 #' # Save
-#' write.csv(df_rLA, "example_rLA.csv", row.names = FALSE)}
+#' write.csv(df_rLA, "example_rLA.csv", row.names = FALSE)
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # use rLakeAnalyzer - heat map
@@ -69,7 +76,7 @@
 #' wtr.heat.map(df_rLA_wtr)
 #'
 #' # Generate Schmidt Plot
-#' schmidt.plot(df_rLA_wtr, df_rLA_bath)
+#' #schmidt.plot(df_rLA_wtr, df_rLA_bath)
 #'
 #' # Generate Schmidt Stability Values
 #' df_rLA_Schmidt <- ts.schmidt.stability(df_rLA_wtr, df_rLA_bath)
@@ -89,12 +96,15 @@
 #'
 #' # Plot, Show
 #' p
+#' }
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @export
 export_rLakeAnalyzer <- function(df_data
-                                 , col_depth="Depth"
+                                 , col_depth = "Depth"
                                  , col_data
                                  , col_rLA
+                                 , dir_export = getwd()
+                                 , fn_export = NULL
                       ) {##FUNCTION~Export.rLakeAnalyzer~START
   #
   boo_DEBUG <- FALSE
@@ -108,7 +118,8 @@ export_rLakeAnalyzer <- function(df_data
   }
   ## QC, cols_data
   if(sum(col_data %in% colnames(df_data))!=length(col_data)){
-    msg <- "The data frame (df_data) does not contain all specified columns (col_data)."
+    msg <- "The data frame (df_data) does not contain all specified columns
+    (col_data)."
     stop(msg)
   }
 
@@ -128,7 +139,8 @@ export_rLakeAnalyzer <- function(df_data
 
     # long to wide for parameter i
     #df_i <- dcast(df_data, col_data[1] ~ col_depth, value.var=i, fun=mean)
-    df_i <- reshape2::dcast(df_data, df_data[, col_data[1]] ~ df_data[, col_depth], value.var=i, fun=mean)
+    df_i <- reshape2::dcast(df_data, df_data[, col_data[1]] ~ df_data[
+                                           , col_depth], value.var=i, fun=mean)
     names(df_i)[1] <- c("datetime")
     names(df_i)[-1] <- paste(col_rLA[i_num+1], names(df_i)[-1], sep="_")
 

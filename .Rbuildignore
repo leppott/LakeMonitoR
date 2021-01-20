@@ -8,3 +8,6 @@
 ^doc$
 ^Meta$
 ^\.github$
+^LICENSE\.md$
+^NEWS.rmd$
+^README.RMD$

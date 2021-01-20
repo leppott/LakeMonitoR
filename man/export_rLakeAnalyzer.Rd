@@ -4,35 +4,49 @@
 \alias{export_rLakeAnalyzer}
 \title{Export data for rLakeAnalyzer package}
 \usage{
-export_rLakeAnalyzer(df_data, col_depth = "Depth", col_data, col_rLA)
+export_rLakeAnalyzer(
+  df_data,
+  col_depth = "Depth",
+  col_data,
+  col_rLA,
+  dir_export = getwd(),
+  fn_export = NULL
+)
 }
 \arguments{
 \item{df_data}{Data frame to be converted for use with rLakeAnalyzer.}
 
 \item{col_depth}{Column name for "depth" in df_data.  Default = "Depth"}
 
-\item{col_data}{Column names in df_data to transform for use with rLakeAnalyzer.  Date time must be the first entry.}
+\item{col_data}{Column names in df_data to transform for use with
+rLakeAnalyzer.  Date time must be the first entry.}
 
-\item{col_rLA}{Column names to use with rLakeAnalyzer.  See details for accepted entries.  datetime must be the first entry.}
+\item{col_rLA}{Column names to use with rLakeAnalyzer.  See details for
+accepted entries.  datetime must be the first entry.}
 
-\item{dir_export}{Directory for export data.  Default = current working directory.}
+\item{dir_export}{Directory for export data.
+Default = current working directory.}
 
-\item{fn_export}{File name of result to be exported.  If no name provided the data frame will not be exported.  Default = NULL.}
+\item{fn_export}{File name of result to be exported.  If no name provided the
+data frame will not be exported.  Default = NULL.}
 }
 \value{
 Returns a data frame with daily mean values by date.
 }
 \description{
-Creates a date frame (and file export) from depth profile data in
-the format used by the rLakeAnalyzer package.
+Creates a date frame (and file export) from depth profile data
+in the format used by the rLakeAnalyzer package.
 }
 \details{
-The rLakeAnalyzer package is not included in the LakeMonitoR package.  But an example is provided.
+The rLakeAnalyzer package is not included in the LakeMonitoR
+package.  But an example is provided.
 
-To run the example rLakeAnalyzer calculations you will need the rLakeAnalyzer package (from CRAN).
+To run the example rLakeAnalyzer calculations you will need the rLakeAnalyzer
+package (from CRAN).
 
-The rLakeAnalyzer format is "datetime" in the format of "yyyy-mm-dd HH:MM:SS" followed by columns of data.
-The header of these data columns is "Param_Depth"; e.g., wtr_0.5 is water temperature (deg C) at 0.5 meters.
+The rLakeAnalyzer format is "datetime" in the format of "yyyy-mm-dd HH:MM:SS"
+followed by columns of data.  The header of these data columns is
+"Param_Depth"; e.g., wtr_0.5 is water temperature (deg C) at 0.5 meters.
 
 * doobs = Dissolved Oxygen Concentration (mg/L)
 
@@ -62,7 +76,7 @@ df_rLA <- export_rLakeAnalyzer(data, col_depth, col_data, col_rLA)
 
 \dontrun{
 # Save
-write.csv(df_rLA, "example_rLA.csv", row.names = FALSE)}
+write.csv(df_rLA, "example_rLA.csv", row.names = FALSE)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # use rLakeAnalyzer - heat map
@@ -79,7 +93,7 @@ df_rLA_bath <- data.frame(depths=c(3,6,9), areas=c(300,200,100))
 wtr.heat.map(df_rLA_wtr)
 
 # Generate Schmidt Plot
-schmidt.plot(df_rLA_wtr, df_rLA_bath)
+#schmidt.plot(df_rLA_wtr, df_rLA_bath)
 
 # Generate Schmidt Stability Values
 df_rLA_Schmidt <- ts.schmidt.stability(df_rLA_wtr, df_rLA_bath)
@@ -99,4 +113,5 @@ p <- ggplot(data, aes(x=Date, y=Measurement)) +
 
 # Plot, Show
 p
+}
 }

@@ -7,7 +7,8 @@
 daily_depth_means(data, col_siteid, col_datetime, col_depth, col_measure)
 }
 \arguments{
-\item{data}{data frame of site id, data/time, depth, and measurement (e.g., temperature).}
+\item{data}{data frame of site id, data/time, depth, and measurement
+(e.g., temperature).}
 
 \item{col_siteid}{Column name, SiteID}
 
@@ -46,7 +47,11 @@ col_depth    <- "Depth_m"
 col_measure  <- "Water_Temp_C"
 
 # run function
-data_ddm <- daily_depth_means(data, col_siteid, col_datetime, col_depth, col_measure)
+data_ddm <- daily_depth_means(data
+                             , col_siteid
+                             , col_datetime
+                             , col_depth
+                             , col_measure)
 
 # summary
 summary(data_ddm)

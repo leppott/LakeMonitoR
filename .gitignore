@@ -42,3 +42,6 @@ docs
 inst/doc
 doc
 Meta
+^_other
+NEWS.rmd
+README.RMD

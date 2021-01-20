@@ -4,7 +4,40 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-19 13:21:25
+    #> Last Update: 2021-01-19 21:53:08
+
+# LakeMonitoR 0.1.0.9011
+
+Released - 2021-01-19
+
+  - style: Remove blank lines at end of script
+      - daily\_depth\_means
+      - data
+      - exort\_rLakeAnalyzer
+      - LakeMonitoR
+      - runShiny
+      - stratification
+  - style: Trim lines to 80 characters
+      - runShiny
+      - daily\_depth\_means
+      - data
+      - export\_rLakeAnalyzer
+      - stratification
+  - refactor: Add items to .Rbuildignore and .gitignore
+      - \_other folder
+      - NEWS.rmd
+      - README.RMD
+  - refactor: Remove docs folder
+      - Using GitHub Action to build pkgdown site
+      - Switch setting to use gh-pages branch
+  - tests: Add two tests for stratification (dates and events)
+  - tests: Add test for export\_rLakeAnalyzer
+  - docs: Add all extra export\_rLakeAnalyzer examples to dontrun
+      - Comment out failing schmidt.plot()
+  - refactor: Add missing parameters to function call
+      - dir\_export
+      - fn\_export
+  - docs: Update DESCRIPTION license
 
 # LakeMonitoR 0.1.0.9010
 

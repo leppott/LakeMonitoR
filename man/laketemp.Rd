@@ -5,7 +5,7 @@
 \alias{laketemp}
 \title{Lake temperature data}
 \format{
-\describe{A data frame with 171,414 observations on the following 12 variables.
+\describe{A data frame with 171,414 observations on the following 12 variables
  \item{\code{DOWLKNUM}}{DOW Lake Number}
  \item{\code{SiteID}}{Site ID}
  \item{\code{Date_Time}}{Date and Time}
@@ -24,7 +24,7 @@
 laketemp
 }
 \description{
-Example data containing one year (January 2017 to January 2018) of lake profile
-temperature data.  Includes QC flag columns.
+Example data containing one year (January 2017 to January 2018) of lake
+profile temperature data.  Includes QC flag columns.
 }
 \keyword{datasets}

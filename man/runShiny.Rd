@@ -10,7 +10,8 @@ runShiny()
 Launches Shiny app for LakeMonitoR
 }
 \details{
-The Shiny app based on the R package LakeMonitoR is included in the R package.
+The Shiny app based on the R package LakeMonitoR is included in the
+R package.
 This function launches that app.
 
 The Shiny app is online at:
