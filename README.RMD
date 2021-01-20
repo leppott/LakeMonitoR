@@ -26,7 +26,7 @@ Suite of functions and tools for lake monitoring.
 [![License: GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/leppott/LakeMonitoR/badge)](https://www.codefactor.io/repository/github/leppott/LakeMonitoR)
-[![codecov](https://codecov.io/gh/leppott/LakeMonitoR/branch/master/graph/badge.svg)](https://codecov.io/gh/leppott/LakeMonitoR)
+[![codecov](https://codecov.io/gh/leppott/LakeMonitoR/branch/main/graph/badge.svg?token=C2MPX70BAL)](https://codecov.io/gh/leppott/LakeMonitoR)
 [![R-CMD-check](https://github.com/leppott/LakeMonitoR/workflows/R-CMD-check/badge.svg)](https://github.com/leppott/LakeMonitoR/actions)
 
 [![GitHub issues](https://img.shields.io/github/issues/leppott/LakeMonitoR.svg)](https://GitHub.com/leppott/LakeMonitoR/issues/)

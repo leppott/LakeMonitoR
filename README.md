@@ -3,7 +3,7 @@ README-LakeMonitoR
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-12-27 12:13:35
+    #> Last Update: 2021-01-19 22:11:36
 
 # LakeMonitoR
 
@@ -18,7 +18,7 @@ Suite of functions and tools for lake monitoring.
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/leppott/LakeMonitoR/badge)](https://www.codefactor.io/repository/github/leppott/LakeMonitoR)
-[![codecov](https://codecov.io/gh/leppott/LakeMonitoR/branch/master/graph/badge.svg)](https://codecov.io/gh/leppott/LakeMonitoR)
+[![codecov](https://codecov.io/gh/leppott/LakeMonitoR/branch/main/graph/badge.svg?token=C2MPX70BAL)](https://codecov.io/gh/leppott/LakeMonitoR)
 [![R-CMD-check](https://github.com/leppott/LakeMonitoR/workflows/R-CMD-check/badge.svg)](https://github.com/leppott/LakeMonitoR/actions)
 
 [![GitHub
@@ -35,8 +35,6 @@ releases](https://img.shields.io/github/downloads/leppott/LakeMonitoR/total.svg)
 library(devtools)
 install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
 ```
-
-\`\`\`
 
 # Purpose
 

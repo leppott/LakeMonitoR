@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9014
+===========
+Released - 2021-01-19
+
+* docs: Update codecov badge in README
+
 LakeMonitoR 0.1.0.9013
 ===========
 Released - 2021-01-19

@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-19 22:06:33
+    #> Last Update: 2021-01-19 22:12:39
+
+# LakeMonitoR 0.1.0.9014
+
+Released - 2021-01-19
+
+  - docs: Update codecov badge in README
 
 # LakeMonitoR 0.1.0.9013
 
