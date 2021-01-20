@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-19 21:53:08
+    #> Last Update: 2021-01-19 21:58:05
+
+# LakeMonitoR 0.1.0.9012
+
+Released - 2021-01-19
+
+  - refactor: Remove docs folder
+      - Using GitHub Action to build pkgdown site
 
 # LakeMonitoR 0.1.0.9011
 
@@ -27,8 +34,6 @@ Released - 2021-01-19
       - \_other folder
       - NEWS.rmd
       - README.RMD
-  - refactor: Remove docs folder
-      - Using GitHub Action to build pkgdown site
       - Switch setting to use gh-pages branch
   - tests: Add two tests for stratification (dates and events)
   - tests: Add test for export\_rLakeAnalyzer
