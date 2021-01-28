@@ -69,6 +69,15 @@ depth_plot <- function(data
                       , lab_measure = NA
                       , lab_title = NA) {
 
+  # QC ----
+  col2check <- c(col_datetime, col_depth, col_measure)
+  col_missing <- col2check[col2check %in% col(data)]
+  if(length(col_missing) != 0){
+    msg <- paste0("Columns are missing from data:\n "
+                  , paste(col_missing, collapse = ", "))
+    cat(msg)
+  }## IF ~ length(col_missing) != 0
+
   # Date, Conversion ----
   # from factor to POSIXct (make it a date and time field in R)
   data[, col_datetime] <- as.POSIXct(data[, col_datetime])

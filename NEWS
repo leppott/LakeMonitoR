@@ -4,7 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-28 12:52:06
+    #> Last Update: 2021-01-28 16:18:27
+
+# LakeMonitoR 0.1.0.9016
+
+Released - 2021-01-28
+
+  - refactor: Add internal QC for column headers for depth\_plot(),
+    Issue \#5
+  - tests: Add test for depth\_plot() ggplot object, Issue \#5
+  - refactor: Add data-raw to create qc object for depth\_plot() test,
+    Issue \#5
+  - docs: Example file for depth\_plot() saved as RDA forced DEPENDS on
+    R \>= 3.5.0
 
 # LakeMonitoR 0.1.0.9015
 

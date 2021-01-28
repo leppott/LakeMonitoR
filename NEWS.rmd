@@ -19,6 +19,15 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9016
+===========
+Released - 2021-01-28
+
+* refactor: Add internal QC for column headers for depth_plot(), Issue #5
+* tests: Add test for depth_plot() ggplot object, Issue #5
+* refactor: Add data-raw to create qc object for depth_plot() test, Issue #5
+* docs: Example file for depth_plot() saved as RDA forced DEPENDS on R >= 3.5.0
+
 LakeMonitoR 0.1.0.9015
 ===========
 Released - 2021-01-28
