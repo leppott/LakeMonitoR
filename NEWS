@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-19 22:12:39
+    #> Last Update: 2021-01-28 12:52:06
+
+# LakeMonitoR 0.1.0.9015
+
+Released - 2021-01-28
+
+  - feature: Add depth\_plot function to return a depth profile plot,
+    Issue \#5
+  - feature: Add laketest data for use with depth\_plot()
 
 # LakeMonitoR 0.1.0.9014
 

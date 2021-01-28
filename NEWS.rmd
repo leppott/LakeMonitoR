@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9015
+===========
+Released - 2021-01-28
+
+* feature: Add depth_plot function to return a depth profile plot, Issue #5
+* feature: Add laketest data for use with depth_plot()
+
 LakeMonitoR 0.1.0.9014
 ===========
 Released - 2021-01-19
