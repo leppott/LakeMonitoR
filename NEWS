@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-28 16:18:27
+    #> Last Update: 2021-01-28 16:23:09
+
+# LakeMonitoR 0.1.0.9017
+
+Released - 2021-01-28
+
+  - refactor: Update stop message for depth\_plot() column QC
 
 # LakeMonitoR 0.1.0.9016
 

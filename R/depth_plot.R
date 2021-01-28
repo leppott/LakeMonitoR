@@ -75,7 +75,7 @@ depth_plot <- function(data
   if(length(col_missing) != 0){
     msg <- paste0("Columns are missing from data:\n "
                   , paste(col_missing, collapse = ", "))
-    cat(msg)
+    stop(msg)
   }## IF ~ length(col_missing) != 0
 
   # Date, Conversion ----
