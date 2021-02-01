@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-28 16:23:09
+    #> Last Update: 2021-02-01 15:10:39
+
+# LakeMonitoR 0.1.0.9018
+
+Released - 2021-02-01
+
+  - refactor: Update temporary settings to inputs for depth\_plot()
+  - feature: Add scatterplot depth profile and heatmap (Issues \#6) for
+    Shiny input
 
 # LakeMonitoR 0.1.0.9017
 

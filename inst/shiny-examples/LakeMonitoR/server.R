@@ -644,8 +644,202 @@ shinyServer(function(input, output) {
     #, contentType = "application/zip"
   )##downloadData~END
 
+  # Plots ----
+  # _Plot, profile ----
+  # output$p_depth <- renderPlot({
+  # #output$p_depth <- renderPlotly({
+  #   # if no data put in blank
+  #
+  #   inFile <- input$fn_input
+  #   inCol_plot_datetime <- input$col_plot_datetime
+  #   inCol_plot_depth <- input$col_plot_depth
+  #   inCol_plot_msr <- input$col_plot_msr
+  #
+  #   lab_error_base <- "Missing: "
+  #   lab_error <- lab_error_base
+  #
+  #   if(is.null(inFile)) {
+  #     lab_error <- paste0(lab_error, "File")
+  #   }
+  #   if(inCol_plot_datetime == "") {
+  #     lab_error <- paste(lab_error, "Column_DateTime", collapse = ", ")
+  #   }
+  #   if(inCol_plot_depth == "") {
+  #     lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
+  #   }
+  #   if(inCol_plot_msr == "") {
+  #     lab_error <- paste(lab_error, "Column_Measurement", collapse = ", ")
+  #   }
+  #
+  #
+  #   if(lab_error == lab_error_base){
+  #     # Read user imported file
+  #     df_plot <- read.table(inFile$datapath
+  #                           , header = TRUE
+  #                           , sep = input$sep
+  #                           , quote = "\""
+  #                           , stringsAsFactors = FALSE)
+  #     # plot
+  #     p_depth <- depth_plot(data = df_plot
+  #                           , col_datetime = input$col_plot_datetime
+  #                           , col_depth = input$col_plot_depth
+  #                           , col_measure = input$col_plot_msr
+  #                           , lab_datetime = input$lab_plot_datetime
+  #                           , lab_depth = input$lab_plot_depth
+  #                           , lab_measure = input$lab_plot_msr
+  #                           , lab_title = input$lab_plot_title)
+  #   } else {
+  #     p_depth <- ggplot() +
+  #       theme_void() +
+  #       geom_text(aes(0, 0, label = lab_error))
+  #   }## IF ~ PLOT
+  #
+  #     p_depth
+  #
+  # })## output$p_depth ~ END
+
+  # _Plot, profile, plotly ----
+  output$p_depth_ly <- renderPlotly({
+    # if no data put in blank
+
+    inFile <- input$fn_input
+    inCol_plot_datetime <- input$col_plot_datetime
+    inCol_plot_depth <- input$col_plot_depth
+    inCol_plot_msr <- input$col_plot_msr
+
+    lab_error_base <- "Missing: "
+    lab_error <- lab_error_base
+
+    if(is.null(inFile)) {
+      lab_error <- paste0(lab_error, "File")
+    }
+    if(inCol_plot_datetime == "") {
+      lab_error <- paste(lab_error, "Column_DateTime", collapse = ", ")
+    }
+    if(inCol_plot_depth == "") {
+      lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
+    }
+    if(inCol_plot_msr == "") {
+      lab_error <- paste(lab_error, "Column_Measurement", collapse = ", ")
+    }
 
 
+    if(lab_error == lab_error_base){
+      # Read user imported file
+      df_plot <- read.table(inFile$datapath
+                            , header = TRUE
+                            , sep = input$sep
+                            , quote = "\""
+                            , stringsAsFactors = FALSE)
+      # plot
+      p_depth <- depth_plot(data = df_plot
+                            , col_datetime = input$col_plot_datetime
+                            , col_depth = input$col_plot_depth
+                            , col_measure = input$col_plot_msr
+                            , lab_datetime = input$lab_plot_datetime
+                            , lab_depth = input$lab_plot_depth
+                            , lab_measure = input$lab_plot_msr
+                            , lab_title = input$lab_plot_title)
+    } else {
+      p_depth <- ggplot() +
+        theme_void() +
+        geom_text(aes(0, 0, label = lab_error))
+    }## IF ~ PLOT
+
+    # Plotly
+    partial_bundle(toWebGL(ggplotly(p = p_depth)))
+    # faster but lots of warnings
+    # but need for larger files (1 hr * 1 yr = 8k records * N depths)
+    #ggplotly(p = p_depth)
+
+  })## output$p_depth_ly ~ END
+
+
+  # _Plot, heatmap, plotly ----
+  output$p_hm_ly <- renderPlotly({
+    # if no data put in blank
+
+    inFile <- input$fn_input
+    inCol_plot_datetime <- input$col_plot_datetime
+    inCol_plot_depth <- input$col_plot_depth
+    inCol_plot_msr <- input$col_plot_msr
+    incol_plot_title <- input$lab_plot_title
+
+    lab_error_base <- "Missing: "
+    lab_error <- lab_error_base
+
+    if(is.null(inFile)) {
+      lab_error <- paste0(lab_error, "File")
+    }
+    if(inCol_plot_datetime == "") {
+      lab_error <- paste(lab_error, "Column_DateTime", collapse = ", ")
+    }
+    if(inCol_plot_depth == "") {
+      lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
+    }
+    if(inCol_plot_msr == "") {
+      lab_error <- paste(lab_error, "Column_Measurement", collapse = ", ")
+    }
+
+
+    if(lab_error == lab_error_base){
+      # Read user imported file
+      df_plot <- read.table(inFile$datapath
+                            , header = TRUE
+                            , sep = input$sep
+                            , quote = "\""
+                            , stringsAsFactors = FALSE)
+
+
+      df_plot[, inCol_plot_datetime] <- as.POSIXct(df_plot[
+                                                         , inCol_plot_datetime])
+
+      # plot
+      p_h <- ggplot(data = data
+                    , aes_string(x = col_datetime
+                                 , y = col_depth
+                                 , fill = col_measure)) +
+        geom_tile(na.rm = TRUE) +
+        scale_fill_viridis_b() +
+        scale_y_reverse() +
+        ggplot2::scale_x_datetime(date_labels = "%Y-%m") +
+        theme_bw() +
+        stat_contour(aes_string(z = col_measure)
+                     , color = "gray"
+                     , na.rm = TRUE)
+
+      # labels
+      if(inCol_plot_datetime == ""){
+        p_h <- p_h + ggplot2::labs(x = inCol_plot_datetime)
+      }## IF ~ is.na(lab_datetime)
+      #
+      if(inCol_plot_depth == ""){
+        p_h <- p_h + ggplot2::guides(color = ggplot2::guide_colourbar(title =
+                                                            inCol_plot_depth))
+      }## IF ~ is.na(lab_depth)
+      # #
+      if(inCol_plot_msr == ""){
+        p_h <- p_h + ggplot2::labs(y = inCol_plot_msr)
+      }## IF ~ is.na(lab_measure)
+      #
+      if(incol_plot_title == ""){
+        p_h <- p_h + ggplot2::labs(title = incol_plot_title)
+      }## IF ~ is.na(lab_measure)
+
+
+    } else {
+      p_h <- ggplot() +
+        theme_void() +
+        geom_text(aes(0, 0, label = lab_error))
+    }## IF ~ PLOT
+
+    # Plotly
+    #partial_bundle(toWebGL(ggplotly(p = p_hm)))
+    # faster but lots of warnings
+    # but need for larger files (1 hr * 1 yr = 8k records * N depths)
+    ggplotly(p = p_h)
+
+  })## output$p_depth_ly ~ END
 
 
 })##shinyServer~END

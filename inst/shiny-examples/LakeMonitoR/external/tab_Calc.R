@@ -1,30 +1,42 @@
 # Calculate Panel
 
 function(){
-  tabPanel("2. Define Columns, 3. Calculate, and 4. Download Results"
+  tabPanel("2. Calculate"
            # SideBar ####
            , sidebarLayout(
              sidebarPanel(
-               h4("2. Define Columns")
+               h4("2.A. Define Columns")
                , p("Define columns below for each box")
                , p("Displayed text is a hint not an actual value.")
                , p("Actual tables are displayed to the right.")
-               , h4("2.A. Define Columns, Measured Values")
+               , h4("2.A.1. Define Columns, Measured Values")
                # Future version use selectize input and use columns from file.
-               , textInput("col_msr_datetime", label = "Input, Measurement, DateTime", placeholder = "Date_Time")
-               , textInput("col_msr_depth", label = "Input, Measurement, Depth (m)", placeholder = "Depth_m")
-               , textInput("col_msr_msr", label = "Input, Measurement, Measurement", placeholder = "Water_Temp_C")
+               , textInput("col_msr_datetime"
+                           , label = "Input, Measurement, DateTime"
+                           , placeholder = "Date_Time")
+               , textInput("col_msr_depth"
+                           , label = "Input, Measurement, Depth (m)"
+                           , placeholder = "Depth_m")
+               , textInput("col_msr_msr"
+                           , label = "Input, Measurement, Measurement"
+                           , placeholder = "Water_Temp_C")
                #
-               , h4("2.B. Define Columns, Lake Areas")
-               , textInput("col_area_depth", label = "Input, Area, Depth (m)", placeholder = "Contour_Depth")
-               , textInput("col_area_area", label = "Input, Area, Area (m2)", placeholder = "Area")
+               , h4("2.A.2. Define Columns, Lake Areas")
+               , textInput("col_area_depth"
+                           , label = "Input, Area, Depth (m)"
+                           , placeholder = "Contour_Depth")
+               , textInput("col_area_area"
+                           , label = "Input, Area, Area (m2)"
+                           , placeholder = "Area")
                #
-               , h4("3. Calculate")
-               , numericInput("strat_min_days", label = "Stratification, minimum days", value = 20)
+               , h4("2.B. Calculate")
+               , numericInput("strat_min_days"
+                              , label = "Stratification, minimum days"
+                              , value = 20)
                , p("Must view data tabs to the right before clicking calculate below.")
                , shinyjs::disabled(actionButton("b_Calc", "Calculate"))
                #
-               , h4("4. Download Results")
+               , h4("2.C. Download Results")
                # Button
                , p("Select button to download zip file with input and results.")
                , p("Check 'results_log.txt' for any warnings or messages.")

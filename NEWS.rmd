@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9018
+===========
+Released - 2021-02-01
+
+* refactor: Update temporary settings to inputs for depth_plot()
+* feature: Add scatterplot depth profile and heatmap (Issues #6) for Shiny input
+
 LakeMonitoR 0.1.0.9017
 ===========
 Released - 2021-01-28

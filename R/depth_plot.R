@@ -101,14 +101,14 @@ depth_plot <- function(data
   #
   if(is.na(lab_depth) == FALSE){
     p <- p + ggplot2::guides(color = ggplot2::guide_colourbar(title =
-                                                                "Depth (m)"))
+                                                                     lab_depth))
   }## IF ~ is.na(lab_depth)
   # #
   if(is.na(lab_measure) == FALSE){
     p <- p + ggplot2::labs(y = lab_measure)
   }## IF ~ is.na(lab_measure)
   #
-  if(is.na(lab_measure) == FALSE){
+  if(is.na(lab_title) == FALSE){
     p <- p + ggplot2::labs(title = lab_title)
   }## IF ~ is.na(lab_measure)
 
