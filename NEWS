@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-02-25 12:31:27
+    #> Last Update: 2021-02-25 14:49:58
+
+# LakeMonitoR 0.1.0.9022
+
+Released - 2021-02-25
+
+-   docs: DESCRIPTION, remove ContDataQC, too many dependencies
 
 # LakeMonitoR 0.1.0.9021
 
