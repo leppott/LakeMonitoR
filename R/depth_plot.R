@@ -82,6 +82,8 @@ depth_plot <- function(data
   # from factor to POSIXct (make it a date and time field in R)
   data[, col_datetime] <- as.POSIXct(data[, col_datetime])
 
+  # use date format helper function to ensure get right format.
+
   # Plot, Create ----
   p <- ggplot2::ggplot(data
                        , ggplot2::aes_string(x = col_datetime

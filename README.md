@@ -3,7 +3,7 @@ README-LakeMonitoR
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-19 22:11:36
+    #> Last Update: 2021-02-24 13:26:07
 
 # LakeMonitoR
 
@@ -31,9 +31,24 @@ releases](https://img.shields.io/github/downloads/leppott/LakeMonitoR/total.svg)
 
 # Installation
 
+To install the current version of the code from GitHub use the example
+below.
+
 ``` r
-library(devtools)
-install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
+if(!require(devtools)){install.packages("devtools")}  #install if needed
+devtools::install_github("leppott/LakeMonitoR")
+```
+
+The vignette (big help file) isn’t created when installing from GitHub
+with the above command. If you want the vignette download the compressed
+file from GitHub and install from that file or install with the command
+below. The “force = TRUE” command is used to ensure the package will
+install over and existing install of the same version (e.g., the same
+version without the vignettes).
+
+``` r
+if(!require(devtools)){install.packages("devtools")}  #install if needed
+devtools::install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
 ```
 
 # Purpose
@@ -41,7 +56,7 @@ install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
 Aid analysis of temperature and dissolved oxygen depth profiles from
 lakes.
 
-# Issue
+# Issues
 
 <https://github.com/leppott/LakeMonitoR/issues>
 

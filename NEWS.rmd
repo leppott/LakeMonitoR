@@ -19,6 +19,17 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9019
+===========
+Released - 2021-02-25
+
+* docs: Updated README for example install code
+* refactor: Update stratification() to handle data that is 100% stratified
+, Issue #9
+* refactor: Update stratification() to handle data that is 0% stratified
+, Issue #9
+* docs: DESCRIPTION, add ContDataQC package for date helper function
+
 LakeMonitoR 0.1.0.9018
 ===========
 Released - 2021-02-01

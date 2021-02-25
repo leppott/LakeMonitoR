@@ -76,6 +76,12 @@ stratification <- function(data
   # QC days to numeric
   min_days <- as.numeric(min_days)
 
+  # # Check total days
+  # days_total <- as.numeric(max(data[, col_date]) - min(data[, col_date]))
+  # if(days_total < min_days) {
+  #   # do something
+  # }## IF ~ days_total < min_days ~ END
+
   # for calculations
   StratificationAnalysis <- NULL
   meandata <- NULL
@@ -106,13 +112,13 @@ stratification <- function(data
   stratrows <- as.numeric(nrow(Stratification))
 
   stratdates <- NULL
-  if (min_days==0){
+  if (min_days == 0){
     min_days <- 1
   }else{
     min_days <- min_days
   }## IF ~ min_days ~ END
 
-  for (i in (min_days+1):(stratrows-(min_days))){
+  for (i in (min_days + 1):(stratrows - (min_days))){
     starttest <- NULL
     endtest <- NULL
     for (j in 1:min_days){
@@ -188,12 +194,42 @@ stratification <- function(data
     }## FOR ~ i ~ END
   }## IF ~ !is.null(stratdates) ~ END
 
-  startdates["Date2"] <- startdates[, col_date]
-  enddates["Date2"] <- enddates[, col_date]
 
-  stratificationdates <- rbind(startdates, enddates)
-  stratificationdates <- stratificationdates[order(stratificationdates[
-                                                                 , col_date]), ]
+  # QC ----
+  # Error if all stratified some things not generated
+  if(exists("stratspan") == FALSE){
+    if(sum(Stratification$stratified) == nrow(Stratification)) {
+      startstrat <- min(Stratification$Date)
+      endstrat <- max(Stratification$Date)
+      timespan <- difftime(startstrat
+                           , endstrat
+                           , units = "days")
+      stratspan <- data.frame(Start_Date = startstrat
+                              , End_Date = endstrat
+                              , Year = format(startstrat, "%Y")
+                              , Time_Span = abs(timespan))
+    } else {
+      stratspan <- data.frame(Start_Date = NA
+                              , End_Date = NA
+                              , Year = NA_character_
+                              , Time_Span = NA)
+    }## IF ~ sum == nrow
+  }## IF ~ exists("stratspan")
+
+
+
+
+  # stratificationdates not exported
+  if(exists("startdates") ==  TRUE) {
+    startdates["Date2"] <- startdates[, col_date]
+    enddates["Date2"] <- enddates[, col_date]
+
+    stratificationdates <- rbind(startdates, enddates)
+    stratificationdates <- stratificationdates[order(stratificationdates[
+      , col_date]), ]
+  }## IF ~ exists("startdates")
+
+
 
   # ERIK ####
   # short cut rest of code and output this information
@@ -204,6 +240,8 @@ stratification <- function(data
 
   # Results 2
   # reshape
+
+
 
   # Results, List
   list_results <- list(Stratification_Dates = Stratification

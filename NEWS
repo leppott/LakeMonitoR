@@ -4,120 +4,131 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-02-01 15:10:39
+    #> Last Update: 2021-02-25 11:41:41
+
+# LakeMonitoR 0.1.0.9019
+
+Released - 2021-02-25
+
+-   docs: Updated README for example install code
+-   refactor: Update stratification() to handle data that is 100%
+    stratified , Issue \#9
+-   refactor: Update stratification() to handle data that is 0%
+    stratified , Issue \#9
+-   docs: DESCRIPTION, add ContDataQC package for date helper function
 
 # LakeMonitoR 0.1.0.9018
 
 Released - 2021-02-01
 
-  - refactor: Update temporary settings to inputs for depth\_plot()
-  - feature: Add scatterplot depth profile and heatmap (Issues \#6) for
+-   refactor: Update temporary settings to inputs for depth\_plot()
+-   feature: Add scatterplot depth profile and heatmap (Issues \#6) for
     Shiny input
 
 # LakeMonitoR 0.1.0.9017
 
 Released - 2021-01-28
 
-  - refactor: Update stop message for depth\_plot() column QC
+-   refactor: Update stop message for depth\_plot() column QC
 
 # LakeMonitoR 0.1.0.9016
 
 Released - 2021-01-28
 
-  - refactor: Add internal QC for column headers for depth\_plot(),
+-   refactor: Add internal QC for column headers for depth\_plot(),
     Issue \#5
-  - tests: Add test for depth\_plot() ggplot object, Issue \#5
-  - refactor: Add data-raw to create qc object for depth\_plot() test,
+-   tests: Add test for depth\_plot() ggplot object, Issue \#5
+-   refactor: Add data-raw to create qc object for depth\_plot() test,
     Issue \#5
-  - docs: Example file for depth\_plot() saved as RDA forced DEPENDS on
-    R \>= 3.5.0
+-   docs: Example file for depth\_plot() saved as RDA forced DEPENDS on
+    R &gt;= 3.5.0
 
 # LakeMonitoR 0.1.0.9015
 
 Released - 2021-01-28
 
-  - feature: Add depth\_plot function to return a depth profile plot,
+-   feature: Add depth\_plot function to return a depth profile plot,
     Issue \#5
-  - feature: Add laketest data for use with depth\_plot()
+-   feature: Add laketest data for use with depth\_plot()
 
 # LakeMonitoR 0.1.0.9014
 
 Released - 2021-01-19
 
-  - docs: Update codecov badge in README
+-   docs: Update codecov badge in README
 
 # LakeMonitoR 0.1.0.9013
 
 Released - 2021-01-19
 
-  - refactor: Remove unneeded concatenation of a constant
-      - export\_rLakeAnalyzer
-  - refactor: Replace 1:foo(bar) with seq\_len(foo(bar))
-      - stratification
+-   refactor: Remove unneeded concatenation of a constant
+    -   export\_rLakeAnalyzer
+-   refactor: Replace 1:foo(bar) with seq\_len(foo(bar))
+    -   stratification
 
 # LakeMonitoR 0.1.0.9012
 
 Released - 2021-01-19
 
-  - refactor: Remove docs folder
-      - Using GitHub Action to build pkgdown site
+-   refactor: Remove docs folder
+    -   Using GitHub Action to build pkgdown site
 
 # LakeMonitoR 0.1.0.9011
 
 Released - 2021-01-19
 
-  - style: Remove blank lines at end of script
-      - daily\_depth\_means
-      - data
-      - exort\_rLakeAnalyzer
-      - LakeMonitoR
-      - runShiny
-      - stratification
-  - style: Trim lines to 80 characters
-      - runShiny
-      - daily\_depth\_means
-      - data
-      - export\_rLakeAnalyzer
-      - stratification
-  - refactor: Add items to .Rbuildignore and .gitignore
-      - \_other folder
-      - NEWS.rmd
-      - README.RMD
-      - Switch setting to use gh-pages branch
-  - tests: Add two tests for stratification (dates and events)
-  - tests: Add test for export\_rLakeAnalyzer
-  - docs: Add all extra export\_rLakeAnalyzer examples to dontrun
-      - Comment out failing schmidt.plot()
-  - refactor: Add missing parameters to function call
-      - dir\_export
-      - fn\_export
-  - docs: Update DESCRIPTION license
+-   style: Remove blank lines at end of script
+    -   daily\_depth\_means
+    -   data
+    -   exort\_rLakeAnalyzer
+    -   LakeMonitoR
+    -   runShiny
+    -   stratification
+-   style: Trim lines to 80 characters
+    -   runShiny
+    -   daily\_depth\_means
+    -   data
+    -   export\_rLakeAnalyzer
+    -   stratification
+-   refactor: Add items to .Rbuildignore and .gitignore
+    -   \_other folder
+    -   NEWS.rmd
+    -   README.RMD
+    -   Switch setting to use gh-pages branch
+-   tests: Add two tests for stratification (dates and events)
+-   tests: Add test for export\_rLakeAnalyzer
+-   docs: Add all extra export\_rLakeAnalyzer examples to dontrun
+    -   Comment out failing schmidt.plot()
+-   refactor: Add missing parameters to function call
+    -   dir\_export
+    -   fn\_export
+-   docs: Update DESCRIPTION license
 
 # LakeMonitoR 0.1.0.9010
 
 Released - 2021-01-19
 
-  - tests: Add test for daily\_depth\_means
+-   tests: Add test for daily\_depth\_means
 
 # LakeMonitoR 0.1.0.9009
 
 Released - 2020-12-27
 
-  - docs: ReadMe, Add license badge
-  - docs: ReadMe, Add CodeFactor badge
-  - docs: ReadMe, Add lifecyle badge
-  - docs: ReadMe, Add maintenance badge
-  - docs: ReadMe, Add issues badge
-  - docs: ReadMe, Add release badge
-  - docs: ReadMe, Add download badge
-  - docs: ReadMe, Add codecov badge
-  - ci: Add GitHub Action, CI
-  - docs: ReadMe, Add CMD Check badge
-  - ci: Add GitHub Action, pkgdown
-  - docs: Remove docs folder from main branch
-  - docs: GitHub redirect web page to gh-pages branch
-  - ci: Add GitHub Action, test coverage
-  - docs: ReadMe, rework md as rmd
+-   docs: ReadMe, Add license badge
+-   docs: ReadMe, Add CodeFactor badge
+-   docs: ReadMe, Add lifecyle badge
+-   docs: ReadMe, Add maintenance badge
+-   docs: ReadMe, Add issues badge
+-   docs: ReadMe, Add release badge
+-   docs: ReadMe, Add download badge
+-   docs: ReadMe, Add codecov badge
+-   ci: Add GitHub Action, CI
+-   docs: ReadMe, Add CMD Check badge
+-   ci: Add GitHub Action, pkgdown
+-   docs: Remove docs folder from main branch
+-   docs: GitHub redirect web page to gh-pages branch
+-   ci: Add GitHub Action, test coverage
+-   docs: ReadMe, rework md as rmd
 
 # LakeMonitoR 0.1.0.9008
 
@@ -135,106 +146,106 @@ functions in DESCRIPTION and code.
 
 Released - 2020-11-10
 
-  - Add package help file.
+-   Add package help file.
 
 # LakeMonitoR 0.1.0.9005
 
 Released - 2020-10-27
 
-  - Shiny, ui.R
-      - Update version number in header.
+-   Shiny, ui.R
+    -   Update version number in header.
 
 # LakeMonitoR 0.1.0.9004
 
 Released - 2020-10-27
 
-  - Shiny, server.R
-      - Add error checking for column names and upload files, Issue \#1
+-   Shiny, server.R
+    -   Add error checking for column names and upload files, Issue \#1
 
 # LakeMonitoR 0.1.0.9003
 
 Released - 2020-10-26
 
-  - Update Shiny app.
-  - Add example files for Shiny app.
+-   Update Shiny app.
+-   Add example files for Shiny app.
 
 # LakeMonitoR 0.1.0.9002
 
 Released - 2020-10-22
 
-  - ReadMe.md
-      - Fix typo in install\_github example code.
-  - Add function export\_rLakeAnalyzer
-      - Convert data frame to rLakeAnalyzer input format.
-  - DESCRIPTION
-      - Imports: reshape2
-      - Suggests: rLakeAnalyzer and ggplot2
-  - Data.R
-      - Add lakehypso
+-   ReadMe.md
+    -   Fix typo in install\_github example code.
+-   Add function export\_rLakeAnalyzer
+    -   Convert data frame to rLakeAnalyzer input format.
+-   DESCRIPTION
+    -   Imports: reshape2
+    -   Suggests: rLakeAnalyzer and ggplot2
+-   Data.R
+    -   Add lakehypso
 
 # LakeMonitoR 0.1.0.9001
 
 Released - 2020-10-22
 
-  - Add Shiny app.
-      - File upload only.
-  - runShiny.R
-      - Add function to run shiny app.
+-   Add Shiny app.
+    -   File upload only.
+-   runShiny.R
+    -   Add function to run shiny app.
 
 # LakeMonitoR 0.1.0
 
 Released - 2020-10-20
 
-  - Interim version.
-      - Both functions fully operational.
-  - Update pkgdown.
+-   Interim version.
+    -   Both functions fully operational.
+-   Update pkgdown.
 
 # LakeMonitoR 0.0.1.9006
 
 Released - 2020-10-20
 
-  - Remove docs (pkgdown) from gitignore
+-   Remove docs (pkgdown) from gitignore
 
 # LakeMonitoR 0.0.1.9005
 
 Released - 2020-10-20
 
-  - Add pkgdown documentation.
+-   Add pkgdown documentation.
 
 # LakeMonitoR 0.0.1.9004
 
 Released - 2020-10-20
 
-  - Update data-raw and data with full records.
-      - Use full raw data.
-      - Zip raw data file.
-  - Update data.R
+-   Update data-raw and data with full records.
+    -   Use full raw data.
+    -   Zip raw data file.
+-   Update data.R
 
 # LakeMonitoR 0.0.1.9003
 
 Released - 2020-10-19
 
-  - Add stratification function.
+-   Add stratification function.
 
 # LakeMonitoR 0.0.1.9002
 
 Released - 2020-10-19
 
-  - Update daily\_depth\_means function.
-  - Add data file, laketemp\_ddm (output of daily\_depth\_means
+-   Update daily\_depth\_means function.
+-   Add data file, laketemp\_ddm (output of daily\_depth\_means
     function).
 
 # LakeMonitoR 0.0.1.9001
 
 Released - 2020-10-16
 
-  - Add laketemp data
-  - Add functions.
-      - daily\_depth\_means
-      - lake\_strat
+-   Add laketemp data
+-   Add functions.
+    -   daily\_depth\_means
+    -   lake\_strat
 
 # LakeMonitoR 0.0.1.9001
 
 Released - 2020-10-16
 
-  - Initial commit to GitHub
+-   Initial commit to GitHub
