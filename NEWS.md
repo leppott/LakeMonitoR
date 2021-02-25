@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-02-25 11:47:28
+    #> Last Update: 2021-02-25 12:31:27
+
+# LakeMonitoR 0.1.0.9021
+
+Released - 2021-02-25
+
+-   docs: DESCRIPTION, ContDataQC package, add remote rather then
+    removing from Imports
 
 # LakeMonitoR 0.1.0.9020
 
