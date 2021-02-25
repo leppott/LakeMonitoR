@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+
+LakeMonitoR 0.1.0.9020
+===========
+Released - 2021-02-25
+
+* docs: DESCRIPTION, remove ContDataQC package, causes build failure
+
 LakeMonitoR 0.1.0.9019
 ===========
 Released - 2021-02-25
