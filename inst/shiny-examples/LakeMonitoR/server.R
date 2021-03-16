@@ -333,6 +333,15 @@ shinyServer(function(input, output) {
                                               , col_strat_depth
                                               , col_strat_measure
                                               , min_days = input$strat_min_days)
+
+      # Calc Stats
+      df_lss <- LakeMonitoR::lake_summary_stats(df_ddm
+                                              , col_strat_date
+                                              , col_strat_depth
+                                              , col_strat_measure
+                                              , ndaysbelow = input$minlimit)
+
+
       # Save Results
       # Results, Stratification Dates
       fn_strat_dates <- file.path(".", "Results", "strat_dates.csv")
@@ -340,6 +349,10 @@ shinyServer(function(input, output) {
       # Results, Stratification Events
       fn_strat_events <- file.path(".", "Results", "strat_events.csv")
       write.csv(ls_strat$Stratification_Events, fn_strat_events, row.names = FALSE)
+
+      # Results, lakes summary stats
+      fn_lss <- file.path(".", "Results", "summary_stats.csv")
+      write.csv(df_lss, fn_lss, row.names = FALSE)
 
       # Sink info
       print("Stratification, Dates (head)")

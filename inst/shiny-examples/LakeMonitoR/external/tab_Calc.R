@@ -33,7 +33,10 @@ function(){
                , numericInput("strat_min_days"
                               , label = "Stratification, minimum days"
                               , value = 20)
-               , p("Must view data tabs to the right before clicking calculate below.")
+               , numericInput("minlimit"
+                              , label = "Minimum DO (mg/L)"
+                              , value = 2)
+               , p("Data view must be visible to the right before clicking calculate below.")
                , shinyjs::disabled(actionButton("b_Calc", "Calculate"))
                #
                , h4("2.C. Download Results")

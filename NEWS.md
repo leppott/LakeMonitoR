@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-02-25 14:49:58
+    #> Last Update: 2021-03-05 16:47:49
+
+# LakeMonitoR 0.1.0.9023
+
+Released - 2021-03-05
+
+-   feature: Add lake\_summary\_stats
+-   refactor: Add dplyer to DESCRIPTION Imports
 
 # LakeMonitoR 0.1.0.9022
 

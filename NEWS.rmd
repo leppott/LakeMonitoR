@@ -20,6 +20,13 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 0.1.0.9023
+===========
+Released - 2021-03-05
+
+* feature: Add lake_summary_stats
+* refactor: Add dplyer to DESCRIPTION Imports
+
 LakeMonitoR 0.1.0.9022
 ===========
 Released - 2021-02-25
