@@ -4,7 +4,7 @@
 \alias{lake_summary_stats}
 \title{Lake Summary Statistics}
 \usage{
-lake_summary_stats(data, col_date, col_depth, col_measure, ndaysbelow = 2)
+lake_summary_stats(data, col_date, col_depth, col_measure, below_threshold = 2)
 }
 \arguments{
 \item{data}{data frame}
@@ -15,7 +15,7 @@ lake_summary_stats(data, col_date, col_depth, col_measure, ndaysbelow = 2)
 
 \item{col_measure}{Column name, measurement for calculation}
 
-\item{ndaysbelow}{Threshold below which to count number of days for
+\item{below_threshold}{Threshold below which to count number of days for
 measured value.  Default = 2}
 }
 \value{
@@ -67,15 +67,15 @@ data <- laketemp_ddm
 col_date    <- "Date"
 col_depth   <- "Depth"
 col_measure <- "Measurement"
-numdaysbelow <- 2
+below_threshold <- 2
 
 # Calculate Stratification
 df_lss <- lake_summary_stats(data
                             , col_date
                             , col_depth
                             , col_measure
-                            , ndaysbelow)
+                            , below_threshold)
 
-# Results, Stratification Dates
+# Results
 head(df_lss)
 }

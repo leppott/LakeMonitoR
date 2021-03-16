@@ -20,6 +20,16 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 0.1.0.9024
+===========
+Released - 2021-03-16
+
+* refactor: Update maps in Shiny to use ggplotly dynamicTicks = TRUE
+* refactor: Update heatmap in Shiny\
+* refactor!: Rename depth_plot to plot_depth
+* feature: Add plot_heatmap, Issues #6 and #10
+* refactor: Update Shiny server with revised plot function names
+
 LakeMonitoR 0.1.0.9023
 ===========
 Released - 2021-03-05

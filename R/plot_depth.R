@@ -40,7 +40,7 @@
 #' lab_title    <- "Test Lake"
 #'
 #' # Create Plot
-#' p_profile <- depth_plot(data = data
+#' p_profile <- plot_depth(data = data
 #'                         , col_datetime = col_datetime
 #'                         , col_depth = col_depth
 #'                         , col_measure = col_measure
@@ -53,14 +53,14 @@
 #' print(p_profile)
 #'
 #' # Demo ability to tweak the plot
-#' p_profile + ggplot2::labs(caption = "LakeMonitoR::depth_plot() example.")
+#' p_profile + ggplot2::labs(caption = "Example, LakeMonitoR::plot_depth()")
 #'
 #' # save plot to temp directory
 #' tempdir() # show the temp directory
-#' ggplot2::ggsave(file.path(tempdir(), "DepthProfile_TestLake.png"))
+#' ggplot2::ggsave(file.path(tempdir(), "TestLake_tempF_plotDepth.png"))
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @export
-depth_plot <- function(data
+plot_depth <- function(data
                       , col_datetime
                       , col_depth
                       , col_measure

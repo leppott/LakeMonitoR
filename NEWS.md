@@ -4,7 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-03-05 16:47:49
+    #> Last Update: 2021-03-16 17:14:22
+
+# LakeMonitoR 0.1.0.9024
+
+Released - 2021-03-16
+
+-   refactor: Update maps in Shiny to use ggplotly dynamicTicks = TRUE
+-   refactor: Update heatmap in Shiny  
+-   refactor!: Rename depth\_plot to plot\_depth
+-   feature: Add plot\_heatmap, Issues \#6 and \#10
+-   refactor: Update Shiny server with revised plot function names
 
 # LakeMonitoR 0.1.0.9023
 

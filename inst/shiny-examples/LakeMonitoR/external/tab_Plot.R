@@ -13,6 +13,9 @@ function(){
                            , label = "Plot, Measurement, DateTime"
                            , value = NULL
                            , placeholder = "Date_Time")
+               # , selectInput("col_plot_datetime"
+               #               , label = "Plot, Measurement, DateTime"
+               #               , choices = c("A", "B", "C"))
                , textInput("col_plot_depth"
                            , label = "Plot, Measurement, Depth (m)"
                            , placeholder = "Depth_m")
@@ -22,26 +25,26 @@ function(){
                #
                , h4("3.B. Define Plot Labels")
                , textInput("lab_plot_datetime"
-                           , label = "Plot, x-axis, DateTime"
-                           , placeholder = "Date Time")
+                           , label = "Plot, DateTime"
+                           , placeholder = "Date Time"
+                           , value = "Date Time")
                , textInput("lab_plot_depth"
-                           , label = "Plot, legend, Depth (m)"
-                           , placeholder = "Depth (m)")
+                           , label = "Plot, Depth"
+                           , placeholder = "Depth (m)"
+                           , value = "Depth (m)")
                , textInput("lab_plot_msr"
-                           , label = "Plot, y-axis, Measurement"
+                           , label = "Plot, Measurement"
                            , placeholder = "Water Temperature (C)")
                , textInput("lab_plot_title"
                            , label = "Plot, Measurement, Measurement"
                            , value = NA
                            , placeholder = "Title")
-
+               , numericInput("line_val_plot_hm"
+                              , label = "heat map line value"
+                              , value = NA)
 
                , h4("3.C. Create Plots")
-               , numericInput("strat_min_days"
-                              , label = "Stratification, minimum days"
-                              , value = 20)
-               , p("**generate plots**")
-               , shinyjs::disabled(actionButton("b_Calc", "Calculate"))
+
                #
                , h4("3.D. Download Plots")
                # Button
