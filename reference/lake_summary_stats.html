@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lake temperature data — laketemp • LakeMonitoR</title>
+<title>Lake Summary Statistics — lake_summary_stats • LakeMonitoR</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Lake temperature data — laketemp" />
-<meta property="og:description" content="Example data containing one year (January 2017 to January 2018) of lake
-profile temperature data.  Includes QC flag columns." />
+<meta property="og:title" content="Lake Summary Statistics — lake_summary_stats" />
+<meta property="og:description" content="Calculates summary statistics on daily depth means." />
 
 
 
@@ -119,39 +118,89 @@ profile temperature data.  Includes QC flag columns." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lake temperature data</h1>
+    <h1>Lake Summary Statistics</h1>
     
-    <div class="hidden name"><code>laketemp.Rd</code></div>
+    <div class="hidden name"><code>lake_summary_stats.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Example data containing one year (January 2017 to January 2018) of lake
-profile temperature data.  Includes QC flag columns.</p>
+    <p>Calculates summary statistics on daily depth means.</p>
     </div>
 
-    <pre class="usage"><span class='va'>laketemp</span></pre>
+    <pre class="usage"><span class='fu'>lake_summary_stats</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>col_date</span>, <span class='va'>col_depth</span>, <span class='va'>col_measure</span>, ndaysbelow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>data frame</p></td>
+    </tr>
+    <tr>
+      <th>col_date</th>
+      <td><p>Column name, Date</p></td>
+    </tr>
+    <tr>
+      <th>col_depth</th>
+      <td><p>Column name, Depth</p></td>
+    </tr>
+    <tr>
+      <th>col_measure</th>
+      <td><p>Column name, measurement for calculation</p></td>
+    </tr>
+    <tr>
+      <th>ndaysbelow</th>
+      <td><p>Threshold below which to count number of days for
+measured value.  Default = 2</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<dl>
- <dt><code>DOWLKNUM</code></dt><dd><p>DOW Lake Number</p></dd>
- <dt><code>SiteID</code></dt><dd><p>Site ID</p></dd>
- <dt><code>Date_Time</code></dt><dd><p>Date and Time</p></dd>
- <dt><code>Water_Temp_C</code></dt><dd><p>water temperature, degree C</p></dd>
- <dt><code>Depth_m</code></dt><dd><p>depth, meters</p></dd>
- <dt><code>Depth_std</code></dt><dd><p>a numeric vector</p></dd>
- <dt><code>FlagG</code></dt><dd><p>QC flag, gross check</p></dd>
- <dt><code>FlagS</code></dt><dd><p>QC flag, spike check</p></dd>
- <dt><code>FlagR</code></dt><dd><p>QC flag, rate of change check</p></dd>
- <dt><code>FlagF</code></dt><dd><p>QC flag, flat line check</p></dd>
- <dt><code>String</code></dt><dd><p>a character vector</p></dd>
- <dt><code>FlagV</code></dt><dd><p>Overall record level QC flag</p></dd>
+    <p>data frame in long format.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-</dl>
+    <p>Input data is assumed to be a single lake location depth profile
+with one measurement per day and depth.  The function daily_depth_means can
+be used to generate this type of data from continuous data with multiple
+measurements per day for each depth.</p>
+<p>Calculated statistics are:</p>
+<p>* minimum</p>
+<p>* maximum</p>
+<p>* range</p>
+<p>* mean</p>
+<p>* median</p>
+<p>* quantiles (1, 5, 10, 25, 50, 75, 90, 95, 99)</p>
+<p>Statistics are calculated for multiple time periods:</p>
+<p>* entire dataset</p>
+<p>* year</p>
+<p>* month</p>
+<p>* year month</p>
+<p>A data frame is returned in a hybrid long format.  Statistics will be columns
+and time periods will also be a column with the values for each row.  That is,
+if time period is month then each month will be a row with each statistic in
+a column.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># data</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>laketemp_ddm</span>
 
+<span class='co'># Columns</span>
+<span class='va'>col_date</span>    <span class='op'>&lt;-</span> <span class='st'>"Date"</span>
+<span class='va'>col_depth</span>   <span class='op'>&lt;-</span> <span class='st'>"Depth"</span>
+<span class='va'>col_measure</span> <span class='op'>&lt;-</span> <span class='st'>"Measurement"</span>
+<span class='va'>numdaysbelow</span> <span class='op'>&lt;-</span> <span class='fl'>2</span>
+
+<span class='co'># Calculate Stratification</span>
+<span class='va'>df_lss</span> <span class='op'>&lt;-</span> <span class='fu'>lake_summary_stats</span><span class='op'>(</span><span class='va'>data</span>
+                            , <span class='va'>col_date</span>
+                            , <span class='va'>col_depth</span>
+                            , <span class='va'>col_measure</span>
+                            , <span class='va'>ndaysbelow</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in ifelse(data[, col_measure] &lt; below_threshold, 1, 0): object 'ndaysbelow' not found</span></div><div class='input'>
+<span class='co'># Results, Stratification Dates</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df_lss</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in head(df_lss): object 'df_lss' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
