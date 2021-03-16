@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 0.1.0.9025
+===========
+Released - 2021-03-16
+
+* refactor: Update version number in shiny UI
+
 LakeMonitoR 0.1.0.9024
 ===========
 Released - 2021-03-16

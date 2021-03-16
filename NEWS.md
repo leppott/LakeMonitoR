@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-03-16 17:14:22
+    #> Last Update: 2021-03-16 17:24:51
+
+# LakeMonitoR 0.1.0.9025
+
+Released - 2021-03-16
+
+-   refactor: Update version number in shiny UI
 
 # LakeMonitoR 0.1.0.9024
 
