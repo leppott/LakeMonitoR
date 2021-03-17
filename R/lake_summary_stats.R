@@ -131,7 +131,7 @@ lake_summary_stats <- function(data
     # }## IF ~ timeframe
     csdt <- data_calc %>%
       dplyr::group_by(.data[[timeframe]]) %>%
-      dplyr::group_by(.data[[col_depth]])
+      dplyr::group_by(.data[[col_depth]]) %>%
       dplyr::summarize(.groups = "drop_last"
                        , n = length(.data[[col_measure]])
                        , ndays = length(unique(.data[[col_date]]))

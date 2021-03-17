@@ -334,12 +334,12 @@ shinyServer(function(input, output) {
                                               , col_strat_measure
                                               , min_days = input$strat_min_days)
 
-      # Calc Stats
-      # df_lss <- LakeMonitoR::lake_summary_stats(df_ddm
-      #                                         , col_strat_date
-      #                                         , col_strat_depth
-      #                                         , col_strat_measure
-      #                                         , below_threshold = input$minlimit)
+      # _Calc, Lake Summary Stats ----
+      df_lss <- LakeMonitoR::lake_summary_stats(df_ddm
+                                              , col_strat_date
+                                              , col_strat_depth
+                                              , col_strat_measure
+                                              , below_threshold = input$minlimit)
 
 
       # Save Results
@@ -358,9 +358,9 @@ shinyServer(function(input, output) {
       ggplot2::ggsave(filename = fn_strat_plot
                       , plot = ls_strat$Stratification_Plot)
 
-      # # Results, lakes summary stats
-      # fn_lss <- file.path(".", "Results", "summary_stats.csv")
-      # write.csv(df_lss, fn_lss, row.names = FALSE)
+      # Results, lakes summary stats
+      fn_lss <- file.path(".", "Results", "summary_stats.csv")
+      write.csv(df_lss, fn_lss, row.names = FALSE)
 
       # Sink info
       print("Stratification, Dates (head)")

@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-03-17 12:47:30
+    #> Last Update: 2021-03-17 13:36:08
+
+# LakeMonitoR 0.1.0.9027
+
+Released - 2021-03-17
+
+-   refactor: lake\_summary\_stats, add missing %&gt;% in stats
+    function, Issue \#12
 
 # LakeMonitoR 0.1.0.9026
 
