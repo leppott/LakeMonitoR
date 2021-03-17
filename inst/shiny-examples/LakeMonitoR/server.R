@@ -266,7 +266,7 @@ shinyServer(function(input, output) {
                                   , message = msg_col_data_missing))## validate ~ END
 
 
-      # b_Calc, Step 3, Daily Depth Means and Stratification ####
+      # b_Calc, Step 3, DDM and Strat ####
       # Increment the progress bar, and update the detail text.
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; Stratification.")
@@ -324,7 +324,7 @@ shinyServer(function(input, output) {
       fn_ddm <- file.path(".", "Results", "data_ddm.csv")
       write.csv(df_ddm, fn_ddm, row.names = FALSE)
 
-      # Calculate Stratification
+      # _Calc, Stratification ----
       col_strat_date    <- "Date"
       col_strat_depth   <- "Depth"
       col_strat_measure <- "Measurement"
@@ -335,24 +335,32 @@ shinyServer(function(input, output) {
                                               , min_days = input$strat_min_days)
 
       # Calc Stats
-      df_lss <- LakeMonitoR::lake_summary_stats(df_ddm
-                                              , col_strat_date
-                                              , col_strat_depth
-                                              , col_strat_measure
-                                              , ndaysbelow = input$minlimit)
+      # df_lss <- LakeMonitoR::lake_summary_stats(df_ddm
+      #                                         , col_strat_date
+      #                                         , col_strat_depth
+      #                                         , col_strat_measure
+      #                                         , below_threshold = input$minlimit)
 
 
       # Save Results
       # Results, Stratification Dates
       fn_strat_dates <- file.path(".", "Results", "strat_dates.csv")
-      write.csv(ls_strat$Stratification_Dates, fn_strat_dates, row.names = FALSE)
+      write.csv(ls_strat$Stratification_Dates
+                , fn_strat_dates
+                , row.names = FALSE)
       # Results, Stratification Events
       fn_strat_events <- file.path(".", "Results", "strat_events.csv")
-      write.csv(ls_strat$Stratification_Events, fn_strat_events, row.names = FALSE)
+      write.csv(ls_strat$Stratification_Events
+                , fn_strat_events
+                , row.names = FALSE)
+      # _Results, Stratification Plot ----
+      fn_strat_plot <- file.path(".", "Results", "strat_plot.png")
+      ggplot2::ggsave(filename = fn_strat_plot
+                      , plot = ls_strat$Stratification_Plot)
 
-      # Results, lakes summary stats
-      fn_lss <- file.path(".", "Results", "summary_stats.csv")
-      write.csv(df_lss, fn_lss, row.names = FALSE)
+      # # Results, lakes summary stats
+      # fn_lss <- file.path(".", "Results", "summary_stats.csv")
+      # write.csv(df_lss, fn_lss, row.names = FALSE)
 
       # Sink info
       print("Stratification, Dates (head)")
@@ -363,13 +371,14 @@ shinyServer(function(input, output) {
       # Clean up
       rm(df_calc)
 
-      # b_Calc, Step 4, Plot ####
+      # b_Calc, Step 4, Plot, depth ####
       # Increment the progress bar, and qc_taxa
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; Plot Measured Data")
       incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(sleep_time)
 
+      # _Plot, Depth Profile ----
       # Plot original data in ggplot
       data_plot <- df_data
       data_plot[, col_date] <- as.POSIXct(data_plot[, col_date]
@@ -378,19 +387,72 @@ shinyServer(function(input, output) {
       # col_date    <- "Date"
       # col_depth   <- "Depth"
       # col_measure <- "Measurement"
+      lab_datetime <- "Date"
+      lab_depth <- "Depth (m)"
+      lab_measure <- "Temperature (Celsius)"
+      lab_title <- "Depth Profile"
 
       # Plot, Create
-      p <- ggplot2::ggplot(data_plot, ggplot2::aes_string(x=col_date, y=col_measure)) +
-        ggplot2::geom_point(ggplot2::aes_string(color=col_depth)) +
-        ggplot2::scale_color_continuous(trans="reverse") +
-        ggplot2::labs(title = "Depth Profile"
-                      , x = "Date"
-                      , y = "Temperature (Celsius)"
-                      , color = "Depth (m)") +
-        ggplot2::theme_light()
+      # p <- ggplot2::ggplot(data_plot, ggplot2::aes_string(x=col_date, y=col_measure)) +
+      #   ggplot2::geom_point(ggplot2::aes_string(color=col_depth)) +
+      #   ggplot2::scale_color_continuous(trans="reverse") +
+      #   ggplot2::labs(title = "Depth Profile"
+      #                 , x = "Date"
+      #                 , y = "Temperature (Celsius)"
+      #                 , color = "Depth (m)") +
+      #   ggplot2::theme_light()
+
+      p_depth <- plot_depth(data = data_plot
+                         , col_datetime = col_date
+                         , col_depth = col_depth
+                         , col_measure = col_measure
+                         , lab_datetime = lab_datetime
+                         , lab_depth = lab_depth
+                         , lab_measure = lab_measure
+                         , lab_title = lab_title)
+
       # Plot, Save
-      fn_p <- file.path(".", "Results", "plot_depth_profile.png")
-      ggplot2::ggsave(fn_p)
+      fn_p_depth <- file.path(".", "Results", "plot_depth_profile.png")
+      ggplot2::ggsave(filename = fn_p_depth, plot = p_depth)
+
+      # _Plot, Depth, StratEvents ----
+      # Add to profile plot
+      df_StratEvents <- as.data.frame(ls_strat$Stratification_Events)
+      df_StratEvents$Start_Date <- as.POSIXct(as.Date(df_StratEvents$Start_Date))
+      df_StratEvents$End_Date <- as.POSIXct(as.Date(df_StratEvents$End_Date))
+
+
+      p_profile_strat <- p_depth +
+        labs(caption = "Stratification Events = red lines
+       Start Date = solid
+       End Date = dashed") +
+        geom_vline(xintercept = df_StratEvents$Start_Date
+                   , color = "red", linetype = "solid", size = 1.5) +
+        geom_vline(xintercept = df_StratEvents$End_Date
+                   , color = "red", linetype = "dashed", size = 2)
+
+      # Plot, Save
+      fn_p_depth_se <- file.path("."
+                                 , "Results"
+                                 , "plot_depth_profile_strat_events.png")
+      ggplot2::ggsave(filename = fn_p_depth_se, plot = p_profile_strat)
+
+
+      # _Plot, heat map ----
+      lab_title_hm <- NA
+      p_hm <- plot_heatmap(data = data_plot
+                           , col_datetime = col_date
+                           , col_depth = col_depth
+                           , col_measure = col_measure
+                           , lab_datetime = lab_datetime
+                           , lab_depth = lab_depth
+                           , lab_measure = lab_measure
+                           , lab_title = lab_title_hm
+                           , contours = TRUE)
+      fn_p_hm <- file.path(".", "Results", "plot_heatmap.png")
+      ggplot2::ggsave(fn_p_hm)
+
+
       #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       #  # could also do plot of events
       #  data_plot <- ls_strat$Stratification_Dates
@@ -575,7 +637,7 @@ shinyServer(function(input, output) {
 
 
         # Generate Heat Map
-        fn_hm <- file.path(".", "Results", "rLA_plot_heatmap.png")
+        fn_hm <- file.path(".", "Results", "plot_heatmap_rLA.png")
         grDevices::png(fn_hm)
           rLakeAnalyzer::wtr.heat.map(df_rLA_wtr)
         grDevices::dev.off()

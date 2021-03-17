@@ -26,10 +26,12 @@
 # Default = NULL
 #'
 #'
-#' @return List of 2 data frames.
+#' @return List with 3 elements, 2 data frames and a ggplot
 #' Stratification_Dates includes dates and T/F for Stratified.
 #' Stratification_Events includes a row for each stratified event along with
 #' start and end dates and number of days.
+#' Stratifcation_Plot is a ggplot with lines for each event by date (x)
+#' and year (y).
 #'
 #' @examples
 #' # data
@@ -54,6 +56,10 @@
 #' # Results, Stratification Events
 #' ls_strat$Stratification_Events
 #'
+#' # Results, Stratification Plot
+#' p <- ls_strat$Stratification_Plot
+#' print(p)
+#
 #' @export
 stratification <- function(data
                            #, col_siteid
@@ -241,11 +247,43 @@ stratification <- function(data
   # Results 2
   # reshape
 
+  # Results 3, plot ----
+  # plot, strat events
+  df_plot <- stratspan
+
+  # julian dates
+  df_plot$Start_j <- as.numeric(format(df_plot$Start_Date, "%j"))
+  df_plot$End_j <- as.numeric(format(df_plot$End_Date, "%j"))
+
+  # Use a leap year (2004) to put julian dates in the same scale
+  df_plot$Start_j2 <- as.Date(df_plot$Start_j
+                                     , origin = as.Date("2004-01-01"))
+  df_plot$End_j2 <- as.Date(df_plot$End_j
+                                   , origin = as.Date("2004-01-01"))
+
+  #
+  p_se <- ggplot2::ggplot(data = df_plot
+                          , ggplot2::aes(y = Year)) +
+    ggplot2::scale_x_date(date_labels = "%b%d"
+                          , limits = as.Date(c("2004-01-01", "2004-12-31"))
+                          , date_breaks = "1 month"
+                          , expand = c(0, 0)) +
+    ggplot2::labs(x = "Date"
+                  , y = "Year"
+                  , title = "Stratification Events") +
+    ggplot2::geom_segment(ggplot2::aes(x = Start_j2
+                                       , xend = End_j2
+                                       , y = Year
+                                       , yend = Year)
+                          , size = 3)
+  # # segments
+  # https://stackoverflow.com/questions/34124599/r-plot-julian-day-in-x-axis-using-ggplot2
 
 
   # Results, List
   list_results <- list(Stratification_Dates = Stratification
-                      , Stratification_Events = stratspan)
+                      , Stratification_Events = stratspan
+                      , Stratification_Plot = p_se)
 
   return(list_results)
 

@@ -4,7 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-03-16 17:24:51
+    #> Last Update: 2021-03-17 12:47:30
+
+# LakeMonitoR 0.1.0.9026
+
+Released - 2021-03-17
+
+-   refactor: Remove lake\_summary\_stats from Shiny app
+-   refactor: Shiny, add plot\_heatmap
+-   refactor: Shiny, rename rLakeAnalyzer heat map
+-   refactor: stratification, add events plot to output list, Issue \#7
+-   refactor: Shiny, add startification plot to calculation
+-   refactor: Shiny, add startification lines to depth profile plot in
+    calculation
 
 # LakeMonitoR 0.1.0.9025
 

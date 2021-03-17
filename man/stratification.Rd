@@ -19,10 +19,12 @@ stratification(data, col_date, col_depth, col_measure, min_days = 20)
 stratification.  Default = 20.}
 }
 \value{
-List of 2 data frames.
+List with 3 elements, 2 data frames and a ggplot
 Stratification_Dates includes dates and T/F for Stratified.
 Stratification_Events includes a row for each stratified event along with
 start and end dates and number of days.
+Stratifcation_Plot is a ggplot with lines for each event by date (x)
+and year (y).
 }
 \description{
 Calculates stratification on daily depth means.
@@ -63,4 +65,7 @@ head(ls_strat$Stratification_Dates)
 # Results, Stratification Events
 ls_strat$Stratification_Events
 
+# Results, Stratification Plot
+p <- ls_strat$Stratification_Plot
+print(p)
 }
