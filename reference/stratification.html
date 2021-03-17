@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9025</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9026</span>
       </span>
     </div>
 
@@ -157,10 +157,12 @@ stratification.  Default = 20.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>List of 2 data frames.
+    <p>List with 3 elements, 2 data frames and a ggplot
 Stratification_Dates includes dates and T/F for Stratified.
 Stratification_Events includes a row for each stratified event along with
-start and end dates and number of days.</p>
+start and end dates and number of days.
+Stratifcation_Plot is a ggplot with lines for each event by date (x)
+and year (y).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Uses the output of `daily_depth_means` and assumes units are
@@ -202,7 +204,10 @@ time span for each stratification event.</p>
 <span class='va'>ls_strat</span><span class='op'>$</span><span class='va'>Stratification_Events</span>
 </div><div class='output co'>#&gt;   Start_Date   End_Date Year Time_Span
 #&gt; 1 2017-06-05 2017-10-16 2017  133 days</div><div class='input'>
-</div></pre>
+<span class='co'># Results, Stratification Plot</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='va'>ls_strat</span><span class='op'>$</span><span class='va'>Stratification_Plot</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+</div><div class='img'><img src='stratification-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
