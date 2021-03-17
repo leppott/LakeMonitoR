@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9026</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9027</span>
       </span>
     </div>
 
@@ -197,10 +197,30 @@ a column.</p>
                             , <span class='va'>col_depth</span>
                             , <span class='va'>col_measure</span>
                             , <span class='va'>below_threshold</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("summarise"): no applicable method for 'summarise' applied to an object of class "character"</span></div><div class='input'>
+
 <span class='co'># Results</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df_lss</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in head(df_lss): object 'df_lss' not found</span></div></pre>
+</div><div class='output co'>#&gt;   TimeFrame_Name TimeFrame_Value   n ndays     mean   median       min      max
+#&gt; 1        AllData               2 357   357 8.496933 4.910854 0.3707292 22.08285
+#&gt; 2        AllData               3 357   357 8.493896 4.934021 0.4128542 22.04698
+#&gt; 3        AllData               4 357   357 8.412515 4.905479 0.4043333 21.87419
+#&gt; 4        AllData               5 357   357 8.320397 4.879625 0.3950208 21.81350
+#&gt; 5        AllData               6 357   357 8.196600 4.863479 0.3886667 20.88719
+#&gt; 6        AllData               7 357   357 8.018090 4.866729 0.4014583 19.93710
+#&gt;      range       sd      var        cv       q01       q05       q10      q25
+#&gt; 1 21.71213 7.455511 55.58465 0.8774356 0.4105175 0.5005958 0.6048125 1.406146
+#&gt; 2 21.63413 7.391324 54.63168 0.8701925 0.4527233 0.5380125 0.6436917 1.461646
+#&gt; 3 21.46985 7.333736 53.78368 0.8717649 0.4388183 0.5209042 0.6345750 1.435958
+#&gt; 4 21.41848 7.253241 52.60950 0.8717422 0.4255325 0.5311250 0.6309250 1.436063
+#&gt; 5 20.49852 7.117106 50.65319 0.8682997 0.4251250 0.5397125 0.6478000 1.446917
+#&gt; 6 19.53565 6.891263 47.48951 0.8594645 0.4382542 0.5636292 0.6885583 1.517688
+#&gt;        q50      q75      q90      q95      q99
+#&gt; 1 4.910854 16.36317 19.25685 19.86896 21.51376
+#&gt; 2 4.934021 16.29277 19.21007 19.82422 21.44097
+#&gt; 3 4.905479 16.20850 19.13412 19.75749 21.22852
+#&gt; 4 4.879625 16.04998 18.92680 19.70643 20.73644
+#&gt; 5 4.863479 15.89538 18.30049 19.61608 20.32941
+#&gt; 6 4.866729 15.66035 17.96345 18.96285 19.80878</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
