@@ -10,7 +10,7 @@ A data frame with 7,338 observations on the following 5 variables.
    \item{\code{SiteID}}{a character vector}
    \item{\code{Date.Time}}{a character vector}
    \item{\code{DO_conc}}{a numeric vector of dissolved oxygen (mg/L)}
-   \item{\code{temp_F}}{a numeric vector of temerature (Fahrenheit)}
+   \item{\code{temp_F}}{a numeric vector of temperature (Fahrenheit)}
    \item{\code{Depth}}{a numeric vector of depth (meters)}
  }
 }

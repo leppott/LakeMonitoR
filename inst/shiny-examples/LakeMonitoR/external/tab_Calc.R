@@ -36,7 +36,8 @@ function(){
                , numericInput("minlimit"
                               , label = "Minimum DO (mg/L)"
                               , value = 2)
-               , p("Data view must be visible to the right before clicking calculate below.")
+               , p("Data view must be visible to the right before clicking
+                   calculate below.")
                , shinyjs::disabled(actionButton("b_Calc", "Calculate"))
                #
                , h4("2.C. Download Results")
@@ -45,7 +46,8 @@ function(){
                , p("Check 'results_log.txt' for any warnings or messages.")
                , useShinyjs()
                , shinyjs::disabled(downloadButton("b_downloadData", "Download"))
-               #, downloadButton("b_downloadData", "Download") # for testing only
+               #, downloadButton("b_downloadData", "Download")
+               # for testing only
 
              )##sidebarPanel~END
              # Main Panel ####

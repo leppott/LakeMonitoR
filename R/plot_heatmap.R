@@ -1,6 +1,7 @@
 #' @title Plot Heat Map
 #'
-#' @description Generates a heat map plot of measurements from depth profile data
+#' @description Generates a heat map plot of measurements from depth profile
+#' data
 #'
 #' @details Can be used with any parameter.  A plot is returned that can be
 #' saved with ggsave(filename).

@@ -96,7 +96,7 @@ stratification <- function(data
   Stratification <- NULL
   for (i in Dates){
     stratdate <- data[data[, col_date] == i, ]
-    stratdate=stratdate[!is.na(stratdate[, col_measure]), ]
+    stratdate <- stratdate[!is.na(stratdate[, col_measure]), ]
     if (nrow(stratdate) > 1){
       strat <- diff(stratdate[, col_measure])/diff(stratdate$Depth)
 

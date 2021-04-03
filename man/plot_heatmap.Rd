@@ -43,7 +43,8 @@ plot_heatmap(
 a ggplot object
 }
 \description{
-Generates a heat map plot of measurements from depth profile data
+Generates a heat map plot of measurements from depth profile
+data
 }
 \details{
 Can be used with any parameter.  A plot is returned that can be

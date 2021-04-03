@@ -43,7 +43,7 @@ shinyServer(function(input, output) {
     #   return(NULL)
     # }##IF~is.null~END
     shiny::validate(shiny::need(is.null(inFile) == FALSE
-                                , message = "'Measured Values (1.A.)' file not uploaded yet."))
+                , message = "'Measured Values (1.A.)' file not uploaded yet."))
 
 
     # Disable download button if load a new file
@@ -73,7 +73,9 @@ shinyServer(function(input, output) {
     write.table(df_input, fn_input, row.names=FALSE, col.names=TRUE, sep="\t")
 
     # Copy to "Results" folder - Import "as is"
-    file.copy(input$fn_input$datapath, file.path(".", "Results", input$fn_input$name))
+    file.copy(input$fn_input$datapath, file.path("."
+                                                 , "Results"
+                                                 , input$fn_input$name))
 
     # enable 'calc' button
     shinyjs::enable("b_Calc")
@@ -104,7 +106,7 @@ shinyServer(function(input, output) {
     #   return(NULL)
     # }##IF~is.null~END
     shiny::validate(shiny::need(is.null(inFile2) == FALSE
-                                , message = "'Lakes Areas (1.B.)' file not uploaded yet."))
+                    , message = "'Lakes Areas (1.B.)' file not uploaded yet."))
 
     # Disable download button if load a new file
     shinyjs::disable("b_downloadData")
@@ -132,7 +134,9 @@ shinyServer(function(input, output) {
     write.table(df_input2, fn_input2, row.names=FALSE, col.names=TRUE, sep="\t")
 
     # Copy to "Results" folder - Import "as is"
-    file.copy(input$fn_input2$datapath, file.path(".", "Results", input$fn_input2$name))
+    file.copy(input$fn_input2$datapath, file.path("."
+                                                  , "Results"
+                                                  , input$fn_input2$name))
 
     # disable 'calc' button
     shinyjs::enable("b_Calc")
@@ -169,7 +173,10 @@ shinyServer(function(input, output) {
 
       # b_Calc, *sink* ####
       #fn_sink <- file.path(".", "Results", "results_log.txt")
-      file_sink <- file(file.path(".", "Results", "results_log.txt"), open = "wt")
+      file_sink <- file(file.path("."
+                                  , "Results"
+                                  , "results_log.txt")
+                        , open = "wt")
       sink(file_sink, type = c("output", "message"), append = TRUE)
       # Log
       message("Results Log from LakeMonitoR Shiny App")
@@ -181,7 +188,8 @@ shinyServer(function(input, output) {
       message(paste0("file, measurement = ", inFile$name))
       inFile2 <- input$fn_input2
       message(paste0("file, area = ", inFile$name))
-      message("If area file is null then only stratification metrics are calculated.")
+      message("If area file is null then only stratification metrics are
+              calculated.")
       # Input variables
       message("\nInput variables:")
       message(paste0("Measurement, Date Time: ", input$col_msr_datetime))
@@ -212,7 +220,8 @@ shinyServer(function(input, output) {
         incProgress(0, detail = prog_detail)
         Sys.sleep(sleep_time_qc)
         #
-        shiny::validate(shiny::need(is.null(input$fn_input) == FALSE, message = "Missing data file."))
+        shiny::validate(shiny::need(is.null(input$fn_input) == FALSE
+                                    , message = "Missing data file."))
       }## IF ~ file.exists ~ END
 
       # QC, FAIL if TRUE
@@ -220,7 +229,8 @@ shinyServer(function(input, output) {
         message("No data file provided.")
         return(NULL)
       }
-      # shiny::validate(shiny::need(is.null(input$fn_input) == FALSE, message = "Missing data file."))
+      # shiny::validate(shiny::need(is.null(input$fn_input) == FALSE
+      # , message = "Missing data file."))
 
       # Columns ("" if no user entry)
       col_date    <- input$col_msr_datetime #"Date_Time"
@@ -244,9 +254,12 @@ shinyServer(function(input, output) {
       }
 
       # silent exit from routine, keeps app running, message above
-      shiny::validate(shiny::need(col_date != "", message = "Missing 'Input, Measurement, Date Time'")
-                      , shiny::need(col_depth != "", message = "Missing 'Input, Measurement, Depth (m)'")
-                      , shiny::need(col_measure != "", message = "Missing 'Input, Measurement, Measurement'")
+      shiny::validate(shiny::need(col_date != ""
+                          , message = "Missing 'Input, Measurement, Date Time'")
+                      , shiny::need(col_depth != ""
+                          , message = "Missing 'Input, Measurement, Depth (m)'")
+                      , shiny::need(col_measure != ""
+                        , message = "Missing 'Input, Measurement, Measurement'")
                       )## validate ~ END
 
       # Check for mispelled column names
@@ -263,7 +276,8 @@ shinyServer(function(input, output) {
       }
 
       shiny::validate(shiny::need(sum_col_data_in == 3
-                                  , message = msg_col_data_missing))## validate ~ END
+                                  , message = msg_col_data_missing))
+      ## validate ~ END
 
 
       # b_Calc, Step 3, DDM and Strat ####
@@ -317,7 +331,11 @@ shinyServer(function(input, output) {
 
       # Calculate daily_depth_means
       # Otherwise stratification fails if have time.
-      df_ddm <- LakeMonitoR::daily_depth_means(df_calc, "SiteID", col_date, col_depth, col_measure)
+      df_ddm <- LakeMonitoR::daily_depth_means(df_calc
+                                               , "SiteID"
+                                               , col_date
+                                               , col_depth
+                                               , col_measure)
       print("QC, Calculate daily depth means")
       print(head(df_ddm))
       # save ddm
@@ -339,7 +357,7 @@ shinyServer(function(input, output) {
                                               , col_strat_date
                                               , col_strat_depth
                                               , col_strat_measure
-                                              , below_threshold = input$minlimit)
+                                             , below_threshold = input$minlimit)
 
 
       # Save Results
@@ -393,7 +411,8 @@ shinyServer(function(input, output) {
       lab_title <- "Depth Profile"
 
       # Plot, Create
-      # p <- ggplot2::ggplot(data_plot, ggplot2::aes_string(x=col_date, y=col_measure)) +
+      # p <- ggplot2::ggplot(data_plot, ggplot2::aes_string(x=col_date
+      # , y=col_measure)) +
       #   ggplot2::geom_point(ggplot2::aes_string(color=col_depth)) +
       #   ggplot2::scale_color_continuous(trans="reverse") +
       #   ggplot2::labs(title = "Depth Profile"
@@ -418,7 +437,7 @@ shinyServer(function(input, output) {
       # _Plot, Depth, StratEvents ----
       # Add to profile plot
       df_StratEvents <- as.data.frame(ls_strat$Stratification_Events)
-      df_StratEvents$Start_Date <- as.POSIXct(as.Date(df_StratEvents$Start_Date))
+    df_StratEvents$Start_Date <- as.POSIXct(as.Date(df_StratEvents$Start_Date))
       df_StratEvents$End_Date <- as.POSIXct(as.Date(df_StratEvents$End_Date))
 
 
@@ -466,12 +485,14 @@ shinyServer(function(input, output) {
       #              geom_line(size = 2) +
       #              scale_x_date(date_labels="%b"
       #                           , date_breaks  ="1 month"
-      #                           , limits = c(as.Date("2017-01-01"), as.Date("2017-12-31"))) +
+      #                           , limits = c(as.Date("2017-01-01")
+      #, as.Date("2017-12-31"))) +
       #              labs(title = "Statification Events", x = "Month") +
       #              theme_light()
       #
       #  #a <- unique(data_plot$Year)
-      # # b <- format(seq( as.Date("2020-01-01"), as.Date("2020-12-31"), by="+1 day"), "%m-%d")
+      # # b <- format(seq( as.Date("2020-01-01"), as.Date("2020-12-31")
+      #, by="+1 day"), "%m-%d")
       #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
       # b_Calc, Step 5, QC Area ####
@@ -501,12 +522,13 @@ shinyServer(function(input, output) {
 
       # QC, FAIL if TRUE
       if (is.null(df_data2)){
-        msg_noArea <-"No area data provided.  No rLakeAnalyzer analyses performed."
+    msg_noArea <-"No area data provided.  No rLakeAnalyzer analyses performed."
         message(msg_noArea)
         #return(NULL)
         shinyjs::enable("b_downloadData")
         #
-        prog_detail <- "QC, No area data provided.  No rLakeAnalyzer analyses performed.'"
+  prog_detail <- "QC
+  , No area data provided.  No rLakeAnalyzer analyses performed.'"
         incProgress(0, detail = prog_detail)
         Sys.sleep(sleep_time_qc)
         #
@@ -533,7 +555,8 @@ shinyServer(function(input, output) {
         #flush.console()
         sink() # console and message
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        shiny::validate(shiny::need(is.null(df_data2) != TRUE, message = msg_noArea))
+        shiny::validate(shiny::need(is.null(df_data2) != TRUE
+                                    , message = msg_noArea))
         #
       }## IF ~ is.null(df_data2) ~ END
 
@@ -555,8 +578,10 @@ shinyServer(function(input, output) {
       }
 
       # silent exit from routine, keeps app running, message above
-      shiny::validate(shiny::need(col_area_depth != "", message = "Missing 'Input, Area, Depth (m)'")
-                      , shiny::need(col_area_area != "", message = "Missing 'Input, Area, Area (m2)'")
+      shiny::validate(shiny::need(col_area_depth != ""
+                                 , message = "Missing 'Input, Area, Depth (m)'")
+                      , shiny::need(col_area_area != ""
+                                , message = "Missing 'Input, Area, Area (m2)'")
       )## validate ~ END
 
       # Check for mispelled column names
@@ -573,7 +598,8 @@ shinyServer(function(input, output) {
       }
 
       shiny::validate(shiny::need(sum_col_data2_in == 2
-                                  , message = msg_col_data2_missing))## validate ~ END
+                                  , message = msg_col_data2_missing))
+      ## validate ~ END
 
 
 
@@ -647,7 +673,8 @@ shinyServer(function(input, output) {
         #   rLakeAnalyzer::schmidt.plot(df_rLA_wtr, df_rLA_bath)
         # grDevices::dev.off()
         # Generate Schmidt Stability Values
-        # df_rLA_Schmidt <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr, df_rLA_bath)
+        # df_rLA_Schmidt <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr
+        #, df_rLA_bath)
         # fn_rLA_Schmidt <- file.path(".", "Results", "rLA_Schmidt.csv")
         # write.csv(df_rLA, "data_rLA.csv", row.names = FALSE)
 
@@ -694,7 +721,11 @@ shinyServer(function(input, output) {
     #myDateTime <- format(Sys.time(), "%Y%m%d_%H%M%S")
 
     filename = function() {
-      paste("LakeMonitoR", "_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".zip", sep = "")
+      paste("LakeMonitoR"
+            , "_"
+            , format(Sys.time(), "%Y%m%d_%H%M%S")
+            , ".zip"
+            , sep = "")
     },
     content = function(fname) {##content~START
      # tmpdir <- tempdir()
@@ -710,7 +741,8 @@ shinyServer(function(input, output) {
       #
       # Create Zip file
       #zip(zipfile = fname, files=fs)
-      #if(file.exists(paste0(fname, ".zip"))) {file.rename(paste0(fname, ".zip"), fname)}
+      #if(file.exists(paste0(fname, ".zip"))) {file.rename(paste0(fname
+      #, ".zip"), fname)}
 
       file.copy(file.path(".", "Results", "results.zip"), fname)
 
@@ -934,8 +966,9 @@ shinyServer(function(input, output) {
         # }## IF ~ is.na(lab_datetime)
         # #
         # if(inCol_plot_depth == ""){
-        #   p_h <- p_h + ggplot2::guides(color = ggplot2::guide_colourbar(title =
-        #                                                                   inCol_plot_depth))
+        #   p_h <- p_h + ggplot2::guides(
+        #color = ggplot2::guide_colourbar(title =
+        #                          inCol_plot_depth))
         # }## IF ~ is.na(lab_depth)
         # # #
         # if(inCol_plot_msr == ""){

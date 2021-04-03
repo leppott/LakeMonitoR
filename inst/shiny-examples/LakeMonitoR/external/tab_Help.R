@@ -5,8 +5,10 @@ function(){
            , fluidPage(h2("LakeMonitoR Shiny App Help"
                           #, style  = "text-align:center"
                           )
-                       , p("This Shiny app helps the user calculate stratification and other lake metrics.")
-                       , p("If you do not have area data for your lake only stratification will be calculated.")
+                       , p("This Shiny app helps the user calculate
+                           stratification and other lake metrics.")
+                       , p("If you do not have area data for your lake only
+                           stratification will be calculated.")
                        , br()
                        , p("1. Import files.")
                        , p("2. Define columns.")

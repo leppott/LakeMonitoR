@@ -48,11 +48,15 @@ function(){
         )##sidebarPanel~END
       # Main Panel ####
       , mainPanel(
-          p("The 'separator' allows the user to upload different file formats (csv, tsv, or txt).")
+          p("The 'separator' allows the user to upload different file formats
+            (csv, tsv, or txt).")
           , p("A measured values file is required.")
-          , p("If an area file is not uploaded then only stratification will be calculated.")
+          , p("If an area file is not uploaded then only stratification will be
+              calculated.")
           , p("Imported data files are displayed in step 2.")
-          , p(paste0("File uploads (separately) are limited to a maximum of ",mb_limit, " MB in size."))
+          , p(paste0("File uploads (separately) are limited to a maximum of "
+                     ,mb_limit
+                     , " MB in size."))
       )##mainPanel~END
 
     )##sidebarLayout~END

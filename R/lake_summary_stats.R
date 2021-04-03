@@ -32,9 +32,9 @@
 #' * year month
 #'
 #' A data frame is returned in a hybrid long format.  Statistics will be columns
-#' and time periods will also be a column with the values for each row.  That is,
-#' if time period is month then each month will be a row with each statistic in
-#' a column.
+#' and time periods will also be a column with the values for each row.  That is
+#' , if time period is month then each month will be a row with each statistic
+#' in a column.
 #'
 #' @param data data frame
 #' @param col_date Column name, Date
@@ -132,7 +132,8 @@ lake_summary_stats <- function(data
     csdt <- data_calc %>%
       dplyr::group_by(.data[[timeframe]]) %>%
       dplyr::group_by(.data[[col_depth]]) %>%
-      dplyr::summarize(.groups = "drop_last"
+      dplyr::summarize(.groups = "keep"
+                       , groupname = timeframe
                        , n = length(.data[[col_measure]])
                        , ndays = length(unique(.data[[col_date]]))
                        , mean = mean(.data[[col_measure]], na.rm = TRUE)
@@ -171,7 +172,7 @@ lake_summary_stats <- function(data
                        , q99 = stats::quantile(.data[[col_measure]]
                                                , probs = .99
                                                , na.rm = TRUE)
-                       #, n_below = sum(.data[["below"]], na.rm = TRUE)
+                       , n_below = sum(.data[["below"]], na.rm = TRUE)
       )
     # TimeFrame_Value
     # if(timeframe == str_AllData) {

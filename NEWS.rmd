@@ -20,6 +20,25 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 0.1.0.9028
+===========
+Released - 2021-04-02
+
+* style: Fix spelling, devtools::spell_check()
+    + NEWS
+    + stratification.R
+    + data.R
+* style:  Fix items from goodpractice::gp()
+    + Trim lines to 80 characters
+        - plot_heatmap.R
+        - lake_summary_stats.R
+        - tab_Calc.R
+        - tab_Help.R
+        - tab_Import.R
+        - server.R
+    + Replace '=' with '<-'
+        - stratification.R
+
 LakeMonitoR 0.1.0.9027
 ===========
 Released - 2021-03-17
@@ -34,8 +53,8 @@ Released - 2021-03-17
 * refactor: Shiny, add plot_heatmap
 * refactor: Shiny, rename rLakeAnalyzer heat map
 * refactor: stratification, add events plot to output list, Issue #7
-* refactor: Shiny, add startification plot to calculation
-* refactor: Shiny, add startification lines to depth profile plot in calculation
+* refactor: Shiny, add stratification plot to calculation
+* refactor: Shiny, add stratification lines to depth profile plot in calculation
 
 LakeMonitoR 0.1.0.9025
 ===========
@@ -148,7 +167,7 @@ Released - 2021-01-19
 * style: Remove blank lines at end of script
     + daily_depth_means
     + data
-    + exort_rLakeAnalyzer
+    + export_rLakeAnalyzer
     + LakeMonitoR
     + runShiny
     + stratification
@@ -184,7 +203,7 @@ Released - 2020-12-27
 
 * docs: ReadMe, Add license badge
 * docs: ReadMe, Add CodeFactor badge
-* docs: ReadMe, Add lifecyle badge
+* docs: ReadMe, Add lifecycle badge
 * docs: ReadMe, Add maintenance badge
 * docs: ReadMe, Add issues badge
 * docs: ReadMe, Add release badge

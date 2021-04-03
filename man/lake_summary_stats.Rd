@@ -55,9 +55,9 @@ Statistics are calculated for multiple time periods:
 * year month
 
 A data frame is returned in a hybrid long format.  Statistics will be columns
-and time periods will also be a column with the values for each row.  That is,
-if time period is month then each month will be a row with each statistic in
-a column.
+and time periods will also be a column with the values for each row.  That is
+, if time period is month then each month will be a row with each statistic
+in a column.
 }
 \examples{
 # data
