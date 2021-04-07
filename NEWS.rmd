@@ -20,6 +20,14 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 0.1.0.9029
+===========
+Released - 2021-04-07
+
+* refactor: Shiny, "min DO" to "min measurement"
+* refactor: Shiny, Stratification, default from 20 to 1
+* refactor: Shiny, plot_depth stratification, lines to polygon
+
 LakeMonitoR 0.1.0.9028
 ===========
 Released - 2021-04-02

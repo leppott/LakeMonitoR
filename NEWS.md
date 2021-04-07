@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-04-02 21:23:40
+    #> Last Update: 2021-04-07 13:48:26
+
+# LakeMonitoR 0.1.0.9029
+
+Released - 2021-04-07
+
+-   refactor: Shiny, “min DO” to “min measurement”
+-   refactor: Shiny, Stratification, default from 20 to 1
+-   refactor: Shiny, plot\_depth stratification, lines to polygon
 
 # LakeMonitoR 0.1.0.9028
 

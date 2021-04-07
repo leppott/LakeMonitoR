@@ -437,11 +437,11 @@ shinyServer(function(input, output) {
       # _Plot, Depth, StratEvents ----
       # Add to profile plot
       df_StratEvents <- as.data.frame(ls_strat$Stratification_Events)
-    df_StratEvents$Start_Date <- as.POSIXct(as.Date(df_StratEvents$Start_Date))
+     df_StratEvents$Start_Date <- as.POSIXct(as.Date(df_StratEvents$Start_Date))
       df_StratEvents$End_Date <- as.POSIXct(as.Date(df_StratEvents$End_Date))
 
-
-      p_profile_strat <- p_depth +
+      # Plot, Depth, StratEvents, lines
+      p_profile_strat_line <- p_depth +
         labs(caption = "Stratification Events = red lines
        Start Date = solid
        End Date = dashed") +
@@ -450,7 +450,28 @@ shinyServer(function(input, output) {
         geom_vline(xintercept = df_StratEvents$End_Date
                    , color = "red", linetype = "dashed", size = 2)
 
-      # Plot, Save
+      # Plot, Depth, StratEvents, shading
+      # annotate() easier than geom_rect()
+      # Get plot limits
+      # https://stackoverflow.com/questions/7705345/
+      # how-can-i-extract-plot-axes-ranges-for-a-ggplot2-object
+      p_depth_ylims <-
+        ggplot_build(p_depth)$layout$panel_scales_y[[1]]$range$range
+      p_profile_strat_shade <- p_depth +
+        labs(caption = "Stratification Events = shaded area") +
+        annotate("rect"
+                 , xmin = df_StratEvents$Start_Date
+                 , xmax = df_StratEvents$End_Date
+                 , ymin = p_depth_ylims[1]
+                 , ymax = p_depth_ylims[2]
+                 , fill = "gray"
+                 , alpha = 0.25)
+
+      # Plot, Depth, StratEvents
+      ## Pick plot
+      p_profile_strat <- p_profile_strat_shade
+
+      # Plot, Save (Depth, StratEvents)
       fn_p_depth_se <- file.path("."
                                  , "Results"
                                  , "plot_depth_profile_strat_events.png")

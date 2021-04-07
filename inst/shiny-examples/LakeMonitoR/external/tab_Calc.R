@@ -32,9 +32,9 @@ function(){
                , h4("2.B. Calculate")
                , numericInput("strat_min_days"
                               , label = "Stratification, minimum days"
-                              , value = 20)
+                              , value = 1)
                , numericInput("minlimit"
-                              , label = "Minimum DO (mg/L)"
+                              , label = "Minimum Measurement"
                               , value = 2)
                , p("Data view must be visible to the right before clicking
                    calculate below.")
