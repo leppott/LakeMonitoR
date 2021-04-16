@@ -1,5 +1,5 @@
-# depth_plot ####
-test_that("depth_plot", {
+# plot_depth ####
+test_that("plot_depth", {
   #
   # Data (Test Lake)
   data         <- laketest
@@ -16,7 +16,7 @@ test_that("depth_plot", {
   lab_title    <- "Test Lake"
 
   # Create Plot
-  p_profile <- depth_plot(data = data
+  p_profile <- plot_depth(data = data
                           , col_datetime = col_datetime
                           , col_depth = col_depth
                           , col_measure = col_measure

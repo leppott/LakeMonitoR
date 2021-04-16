@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' # Packages
-#' library(xts)
+#' #library(xts)
 #'
 #' # Lake Data
 #' data <- laketemp
@@ -48,6 +48,9 @@ daily_depth_means <- function(data
                               , col_datetime
                               , col_depth
                               , col_measure){
+
+  # get unexported function "index" from "xts" package.
+ # xts_index <- utils::getFromNamespace("index", "xts")
 
   # new column
   col_fun_date    <- "Date"
@@ -94,6 +97,7 @@ daily_depth_means <- function(data
                              , order.by = as.Date(depth[, col_datetime]
                                                   , format = '%Y-%m-%d %H:%M'))
     depth.mean.xts <- xts::apply.daily(depth.xts, mean)
+#    depthmean <- data.frame(col_fun_date = xts_index(depth.mean.xts)
     depthmean <- data.frame(col_fun_date = index(depth.mean.xts)
                             , col_fun_depth = i
                             , col_fun_measure = zoo::coredata(depth.mean.xts))

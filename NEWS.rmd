@@ -19,6 +19,18 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9030
+===========
+Released - 2021-04-16
+
+* refactor: stratification
+    + change default min_days from 20 to 1
+    + add global variable bindings
+* tests: Update plot_depth test for name change
+* refactor: Add global variable bindings
+    + stratification
+    + daily_depth_means
+    + lake_summary_stats
 
 LakeMonitoR 0.1.0.9029
 ===========

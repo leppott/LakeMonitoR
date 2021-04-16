@@ -1,7 +1,7 @@
 Package: LakeMonitoR
 Type: Package
 Title: Suite of Functions and Tools for Lake Monitoring
-Version: 0.1.0.9029
+Version: 0.1.0.9030
 Author: Erik W Leppo, Tim Martin
 Maintainer: Erik W Leppo <Erik.Leppo@tetratech.com>
 Description: Tools for analyzing lake depth profiles.
@@ -21,6 +21,7 @@ Suggests:
     ggplot2,
     rLakeAnalyzer,
     knitr,
+    rmarkdown,
     shiny,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr

@@ -4,7 +4,20 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-04-07 13:48:26
+    #> Last Update: 2021-04-16 16:08:45
+
+# LakeMonitoR 0.1.0.9030
+
+Released - 2021-04-16
+
+-   refactor: stratification
+    -   change default min\_days from 20 to 1
+    -   add global variable bindings
+-   tests: Update plot\_depth test for name change
+-   refactor: Add global variable bindings
+    -   stratification
+    -   daily\_depth\_means
+    -   lake\_summary\_stats
 
 # LakeMonitoR 0.1.0.9029
 

@@ -99,8 +99,7 @@ lake_summary_stats <- function(data
   data[, "Month"]      <- format(as.Date(data[, col_date]), format="%m")
   data[, "Year_Month"] <- format(as.Date(data[, col_date]), format="%Y%m")
   data[, "Month_Day"]  <- format(as.Date(data[, col_date]), format="%m%d")
-  data[, "JulianDay"]  <- as.POSIXlt(data[, col_date]
-                                     , format = dateformat)$yday + 1
+  data[, "JulianDay"]  <- as.POSIXlt(data[, col_date])$yday + 1
 
   # Calc, days below
   data[, "below"] <- ifelse(data[, col_measure] < below_threshold
@@ -183,6 +182,10 @@ lake_summary_stats <- function(data
     names(csdt)[1] <- "TimeFrame_Value"
     # TimeFrame_Name
     csdt <- data.frame("TimeFrame_Name" = timeframe, as.data.frame(csdt))
+    #
+    # Update n_below to include threshold
+    names(csdt)[names(csdt) %in% "n_below"] <- paste0("n_below_"
+                                                      , below_threshold)
     #
     # Return df
     return(csdt)

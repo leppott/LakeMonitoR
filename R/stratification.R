@@ -20,7 +20,7 @@
 #' @param col_depth Column name, Depth
 #' @param col_measure Column name, measurement for calculation
 #' @param min_days Minimum number of consecutive days to be classified as
-#' stratification.  Default = 20.
+#' stratification.  Default = 1.
 # @param df_hypso Data frame of hypsometry for lake.
 # Column names of Contour_Depth and Area.
 # Default = NULL
@@ -48,7 +48,7 @@
 #'                            , col_date
 #'                            , col_depth
 #'                            , col_measure
-#'                            , min_days = 20 )
+#'                            , min_days = 1 )
 #'
 #' # Results, Stratification Dates
 #' head(ls_strat$Stratification_Dates)
@@ -66,9 +66,12 @@ stratification <- function(data
                            , col_date
                            , col_depth
                            , col_measure
-                           , min_days = 20
+                           , min_days = 1
                            #, df_hypso = NULL
-                           ){
+                           ) {
+
+  # global variable bindings
+  Year <- Start_j2 <- End_j2 <- NULL
 
   # Ensure proper formats
   # Convert to data frame (avoid use of tibble)

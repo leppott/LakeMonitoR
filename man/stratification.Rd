@@ -4,7 +4,7 @@
 \alias{stratification}
 \title{Lake Stratification}
 \usage{
-stratification(data, col_date, col_depth, col_measure, min_days = 20)
+stratification(data, col_date, col_depth, col_measure, min_days = 1)
 }
 \arguments{
 \item{data}{data frame}
@@ -16,7 +16,7 @@ stratification(data, col_date, col_depth, col_measure, min_days = 20)
 \item{col_measure}{Column name, measurement for calculation}
 
 \item{min_days}{Minimum number of consecutive days to be classified as
-stratification.  Default = 20.}
+stratification.  Default = 1.}
 }
 \value{
 List with 3 elements, 2 data frames and a ggplot
@@ -57,7 +57,7 @@ ls_strat <- stratification(data
                            , col_date
                            , col_depth
                            , col_measure
-                           , min_days = 20 )
+                           , min_days = 1 )
 
 # Results, Stratification Dates
 head(ls_strat$Stratification_Dates)
