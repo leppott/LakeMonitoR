@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9030</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9031</span>
       </span>
     </div>
 
@@ -103,7 +103,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/leppott/LakeMonitoR/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -118,9 +123,37 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      
+      <small>Source: <a href='https://github.com/leppott/LakeMonitoR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="lakemonitor-0109031" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0.9031">
+<a href="#lakemonitor-0109031" class="anchor"></a>LakeMonitoR 0.1.0.9031</h1>
+<p>Released - 2021-04-27</p>
+<ul>
+<li>refactor: lake_summary_stats
+<ul>
+<li>Fix calculation and grouping for output</li>
+</ul>
+</li>
+<li>refactor: Remove RussWood_FixedID.csv from extdata folder
+<ul>
+<li>66.9 MB</li>
+</ul>
+</li>
+<li>style: Trim lines to 80 characters
+<ul>
+<li>stratification.R</li>
+</ul>
+</li>
+<li>docs: Add to DESCRIPTION
+<ul>
+<li>URL</li>
+<li>BugReports</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="lakemonitor-0109030" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0.9030">
 <a href="#lakemonitor-0109030" class="anchor"></a>LakeMonitoR 0.1.0.9030</h1>
@@ -190,7 +223,7 @@
 <a href="#lakemonitor-0109027" class="anchor"></a>LakeMonitoR 0.1.0.9027</h1>
 <p>Released - 2021-03-17</p>
 <ul>
-<li>refactor: lake_summary_stats, add missing %&gt;% in stats function, Issue #12</li>
+<li>refactor: lake_summary_stats, add missing %&gt;% in stats function, Issue <a href='https://github.com/leppott/LakeMonitoR/issues/12'>#12</a></li>
 </ul>
 </div>
     <div id="lakemonitor-0109026" class="section level1">
@@ -201,7 +234,7 @@
 <li>refactor: Remove lake_summary_stats from Shiny app</li>
 <li>refactor: Shiny, add plot_heatmap</li>
 <li>refactor: Shiny, rename rLakeAnalyzer heat map</li>
-<li>refactor: stratification, add events plot to output list, Issue #7</li>
+<li>refactor: stratification, add events plot to output list, Issue <a href='https://github.com/leppott/LakeMonitoR/issues/7'>#7</a></li>
 <li>refactor: Shiny, add stratification plot to calculation</li>
 <li>refactor: Shiny, add stratification lines to depth profile plot in calculation</li>
 </ul>
@@ -223,7 +256,7 @@
 <li>refactor: Update heatmap in Shiny<br>
 </li>
 <li>refactor!: Rename depth_plot to plot_depth</li>
-<li>feature: Add plot_heatmap, Issues #6 and #10</li>
+<li>feature: Add plot_heatmap, Issues <a href='https://github.com/leppott/LakeMonitoR/issues/6'>#6</a> and <a href='https://github.com/leppott/LakeMonitoR/issues/10'>#10</a></li>
 <li>refactor: Update Shiny server with revised plot function names</li>
 </ul>
 </div>
@@ -266,8 +299,8 @@
 <p>Released - 2021-02-25</p>
 <ul>
 <li>docs: Updated README for example install code</li>
-<li>refactor: Update stratification() to handle data that is 100% stratified , Issue #9</li>
-<li>refactor: Update stratification() to handle data that is 0% stratified , Issue #9</li>
+<li>refactor: Update stratification() to handle data that is 100% stratified , Issue <a href='https://github.com/leppott/LakeMonitoR/issues/9'>#9</a></li>
+<li>refactor: Update stratification() to handle data that is 0% stratified , Issue <a href='https://github.com/leppott/LakeMonitoR/issues/9'>#9</a></li>
 <li>docs: DESCRIPTION, add ContDataQC package for date helper function</li>
 </ul>
 </div>
@@ -277,7 +310,7 @@
 <p>Released - 2021-02-01</p>
 <ul>
 <li>refactor: Update temporary settings to inputs for depth_plot()</li>
-<li>feature: Add scatterplot depth profile and heatmap (Issues #6) for Shiny input</li>
+<li>feature: Add scatterplot depth profile and heatmap (Issues <a href='https://github.com/leppott/LakeMonitoR/issues/6'>#6</a>) for Shiny input</li>
 </ul>
 </div>
     <div id="lakemonitor-0109017" class="section level1">
@@ -293,9 +326,9 @@
 <a href="#lakemonitor-0109016" class="anchor"></a>LakeMonitoR 0.1.0.9016</h1>
 <p>Released - 2021-01-28</p>
 <ul>
-<li>refactor: Add internal QC for column headers for depth_plot(), Issue #5</li>
-<li>tests: Add test for depth_plot() ggplot object, Issue #5</li>
-<li>refactor: Add data-raw to create qc object for depth_plot() test, Issue #5</li>
+<li>refactor: Add internal QC for column headers for depth_plot(), Issue <a href='https://github.com/leppott/LakeMonitoR/issues/5'>#5</a></li>
+<li>tests: Add test for depth_plot() ggplot object, Issue <a href='https://github.com/leppott/LakeMonitoR/issues/5'>#5</a></li>
+<li>refactor: Add data-raw to create qc object for depth_plot() test, Issue <a href='https://github.com/leppott/LakeMonitoR/issues/5'>#5</a></li>
 <li>docs: Example file for depth_plot() saved as RDA forced DEPENDS on R &gt;= 3.5.0</li>
 </ul>
 </div>
@@ -304,7 +337,7 @@
 <a href="#lakemonitor-0109015" class="anchor"></a>LakeMonitoR 0.1.0.9015</h1>
 <p>Released - 2021-01-28</p>
 <ul>
-<li>feature: Add depth_plot function to return a depth profile plot, Issue #5</li>
+<li>feature: Add depth_plot function to return a depth profile plot, Issue <a href='https://github.com/leppott/LakeMonitoR/issues/5'>#5</a></li>
 <li>feature: Add laketest data for use with depth_plot()</li>
 </ul>
 </div>
@@ -431,7 +464,7 @@
     <div id="lakemonitor-0109007" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0.9007">
 <a href="#lakemonitor-0109007" class="anchor"></a>LakeMonitoR 0.1.0.9007</h1>
-<p>Released - 2020-11-13 * stratification.R + Add number of days to column name in output, Issue #3. * check + Add and declare packages for functions in DESCRIPTION and code.</p>
+<p>Released - 2020-11-13 * stratification.R + Add number of days to column name in output, Issue <a href='https://github.com/leppott/LakeMonitoR/issues/3'>#3</a>. * check + Add and declare packages for functions in DESCRIPTION and code.</p>
 </div>
     <div id="lakemonitor-0109006" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0.9006">
@@ -460,7 +493,7 @@
 <ul>
 <li>Shiny, server.R
 <ul>
-<li>Add error checking for column names and upload files, Issue #1</li>
+<li>Add error checking for column names and upload files, Issue <a href='https://github.com/leppott/LakeMonitoR/issues/1'>#1</a></li>
 </ul>
 </li>
 </ul>

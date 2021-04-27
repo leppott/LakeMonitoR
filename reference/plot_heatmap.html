@@ -73,7 +73,7 @@ data" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9030</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9031</span>
       </span>
     </div>
 
@@ -105,7 +105,12 @@ data" />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/leppott/LakeMonitoR/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -120,7 +125,7 @@ data" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot Heat Map</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/leppott/LakeMonitoR/blob/master/R/plot_heatmap.R'><code>R/plot_heatmap.R</code></a></small>
     <div class="hidden name"><code>plot_heatmap.Rd</code></div>
     </div>
 
@@ -236,7 +241,7 @@ the plot will not be modified.</p>
 </div><div class='img'><img src='plot_heatmap-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># save plot to temp directory</span>
 <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span> <span class='co'># show the temp directory</span>
-</div><div class='output co'>#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmphaeJSn"</div><div class='input'><span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"TestLake_tempF_plotHeatMap.png"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpgy6AcP"</div><div class='input'><span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"TestLake_tempF_plotHeatMap.png"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Saving 6.67 x 6.67 in image</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
