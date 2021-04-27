@@ -280,7 +280,8 @@ stratification <- function(data
                                        , yend = Year)
                           , size = 3)
   # # segments
-  # https://stackoverflow.com/questions/34124599/r-plot-julian-day-in-x-axis-using-ggplot2
+  # https://stackoverflow.com/questions/34124599/
+  # r-plot-julian-day-in-x-axis-using-ggplot2
 
 
   # Results, List

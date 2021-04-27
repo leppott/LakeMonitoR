@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' # Packages
-#' #library(xts)
+#' library(xts)
 #'
 #' # Lake Data
 #' data <- laketemp

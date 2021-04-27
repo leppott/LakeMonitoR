@@ -32,7 +32,7 @@ Utilizes the `xts` package.
 }
 \examples{
 # Packages
-#library(xts)
+library(xts)
 
 # Lake Data
 data <- laketemp

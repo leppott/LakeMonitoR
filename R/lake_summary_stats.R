@@ -129,8 +129,7 @@ lake_summary_stats <- function(data
     #     dplyr::group_by(.data[[col_depth]])
     # }## IF ~ timeframe
     csdt <- data_calc %>%
-      dplyr::group_by(.data[[timeframe]]) %>%
-      dplyr::group_by(.data[[col_depth]]) %>%
+      dplyr::group_by(.data[[timeframe]], .data[[col_depth]]) %>%
       dplyr::summarize(.groups = "keep"
                        , groupname = timeframe
                        , n = length(.data[[col_measure]])
@@ -179,10 +178,15 @@ lake_summary_stats <- function(data
     # } else {
     #   names(csdt)[1] <- "TimeFrame_Value"
     # }## IF ~ timeframe
-    names(csdt)[1] <- "TimeFrame_Value"
-    # TimeFrame_Name
-    csdt <- data.frame("TimeFrame_Name" = timeframe, as.data.frame(csdt))
-    #
+
+
+    # Rearrange columns
+    csdt <- csdt[, c(3,1,2,4:ncol(csdt))]
+    # groupname, timeframe, col_depth
+
+    # Rename Columns
+    names(csdt)[1:2] <- c("TimeFrame_Name", "TimeFrame_Value")
+
     # Update n_below to include threshold
     names(csdt)[names(csdt) %in% "n_below"] <- paste0("n_below_"
                                                       , below_threshold)
@@ -218,6 +222,11 @@ lake_summary_stats <- function(data
                                                 , "JulianDay")
 
   # Combine
+
+  # TimeFrame_Value for Julian Day to Character
+  stats_JulianDay[, "TimeFrame_Value"] <- as.character(stats_JulianDay[,
+                                                            "TimeFrame_Value"])
+
   stats_all <- rbind(stats_AllData
                      , stats_Year
                      , stats_Month

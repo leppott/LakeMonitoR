@@ -4,7 +4,21 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-04-16 16:08:45
+    #> Last Update: 2021-04-27 17:00:35
+
+# LakeMonitoR 0.1.0.9031
+
+Released - 2021-04-27
+
+-   refactor: lake\_summary\_stats
+    -   Fix calculation and grouping for output
+-   refactor: Remove RussWood\_FixedID.csv from extdata folder
+    -   66.9 MB
+-   style: Trim lines to 80 characters
+    -   stratification.R
+-   docs: Add to DESCRIPTION
+    -   URL
+    -   BugReports
 
 # LakeMonitoR 0.1.0.9030
 

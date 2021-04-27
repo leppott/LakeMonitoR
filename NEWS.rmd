@@ -19,6 +19,20 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9031
+===========
+Released - 2021-04-27
+
+* refactor: lake_summary_stats
+    + Fix calculation and grouping for output
+* refactor: Remove RussWood_FixedID.csv from extdata folder
+    + 66.9 MB
+* style: Trim lines to 80 characters
+    + stratification.R
+* docs: Add to DESCRIPTION
+    + URL
+    + BugReports
+
 LakeMonitoR 0.1.0.9030
 ===========
 Released - 2021-04-16
