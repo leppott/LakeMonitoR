@@ -225,7 +225,8 @@ lake_summary_stats <- function(data
 
   # TimeFrame_Value for Julian Day to Character
   stats_JulianDay[, "TimeFrame_Value"] <- as.character(stats_JulianDay[,
-                                                            "TimeFrame_Value"])
+                                                            "TimeFrame_Value"
+                                                            , TRUE])
 
   stats_all <- rbind(stats_AllData
                      , stats_Year

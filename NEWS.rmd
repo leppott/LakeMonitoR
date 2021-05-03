@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9032
+===========
+Released - 2021-05-03
+
+* refactor: lake_summary_stats
+    + Fix JulianDay stats.  Conversion of TimeFrame_Value to character caused
+    errors.  
+
 LakeMonitoR 0.1.0.9031
 ===========
 Released - 2021-04-27

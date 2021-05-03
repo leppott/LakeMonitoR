@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-04-27 17:00:35
+    #> Last Update: 2021-05-03 11:15:39
+
+# LakeMonitoR 0.1.0.9032
+
+Released - 2021-05-03
+
+-   refactor: lake\_summary\_stats
+    -   Fix JulianDay stats. Conversion of TimeFrame\_Value to character
+        caused errors.
 
 # LakeMonitoR 0.1.0.9031
 
