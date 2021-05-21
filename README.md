@@ -3,7 +3,7 @@ README-LakeMonitoR
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-02-24 13:26:07
+    #> Last Update: 2021-05-21 15:50:51
 
 # LakeMonitoR
 
@@ -35,8 +35,8 @@ To install the current version of the code from GitHub use the example
 below.
 
 ``` r
-if(!require(devtools)){install.packages("devtools")}  #install if needed
-devtools::install_github("leppott/LakeMonitoR")
+if(!require(remotes)){install.packages("remotes")}  #install if needed
+remotes::install_github("leppott/LakeMonitoR")
 ```
 
 The vignette (big help file) isn’t created when installing from GitHub
@@ -47,8 +47,8 @@ install over and existing install of the same version (e.g., the same
 version without the vignettes).
 
 ``` r
-if(!require(devtools)){install.packages("devtools")}  #install if needed
-devtools::install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
+if(!require(remotes)){install.packages("remotes")}  #install if needed
+remotes::install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
 ```
 
 # Purpose

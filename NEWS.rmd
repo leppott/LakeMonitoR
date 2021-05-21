@@ -19,6 +19,19 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9033
+===========
+Released - 2021-05-21
+
+* feature: Add function to combine depth data files, Issue #13
+   + AggregateDepthData
+   + Tweaked port of AggregateFile function from ContDataQC package
+* docs: Update README to use remotes instead of devtools
+* feature: Add internal function fun.Msg.Status for constructing user feedback
+   + Port of same function from ContDataQC package
+* feature: Example data files for use with AggregateDepthData function
+   + Included in extdata as CSV files
+
 LakeMonitoR 0.1.0.9032
 ===========
 Released - 2021-05-03

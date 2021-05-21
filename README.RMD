@@ -38,8 +38,8 @@ Suite of functions and tools for lake monitoring.
 To install the current version of the code from GitHub use the example below.
 
 ```{r, eval=FALSE}
-if(!require(devtools)){install.packages("devtools")}  #install if needed
-devtools::install_github("leppott/LakeMonitoR")
+if(!require(remotes)){install.packages("remotes")}  #install if needed
+remotes::install_github("leppott/LakeMonitoR")
 ```
 
 The vignette (big help file) isn’t created when installing from GitHub with the 
@@ -49,8 +49,8 @@ command is used to ensure the package will install over and existing install of
 the same version (e.g., the same version without the vignettes).
 
 ```{r, eval=FALSE}
-if(!require(devtools)){install.packages("devtools")}  #install if needed
-devtools::install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
+if(!require(remotes)){install.packages("remotes")}  #install if needed
+remotes::install_github("leppott/LakeMonitoR", force = TRUE, build_vignettes = TRUE)
 ```
 
 # Purpose

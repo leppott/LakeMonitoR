@@ -4,7 +4,21 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-05-03 11:15:39
+    #> Last Update: 2021-05-21 16:02:25
+
+# LakeMonitoR 0.1.0.9033
+
+Released - 2021-05-21
+
+-   feature: Add function to combine depth data files, Issue \#13
+    -   AggregateDepthData
+    -   Tweaked port of AggregateFile function from ContDataQC package
+-   docs: Update README to use remotes instead of devtools
+-   feature: Add internal function fun.Msg.Status for constructing user
+    feedback
+    -   Port of same function from ContDataQC package
+-   feature: Example data files for use with AggregateDepthData function
+    -   Included in extdata as CSV files
 
 # LakeMonitoR 0.1.0.9032
 
