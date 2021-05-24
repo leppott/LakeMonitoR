@@ -10,6 +10,7 @@ function(){
                        , p("If you do not have area data for your lake only
                            stratification will be calculated.")
                        , br()
+                       , p("0. Combine (Aggregate) files (if necessary).")
                        , p("1. Import files.")
                        , p("2. Define columns.")
                        , p("3. Calculate.")

@@ -4,6 +4,8 @@
 #'
 #' @details Assumes files have the same column names.
 #' The files are merged with all=TRUE.
+#'
+#' One new field (AggFile_Source) is added with the name of the source file.
 #' No other manipulation of the data is performed.
 #'
 #' If any columns in the output have the ".x" or ".y" suffix when have duplicate
@@ -50,7 +52,7 @@ AggregateFiles <- function(filename_import
   }## IF ~ isTRUE(boo_QC) ~ END
 
   # Error Checking - only 1 SiteID and 1 DataType
-  if(length(filename_import)==1){
+  if(length(filename_import) == 1){
     myMsg <- "Only 1 file selected.  No action performed."
     stop(myMsg)
   }
@@ -148,10 +150,13 @@ AggregateFiles <- function(filename_import
     #varSep = "\t" (use read.delim instead of read.table)
     # as.is = T so dates come in as text rather than factor
     #data.import <- utils::read.delim(strFile,as.is=TRUE,na.strings=c("","NA"))
-    data.import <- utils::read.csv(file.path(myDir.data.import,strFile)
+    data.import <- utils::read.csv(file.path(myDir.data.import, strFile)
                                    ,as.is=TRUE
                                    ,na.strings=c("","NA"))
     #
+
+    # 3.5, Add SourceFile Name ----
+    data.import[, "AggFile_Source"] <- strFile
 
     # File, 20170607
     if(intCounter == 1) {

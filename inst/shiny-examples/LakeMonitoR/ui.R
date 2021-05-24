@@ -16,15 +16,17 @@
 # library(shinyjs) # used for togglestate of download button
 
 # Sources Pages ####
-tab_Help   <- source("external/tab_Help.R", local = TRUE)$value
-tab_Import <- source("external/tab_Import.R", local = TRUE)$value
-tab_Calc   <- source("external/tab_Calc.R", local = TRUE)$value
-tab_Plot   <- source("external/tab_Plot.R", local = TRUE)$value
+tab_Help    <- source("external/tab_Help.R", local = TRUE)$value
+tab_Combine <- source("external/tab_Combine.R", local = TRUE)$value
+tab_Import  <- source("external/tab_Import.R", local = TRUE)$value
+tab_Calc    <- source("external/tab_Calc.R", local = TRUE)$value
+tab_Plot    <- source("external/tab_Plot.R", local = TRUE)$value
 
 # Define UI
 shinyUI(
-  navbarPage("LakeMonitoR, v0.1.0.9032"
+  navbarPage("LakeMonitoR, v0.1.0.9034"
     , tab_Help()
+    , tab_Combine()
     , tab_Import()
     , tab_Calc()
     , tab_Plot()

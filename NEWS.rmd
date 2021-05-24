@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9034
+===========
+Released - 2021-05-24
+
+* feature: Add ability to combine files to the Shiny app
+* refactor: Add source column to AggregateDepthData function output
+
 LakeMonitoR 0.1.0.9033
 ===========
 Released - 2021-05-21

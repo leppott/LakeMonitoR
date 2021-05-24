@@ -27,6 +27,8 @@ Function for combining high frequency data with depth.
 \details{
 Assumes files have the same column names.
 The files are merged with all=TRUE.
+
+One new field (AggFile_Source) is added with the name of the source file.
 No other manipulation of the data is performed.
 
 If any columns in the output have the ".x" or ".y" suffix when have duplicate

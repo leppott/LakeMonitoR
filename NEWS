@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-05-21 16:02:25
+    #> Last Update: 2021-05-24 16:45:25
+
+# LakeMonitoR 0.1.0.9034
+
+Released - 2021-05-24
+
+-   feature: Add ability to combine files to the Shiny app
+-   refactor: Add source column to AggregateDepthData function output
 
 # LakeMonitoR 0.1.0.9033
 

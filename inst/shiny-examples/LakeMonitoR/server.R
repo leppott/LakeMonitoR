@@ -24,6 +24,7 @@ shinyServer(function(input, output) {
   # Misc Names ####
   output$fn_input_display <- renderText({input$fn_input})
 
+    # CALCULATE ----
 
   # df_import ####
   output$df_import_DT <- renderDT({
@@ -164,14 +165,17 @@ shinyServer(function(input, output) {
       sleep_time <- 0.25
       sleep_time_qc <- 5
 
-      # b_Calc, Step 1, Initialize ####
+      ## _b_Calc, Step 1, Initialize ####
       # Increment the progress bar, and update the detail text.
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; Initialize log file.")
       incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(sleep_time)
 
-      # b_Calc, *sink* ####
+      ## Disable download button ----
+      shinyjs::disable("b_downloadAgg")
+
+      # _b_Calc, *sink* ####
       #fn_sink <- file.path(".", "Results", "results_log.txt")
       file_sink <- file(file.path("."
                                   , "Results"
@@ -199,7 +203,7 @@ shinyServer(function(input, output) {
       message(paste0("Area, Area (m2): ", input$col_area_area))
       message(paste0("Calculate, minimum days: ", input$strat_min_days))
 
-      # b_Calc, Step 2, QC Measured Values ####
+      # _b_Calc, Step 2, QC Measured Values ####
       # Increment the progress bar, and update the detail text.
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; QC, Measured Values")
@@ -280,7 +284,7 @@ shinyServer(function(input, output) {
       ## validate ~ END
 
 
-      # b_Calc, Step 3, DDM and Strat ####
+      # _b_Calc, Step 3, DDM and Strat ####
       # Increment the progress bar, and update the detail text.
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; Stratification.")
@@ -342,7 +346,7 @@ shinyServer(function(input, output) {
       fn_ddm <- file.path(".", "Results", "data_ddm.csv")
       write.csv(df_ddm, fn_ddm, row.names = FALSE)
 
-      # _Calc, Stratification ----
+      # __Calc, Stratification ----
       col_strat_date    <- "Date"
       col_strat_depth   <- "Depth"
       col_strat_measure <- "Measurement"
@@ -352,7 +356,7 @@ shinyServer(function(input, output) {
                                               , col_strat_measure
                                               , min_days = input$strat_min_days)
 
-      # _Calc, Lake Summary Stats ----
+      # __Calc, Lake Summary Stats ----
       df_lss <- LakeMonitoR::lake_summary_stats(df_ddm
                                               , col_strat_date
                                               , col_strat_depth
@@ -371,7 +375,7 @@ shinyServer(function(input, output) {
       write.csv(ls_strat$Stratification_Events
                 , fn_strat_events
                 , row.names = FALSE)
-      # _Results, Stratification Plot ----
+      # __Results, Stratification Plot ----
       fn_strat_plot <- file.path(".", "Results", "strat_plot.png")
       ggplot2::ggsave(filename = fn_strat_plot
                       , plot = ls_strat$Stratification_Plot)
@@ -389,14 +393,14 @@ shinyServer(function(input, output) {
       # Clean up
       rm(df_calc)
 
-      # b_Calc, Step 4, Plot, depth ####
+      # _b_Calc, Step 4, Plot, depth ####
       # Increment the progress bar, and qc_taxa
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; Plot Measured Data")
       incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(sleep_time)
 
-      # _Plot, Depth Profile ----
+      # __Plot, Depth Profile ----
       # Plot original data in ggplot
       data_plot <- df_data
       data_plot[, col_date] <- as.POSIXct(data_plot[, col_date]
@@ -434,7 +438,7 @@ shinyServer(function(input, output) {
       fn_p_depth <- file.path(".", "Results", "plot_depth_profile.png")
       ggplot2::ggsave(filename = fn_p_depth, plot = p_depth)
 
-      # _Plot, Depth, StratEvents ----
+      # __Plot, Depth, StratEvents ----
       # Add to profile plot
       df_StratEvents <- as.data.frame(ls_strat$Stratification_Events)
      df_StratEvents$Start_Date <- as.POSIXct(as.Date(df_StratEvents$Start_Date))
@@ -478,7 +482,7 @@ shinyServer(function(input, output) {
       ggplot2::ggsave(filename = fn_p_depth_se, plot = p_profile_strat)
 
 
-      # _Plot, heat map ----
+      # __Plot, heat map ----
       lab_title_hm <- NA
       p_hm <- plot_heatmap(data = data_plot
                            , col_datetime = col_date
@@ -516,7 +520,7 @@ shinyServer(function(input, output) {
       #, by="+1 day"), "%m-%d")
       #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      # b_Calc, Step 5, QC Area ####
+      # _b_Calc, Step 5, QC Area ####
       # Increment the progress bar, and qc_taxa
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; QC, Area")
@@ -555,7 +559,7 @@ shinyServer(function(input, output) {
         #
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # b_Calc, Step 7a, Zip Results ####
+        # _b_Calc, Step 7a, Zip Results ####
         # Increment the progress bar, and update the detail text.
         n_step <- n_step + 1
         prog_detail <- paste0("Step ", n_step, "; Create, Zip.")
@@ -625,7 +629,7 @@ shinyServer(function(input, output) {
 
 
 
-      # b_Calc, Step 6, Schmidt, rLA ####
+      ## _b_Calc, Step 6, Schmidt, rLA ####
       # Increment the progress bar, and qc_taxa
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; rLakeAnalyzer stats")
@@ -700,8 +704,12 @@ shinyServer(function(input, output) {
         # write.csv(df_rLA, "data_rLA.csv", row.names = FALSE)
 
 
+        # end sink
+        #flush.console()
+        sink() # console and message
+
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # b_Calc, Step 7b, Zip Results ####
+        # _b_Calc, Step 7b, Zip Results ####
         # Increment the progress bar, and update the detail text.
         n_step <- n_step + 1
         prog_detail <- paste0("Step ", n_step, "; Create, Zip.")
@@ -718,9 +726,9 @@ shinyServer(function(input, output) {
         shinyjs::enable("b_downloadData")
 
         # #
-        # end sink
-        #flush.console()
-        sink() # console and message
+        # # end sink
+        # #flush.console()
+        # sink() # console and message
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
       }## IF ~ is.null(df_data2) ~ END
@@ -742,7 +750,7 @@ shinyServer(function(input, output) {
     #myDateTime <- format(Sys.time(), "%Y%m%d_%H%M%S")
 
     filename = function() {
-      paste("LakeMonitoR"
+      paste("LakeMonitoR_Calc"
             , "_"
             , format(Sys.time(), "%Y%m%d_%H%M%S")
             , ".zip"
@@ -1018,6 +1026,179 @@ shinyServer(function(input, output) {
     ggplotly(p = p_h, dynamicTicks = TRUE)
 
   })## output$p_depth_ly ~ END
+
+  # AGGREGATE ----
+
+  # b_ImportAgg ----
+
+  # b_Agg ----
+  observeEvent(input$b_Agg, {
+    shiny::withProgress({
+      #
+      boo_DEBUG <- FALSE
+      # Number of increments
+      n_inc <- 5
+      n_step <- 0
+      sleep_time <- 0.5
+      sleep_time_qc <- 5
+
+      # _b_Agg, 1, Initialize ####
+      #
+      # Increment the progress bar, and update the detail text.
+      n_step <- n_step + 1
+      prog_detail <- paste0("Step ", n_step, "; Initialize log file.")
+      incProgress(1/n_inc, detail = prog_detail)
+      Sys.sleep(sleep_time)
+      #
+      ## Empty Folder, Results ----
+      fn_results <- list.files(file.path("Results"), full.names=TRUE)
+      file.remove(fn_results)
+
+      ## Empty Folder, import ----
+      fn_import <- list.files(file.path("import"), full.names=TRUE)
+      file.remove(fn_import)
+
+      ## Sink, start ----
+      file_sink <- file(file.path("Results", "agg_log.txt")
+                        , open = "wt")
+      #sink(file_sink, type = c("output", "message"), append = TRUE)
+      # not working as a single line
+      sink(file_sink, type = "output", append = TRUE)
+      sink(file_sink, type = "message", append = TRUE)
+      # Log
+      message("Aggregate Log from LakeMonitoR Shiny App")
+      message(paste0("Time, Start:  ", Sys.time()))
+      # appUser <- Sys.getenv('USERNAME')
+      # message(paste0("Username = ", appUser))
+      # Not meaningful when run online via Shiny.io
+      inFile <- input$fn_input_agg
+      message(paste0("files to combine = \n"
+                     , paste(paste0("  ", inFile$name), collapse = "\n")))
+
+      # # TEST ----
+      # # message("inFile$datapath")
+      # # message(inFile$datapath)
+      # # message("basename")
+      # # message(paste(basename(inFile$datapath)), collapse = ",")
+      # # message("dirname")
+      # # message(dirname(inFile$datapath)[1])
+      # # message("file.path('Results')")
+      # # message(file.path("Results"))
+      # # message("Files")
+      # # message(as.vector(paste(inFile$name, collapse = ",")))
+      #
+      # _b_Agg, 2, Copy Files ----
+      #
+      # Increment the progress bar, and update the detail text.
+      n_step <- n_step + 1
+      prog_detail <- paste0("Step ", n_step, "; Combine files.")
+      incProgress(1/n_inc, detail = prog_detail)
+      Sys.sleep(sleep_time)
+      #
+      # Copy Import "as is" to "Results" folder
+      file.copy(inFile$datapath
+                , file.path("import", inFile$name))
+
+
+      # _b_Agg, 3, Combine ----
+      #
+      # Increment the progress bar, and update the detail text.
+      n_step <- n_step + 1
+      prog_detail <- paste0("Step ", n_step, "; Combine files.")
+      incProgress(1/n_inc, detail = prog_detail)
+      Sys.sleep(sleep_time)
+
+      # Run aggregate function
+      #myFile_import <- file.path("Results", inFile$name)
+      myFile_import <- list.files("import", "*")
+      myFile_export <- paste0("CombinedFile_"
+                              , format(Sys.time(), "%Y%m%d_%H%M%S")
+                              , ".csv")
+      myDir_import <- file.path("import")
+      myDir_export <- file.path("Results")
+
+      LakeMonitoR::AggregateFiles(filename_import = myFile_import
+                                 , filename_export = myFile_export
+                                 , dir_import = myDir_import
+                                 , dir_export = myDir_export)
+
+      ## Sink, End ----
+      message(paste0("Combined file = ", myFile_export))
+      message(paste0("Time, End:  ", Sys.time()))
+      #flush.console()
+      sink() # console
+      sink() # message
+
+      # _b_Agg, 4, Zip Results ####
+      #
+      # Increment the progress bar, and update the detail text.
+      n_step <- n_step + 1
+      prog_detail <- paste0("Step ", n_step, "; Create, Zip.")
+      incProgress(1/n_inc, detail = prog_detail)
+      Sys.sleep(sleep_time)
+      #
+      # Create zip file
+      fn_4zip <- list.files(path = file.path("Results")
+                            , pattern = "*"
+                            , full.names = TRUE)
+      # fn_4zip <- normalizePath(file.path("Results"
+      #                                    , c("agg_log.txt")))
+      #                                    #, c("agg_log.txt", myFile_export)))
+      zip(file.path("Results", "agg.zip"), fn_4zip)
+
+
+      # _b_Agg, 5, Clean Up ----
+      ## Enable download button ----
+      shinyjs::enable("b_downloadAgg")
+
+
+
+      #
+    }##expr~withProgress~END
+    , message = "Combining:"
+    )##withProgress~END
+  }##expr~ObserveEvent~END
+  )##observeEvent~b_Calc~END
+
+
+
+
+
+
+  # b_downloadAgg ----
+  # Download of Aggregated Files
+  output$b_downloadAgg <- downloadHandler(
+    #
+    filename = function() {
+      paste("LakeMonitoR_Agg"
+            , "_"
+            , format(Sys.time(), "%Y%m%d_%H%M%S")
+            , ".zip"
+            , sep = "")
+    },
+    content = function(fname) {##content~START
+      # tmpdir <- tempdir()
+      #setwd(tempdir())
+      # fs <- c("input.csv", "metval.csv", "metsc.csv")
+      # file.copy(inFile$datapath, "input.csv")
+      # file.copy(inFile$datapath, "metval.tsv")
+      # file.copy(inFile$datapath, "metsc.tsv")
+      # file.copy(inFile$datapath, "IBI_plot.jpg")
+      # write.csv(datasetInput(), file="input.csv", row.names = FALSE)
+      # write.csv(datasetInput(), file="metval.csv", row.names = FALSE)
+      # write.csv(datasetInput(), file="metsc.csv", row.names = FALSE)
+      #
+      # Create Zip file
+      #zip(zipfile = fname, files=fs)
+      #if(file.exists(paste0(fname, ".zip"))) {file.rename(paste0(fname
+      #, ".zip"), fname)}
+
+      file.copy(file.path("Results", "agg.zip"), fname)
+
+      #
+    }##content~END
+    #, contentType = "application/zip"
+  )##downloadData~END
 
 
 })##shinyServer~END
