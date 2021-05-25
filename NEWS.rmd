@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9035
+===========
+Released - 2021-05-25
+
+* refactor: Update Shiny app code to avoid error when upload to ShinyApps.io
+    + Blank directories don't upload.
+        - Wrote code to ensure directories exist prior to using them.
+
 LakeMonitoR 0.1.0.9034
 ===========
 Released - 2021-05-24

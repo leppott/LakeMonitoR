@@ -1046,9 +1046,20 @@ shinyServer(function(input, output) {
       #
       # Increment the progress bar, and update the detail text.
       n_step <- n_step + 1
-      prog_detail <- paste0("Step ", n_step, "; Initialize log file.")
+      prog_detail <- paste0("Step ", n_step, "; Initialize.")
       incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(sleep_time)
+
+      # Ensure folders exist
+      #
+      if(isFALSE(dir.exists(file.path("Results")))){
+        dir.create(file.path("Results"))
+      }## IF ~ Results ~ END
+      #
+      if(isFALSE(dir.exists(file.path("import")))){
+        dir.create(file.path("import"))
+      }## IF ~ import ~ END
+
       #
       ## Empty Folder, Results ----
       fn_results <- list.files(file.path("Results"), full.names=TRUE)
@@ -1059,7 +1070,9 @@ shinyServer(function(input, output) {
       file.remove(fn_import)
 
       ## Sink, start ----
-      file_sink <- file(file.path("Results", "agg_log.txt")
+      # create file, ok on Windows but not Linux
+      #file.create(file.path("Results", "agg_log.txt"))
+      file_sink <- file(file.path(".", "Results", "agg_log.txt")
                         , open = "wt")
       #sink(file_sink, type = c("output", "message"), append = TRUE)
       # not working as a single line
@@ -1126,8 +1139,8 @@ shinyServer(function(input, output) {
       message(paste0("Combined file = ", myFile_export))
       message(paste0("Time, End:  ", Sys.time()))
       #flush.console()
-      sink() # console
-      sink() # message
+      suppressWarnings(sink()) # console
+      suppressWarnings(sink()) # message
 
       # _b_Agg, 4, Zip Results ####
       #
