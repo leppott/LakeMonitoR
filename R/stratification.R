@@ -8,9 +8,18 @@
 #' Calculation is defined as greater than a 1 degree (C) difference over
 #' 1 meter anywhere in the water column.
 #'
-#' A list is returned with two data frames.  The first has the dates and
-#' TRUE or FALSE for stratification  The second has the start and end dates and
-#' time span for each stratification event.
+#' A list is returned with two data frames and a plot.
+#'
+#' The first data frame has the dates and TRUE or FALSE for stratification.
+#'
+#' The second data frame has the start and end dates, time span, and minimum
+#' value for each stratification event.
+#'
+#' The plot is a ggplot object with lines for each stratification event.
+#' The minimum value is shown on the plot for each plot as a red circle.
+#'
+#' For the minimum value for each event the value, date, depth, and number of
+#' occurrences appears in the second data frame.  Only the first value is shown.
 #'
 #' Input data is assumed to be a single lake location depth profile.
 #'
@@ -225,13 +234,45 @@ stratification <- function(data
     }## IF ~ sum == nrow
   }## IF ~ exists("stratspan")
 
+  # Min ----
+  # Erik
+  # Add min DO, date, depth
+  # for each event
+  if(exists("stratspan") == FALSE) {
+    # Update stratspan
+    stratspan[j, "min_value"] <- NA
+    stratspan[j, "min_n"]     <- NA_integer_
+    stratspan[j, "min_date"]  <- NA
+    stratspan[j, "min_depth"] <- NA
+  } else {
+    for (j in seq_len(nrow(stratspan))){
+      # Date Range
+      j_start <- stratspan[j, "Start_Date"]
+      j_end   <- stratspan[j, "End_Date"]
+      # Filter
+      df_j <- data[data[, col_date] >= j_start &
+                     data[, col_date] <= j_end
+                   , ]
+      # Calcs
+      j_min_msr   <- min(df_j[, col_measure])
+      j_min_n     <- sum(df_j[, col_measure] == j_min_msr)
+      j_min_date  <- data[data[, col_measure] == j_min_msr, col_date]
+      j_min_depth <- data[data[, col_measure] == j_min_msr, col_depth]
+      # Update stratspan
+      stratspan[j, "min_value"] <- j_min_msr
+      stratspan[j, "min_n"]     <- j_min_n
+      stratspan[j, "min_date"]  <- j_min_date
+      stratspan[j, "min_depth"] <- j_min_depth
+      #
+    }## FOR ~ j ~ END
+  }## IF ~ exists("stratspan") ~ END (stratspan additional)
 
 
 
   # stratificationdates not exported
   if(exists("startdates") ==  TRUE) {
     startdates["Date2"] <- startdates[, col_date]
-    enddates["Date2"] <- enddates[, col_date]
+    enddates["Date2"]   <- enddates[, col_date]
 
     stratificationdates <- rbind(startdates, enddates)
     stratificationdates <- stratificationdates[order(stratificationdates[
@@ -250,40 +291,55 @@ stratification <- function(data
   # Results 2
   # reshape
 
-  # Results 3, plot ----
-  # plot, strat events
-  df_plot <- stratspan
+  # Plot ----
+  # Results 3, plot
+  if(exists("stratspan") == FALSE) {
+    p_se <- ggplot2::ggplot() +
+      ggplot2::theme_void() +
+      ggplot2::labs(title = "No stratification events")
+  } else {
+    # plot, strat events
+    df_plot <- stratspan
 
-  # julian dates
-  df_plot$Start_j <- as.numeric(format(df_plot$Start_Date, "%j"))
-  df_plot$End_j <- as.numeric(format(df_plot$End_Date, "%j"))
+    # julian dates
+    df_plot$Start_j <- as.numeric(format(df_plot$Start_Date, "%j"))
+    df_plot$End_j <- as.numeric(format(df_plot$End_Date, "%j"))
+    df_plot$Min_j <- as.numeric(format(df_plot$min_date, "%j"))
 
-  # Use a leap year (2004) to put julian dates in the same scale
-  df_plot$Start_j2 <- as.Date(df_plot$Start_j
-                                     , origin = as.Date("2004-01-01"))
-  df_plot$End_j2 <- as.Date(df_plot$End_j
-                                   , origin = as.Date("2004-01-01"))
+    # Use a leap year (2004) to put julian dates in the same scale
+    df_plot$Start_j2 <- as.Date(df_plot$Start_j
+                                , origin = as.Date("2004-01-01"))
+    df_plot$End_j2 <- as.Date(df_plot$End_j
+                              , origin = as.Date("2004-01-01"))
+    df_plot$Min_j2 <- as.Date(df_plot$Min_j
+                              , origin = as.Date("2004-01-01"))
 
-  #
-  p_se <- ggplot2::ggplot(data = df_plot
-                          , ggplot2::aes(y = Year)) +
-    ggplot2::scale_x_date(date_labels = "%b%d"
-                          , limits = as.Date(c("2004-01-01", "2004-12-31"))
-                          , date_breaks = "1 month"
-                          , expand = c(0, 0)) +
-    ggplot2::labs(x = "Date"
-                  , y = "Year"
-                  , title = "Stratification Events") +
-    ggplot2::geom_segment(ggplot2::aes(x = Start_j2
-                                       , xend = End_j2
-                                       , y = Year
-                                       , yend = Year)
-                          , size = 3)
-  # # segments
-  # https://stackoverflow.com/questions/34124599/
-  # r-plot-julian-day-in-x-axis-using-ggplot2
+    #
+    p_se <- ggplot2::ggplot(data = df_plot
+                            , ggplot2::aes(y = Year)) +
+      ggplot2::scale_x_date(date_labels = "%b%d"
+                            , limits = as.Date(c("2004-01-01", "2004-12-31"))
+                            , date_breaks = "1 month"
+                            , expand = c(0, 0)) +
+      ggplot2::labs(x = "Date"
+                    , y = "Year"
+                    , title = "Stratification Events") +
+      ggplot2::geom_segment(ggplot2::aes(x = Start_j2
+                                         , xend = End_j2
+                                         , y = Year
+                                         , yend = Year)
+                            , size = 3) +
+      ggplot2::geom_point(ggplot2::aes(x = Min_j2, y = Year)
+                          , col = "red"
+                          , size = 4) +
+      ggplot2::labs(caption = "Red dot = Minimum measured value.")
+    # # segments
+    # https://stackoverflow.com/questions/34124599/
+    # r-plot-julian-day-in-x-axis-using-ggplot2
+  }## IF ~ exists("stratspan") ~ END  (Plot)
 
 
+  # Results ----
   # Results, List
   list_results <- list(Stratification_Dates = Stratification
                       , Stratification_Events = stratspan

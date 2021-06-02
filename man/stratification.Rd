@@ -36,9 +36,18 @@ degree Celcius and meters.
 Calculation is defined as greater than a 1 degree (C) difference over
 1 meter anywhere in the water column.
 
-A list is returned with two data frames.  The first has the dates and
-TRUE or FALSE for stratification  The second has the start and end dates and
-time span for each stratification event.
+A list is returned with two data frames and a plot.
+
+The first data frame has the dates and TRUE or FALSE for stratification.
+
+The second data frame has the start and end dates, time span, and minimum
+value for each stratification event.
+
+The plot is a ggplot object with lines for each stratification event.
+The minimum value is shown on the plot for each plot as a red circle.
+
+For the minimum value for each event the value, date, depth, and number of
+occurrences appears in the second data frame.  Only the first value is shown.
 
 Input data is assumed to be a single lake location depth profile.
 }

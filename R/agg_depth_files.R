@@ -28,17 +28,17 @@
 #' myFile_export <- "Ellis--Combined_Water_20180524_20180918.csv"
 #' myDir_import <- file.path(system.file("extdata", package = "LakeMonitoR"))
 #' myDir_export <- tempdir()
-#' AggregateFiles(filename_import = myFile_import
-#'                , filename_export = myFile_export
-#'                , dir_import = myDir_import
-#'                , dir_export = myDir_export)
+#' agg_depth_files(filename_import = myFile_import
+#'                 , filename_export = myFile_export
+#'                 , dir_import = myDir_import
+#'                 , dir_export = myDir_export)
 #
 #' @export
-AggregateFiles <- function(filename_import
-                           , filename_export
-                           , dir_import
-                           , dir_export
-                           ) {
+agg_depth_files <- function(filename_import
+                            , filename_export
+                            , dir_import
+                            , dir_export
+                            ) {
   #
   # QC ----
   boo_QC <- FALSE

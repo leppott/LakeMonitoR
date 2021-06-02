@@ -19,6 +19,15 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.0.9036
+===========
+Released - 2021-06-02
+
+* refactor: Rename AggregateFiles to agg_depth_files
+* refactor: Add sections to Vignettee for LakeMonitoR functions
+* feature: Add minimum value outputs to stratification()
+* refactor: Add minimum value to stratification plot
+
 LakeMonitoR 0.1.0.9035
 ===========
 Released - 2021-05-25

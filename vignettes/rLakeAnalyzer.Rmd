@@ -22,6 +22,20 @@ Show users how to use functions in rLakeAnalyzer from LakeMonitor.
 
 In most cases are using examples provided by rLakeAnalyzer.
 
+# LakeMonitoR
+
+## agg_depth_files
+
+## daily_depth_means
+
+## lake_summary_stats
+
+## plot_depth
+
+## plot_heatmap
+
+## export_rLakeAnalyzer
+
 # rLakeAnalyzer
 
 ## Help

@@ -4,7 +4,25 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-05-24 16:45:25
+    #> Last Update: 2021-06-02 14:22:02
+
+# LakeMonitoR 0.1.0.9036
+
+Released - 2021-06-02
+
+-   refactor: Rename AggregateFiles to agg\_depth\_files
+-   refactor: Add sections to Vignettee for LakeMonitoR functions
+-   feature: Add minimum value outputs to stratification()
+-   refactor: Add minimum value to stratification plot
+
+# LakeMonitoR 0.1.0.9035
+
+Released - 2021-05-25
+
+-   refactor: Update Shiny app code to avoid error when upload to
+    ShinyApps.io
+    -   Blank directories don’t upload.
+        -   Wrote code to ensure directories exist prior to using them.
 
 # LakeMonitoR 0.1.0.9034
 

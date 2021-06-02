@@ -66,9 +66,9 @@ help(package=(myPkg))
 #?metric.scores 
 citation(myPkg)
 
-# Create PkgDown Website
-usethis::use_pkgdown()
-pkgdown::build_site()
+# # Create PkgDown Website
+# usethis::use_pkgdown()
+# pkgdown::build_site()
 
 ```
 
