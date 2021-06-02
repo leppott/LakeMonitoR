@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9035</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9036</span>
       </span>
     </div>
 
@@ -174,9 +174,14 @@ and year (y).</p>
 degree Celcius and meters.</p>
 <p>Calculation is defined as greater than a 1 degree (C) difference over
 1 meter anywhere in the water column.</p>
-<p>A list is returned with two data frames.  The first has the dates and
-TRUE or FALSE for stratification  The second has the start and end dates and
-time span for each stratification event.</p>
+<p>A list is returned with two data frames and a plot.</p>
+<p>The first data frame has the dates and TRUE or FALSE for stratification.</p>
+<p>The second data frame has the start and end dates, time span, and minimum
+value for each stratification event.</p>
+<p>The plot is a ggplot object with lines for each stratification event.
+The minimum value is shown on the plot for each plot as a red circle.</p>
+<p>For the minimum value for each event the value, date, depth, and number of
+occurrences appears in the second data frame.  Only the first value is shown.</p>
 <p>Input data is assumed to be a single lake location depth profile.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -207,8 +212,8 @@ time span for each stratification event.</p>
 #&gt; 6 2017-01-24        FALSE</div><div class='input'>
 <span class='co'># Results, Stratification Events</span>
 <span class='va'>ls_strat</span><span class='op'>$</span><span class='va'>Stratification_Events</span>
-</div><div class='output co'>#&gt;   Start_Date   End_Date Year Time_Span
-#&gt; 1 2017-06-05 2017-10-16 2017  133 days</div><div class='input'>
+</div><div class='output co'>#&gt;   Start_Date   End_Date Year Time_Span min_value min_n   min_date min_depth
+#&gt; 1 2017-06-05 2017-10-16 2017  133 days  7.343844     1 2017-06-05        27</div><div class='input'>
 <span class='co'># Results, Stratification Plot</span>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='va'>ls_strat</span><span class='op'>$</span><span class='va'>Stratification_Plot</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
