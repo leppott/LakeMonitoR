@@ -21,6 +21,10 @@
 #' For the minimum value for each event the value, date, depth, and number of
 #' occurrences appears in the second data frame.  Only the first value is shown.
 #'
+#' Units should be metric (meters and celsius).  If use Imperial units (feet and
+#' fahrenheit) they will be converted.  Accepted abberviations are m, ft, C, and
+#' F.
+#'
 #' Input data is assumed to be a single lake location depth profile.
 #'
 #' @param data data frame
@@ -30,6 +34,8 @@
 #' @param col_measure Column name, measurement for calculation
 #' @param min_days Minimum number of consecutive days to be classified as
 #' stratification.  Default = 1.
+#' @param units_depth Units for depth column (m or ft).  Default = "m".
+#' @param units_measure Unites for measurement column (C or F).  Default = "C".
 # @param df_hypso Data frame of hypsometry for lake.
 # Column names of Contour_Depth and Area.
 # Default = NULL
@@ -71,12 +77,12 @@
 #
 #' @export
 stratification <- function(data
-                           #, col_siteid
                            , col_date
                            , col_depth
                            , col_measure
                            , min_days = 1
-                           #, df_hypso = NULL
+                           , units_depth = "m"
+                           , units_measure = "C"
                            ) {
 
   # global variable bindings
@@ -89,6 +95,29 @@ stratification <- function(data
   data[, col_depth]   <- as.numeric(data[,col_depth])
   data[, col_measure] <- as.numeric(data[, col_measure])
 
+  # QC units
+  ## depth
+  if(tolower(units_depth) == "m") {
+    # do nothing
+  } else if (tolower(units_depth) == "ft") {
+    data[, col_depth] <- 0.3048 * data[, col_depth]
+  } else {
+    msg <- paste0("Unknown depth units (", units_depth, "); use 'm' or 'ft'")
+    stop(msg)
+  }## IF ~ units_depth ~ END
+  ## measure
+  if(tolower(units_measure) == "c") {
+    # do nothing
+  } else if (tolower(units_measure) == "f") {
+    data[, col_measure] <- (data[, col_measure] - 32) * 5/9
+  } else {
+    msg <- paste0("Unknown measurement units ("
+                  , units_measure
+                  , "); use 'C' or 'F'.")
+    stop(msg)
+  }## IF ~ units_depth ~ END
+
+  # Dates
   Dates <- sort(unique(data[, col_date]))
 
   # QC days to numeric
@@ -238,34 +267,34 @@ stratification <- function(data
   # Erik
   # Add min DO, date, depth
   # for each event
-  if(exists("stratspan") == FALSE) {
-    # Update stratspan
-    stratspan[j, "min_value"] <- NA
-    stratspan[j, "min_n"]     <- NA_integer_
-    stratspan[j, "min_date"]  <- NA
-    stratspan[j, "min_depth"] <- NA
-  } else {
-    for (j in seq_len(nrow(stratspan))){
-      # Date Range
-      j_start <- stratspan[j, "Start_Date"]
-      j_end   <- stratspan[j, "End_Date"]
-      # Filter
-      df_j <- data[data[, col_date] >= j_start &
-                     data[, col_date] <= j_end
-                   , ]
-      # Calcs
-      j_min_msr   <- min(df_j[, col_measure])
-      j_min_n     <- sum(df_j[, col_measure] == j_min_msr)
-      j_min_date  <- data[data[, col_measure] == j_min_msr, col_date]
-      j_min_depth <- data[data[, col_measure] == j_min_msr, col_depth]
-      # Update stratspan
-      stratspan[j, "min_value"] <- j_min_msr
-      stratspan[j, "min_n"]     <- j_min_n
-      stratspan[j, "min_date"]  <- j_min_date
-      stratspan[j, "min_depth"] <- j_min_depth
-      #
-    }## FOR ~ j ~ END
-  }## IF ~ exists("stratspan") ~ END (stratspan additional)
+  # if(exists("stratspan") == FALSE) {
+  #   # Update stratspan
+  #   stratspan[j, "min_value"] <- NA
+  #   stratspan[j, "min_n"]     <- NA_integer_
+  #   stratspan[j, "min_date"]  <- NA
+  #   stratspan[j, "min_depth"] <- NA
+  # } else {
+  #   for (j in seq_len(nrow(stratspan))){
+  #     # Date Range
+  #     j_start <- stratspan[j, "Start_Date"]
+  #     j_end   <- stratspan[j, "End_Date"]
+  #     # Filter
+  #     df_j <- data[data[, col_date] >= j_start &
+  #                    data[, col_date] <= j_end
+  #                  , ]
+  #     # Calcs
+  #     j_min_msr   <- min(df_j[, col_measure])
+  #     j_min_n     <- sum(df_j[, col_measure] == j_min_msr)
+  #     j_min_date  <- data[data[, col_measure] == j_min_msr, col_date]
+  #     j_min_depth <- data[data[, col_measure] == j_min_msr, col_depth]
+  #     # Update stratspan
+  #     stratspan[j, "min_value"] <- j_min_msr
+  #     stratspan[j, "min_n"]     <- j_min_n
+  #     stratspan[j, "min_date"]  <- j_min_date
+  #     stratspan[j, "min_depth"] <- j_min_depth
+  #     #
+  #   }## FOR ~ j ~ END
+  # }## IF ~ exists("stratspan") ~ END (stratspan additional)
 
 
 
@@ -328,11 +357,11 @@ stratification <- function(data
                                          , xend = End_j2
                                          , y = Year
                                          , yend = Year)
-                            , size = 3) +
-      ggplot2::geom_point(ggplot2::aes(x = Min_j2, y = Year)
-                          , col = "red"
-                          , size = 4) +
-      ggplot2::labs(caption = "Red dot = Minimum measured value.")
+                            , size = 3) #+
+      # ggplot2::geom_point(ggplot2::aes(x = Min_j2, y = Year)
+      #                     , col = "red"
+      #                     , size = 4) +
+      # ggplot2::labs(caption = "Red dot = Minimum measured value.")
     # # segments
     # https://stackoverflow.com/questions/34124599/
     # r-plot-julian-day-in-x-axis-using-ggplot2

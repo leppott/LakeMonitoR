@@ -79,7 +79,10 @@ p_profile <- plot_depth(data = data
 print(p_profile)
 
 # Demo ability to tweak the plot
-p_profile + ggplot2::labs(caption = "Example, LakeMonitoR::plot_depth()")
+p_profile + ggplot2::geom_hline(yintercept = 65
+                               , linetype = "dashed"
+                               , color = "red") +
+    ggplot2::labs(caption = "Red dashed line = User defined value")
 
 # save plot to temp directory
 tempdir() # show the temp directory

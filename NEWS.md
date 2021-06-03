@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-06-02 14:22:02
+    #> Last Update: 2021-06-03 08:31:23
+
+# LakeMonitoR 0.1.0.9037
+
+Released - 2021-06-03
+
+-   refactor: Add example to plot\_depth showing horizontal line
+-   feature: Remove minimum values outputs for startification()
+-   refactor: Add units as input for stratification(), Issue \#1
 
 # LakeMonitoR 0.1.0.9036
 

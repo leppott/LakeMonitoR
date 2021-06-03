@@ -4,7 +4,15 @@
 \alias{stratification}
 \title{Lake Stratification}
 \usage{
-stratification(data, col_date, col_depth, col_measure, min_days = 1)
+stratification(
+  data,
+  col_date,
+  col_depth,
+  col_measure,
+  min_days = 1,
+  units_depth = "m",
+  units_measure = "C"
+)
 }
 \arguments{
 \item{data}{data frame}
@@ -17,6 +25,10 @@ stratification(data, col_date, col_depth, col_measure, min_days = 1)
 
 \item{min_days}{Minimum number of consecutive days to be classified as
 stratification.  Default = 1.}
+
+\item{units_depth}{Units for depth column (m or ft).  Default = "m".}
+
+\item{units_measure}{Unites for measurement column (C or F).  Default = "C".}
 }
 \value{
 List with 3 elements, 2 data frames and a ggplot
@@ -48,6 +60,10 @@ The minimum value is shown on the plot for each plot as a red circle.
 
 For the minimum value for each event the value, date, depth, and number of
 occurrences appears in the second data frame.  Only the first value is shown.
+
+Units should be metric (meters and celsius).  If use Imperial units (feet and
+fahrenheit) they will be converted.  Accepted abberviations are m, ft, C, and
+F.
 
 Input data is assumed to be a single lake location depth profile.
 }
