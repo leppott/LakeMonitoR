@@ -16,7 +16,7 @@ plot_depth(
 )
 }
 \arguments{
-\item{data}{data frame of site id (optional), data/time, depth
+\item{data}{data frame of site id (optional), date/time, depth
 , and measurement (e.g., temperature).}
 
 \item{col_datetime}{Column name, Date Time}

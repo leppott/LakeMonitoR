@@ -59,3 +59,15 @@
 #'  }
 "laketest"
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' Test Lake wind data
+#'
+#' Lake wind data for plotting
+#'
+#' @format A data frame with 2,446 observations on the following 3 variables.
+#'  \describe{
+#'    \item{\code{SiteID}}{a character vector}
+#'    \item{\code{Date.Time}}{a character vector}
+#'    \item{\code{WSPD}}{a numeric vector of average wind speed (m/s)}
+#'  }
+"laketest_wind"
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

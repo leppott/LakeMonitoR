@@ -4,7 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-06-03 08:31:23
+    #> Last Update: 2021-06-03 13:39:03
+
+# LakeMonitoR 0.1.0.9038
+
+Released - 2021-06-03
+
+-   refactor: Add gridExtra package to Shiny global.R and DESCRIPTION
+-   refactor: Add wind speed data to laketest dataset
+-   feature: Add plot\_ts function for generic plotting by date (and not
+    depth)
+-   feature: Add data `testlake_wind`
 
 # LakeMonitoR 0.1.0.9037
 

@@ -25,24 +25,312 @@ In most cases are using examples provided by rLakeAnalyzer.
 # LakeMonitoR
 
 ## agg_depth_files
+```{r agg_depth_files, echo=TRUE, eval=FALSE}
+# Data Files
+myFile_import <- c("Ellis--1.0m_Water_20180524_20180918.csv"
+                  , "Ellis--3.0m_Water_20180524_20180918.csv")
+myFile_export <- "Ellis--Combined_Water_20180524_20180918.csv"
+myDir_import <- file.path(system.file("extdata", package = "LakeMonitoR"))
+myDir_export <- tempdir()
+agg_depth_files(filename_import = myFile_import
+                , filename_export = myFile_export
+                , dir_import = myDir_import
+                , dir_export = myDir_export)
+```
 
 ## daily_depth_means
+```{r daily_depth_means}
+# Packages
+library(xts)
+
+# Lake Data
+data <- laketemp
+
+# Filter by any QC fields
+data <- data[data$FlagV == "P", ]
+
+# name columns
+col_siteid   <- "SiteID"
+col_datetime <- "Date_Time"
+col_depth    <- "Depth_m"
+col_measure  <- "Water_Temp_C"
+
+# run function
+data_ddm <- daily_depth_means(data
+                             , col_siteid
+                             , col_datetime
+                             , col_depth
+                             , col_measure)
+
+# summary
+summary(data_ddm)
+```
 
 ## lake_summary_stats
+```{r lake_summary_stats}
+# data
+data <- laketemp_ddm
+
+# Columns
+col_date    <- "Date"
+col_depth   <- "Depth"
+col_measure <- "Measurement"
+below_threshold <- 2
+
+# Calculate Stratification
+df_lss <- lake_summary_stats(data
+                            , col_date
+                            , col_depth
+                            , col_measure
+                            , below_threshold)
+
+# Results
+head(df_lss)
+```
 
 ## plot_depth
+```{r plot_depth}
+library(LakeMonitoR)
 
+# Data (Test Lake)
+data         <- laketest
+
+# Column Names
+col_datetime <- "Date.Time"
+col_depth    <- "Depth"
+col_measure  <- "temp_F"
+
+# Plot Labels
+lab_datetime <- "Date Time"
+lab_depth    <- "Depth (m)"
+lab_measure  <- "Temperature (F)"
+lab_title    <- "Test Lake"
+
+# Create Plot
+p_profile <- plot_depth(data = data
+                        , col_datetime = col_datetime
+                        , col_depth = col_depth
+                        , col_measure = col_measure
+                        , lab_datetime = lab_datetime
+                        , lab_depth = lab_depth
+                        , lab_measure = lab_measure
+                        , lab_title = lab_title)
+
+# Print Plot
+print(p_profile)
+```
 ## plot_heatmap
+```{r plot_heatmap}
+library(LakeMonitoR)
+
+# Data (Test Lake)
+data         <- laketest
+
+# Column Names
+col_datetime <- "Date.Time"
+col_depth    <- "Depth"
+col_measure  <- "temp_F"
+
+# Plot Labels
+lab_datetime <- "Date Time"
+lab_depth    <- "Depth (m)"
+lab_measure  <- "Temperature (F)"
+lab_title    <- "Test Lake"
+line_val     <- 2
+
+# Create Plot
+p_hm <- plot_heatmap(data = data
+                        , col_datetime = col_datetime
+                        , col_depth = col_depth
+                        , col_measure = col_measure
+                        , lab_datetime = lab_datetime
+                        , lab_depth = lab_depth
+                        , lab_measure = lab_measure
+                        , lab_title = lab_title
+                        , contours = TRUE)
+
+# Print Plot
+print(p_hm)
+```
+
+## plot_ts
+```{r plot_ts}
+# Data (Test Lake)
+data         <- laketest_wind
+
+# Column Names
+col_datetime <- "Date.Time"
+col_measure  <- "WSPD"
+
+# Plot Labels
+lab_datetime <- "Date Time"
+lab_measure  <- "Average Wind Speed (m/s)"
+lab_title    <- "Test Lake"
+
+# Create Plot
+p_ts <- plot_ts(data = data
+                , col_datetime = col_datetime
+                , col_measure = col_measure
+                , lab_datetime = lab_datetime
+                , lab_measure = lab_measure
+                , lab_title = lab_title)
+
+# Print Plot
+print(p_ts)
+```
+
+## Combining Plots
+The shiny app combines the depth plot with the heat map and saves it to the 
+Results folder.  Combining the plots is not a default feature of the package
+but can be done with the use of the `gridExtra` package.
+
+Move legends to the bottom and remove titles to get more space.
+```{r plot_combine}
+library(LakeMonitoR)
+
+# Data (Test Lake)
+data         <- laketest
+
+# depth----
+# Column Names
+col_datetime <- "Date.Time"
+col_depth    <- "Depth"
+col_measure  <- "DO_conc"
+
+# Plot Labels
+lab_datetime <- "Date Time"
+lab_depth    <- "Depth (m)"
+lab_measure  <- "Dissolved Oxygen (mg/L)"
+lab_title    <- "Test Lake"
+
+# Create Plot
+p_profile <- plot_depth(data = data
+                        , col_datetime = col_datetime
+                        , col_depth = col_depth
+                        , col_measure = col_measure
+                        , lab_datetime = lab_datetime
+                        , lab_depth = lab_depth
+                        , lab_measure = lab_measure
+                        , lab_title = NA)
+
+# heat map----
+# Data (Test Lake)
+data         <- laketest
+
+# Column Names
+col_datetime <- "Date.Time"
+col_depth    <- "Depth"
+col_measure  <- "temp_F"
+
+# Plot Labels
+lab_datetime <- "Date Time"
+lab_depth    <- "Depth (m)"
+lab_measure  <- "Temperature (F)"
+lab_title    <- "Test Lake"
+line_val     <- 2
+
+# Create Plot----
+p_hm <- plot_heatmap(data = data
+                        , col_datetime = col_datetime
+                        , col_depth = col_depth
+                        , col_measure = col_measure
+                        , lab_datetime = lab_datetime
+                        , lab_depth = lab_depth
+                        , lab_measure = lab_measure
+                        , lab_title = NA
+                        , contours = TRUE)
+
+# Change legend location
+p_profile <- p_profile + ggplot2::theme(legend.position = "bottom") +
+  ggplot2::geom_hline(yintercept = 2
+                      , color = "red"
+                      , linetype = "dashed"
+                      , size = 1.5)
+p_hm <- p_hm + ggplot2::theme(legend.position = "bottom")
+
+# # plot, Wind
+p_ts <- plot_ts(data = laketest_wind
+                , col_datetime = col_datetime
+                , col_measure = "WSPD"
+                , lab_datetime = lab_datetime
+                , lab_measure = "Average Wind (m/s)"
+                , lab_title = NA)
+
+# Combine 2
+p_combo_2 <- gridExtra::grid.arrange(p_hm, p_profile)
+
+# Combine 3
+p_combo_3 <- gridExtra::grid.arrange(p_hm, p_profile, p_ts)
+
+```
+
+## stratification
+```{r stratification}
+library(LakeMonitoR)
+
+# data
+data <- laketemp_ddm
+
+# Columns
+#col_siteid  <- "SiteID"
+col_date    <- "Date"
+col_depth   <- "Depth"
+col_measure <- "Measurement"
+
+# Calculate Stratification
+ls_strat <- stratification(data
+                           , col_date
+                           , col_depth
+                           , col_measure
+                           , min_days = 1 )
+
+# Results, Stratification Dates
+head(ls_strat$Stratification_Dates)
+
+# Results, Stratification Events
+ls_strat$Stratification_Events
+
+# Results, Stratification Plot
+p <- ls_strat$Stratification_Plot
+print(p)
+```
 
 ## export_rLakeAnalyzer
+Reorganize file for use with `rLakeAnalyzer` package.
+```{r}
+library(LakeMonitoR)
+
+# Convert Data for use with rLakeAnalyzer
+
+# Data
+data <- laketemp_ddm
+
+# Columns, date listed first
+col_depth <- "Depth"
+col_data <- c("Date", "Measurement")
+col_rLA  <- c("datetime", "wtr")
+
+# Run function
+df_rLA <- export_rLakeAnalyzer(data, col_depth, col_data, col_rLA)
+
+#
+str(df_rLA)
+
+## Not run: 
+# Save
+#write.csv(df_rLA, file.path(tempdir(), "example_rLA.csv"), row.names = FALSE)
+```
 
 # rLakeAnalyzer
+After exporting file format for `rLakeAnalyzer` can use the functions from that 
+package.
 
 ## Help
 ```{r help, echo = FALSE}
 library(rLakeAnalyzer)
 print(lsf.str("package:rLakeAnalyzer"))
 ```
+
 ## approx.bathy
 Estimate hypsography curve
 
@@ -56,7 +344,6 @@ plot(Cone.ex$depths ~ Cone.ex$Area.at.z, xlab = "Area (m^3)", ylab = "Depth (m)"
 points(Voldev.ex$depths ~ Voldev.ex$Area.at.z, col = "red")
 points(Voldevshallow.ex$depths ~ Voldevshallow.ex$Area.at.z, col = "blue")
 ```
-
 
 ## buoyancy.freq
 Calculate buoyancy frequency

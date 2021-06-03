@@ -1,6 +1,6 @@
-#' @title Plot Depth Profile
+#' @title Plot Time Series
 #'
-#' @description Generates a plot of measurements from depth profile data
+#' @description Generates a plot of time series measurements
 #'
 #' @details Can be used with any parameter.  A plot is returned that can be
 #' saved with ggsave(filename).
@@ -12,13 +12,11 @@
 #'
 #' The returned object is a ggplot object so it can be further manipulated.
 #'
-#' @param data data frame of site id (optional), date/time, depth
-#' , and measurement (e.g., temperature).
+#' @param data data frame of site id (optional), date/time, and measurement
+#' (e.g., wind speed).
 #' @param col_datetime Column name, Date Time
-#' @param col_depth Column name, Depth
 #' @param col_measure Column name, measurement for plotting
 #' @param lab_datetime Plot label for x-axis, Default = col_datetime
-#' @param lab_depth Plot label for legend, Default = col_depth
 #' @param lab_measure Plot label for y-axis, Default = col_measure
 #' @param lab_title Plot title, Default = NA
 #'
@@ -26,54 +24,42 @@
 #'
 #' @examples
 #' # Data (Test Lake)
-#' data         <- laketest
+#' data         <- laketest_wind
 #'
 #' # Column Names
 #' col_datetime <- "Date.Time"
-#' col_depth    <- "Depth"
-#' col_measure  <- "temp_F"
+#' col_measure  <- "WSPD"
 #'
 #' # Plot Labels
 #' lab_datetime <- "Date Time"
-#' lab_depth    <- "Depth (m)"
-#' lab_measure  <- "Temperature (F)"
+#' lab_measure  <- "Average Wind Speed (m/s)"
 #' lab_title    <- "Test Lake"
 #'
 #' # Create Plot
-#' p_profile <- plot_depth(data = data
-#'                         , col_datetime = col_datetime
-#'                         , col_depth = col_depth
-#'                         , col_measure = col_measure
-#'                         , lab_datetime = lab_datetime
-#'                         , lab_depth = lab_depth
-#'                         , lab_measure = lab_measure
-#'                         , lab_title = lab_title)
+#' p_ts <- plot_ts(data = data
+#'                 , col_datetime = col_datetime
+#'                 , col_measure = col_measure
+#'                 , lab_datetime = lab_datetime
+#'                 , lab_measure = lab_measure
+#'                 , lab_title = lab_title)
 #'
 #' # Print Plot
-#' print(p_profile)
-#'
-#' # Demo ability to tweak the plot
-#' p_profile + ggplot2::geom_hline(yintercept = 65
-#'                                , linetype = "dashed"
-#'                                , color = "red") +
-#'     ggplot2::labs(caption = "Red dashed line = User defined value")
+#' print(p_ts)
 #'
 #' # save plot to temp directory
 #' tempdir() # show the temp directory
-#' ggplot2::ggsave(file.path(tempdir(), "TestLake_tempF_plotDepth.png"))
+#' ggplot2::ggsave(file.path(tempdir(), "TestLake_wind_plotTS.png"))
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @export
-plot_depth <- function(data
+plot_ts <- function(data
                       , col_datetime
-                      , col_depth
                       , col_measure
                       , lab_datetime = NA
-                      , lab_depth = NA
                       , lab_measure = NA
                       , lab_title = NA) {
 
   # QC ----
-  col2check <- c(col_datetime, col_depth, col_measure)
+  col2check <- c(col_datetime, col_measure)
   col_missing <- col2check[col2check %in% col(data)]
   if(length(col_missing) != 0){
     msg <- paste0("Columns are missing from data:\n "
@@ -91,9 +77,7 @@ plot_depth <- function(data
   p <- ggplot2::ggplot(data
                        , ggplot2::aes_string(x = col_datetime
                                              , y = col_measure)) +
-    ggplot2::geom_point(ggplot2::aes_string(color = col_depth)
-                        , na.rm = TRUE) +
-    ggplot2::scale_color_continuous(trans = "reverse") +
+    ggplot2::geom_line(na.rm = TRUE) +
     ggplot2::scale_x_datetime(date_labels = "%Y-%m") +
     ggplot2::theme_bw()
 
@@ -104,11 +88,7 @@ plot_depth <- function(data
     p <- p + ggplot2::labs(x = lab_datetime)
   }## IF ~ is.na(lab_datetime)
   #
-  if(is.na(lab_depth) == FALSE){
-    p <- p + ggplot2::guides(color = ggplot2::guide_colourbar(title =
-                                                                     lab_depth))
-  }## IF ~ is.na(lab_depth)
-  # #
+  #
   if(is.na(lab_measure) == FALSE){
     p <- p + ggplot2::labs(y = lab_measure)
   }## IF ~ is.na(lab_measure)

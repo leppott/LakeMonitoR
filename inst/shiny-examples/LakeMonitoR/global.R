@@ -9,6 +9,7 @@ library(shinyjs) # used for download button enable
 library(ggplot2)
 library(rLakeAnalyzer)
 library(plotly)
+library(gridExtra)
 
 # Drop-down boxes
 Calc_Options <- c("daily depth means", "stratification", "both")
