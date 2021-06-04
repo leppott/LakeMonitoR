@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Test Lake data — laketest • LakeMonitoR</title>
+<title>Lake temperature and dissolved oxygen, daily depth means — laketempdo_ddm • LakeMonitoR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Test Lake data — laketest" />
-<meta property="og:description" content="Lake profile temperature and dissolved oxygen data." />
+<meta property="og:title" content="Lake temperature and dissolved oxygen, daily depth means — laketempdo_ddm" />
+<meta property="og:description" content="Lake profile temperature data created from `LakeMonitoR::laketemp` using
+`LakeMonitoR::daily_depth_means`." />
 
 
 
@@ -123,26 +124,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Test Lake data</h1>
+    <h1>Lake temperature and dissolved oxygen, daily depth means</h1>
     <small class="dont-index">Source: <a href='https://github.com/leppott/LakeMonitoR/blob/master/R/data.r'><code>R/data.r</code></a></small>
-    <div class="hidden name"><code>laketest.Rd</code></div>
+    <div class="hidden name"><code>laketempdo_ddm.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Lake profile temperature and dissolved oxygen data.</p>
+    <p>Lake profile temperature data created from `LakeMonitoR::laketemp` using
+`LakeMonitoR::daily_depth_means`.</p>
     </div>
 
-    <pre class="usage"><span class='va'>laketest</span></pre>
+    <pre class="usage"><span class='va'>laketempdo_ddm</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 7,338 observations on the following 5 variables.</p><dl>
-   <dt><code>SiteID</code></dt><dd><p>a character vector</p></dd>
-   <dt><code>Date.Time</code></dt><dd><p>a character vector</p></dd>
-   <dt><code>DO_conc</code></dt><dd><p>a numeric vector of dissolved oxygen (mg/L)</p></dd>
+    <p>A data frame with 9,639 observations on the following 3 variables.</p><dl>
+   <dt><code>Date</code></dt><dd><p>a Date, January 2017 to January 2018</p></dd>
+   <dt><code>Depth</code></dt><dd><p>a numeric vector of depths (meters)</p></dd>
    <dt><code>temp_F</code></dt><dd><p>a numeric vector of temperature (Fahrenheit)</p></dd>
-   <dt><code>Depth</code></dt><dd><p>a numeric vector of depth (meters)</p></dd>
+   <dt><code>DO_conc</code></dt><dd><p>a numeric vector of dissolved oxygen (mg/L)</p></dd>
  
 </dl>
 
