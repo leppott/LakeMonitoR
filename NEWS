@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-06-04 11:36:36
+    #> Last Update: 2021-06-04 11:39:19
+
+# LakeMonitoR 0.1.1
+
+Released - 2021-06-04
+
+-   release: Update version for interim release
 
 # LakeMonitoR 0.1.0.9039
 
