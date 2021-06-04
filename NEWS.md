@@ -4,7 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-06-03 13:39:03
+    #> Last Update: 2021-06-04 11:36:36
+
+# LakeMonitoR 0.1.0.9039
+
+Released - 2021-06-04
+
+-   feature: Shiny, add third file
+    -   Import
+    -   Display
+    -   Plot, screen
+    -   Plot, calculate
+-   refactor: Add new daily depth mean file with temp and DO from
+    example lake
 
 # LakeMonitoR 0.1.0.9038
 

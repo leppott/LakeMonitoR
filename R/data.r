@@ -71,3 +71,16 @@
 #'  }
 "laketest_wind"
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' Lake temperature and dissolved oxygen, daily depth means
+#'
+#' Lake profile temperature data created from `LakeMonitoR::laketemp` using
+#' `LakeMonitoR::daily_depth_means`.
+#'
+#' @format A data frame with 9,639 observations on the following 3 variables.
+#'  \describe{
+#'    \item{\code{Date}}{a Date, January 2017 to January 2018}
+#'    \item{\code{Depth}}{a numeric vector of depths (meters)}
+#'    \item{\code{temp_F}}{a numeric vector of temperature (Fahrenheit)}
+#'    \item{\code{DO_conc}}{a numeric vector of dissolved oxygen (mg/L)}
+#'  }
+"laketempdo_ddm"

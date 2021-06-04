@@ -45,6 +45,24 @@ function(){
                       )
           )##fileInput~END
 
+          , h4("1.C. Load File, Measure, No Depth")
+          , radioButtons('sep3', 'Separator',
+                         c(Comma=',',
+                           Semicolon=';',
+                           Tab='\t'),
+                         ',')
+          , fileInput('fn_input3', 'Choose file to upload',
+                      accept = c(
+                        'text/csv',
+                        'text/comma-separated-values',
+                        'text/tab-separated-values',
+                        'text/plain',
+                        '.csv',
+                        '.tsv',
+                        '.txt'
+                      )
+          )##fileInput~END
+
         )##sidebarPanel~END
       # Main Panel ####
       , mainPanel(

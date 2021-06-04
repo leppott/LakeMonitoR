@@ -152,6 +152,67 @@ shinyServer(function(input, output) {
   , caption = "Lake Areas"
   )##output$df_import2_DT~END
 
+  # df_import3 ####
+  output$df_import3_DT <- renderDT({
+    # input$df_import will be NULL initially. After the user selects
+    # and uploads a file, it will be a data frame with 'name',
+    # 'size', 'type', and 'datapath' columns. The 'datapath'
+    # column will contain the local filenames where the data can
+    # be found.
+
+    inFile3 <- input$fn_input3
+
+    # # return null so screen is blank until upload file
+    # if (is.null(inFile2)){
+    #   shinyjs::enable("b_Calc")
+    #   return(NULL)
+    # }##IF~is.null~END
+    shiny::validate(shiny::need(is.null(inFile3) == FALSE
+              , message = "'Measure, No Depth (1.C.)' file not uploaded yet."))
+
+    # Disable download button if load a new file
+    shinyjs::disable("b_downloadData")
+    # only activates if try to display the file.
+
+    #message(getwd())
+
+    # Add "Results" folder if missing
+    boo_Results <- dir.exists(file.path(".", "Results"))
+    if(boo_Results == FALSE){
+      dir.create(file.path(".", "Results"))
+    }
+
+    # will not remove files.
+
+    # Read user imported file
+    df_input3 <- read.table(inFile3$datapath
+                            , header = TRUE
+                            , sep = input$sep3
+                            , quote = "\""
+                            , stringsAsFactors = FALSE)
+
+    # Write to "Results" folder - Import as TSV
+    fn_input3 <- file.path(".", "Results", "data_import3_nodepth.tsv")
+    write.table(df_input3, fn_input3, row.names=FALSE, col.names=TRUE, sep="\t")
+
+    # Copy to "Results" folder - Import "as is"
+    file.copy(input$fn_input3$datapath, file.path("."
+                                                  , "Results"
+                                                  , input$fn_input3$name))
+
+    # disable 'calc' button
+    shinyjs::enable("b_Calc")
+
+    return(df_input3)
+
+  }##expression~END
+  , filter="top"
+  , options=list(scrollX=TRUE
+                 , pageLength = 5
+                 , lengthMenu = c(5, 10, 25, 50, 100, 250, 500, 1000))
+  , caption = "Measure, No Depth"
+  )##output$df_import3_DT~END
+
   # b_Calc ####
   # Calculate metrics on imported data
   # add "sleep" so progress bar is readable
@@ -240,6 +301,8 @@ shinyServer(function(input, output) {
       col_date    <- input$col_msr_datetime #"Date_Time"
       col_depth   <- input$col_msr_depth #"Depth_m"
       col_measure <- input$col_msr_msr #"Water_Temp_C"
+      col_measure2 <- input$col_msr_msr2 # do
+      col_measure3 <- input$col_msrND_msr # wind
 
       if(col_date == ""){
         prog_detail <- "QC, Missing 'Input, Measurement, Date Time'"
@@ -376,7 +439,7 @@ shinyServer(function(input, output) {
                 , fn_strat_events
                 , row.names = FALSE)
       # __Results, Stratification Plot ----
-      fn_strat_plot <- file.path(".", "Results", "strat_plot.png")
+      fn_strat_plot <- file.path(".", "Results", "plot_strat.png")
       ggplot2::ggsave(filename = fn_strat_plot
                       , plot = ls_strat$Stratification_Plot)
 
@@ -496,6 +559,46 @@ shinyServer(function(input, output) {
       fn_p_hm <- file.path(".", "Results", "plot_heatmap.png")
       ggplot2::ggsave(fn_p_hm)
 
+
+      # __Plot, Measure 2 ----
+      lab_error <- "No plot"
+      lab_title_2 <- NA
+      p_profile2 <- ggplot() +
+        theme_void() +
+      geom_text(aes(0, 0, label = lab_error))
+      fn_p_profile2 <- file.path("."
+                                , "Results"
+                                , "plot_depth_profile2.png")
+      ggplot2::ggsave(filename = fn_p_profile2, plot = p_profile2)
+
+      # __Plot, time series----
+      # **Needs different data source***
+      # lab_title_ts <- NA
+      # p_ts <- plot_ts(data = df_plot
+      #                 , col_datetime = col_date
+      #                 , col_measure = col_measure3
+      #                 , lab_datetime = lab_datetime
+      #                 , lab_measure = lab_measure3
+      #                 , lab_title = lab_title_ts)
+      # fn_p_ts <- file.path("."
+      #                            , "Results"
+      #                            , "plot_depth_profile2.png")
+      # ggplot2::ggsave(filename = fn_p_ts, plot = p_ts)
+
+
+      # __Plot, Combined 2 ----
+      p_combo_2 <- gridExtra::grid.arrange(p_hm, p_depth)
+      fn_p_combo_2 <- file.path("."
+                                , "Results"
+                                , "plot_combo2.png")
+      ggplot2::ggsave(filename = fn_p_combo_2, plot = p_combo_2)
+
+      # __Plot, Combined 3 ----
+      # p_combo_3 <- gridExtra::grid.arrange(p_hm, p_depth, p_ts)
+      # fn_p_combo_3 <- file.path("."
+      #                           , "Results"
+      #                           , "plot_combo3.png")
+      # ggplot2::ggsave(filename = fn_p_combo_3, plot = p_combo_3)
 
       #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       #  # could also do plot of events
@@ -834,7 +937,7 @@ shinyServer(function(input, output) {
   #
   # })## output$p_depth ~ END
 
-  # _Plot, profile, plotly ----
+  ## _Plot, profile, plotly ----
   output$p_depth_ly <- renderPlotly({
     # if no data put in blank
 
@@ -857,7 +960,7 @@ shinyServer(function(input, output) {
       lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
     }
     if(inCol_plot_msr == "") {
-      lab_error <- paste(lab_error, "Column_Measurement", collapse = ", ")
+      lab_error <- paste(lab_error, "Column_Measurement 1", collapse = ", ")
     }
 
     # Plot
@@ -883,7 +986,7 @@ shinyServer(function(input, output) {
         lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
       }
       if(present_col_msr == FALSE) {
-        lab_error <- paste(lab_error, "Column_Measurement", collapse = ", ")
+        lab_error <- paste(lab_error, "Column_Measurement 1", collapse = ", ")
       }
 
       if(lab_error == lab_error_base){
@@ -917,7 +1020,7 @@ shinyServer(function(input, output) {
   })## output$p_depth_ly ~ END
 
 
-  # _Plot, heatmap, plotly ----
+  ## _Plot, heatmap, plotly ----
   output$p_hm_ly <- renderPlotly({
     # if no data put in blank
 
@@ -940,7 +1043,7 @@ shinyServer(function(input, output) {
       lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
     }
     if(inCol_plot_msr == "") {
-      lab_error <- paste(lab_error, "Column_Measurement", collapse = ", ")
+      lab_error <- paste(lab_error, "Column_Measurement 1", collapse = ", ")
     }
 
     # Plot
@@ -971,7 +1074,7 @@ shinyServer(function(input, output) {
         lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
       }
       if(present_col_msr == FALSE) {
-        lab_error <- paste(lab_error, "Column_Measurement", collapse = ", ")
+        lab_error <- paste(lab_error, "Column_Measurement 1", collapse = ", ")
       }
 
       if(lab_error == lab_error_base){
@@ -1026,6 +1129,161 @@ shinyServer(function(input, output) {
     ggplotly(p = p_h, dynamicTicks = TRUE)
 
   })## output$p_depth_ly ~ END
+
+  ## _Plot, Profile 2 ----
+  output$p_profile2_ly <- renderPlotly({
+
+    inFile <- input$fn_input
+    inCol_plot_datetime <- input$col_plot_datetime
+    inCol_plot_depth    <- input$col_plot_depth
+    inCol_plot_msr2     <- input$col_plot_msr2
+    incol_plot_title    <- input$lab_plot_title
+
+    lab_error_base <- "Missing: "
+    lab_error <- lab_error_base
+
+    if(is.null(inFile)) {
+      lab_error <- paste0(lab_error, "File")
+    }
+    if(inCol_plot_datetime == "") {
+      lab_error <- paste(lab_error, "Column_DateTime", collapse = ", ")
+    }
+    if(inCol_plot_depth == "") {
+      lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
+    }
+    if(inCol_plot_msr2 == "") {
+      lab_error <- paste(lab_error, "Column_Measurement 2", collapse = ", ")
+    }
+
+    # Plot
+    if(lab_error == lab_error_base){
+      # Read user imported file
+      df_plot <- read.table(inFile$datapath
+                            , header = TRUE
+                            , sep = input$sep
+                            , quote = "\""
+                            , stringsAsFactors = FALSE)
+
+      #
+      inFile_Cols <- names(df_plot)
+      present_col_datetime <- inCol_plot_datetime %in% inFile_Cols
+      present_col_depth    <- inCol_plot_depth %in% inFile_Cols
+      present_col_msr2     <- inCol_plot_msr2 %in% inFile_Cols
+
+      # More checks to ensure plots correctly
+      if(present_col_datetime == FALSE) {
+        lab_error <- paste(lab_error, "Column_DateTime", collapse = ", ")
+      }
+      if(present_col_depth == FALSE) {
+        lab_error <- paste(lab_error, "Column_Depth", collapse = ", ")
+      }
+      if(present_col_msr2 == FALSE) {
+        lab_error <- paste(lab_error, "Column_Measurement 2", collapse = ", ")
+      }
+
+      if(lab_error == lab_error_base){
+        # plot
+        p_profile2 <- plot_depth(data = df_plot
+                              , col_datetime = input$col_plot_datetime
+                              , col_depth = input$col_plot_depth
+                              , col_measure = input$col_plot_msr2
+                              , lab_datetime = input$lab_plot_datetime
+                              , lab_depth = input$lab_plot_depth
+                              , lab_measure = input$lab_plot_msr2
+                              , lab_title = input$lab_plot_title)
+      } else {
+        p_profile2 <- ggplot() +
+          theme_void() +
+          geom_text(aes(0, 0, label = lab_error))
+      }## 2nd lab_error check
+
+    } else {
+      p_profile2 <- ggplot() +
+        theme_void() +
+        geom_text(aes(0, 0, label = lab_error))
+    }## IF ~ PLOT
+
+    # Plotly
+    partial_bundle(toWebGL(ggplotly(p = p_profile2, dynamicTicks = TRUE)))
+    # faster but lots of warnings
+    # but need for larger files (1 hr * 1 yr = 8k records * N depths)
+    #ggplotly(p = p_depth)
+
+
+  })## output$p_profile2_ly ~ END
+
+  ## _Plot, Time Series ----
+  output$p_ts_ly <- renderPlotly({
+
+    inFile <- input$fn_input3
+    inCol_plot_datetime <- input$col_plot_datetime
+    inCol_plot_msr3     <- input$col_plot_msr3
+    incol_plot_title    <- input$lab_plot_title
+
+    lab_error_base <- "Missing: "
+    lab_error <- lab_error_base
+
+    if(is.null(inFile)) {
+      lab_error <- paste0(lab_error, "File")
+    }
+    if(inCol_plot_datetime == "") {
+      lab_error <- paste(lab_error, "Column_DateTime", collapse = ", ")
+    }
+    if(inCol_plot_msr3 == "") {
+      lab_error <- paste(lab_error, "Column_Measurement 3", collapse = ", ")
+    }
+
+    # Plot
+    if(lab_error == lab_error_base){
+      # Read user imported file
+      df_plot <- read.table(inFile$datapath
+                            , header = TRUE
+                            , sep = input$sep
+                            , quote = "\""
+                            , stringsAsFactors = FALSE)
+
+      #
+      inFile_Cols <- names(df_plot)
+      present_col_datetime <- inCol_plot_datetime %in% inFile_Cols
+      present_col_msr3     <- inCol_plot_msr3 %in% inFile_Cols
+
+      # More checks to ensure plots correctly
+      if(present_col_datetime == FALSE) {
+        lab_error <- paste(lab_error, "Column_DateTime", collapse = ", ")
+      }
+      if(present_col_msr3 == FALSE) {
+        lab_error <- paste(lab_error, "Column_Measurement 3", collapse = ", ")
+      }
+
+      if(lab_error == lab_error_base){
+        # plot
+        p_ts <- plot_ts(data = df_plot
+                        , col_datetime = input$col_plot_datetime
+                        , col_measure = input$col_plot_msr3
+                        , lab_datetime = input$lab_plot_datetime
+                        , lab_measure = input$lab_plot_msr3
+                        , lab_title = input$lab_plot_title)
+      } else {
+        p_ts <- ggplot() +
+          theme_void() +
+          geom_text(aes(0, 0, label = lab_error))
+      }## 2nd lab_error check
+
+    } else {
+      p_ts <- ggplot() +
+        theme_void() +
+        geom_text(aes(0, 0, label = lab_error))
+    }## IF ~ PLOT
+
+    # Plotly
+    partial_bundle(toWebGL(ggplotly(p = p_ts, dynamicTicks = TRUE)))
+    # faster but lots of warnings
+    # but need for larger files (1 hr * 1 yr = 8k records * N depths)
+    #ggplotly(p = p_depth)
+
+
+  })## output$p_ts_ly ~ END
+
 
   # AGGREGATE ----
 

@@ -119,6 +119,39 @@ p_profile <- plot_depth(data = data
 # Print Plot
 print(p_profile)
 ```
+
+The function is generic and can plot other variables if present.
+
+```{r plot_depth_do}
+# Data (Test Lake)
+data         <- laketest
+
+# Column Names
+col_datetime <- "Date.Time"
+col_depth    <- "Depth"
+col_measure  <- "DO_conc"
+
+# Plot Labels
+lab_datetime <- "Date Time"
+lab_depth    <- "Depth (m)"
+lab_measure  <- "Dissolved Oxygen (mg/L)"
+lab_title    <- "Test Lake"
+
+# Create Plot
+p_profile2 <- plot_depth(data = data
+                        , col_datetime = col_datetime
+                        , col_depth = col_depth
+                        , col_measure = col_measure
+                        , lab_datetime = lab_datetime
+                        , lab_depth = lab_depth
+                        , lab_measure = lab_measure
+                        , lab_title = lab_title)
+
+# Print Plot
+print(p_profile2)
+```
+
+
 ## plot_heatmap
 ```{r plot_heatmap}
 library(LakeMonitoR)

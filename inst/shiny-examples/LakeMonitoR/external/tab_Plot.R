@@ -20,8 +20,14 @@ function(){
                            , label = "Plot, Measurement, Depth (m)"
                            , placeholder = "Depth_m")
                , textInput("col_plot_msr"
-                           , label = "Plot, Measurement, Measurement"
+                           , label = "Plot, Measurement, Measurement 1"
                            , placeholder = "Water_Temp_C")
+               , textInput("col_plot_msr2"
+                           , label = "Plot, Measurement, Measurement 2"
+                           , placeholder = "DO")
+               , textInput("col_plot_msr3"
+                           , label = "Plot, Measurement, Measurement 3"
+                           , placeholder = "WSPD")
                #
                , h4("3.B. Define Plot Labels")
                , textInput("lab_plot_datetime"
@@ -33,8 +39,14 @@ function(){
                            , placeholder = "Depth (m)"
                            , value = "Depth (m)")
                , textInput("lab_plot_msr"
-                           , label = "Plot, Measurement"
+                           , label = "Plot, Measurement 1"
                            , placeholder = "Water Temperature (C)")
+               , textInput("lab_plot_msr2"
+                           , label = "Plot, Measurement 2"
+                           , placeholder = "Dissolved Oxygen (mg/L)")
+               , textInput("lab_plot_msr3"
+                           , label = "Plot, Measurement 3"
+                           , placeholder = "Wind Speed (m/s)")
                , textInput("lab_plot_title"
                            , label = "Plot, Measurement, Measurement"
                            , value = NA
@@ -44,7 +56,8 @@ function(){
                               , value = NA)
 
                , h4("3.C. Create Plots")
-
+               , p("Plots are interactive and will be created when data are
+                   loaded.")
                #
                , h4("3.D. Download Plots")
                # Button
@@ -59,11 +72,15 @@ function(){
              # Main Panel ####
              , mainPanel(
                p("Larger files take longer to plot and change labels.")
-               , h4("Plot, Scatterplot")
+               , h4("Plot, Depth Profile, Measurement 1")
                #, plotOutput("p_depth")
                , plotlyOutput("p_depth_ly")
                , h4("Plot, Heat Map")
                , plotlyOutput("p_hm_ly")
+               , h4("Plot, Depth Profile, Measurement 2")
+               , plotlyOutput("p_profile2_ly")
+               , h4("Plot, Time Series, Measurement 3")
+               , plotlyOutput("p_ts_ly")
              )##mainPanel~END
 
            )##sidebarLayout~END

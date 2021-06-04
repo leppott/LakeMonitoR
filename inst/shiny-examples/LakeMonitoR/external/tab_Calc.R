@@ -18,8 +18,11 @@ function(){
                            , label = "Input, Measurement, Depth (m)"
                            , placeholder = "Depth_m")
                , textInput("col_msr_msr"
-                           , label = "Input, Measurement, Measurement"
+                           , label = "Input, Measurement, Measurement 1"
                            , placeholder = "Water_Temp_C")
+               , textInput("col_msr_msr2"
+                           , label = "Input, Measurement, Measurement 2"
+                           , placeholder = "DO_conc")
                #
                , h4("2.A.2. Define Columns, Lake Areas")
                , textInput("col_area_depth"
@@ -28,6 +31,14 @@ function(){
                , textInput("col_area_area"
                            , label = "Input, Area, Area (m2)"
                            , placeholder = "Area")
+               #
+               , h4("2.A.3. Define Columns, Measure No Date")
+               , textInput("col_msrND_datetime"
+                           , label = "Input, Measure No Date, DateTime"
+                           , placeholder = "Date_Time")
+               , textInput("col_msrND_msr"
+                           , label = "Input, Measure No Date, Measurement"
+                           , placeholder = "Wind")
                #
                , h4("2.B. Calculate")
                , numericInput("strat_min_days"
@@ -58,6 +69,9 @@ function(){
                            )
                            , tabPanel("Data, Import, Lakes Areas"
                                       , DT::dataTableOutput('df_import2_DT')
+                           )
+                           , tabPanel("Data, Import, Measured, No Depth"
+                                      , DT::dataTableOutput('df_import3_DT')
                            )
                )##tabsetPanel~END
              )##mainPanel~END
