@@ -36,12 +36,9 @@
 #' rLakeAnalyzer.  Date time must be the first entry.
 #' @param col_rLA Column names to use with rLakeAnalyzer.  See details for
 #' accepted entries.  datetime must be the first entry.
-#' @param dir_export Directory for export data.
-#' Default = current working directory.
-#' @param fn_export File name of result to be exported.  If no name provided the
-#'  data frame will not be exported.  Default = NULL.
 #'
-#' @return Returns a data frame with daily mean values by date.
+#' @return Returns a data frame formatted (wide) for use with the rLakeAnalyzer
+#' package suite of functions.
 #'
 #' @examples
 #' # Convert Data for use with rLakeAnalyzer
@@ -103,9 +100,7 @@ export_rLakeAnalyzer <- function(df_data
                                  , col_depth = "Depth"
                                  , col_data
                                  , col_rLA
-                                 , dir_export = getwd()
-                                 , fn_export = NULL
-                      ) {##FUNCTION~Export.rLakeAnalyzer~START
+                      ) {
   #
   boo_DEBUG <- FALSE
   # QC

@@ -394,7 +394,6 @@ b.f <- buoyancy.freq(wtr, depths)
 plot(b.f, attr(b.f, 'depths'), type='b'
      , ylab='Depth', xlab='Buoyancy Frequency'
      , ylim=c(max(depths), min(depths)))
-
 ```
 
 ## center.buoyancy
@@ -588,6 +587,12 @@ sp.bathy <- load.bathy(bathy.path)
 l.t <- ts.layer.temperature(sp.wtr, 0, 18, sp.bathy)
 plot(l.t$datetime, l.t$layer.temp, type='l', 
       ylab='Volumetrically averaged lake temperature', xlab='Date')
+
+# ggplot
+ggplot2::ggplot(data = l.t, ggplot2::aes(x = datetime, y = layer.temp)) +
+  ggplot2::geom_line(na.rm = TRUE) + 
+  ggplot2::labs(x = "Date", y = "Volumetrically averaged lake temperature") +
+  ggplot2::theme_bw()
 ```
 
 ## ts.meta.depths
@@ -604,6 +609,16 @@ m.d <- ts.meta.depths(sparkling.temp)
 
 plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
 lines(m.d$datetime, m.d$bottom, col='red')
+
+# ggplot
+ggplot2::ggplot(data = m.d, ggplot2::aes(x = datetime, y = top)) +
+  ggplot2::geom_line(color = "blue", na.rm = TRUE) + 
+  ggplot2::labs(x = "Date", y = "Meta Depths (m)") +
+  ggplot2::theme_bw() + 
+  ggplot2::geom_line(data = m.d
+                     , ggplot2::aes(x = datetime, y = bottom)
+                     , color = "red"
+                     , na.rm = TRUE)
 ```
 
 ## ts.schmidt.stability
@@ -626,6 +641,12 @@ sparkling.temp <- load.ts(exampleFilePath)
 t.d <- ts.thermo.depth(sparkling.temp)
 
 plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
+
+# ggplot
+ggplot2::ggplot(data = t.d, ggplot2::aes(x = datetime, y = thermo.depth)) +
+  ggplot2::geom_line(na.rm = TRUE) +
+  ggplot2::labs(x = "Date", y = "Thermocline Depth (m)") + 
+  ggplot2::theme_bw()
 ```
 
 ## ts.uStar
@@ -652,6 +673,12 @@ wnd.height = 2  #Height of Sparkling lake anemometer
 
 w.n <- ts.wedderburn.number(sp.wtr, sp.wnd, wnd.height, sp.bathy, sp.area)
 plot(w.n$datetime, w.n$wedderburn.number, type='l', ylab='Wedderburn Number', xlab='Date')
+
+# ggplot
+ggplot2::ggplot(data = w.n, ggplot2::aes(x = datetime, y = wedderburn.number)) +
+  ggplot2::geom_line(na.rm = TRUE) +
+  ggplot2::labs(x = "Date", y = "Wedderburn Number") + 
+  ggplot2::theme_bw()
 ```
 
 ## uStar
@@ -671,6 +698,12 @@ Estimate Water Density
 #Plot water density for water between 1 and 30 deg C
 dens <- water.density(1:30)
 plot(1:30, dens, xlab="Temp(deg C)", ylab="Density(kg/m^3)")
+
+# ggplot
+ggplot2::ggplot() + 
+  ggplot2::geom_point(ggplot2::aes(x = 1:30, y = dens)) + 
+  ggplot2::labs(x = "Temp (deg C)", y = "Density (kg/m^3)") + 
+  ggplot2::theme_bw()
 ```
 
 ## wedderburn.number

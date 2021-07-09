@@ -1,0 +1,47 @@
+---
+title: "LakeMonitoR Shiny App Help"
+author: "Erik.Leppo@tetratech.com"
+date: "`r Sys.time()`"
+output: rmarkdown::html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The Shiny app enables the user to calculated stratification and other lake 
+metrics.
+
+If you do not have area data for your lake only stratification will be 
+calculated.
+
+This Shiny app is provided as an alternative to using R on your computer.
+
+## 0. Combine
+*	Do the files need to be from the same site?
+*	Can you combine files from the same site that have different parameters (e.g., same site, same time period, with DO data in one file and temperature and water level data in other files)
+*	What if input files don’t have date ranges that match exactly? Does that matter?
+*	If input files have any overlap, does R address that or do you just end up with multiple entries for the same date/time/depth?
+
+## 1. Import Data
+*	Are there required fields for input files? Do they need to be in a certain format? maybe put in a hyperlink that allows people to download an example input file?
+*	Can you give some guidance on what Load File, Lake Areas is (lake area for each depth)? (Is it optional or required? Should you use certain units? (I believe rLakeAnalyzer is looking for m2); maybe put in a hyperlink that allows people to download an example input file?
+*	Can you run files for individual depths through this to generate summary stats and time series plots (with years overlaid) for each depth (e.g., how much does temperature at 3-m change from year to year?)? If so, should individ depth inputs/outputs have a separate tab? 
+
+## 2. Calculate
+*	Can there be a brief explanation of what is being calculated and/or plotted here? 
+*	Can people choose from a list of possible results/outputs or should we stick with the default (output everything)? 
+*	Can you provide an explanation as to how many parameters can be plotted and/or summarized at one time? For example, if an input file has three parameters (temperature, DO, water level) will the summary output include sum stats for all three parameters in the same file? Or separate files? And can you only plot up to two parameters at the same time? 
+*	For the stratification statistic, can you provide at least a brief description somewhere explaining what the calculation is based on (>1C/1m change somewhere in the water column) and what is meant by stratification, minimum days? It won’t be intuitive to a new user.
+*	For the minimum measurement value, is this for DO only or whatever parameter is entered as measurement #2? can you provide at least a short description of what this entry means and does? 
+
+## 3. Plot Data
+
+Larger files take longer plot and update labels.  Copying and pasting in labels 
+will be faster than typing in labels.  This is because the app tries to update 
+the label as each character is typed.
+
+All the plots use plotly so are interactive (can zoom in/out) and include a 
+download image button.  The user can always return the plot to the default with 
+the "home" button.
+

@@ -4,14 +4,7 @@
 \alias{export_rLakeAnalyzer}
 \title{Export data for rLakeAnalyzer package}
 \usage{
-export_rLakeAnalyzer(
-  df_data,
-  col_depth = "Depth",
-  col_data,
-  col_rLA,
-  dir_export = getwd(),
-  fn_export = NULL
-)
+export_rLakeAnalyzer(df_data, col_depth = "Depth", col_data, col_rLA)
 }
 \arguments{
 \item{df_data}{Data frame to be converted for use with rLakeAnalyzer.}
@@ -23,15 +16,10 @@ rLakeAnalyzer.  Date time must be the first entry.}
 
 \item{col_rLA}{Column names to use with rLakeAnalyzer.  See details for
 accepted entries.  datetime must be the first entry.}
-
-\item{dir_export}{Directory for export data.
-Default = current working directory.}
-
-\item{fn_export}{File name of result to be exported.  If no name provided the
-data frame will not be exported.  Default = NULL.}
 }
 \value{
-Returns a data frame with daily mean values by date.
+Returns a data frame formatted (wide) for use with the rLakeAnalyzer
+package suite of functions.
 }
 \description{
 Creates a date frame (and file export) from depth profile data

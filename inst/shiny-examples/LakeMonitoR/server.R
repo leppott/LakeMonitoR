@@ -52,15 +52,22 @@ shinyServer(function(input, output) {
 
     #message(getwd())
 
-    # Add "Results" folder if missing
-    boo_Results <- dir.exists(file.path(".", "Results"))
-    if(boo_Results == FALSE){
-      dir.create(file.path(".", "Results"))
-    }
-
-    # Remove all files in "Results" folder
-    fn_results <- list.files(file.path(".", "Results"), full.names=TRUE)
-    file.remove(fn_results)
+    # # "Results" folder
+    # ## Remove then Add
+    # #path_results <- file.path(".", "Results)
+    # boo_Results <- dir.exists(path_results)
+    # if(isTRUE(boo_Results)){
+    #   unlink(path_results, recursive = TRUE)
+    # }
+    # # Create Results, Dir
+    # dir.create(path_results)
+    # #
+    # # Create Results, subfolders
+    # for (i in path_results_sub){
+    #   if(isFALSE(dir.exists(i))) {
+    #     dir.create(i)
+    #   }## IF ~ dir.exists(i) ~ END
+    # }## FOR ~ i ~ END
 
     # Read user imported file
     df_input <- read.table(inFile$datapath
@@ -70,12 +77,12 @@ shinyServer(function(input, output) {
                            , stringsAsFactors = FALSE)
 
     # Write to "Results" folder - Import as TSV
-    fn_input <- file.path(".", "Results", "data_import_measure.tsv")
-    write.table(df_input, fn_input, row.names=FALSE, col.names=TRUE, sep="\t")
+    # fn_input <- file.path(path_results, "data_import_measure.tsv")
+    # write.table(df_input, fn_input, row.names=FALSE, col.names=TRUE, sep="\t")
 
     # Copy to "Results" folder - Import "as is"
-    file.copy(input$fn_input$datapath, file.path("."
-                                                 , "Results"
+    file.copy(input$fn_input$datapath, file.path(path_results
+                                                 , dn_results_data_input
                                                  , input$fn_input$name))
 
     # enable 'calc' button
@@ -115,13 +122,13 @@ shinyServer(function(input, output) {
 
     #message(getwd())
 
-    # Add "Results" folder if missing
-    boo_Results <- dir.exists(file.path(".", "Results"))
-    if(boo_Results == FALSE){
-      dir.create(file.path(".", "Results"))
-    }
-
-    # will not remove files.
+    # # Add "Results" folder if missing
+    # boo_Results <- dir.exists(path_results)
+    # if(boo_Results == FALSE){
+    #   dir.create(path_results)
+    # }
+    #
+    # # will not remove files.
 
     # Read user imported file
     df_input2 <- read.table(inFile2$datapath
@@ -131,12 +138,12 @@ shinyServer(function(input, output) {
                            , stringsAsFactors = FALSE)
 
     # Write to "Results" folder - Import as TSV
-    fn_input2 <- file.path(".", "Results", "data_import2_area.tsv")
-    write.table(df_input2, fn_input2, row.names=FALSE, col.names=TRUE, sep="\t")
+    # fn_input2 <- file.path(path_results, "data_import2_area.tsv")
+    # write.table(df_input2, fn_input2, row.names=FALSE, col.names=TRUE, sep="\t")
 
     # Copy to "Results" folder - Import "as is"
-    file.copy(input$fn_input2$datapath, file.path("."
-                                                  , "Results"
+    file.copy(input$fn_input2$datapath, file.path(path_results
+                                                  , dn_results_data_input
                                                   , input$fn_input2$name))
 
     # disable 'calc' button
@@ -176,11 +183,11 @@ shinyServer(function(input, output) {
 
     #message(getwd())
 
-    # Add "Results" folder if missing
-    boo_Results <- dir.exists(file.path(".", "Results"))
-    if(boo_Results == FALSE){
-      dir.create(file.path(".", "Results"))
-    }
+    # # Add "Results" folder if missing
+    # boo_Results <- dir.exists(path_results)
+    # if(boo_Results == FALSE){
+    #   dir.create(path_results)
+    # }
 
     # will not remove files.
 
@@ -192,12 +199,12 @@ shinyServer(function(input, output) {
                             , stringsAsFactors = FALSE)
 
     # Write to "Results" folder - Import as TSV
-    fn_input3 <- file.path(".", "Results", "data_import3_nodepth.tsv")
-    write.table(df_input3, fn_input3, row.names=FALSE, col.names=TRUE, sep="\t")
+    # fn_input3 <- file.path(path_results, "data_import3_nodepth.tsv")
+    # write.table(df_input3, fn_input3, row.names=FALSE, col.names=TRUE, sep="\t")
 
     # Copy to "Results" folder - Import "as is"
-    file.copy(input$fn_input3$datapath, file.path("."
-                                                  , "Results"
+    file.copy(input$fn_input3$datapath, file.path(path_results
+                                                  , dn_results_data_input
                                                   , input$fn_input3$name))
 
     # disable 'calc' button
@@ -237,7 +244,7 @@ shinyServer(function(input, output) {
       shinyjs::disable("b_downloadAgg")
 
       # _b_Calc, *sink* ####
-      #fn_sink <- file.path(".", "Results", "results_log.txt")
+      #fn_sink <- file.path(path_results, "results_log.txt")
       file_sink <- file(file.path("."
                                   , "Results"
                                   , "results_log.txt")
@@ -259,10 +266,12 @@ shinyServer(function(input, output) {
       message("\nInput variables:")
       message(paste0("Measurement, Date Time: ", input$col_msr_datetime))
       message(paste0("Measurement, Depth (m): ", input$col_msr_depth))
-      message(paste0("Measurement, Measurement: ", input$col_msr_msr))
+      message(paste0("Measurement, Measurement 1: ", input$col_msr_msr))
+      message(paste0("Measurement, Measurement 2: ", input$col_msr_msr2))
       message(paste0("Area, Depth (m): ", input$col_area_depth))
       message(paste0("Area, Area (m2): ", input$col_area_area))
       message(paste0("Calculate, minimum days: ", input$strat_min_days))
+      message(paste0("Measurement No Date, Measurement: ", input$col_msrND_msr))
 
       # _b_Calc, Step 2, QC Measured Values ####
       # Increment the progress bar, and update the detail text.
@@ -274,11 +283,16 @@ shinyServer(function(input, output) {
       #df_data <- 'df_import_DT'
       # Read in saved file (known format)
       df_data <- NULL  # set as null for IF QC check prior to import
-      fn_input <- file.path(".", "Results", "data_import_measure.tsv")
-
+      fn_input <- file.path(inFile$datapath)
+      sep_input <- input$sep
 
       if(file.exists(fn_input)){
-        df_data <- read.delim(fn_input, stringsAsFactors = FALSE, sep="\t")
+        # df_data <- read.delim(fn_input, stringsAsFactors = FALSE, sep="\t")
+        df_data <- read.table(fn_input
+                               , header = TRUE
+                               , sep = sep_input
+                               , quote = "\""
+                               , stringsAsFactors = FALSE)
       } else {
         # only happens if load area and not measurement data
         prog_detail <- "QC, No measurement data provided.'"
@@ -354,7 +368,7 @@ shinyServer(function(input, output) {
       incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(sleep_time)
 
-      # Calc Strat
+      # __Calc, munge----
       if(boo_DEBUG == FALSE){
         # data
         df_calc <- df_data
@@ -395,7 +409,7 @@ shinyServer(function(input, output) {
       print(str(df_calc))
 
 
-
+      # __Calc, ddm----
       # Calculate daily_depth_means
       # Otherwise stratification fails if have time.
       df_ddm <- LakeMonitoR::daily_depth_means(df_calc
@@ -406,7 +420,7 @@ shinyServer(function(input, output) {
       print("QC, Calculate daily depth means")
       print(head(df_ddm))
       # save ddm
-      fn_ddm <- file.path(".", "Results", "data_ddm.csv")
+      fn_ddm <- file.path(path_results, "data_ddm.csv")
       write.csv(df_ddm, fn_ddm, row.names = FALSE)
 
       # __Calc, Stratification ----
@@ -429,22 +443,22 @@ shinyServer(function(input, output) {
 
       # Save Results
       # Results, Stratification Dates
-      fn_strat_dates <- file.path(".", "Results", "strat_dates.csv")
+      fn_strat_dates <- file.path(path_results, "strat_dates.csv")
       write.csv(ls_strat$Stratification_Dates
                 , fn_strat_dates
                 , row.names = FALSE)
       # Results, Stratification Events
-      fn_strat_events <- file.path(".", "Results", "strat_events.csv")
+      fn_strat_events <- file.path(path_results, "strat_events.csv")
       write.csv(ls_strat$Stratification_Events
                 , fn_strat_events
                 , row.names = FALSE)
       # __Results, Stratification Plot ----
-      fn_strat_plot <- file.path(".", "Results", "plot_strat.png")
+      fn_strat_plot <- file.path(path_results, "plot_strat.png")
       ggplot2::ggsave(filename = fn_strat_plot
                       , plot = ls_strat$Stratification_Plot)
 
       # Results, lakes summary stats
-      fn_lss <- file.path(".", "Results", "summary_stats.csv")
+      fn_lss <- file.path(path_results, "summary_stats.csv")
       write.csv(df_lss, fn_lss, row.names = FALSE)
 
       # Sink info
@@ -498,13 +512,13 @@ shinyServer(function(input, output) {
                          , lab_title = lab_title)
 
       # Plot, Save
-      fn_p_depth <- file.path(".", "Results", "plot_depth_profile.png")
+      fn_p_depth <- file.path(path_results, "plot_depth_profile.png")
       ggplot2::ggsave(filename = fn_p_depth, plot = p_depth)
 
       # __Plot, Depth, StratEvents ----
       # Add to profile plot
       df_StratEvents <- as.data.frame(ls_strat$Stratification_Events)
-     df_StratEvents$Start_Date <- as.POSIXct(as.Date(df_StratEvents$Start_Date))
+      df_StratEvents$Start_Date <- as.POSIXct(as.Date(df_StratEvents$Start_Date))
       df_StratEvents$End_Date <- as.POSIXct(as.Date(df_StratEvents$End_Date))
 
       # Plot, Depth, StratEvents, lines
@@ -539,8 +553,7 @@ shinyServer(function(input, output) {
       p_profile_strat <- p_profile_strat_shade
 
       # Plot, Save (Depth, StratEvents)
-      fn_p_depth_se <- file.path("."
-                                 , "Results"
+      fn_p_depth_se <- file.path(path_results
                                  , "plot_depth_profile_strat_events.png")
       ggplot2::ggsave(filename = fn_p_depth_se, plot = p_profile_strat)
 
@@ -556,7 +569,7 @@ shinyServer(function(input, output) {
                            , lab_measure = lab_measure
                            , lab_title = lab_title_hm
                            , contours = TRUE)
-      fn_p_hm <- file.path(".", "Results", "plot_heatmap.png")
+      fn_p_hm <- file.path(path_results, "plot_heatmap.png")
       ggplot2::ggsave(fn_p_hm)
 
 
@@ -566,8 +579,7 @@ shinyServer(function(input, output) {
       p_profile2 <- ggplot() +
         theme_void() +
       geom_text(aes(0, 0, label = lab_error))
-      fn_p_profile2 <- file.path("."
-                                , "Results"
+      fn_p_profile2 <- file.path(path_results
                                 , "plot_depth_profile2.png")
       ggplot2::ggsave(filename = fn_p_profile2, plot = p_profile2)
 
@@ -588,8 +600,7 @@ shinyServer(function(input, output) {
 
       # __Plot, Combined 2 ----
       p_combo_2 <- gridExtra::grid.arrange(p_hm, p_depth)
-      fn_p_combo_2 <- file.path("."
-                                , "Results"
+      fn_p_combo_2 <- file.path(path_results
                                 , "plot_combo2.png")
       ggplot2::ggsave(filename = fn_p_combo_2, plot = p_combo_2)
 
@@ -633,11 +644,17 @@ shinyServer(function(input, output) {
       #df_data2 <- 'df_import2_DT'
       # Read in saved file (known format)
       df_data2 <- NULL  # set as null for IF QC check prior to import
-      fn_input2 <- file.path(".", "Results", "data_import2_area.tsv")
+      fn_input2 <- file.path(inFile2$datapath)
+      sep_input2 <- input$sep2
+      #file.path(path_results, "data_import2_area.tsv")
 
       # Possible to not load area file
       if(file.exists(fn_input2)){
-        df_data2 <- read.delim(fn_input2, stringsAsFactors = FALSE, sep="\t")
+        df_data2 <- read.table(inFile2$datapath
+                                , header = TRUE
+                                , sep = sep_input2
+                                , quote = "\""
+                                , stringsAsFactors = FALSE)
       } else {
         # only happens if load area and not measurement data
         prog_detail <- "QC, No area data provided.'"
@@ -670,10 +687,10 @@ shinyServer(function(input, output) {
         Sys.sleep(sleep_time)
 
         # Create zip file
-        fn_4zip <- list.files(path = file.path(".", "Results")
+        fn_4zip <- list.files(path = path_results
                               , pattern = "*"
                               , full.names = TRUE)
-        zip(file.path(".", "Results", "results.zip"), fn_4zip)
+        zip(file.path(path_results, "results.zip"), fn_4zip)
 
         # enable download button
         shinyjs::enable("b_downloadData")
@@ -712,7 +729,7 @@ shinyServer(function(input, output) {
                                 , message = "Missing 'Input, Area, Area (m2)'")
       )## validate ~ END
 
-      # Check for mispelled column names
+      # Check for misspelled column names
       col_data2 <- c(col_area_depth, col_area_area)
       sum_col_data2_in <- sum(col_data2 %in% names(df_data2))
       col_data2_missing <- col_data2[!(col_data2 %in% names(df_data2))]
@@ -732,13 +749,60 @@ shinyServer(function(input, output) {
 
 
 
-      ## _b_Calc, Step 6, Schmidt, rLA ####
+      ## _b_Calc, Step 6, rLA ####
       # Increment the progress bar, and qc_taxa
       n_step <- n_step + 1
       prog_detail <- paste0("Step ", n_step, "; rLakeAnalyzer stats")
       incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(sleep_time)
 
+
+
+      ##__rLA, convert ----
+      col_depth_rLA <- col_depth
+      col_data_rLA <- c(col_date, col_measure)
+      col_rLA_rLA <- c("datetime", "wtr")
+      dir_export_rLA <- file.path(path_results)
+      fn_export_rLA <- "rLA_export.csv"
+      df_rLA_wtr <- LakeMonitoR::export_rLakeAnalyzer(df_data
+                                                  , col_depth = col_depth_rLA
+                                                  , col_data = col_data_rLA
+                                                  , col_rLA = col_rLA_rLA)
+      # save
+      write.csv(df_rLA_wtr
+                , file.path(dir_export_rLA, fn_export_rLA)
+                , row.names = FALSE)
+
+
+      ##__rLA, ts.bouyancy.freq ----
+      ### Calc
+      df_rLA_bf <- rLakeAnalyzer::ts.buoyancy.freq(df_rLA_wtr)
+      fn_rLA_bf <- file.path(path_results, "rLA_buoyancy_frequency.csv")
+      write.csv(df_rLA_bf, file = fn_rLA_bf, row.names = FALSE)
+      ### Plot
+      # grDevices::png(file.path(path_results, "plot_rLA_bf.png"))
+      #   plot(df_rLA_bf, type='l', ylab='Buoyancy Frequency', xlab='Date')
+      # grDevices::dev.off()
+      ### Save
+
+      browser()
+
+      ##__rLA, ts.center.bouyancy ----
+      df_rLA_cb <- rLakeAnalyzer::ts.center.buoyancy(df_rLA_wtr)
+      fn_rLA_cb <- file.path(path_results, "rLA_center_buoyancy.csv")
+      write.csv(df_rLA_cb, file = fn_rLA_cb, row.names = FALSE)
+
+
+      ##__rLA, ts.schmidt.stability ----
+      # df_rLA_ss <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr
+      #                                                  , bathy = df_data2)
+      # fn_rLA_ss <- file.path(path_results, "rLA_schmidt_stability.csv")
+      # write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
+
+      ##__rLA, ts.thermo.depth ----
+      df_rLA_td <- rLakeAnalyzer::ts.thermo.depth(df_rLA_wtr)
+      fn_rLA_td <- file.path(path_results, "rLA_center_buoyancy.csv")
+      write.csv(df_rLA_td, file = fn_rLA_td, row.names = FALSE)
 
 
       # QC, FAIL if TRUE
@@ -791,19 +855,19 @@ shinyServer(function(input, output) {
 
 
         # Generate Heat Map
-        fn_hm <- file.path(".", "Results", "plot_heatmap_rLA.png")
+        fn_hm <- file.path(path_results, "plot_heatmap_rLA.png")
         grDevices::png(fn_hm)
           rLakeAnalyzer::wtr.heat.map(df_rLA_wtr)
         grDevices::dev.off()
         # Generate Schmidt Plot
-        # fn_sp <- file.path(".", "Results", "rLA_plot_Schmidt.png")
+        # fn_sp <- file.path(path_results, "rLA_plot_Schmidt.png")
         # grDevices::png(fn_sp)
         #   rLakeAnalyzer::schmidt.plot(df_rLA_wtr, df_rLA_bath)
         # grDevices::dev.off()
         # Generate Schmidt Stability Values
         # df_rLA_Schmidt <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr
         #, df_rLA_bath)
-        # fn_rLA_Schmidt <- file.path(".", "Results", "rLA_Schmidt.csv")
+        # fn_rLA_Schmidt <- file.path(path_results, "rLA_Schmidt.csv")
         # write.csv(df_rLA, "data_rLA.csv", row.names = FALSE)
 
 
@@ -820,10 +884,10 @@ shinyServer(function(input, output) {
         Sys.sleep(sleep_time)
 
         # Create zip file
-        fn_4zip <- list.files(path = file.path(".", "Results")
+        fn_4zip <- list.files(path = path_results
                               , pattern = "*"
                               , full.names = TRUE)
-        zip(file.path(".", "Results", "results.zip"), fn_4zip)
+        zip(file.path(path_results, "results.zip"), fn_4zip)
 
         # enable download button
         shinyjs::enable("b_downloadData")
@@ -876,7 +940,7 @@ shinyServer(function(input, output) {
       #if(file.exists(paste0(fname, ".zip"))) {file.rename(paste0(fname
       #, ".zip"), fname)}
 
-      file.copy(file.path(".", "Results", "results.zip"), fname)
+      file.copy(file.path(path_results, "results.zip"), fname)
 
       #
     }##content~END
@@ -1310,27 +1374,27 @@ shinyServer(function(input, output) {
 
       # Ensure folders exist
       #
-      if(isFALSE(dir.exists(file.path("Results")))){
-        dir.create(file.path("Results"))
-      }## IF ~ Results ~ END
-      #
-      if(isFALSE(dir.exists(file.path("import")))){
-        dir.create(file.path("import"))
-      }## IF ~ import ~ END
+      # if(isFALSE(dir.exists(file.path("Results")))){
+      #   dir.create(file.path("Results"))
+      # }## IF ~ Results ~ END
+      # #
+      # if(isFALSE(dir.exists(file.path("import")))){
+      #   dir.create(file.path("import"))
+      # }## IF ~ import ~ END
 
       #
-      ## Empty Folder, Results ----
-      fn_results <- list.files(file.path("Results"), full.names=TRUE)
-      file.remove(fn_results)
+      # ## Empty Folder, Results ----
+      # fn_results <- list.files(file.path("Results"), full.names=TRUE)
+      # file.remove(fn_results)
 
-      ## Empty Folder, import ----
-      fn_import <- list.files(file.path("import"), full.names=TRUE)
-      file.remove(fn_import)
+      # ## Empty Folder, import ----
+      # fn_import <- list.files(file.path("import"), full.names=TRUE)
+      # file.remove(fn_import)
 
       ## Sink, start ----
       # create file, ok on Windows but not Linux
       #file.create(file.path("Results", "agg_log.txt"))
-      file_sink <- file(file.path(".", "Results", "agg_log.txt")
+      file_sink <- file(file.path(path_results, "agg_log.txt")
                         , open = "wt")
       #sink(file_sink, type = c("output", "message"), append = TRUE)
       # not working as a single line
@@ -1392,7 +1456,6 @@ shinyServer(function(input, output) {
                                  , filename_export = myFile_export
                                  , dir_import = myDir_import
                                  , dir_export = myDir_export)
-
       ## Sink, End ----
       message(paste0("Combined file = ", myFile_export))
       message(paste0("Time, End:  ", Sys.time()))
@@ -1470,6 +1533,12 @@ shinyServer(function(input, output) {
     }##content~END
     #, contentType = "application/zip"
   )##downloadData~END
+
+  # Sidebar Toggles ----
+  # https://stackoverflow.com/questions/42159804/how-to-collapse-sidebarpanel-in-shiny-app
+  observeEvent(input$toggleSidebar_Plot, {
+    shinyjs::toggle(id = "Sidebar_Plot")
+  })
 
 
 })##shinyServer~END

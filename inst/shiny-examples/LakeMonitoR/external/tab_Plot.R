@@ -3,7 +3,8 @@
 function(){
   tabPanel("3. Plot Data"
            # SideBar ####
-           , sidebarLayout(
+           #, sidebarLayout(
+           , div(id = "Sidebar_Plot",
              sidebarPanel(
                h4("3.A. Define Columns")
                , p("Define columns below for each box")
@@ -69,9 +70,12 @@ function(){
 
 
              )##sidebarPanel~END
+           ) ## div ~ END
+
              # Main Panel ####
              , mainPanel(
-               p("Larger files take longer to plot and change labels.")
+               actionButton("toggleSidebar_plot", "Toggle sidebar")
+               , p("Larger files take longer to plot and change labels.")
                , h4("Plot, Depth Profile, Measurement 1")
                #, plotOutput("p_depth")
                , plotlyOutput("p_depth_ly")
@@ -83,6 +87,6 @@ function(){
                , plotlyOutput("p_ts_ly")
              )##mainPanel~END
 
-           )##sidebarLayout~END
+           #)##sidebarLayout~END
   )##tabPanel ~ END
 }## FUNCTION ~ END

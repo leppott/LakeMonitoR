@@ -4,7 +4,27 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-06-04 11:39:19
+    #> Last Update: 2021-07-09 11:31:46
+
+# LakeMonitoR 0.1.1.9002
+
+Release - 2021-07-09
+
+-   refactor: Shiny import remove semicolon as available delimiter
+-   docs: Add packages used in Shiny app to DESCRIPTION
+-   feature: Add tooltips to some inputs in Shiny app with shinyBS
+    package
+-   docs: Add shinyBS to DESCRIPTION
+-   feature: Add plot\_oxythermal function, Issue \#18
+
+# LakeMonitoR 0.1.1.9001
+
+Released - 2021-06-08
+
+-   refactor: Organize Results folder, Issue \#14
+-   refactor: Drop import files in new format
+-   docs: Add ggplot versions of plots to Vignette for rLakeAnalyzer
+    examples
 
 # LakeMonitoR 0.1.1
 
