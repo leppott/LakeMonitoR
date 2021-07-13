@@ -3,7 +3,7 @@ README-LakeMonitoR
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-05-21 15:50:51
+    #> Last Update: 2021-07-13 09:18:50
 
 # LakeMonitoR
 
@@ -63,3 +63,21 @@ lakes.
 # Documentation
 
 Included Vignette and install guide.
+
+# Shiny App
+
+A Shiny app is included in the package.
+
+The online version is hosted at
+<https://tetratech-wtr-wne.shinyapps.io/LakeMonitoR>
+
+The Shiny app can be run from R console using the shiny package without
+installing the LakeMonitoR package.
+
+``` r
+if(!require(shiny)){install.packages("shiny")}
+shiny::runGitHub(repo = "LakeMonitoR"
+                , username = "leppott"
+                , ref = "main"
+                , subdir = "inst/shiny-examples/LakeMonitoR")
+```

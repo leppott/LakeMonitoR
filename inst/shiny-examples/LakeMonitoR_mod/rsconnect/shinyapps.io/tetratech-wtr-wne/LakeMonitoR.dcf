@@ -1,0 +1,13 @@
+name: LakeMonitoR
+title: LakeMonitoR
+username:
+account: tetratech-wtr-wne
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3075236
+bundleId: 4678237
+url: https://tetratech-wtr-wne.shinyapps.io/LakeMonitoR/
+when: 1622821503.05519
+lastSyncTime: 1622821503.05519
+asMultiple: FALSE
+asStatic: FALSE

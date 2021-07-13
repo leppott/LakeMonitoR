@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.1.9003
+===========
+Release - 2021-07-13
+
+* refactor: Shiny app update.
+* docs: Update README with example to run Shiny app.
+
 LakeMonitoR 0.1.1.9002
 ===========
 Release - 2021-07-09
