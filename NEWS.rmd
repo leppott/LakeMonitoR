@@ -19,6 +19,16 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.1.9004
+===========
+Release - 2021-07-13
+
+* fix: Unwind some changes to Shiny app.  App won't allow for upload of files
+    + Combine files tab is now working.
+* fix: `AggregateFiles()` to `agg_depth_files()` in server.R
+* fix: Shiny, in Aggregate section replace "import" folder with 
+"Results/data_input" folder
+
 LakeMonitoR 0.1.1.9003
 ===========
 Release - 2021-07-13

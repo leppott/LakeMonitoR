@@ -122,7 +122,8 @@ print(p_ot)
 # Demo ability to tweak the plot
 ## move gridlines on top of plot
 p_ot + ggplot2::theme(panel.ontop = TRUE
-               , panel.background = element_rect(color = NA, fill = NA))
+               , panel.background = ggplot2::element_rect(color = NA
+                                                          , fill = NA))
 ## Add caption
 p_ot + ggplot2::labs(caption = "Gray = Areas outside of given temp and DO
                      values.")

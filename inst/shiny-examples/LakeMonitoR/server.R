@@ -1355,10 +1355,11 @@ shinyServer(function(input, output) {
 
   # b_Agg ----
   observeEvent(input$b_Agg, {
-    browser()
+
     shiny::withProgress({
       #
       boo_DEBUG <- FALSE
+      #
       # Number of increments
       n_inc <- 5
       n_step <- 0
@@ -1431,10 +1432,13 @@ shinyServer(function(input, output) {
       incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(sleep_time)
       #
-      # Copy Import "as is" to "Results" folder
+      # Empty Folder, import ----
+      # fn_import <- list.files(file.path("Results", "data_input"), full.names=TRUE)
+      # file.remove(fn_import)
+      #
+      # Copy Import "as is" to "import" folder
       file.copy(inFile$datapath
-                , file.path("import", inFile$name))
-
+                , file.path("Results", "data_input", inFile$name))
 
       # _b_Agg, 3, Combine ----
       #
@@ -1446,17 +1450,17 @@ shinyServer(function(input, output) {
 
       # Run aggregate function
       #myFile_import <- file.path("Results", inFile$name)
-      myFile_import <- list.files("import", "*")
+      myFile_import <- list.files(file.path("Results", "data_input"), "*")
       myFile_export <- paste0("CombinedFile_"
                               , format(Sys.time(), "%Y%m%d_%H%M%S")
                               , ".csv")
-      myDir_import <- file.path("import")
+      myDir_import <- file.path("Results", "data_input")
       myDir_export <- file.path("Results")
 
-      LakeMonitoR::AggregateFiles(filename_import = myFile_import
-                                 , filename_export = myFile_export
-                                 , dir_import = myDir_import
-                                 , dir_export = myDir_export)
+      LakeMonitoR::agg_depth_files(filename_import = myFile_import
+                                  , filename_export = myFile_export
+                                  , dir_import = myDir_import
+                                  , dir_export = myDir_export)
       ## Sink, End ----
       message(paste0("Combined file = ", myFile_export))
       message(paste0("Time, End:  ", Sys.time()))

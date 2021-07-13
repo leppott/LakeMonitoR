@@ -1,0 +1,34 @@
+Aggregate Log from LakeMonitoR Shiny App
+Time, Start:  2021-07-13 17:54:01
+files to combine = 
+  Ellis--1.0m_Water_20180524_20180918.csv
+  Ellis--3.0m_Water_20180524_20180918.csv
+Called from: eval(expr, env)
+debug at C:\Users\Erik.Leppo\OneDrive - Tetra Tech, Inc\MyDocs_OneDrive\GitHub\LakeMonitoR\inst\shiny-examples\LakeMonitoR/server.R#1453: myFile_import <- list.files(file.path("Results", "data_input"), 
+    "*")
+debug at C:\Users\Erik.Leppo\OneDrive - Tetra Tech, Inc\MyDocs_OneDrive\GitHub\LakeMonitoR\inst\shiny-examples\LakeMonitoR/server.R#1454: myFile_export <- paste0("CombinedFile_", format(Sys.time(), "%Y%m%d_%H%M%S"), 
+    ".csv")
+debug at C:\Users\Erik.Leppo\OneDrive - Tetra Tech, Inc\MyDocs_OneDrive\GitHub\LakeMonitoR\inst\shiny-examples\LakeMonitoR/server.R#1457: myDir_import <- file.path("Results", "data_input")
+debug at C:\Users\Erik.Leppo\OneDrive - Tetra Tech, Inc\MyDocs_OneDrive\GitHub\LakeMonitoR\inst\shiny-examples\LakeMonitoR/server.R#1458: myDir_export <- file.path("Results")
+debug at C:\Users\Erik.Leppo\OneDrive - Tetra Tech, Inc\MyDocs_OneDrive\GitHub\LakeMonitoR\inst\shiny-examples\LakeMonitoR/server.R#1460: LakeMonitoR::agg_depth_files(filename_import = myFile_import, 
+    filename_export = myFile_export, dir_import = myDir_import, 
+    dir_export = myDir_export)
+[1] "Total files to process = 2"
+[1] "Processing item 1 of 2, COMPLETE, Ellis--1.0m_Water_20180524_20180918.csv."
+[1] "Processing item 2 of 2, COMPLETE, Ellis--3.0m_Water_20180524_20180918.csv."
+debug at C:\Users\Erik.Leppo\OneDrive - Tetra Tech, Inc\MyDocs_OneDrive\GitHub\LakeMonitoR\inst\shiny-examples\LakeMonitoR/server.R#1465: message(paste0("Combined file = ", myFile_export))
+Combined file = CombinedFile_20210713_175412.csv
+Time, End:  2021-07-13 17:54:20
+
+
+Error in readLines(con, warn = FALSE) : cannot open the connection
+In addition: Warning message:
+In readLines(con, warn = FALSE) :
+  cannot open file 'NEWS.rmd': No such file or directory
+Warning message:
+In file.remove("NEWS.html") :
+  cannot remove file 'NEWS.html', reason 'No such file or directory'
+Loading required package: usethis
+Error in setwd(paste0("./", myPkg)) : cannot change working directory
+i Updating LakeMonitoR documentation
+i Loading LakeMonitoR
