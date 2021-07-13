@@ -61,3 +61,23 @@ https://github.com/leppott/LakeMonitoR/issues
 
 # Documentation
 Included Vignette and install guide.
+
+# Shiny App
+A Shiny app is included in the package.
+
+The online version is hosted at 
+https://tetratech-wtr-wne.shinyapps.io/LakeMonitoR
+
+The Shiny app can be run from R console using the shiny package without 
+installing the LakeMonitoR package.
+
+```{r, eval=FALSE}
+if(!require(shiny)){install.packages("shiny")}
+shiny::runGitHub(repo = "LakeMonitoR"
+                , username = "leppott"
+                , ref = "main"
+                , subdir = "inst/shiny-examples/LakeMonitoR")
+```
+
+
+

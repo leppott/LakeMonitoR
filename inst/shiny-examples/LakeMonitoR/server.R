@@ -1355,6 +1355,7 @@ shinyServer(function(input, output) {
 
   # b_Agg ----
   observeEvent(input$b_Agg, {
+    browser()
     shiny::withProgress({
       #
       boo_DEBUG <- FALSE
