@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9003</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#readme-lakemonitor" class="anchor"></a>README-LakeMonitoR</h1></div>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; Last Update: 2021-05-21 15:50:51</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#&gt; Last Update: 2021-07-13 09:18:50</span></span></code></pre></div>
 </div>
 <div id="lakemonitor" class="section level1">
 <h1 class="hasAnchor">
@@ -120,6 +120,19 @@
 <h1 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h1>
 <p>Included Vignette and install guide.</p>
+</div>
+<div id="shiny-app" class="section level1">
+<h1 class="hasAnchor">
+<a href="#shiny-app" class="anchor"></a>Shiny App</h1>
+<p>A Shiny app is included in the package.</p>
+<p>The online version is hosted at <a href="https://tetratech-wtr-wne.shinyapps.io/LakeMonitoR" class="uri">https://tetratech-wtr-wne.shinyapps.io/LakeMonitoR</a></p>
+<p>The Shiny app can be run from R console using the shiny package without installing the LakeMonitoR package.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"shiny"</span><span class="op">)</span><span class="op">}</span>
+<span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html">runGitHub</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"LakeMonitoR"</span>
+                , username <span class="op">=</span> <span class="st">"leppott"</span>
+                , ref <span class="op">=</span> <span class="st">"main"</span>
+                , subdir <span class="op">=</span> <span class="st">"inst/shiny-examples/LakeMonitoR"</span><span class="op">)</span></code></pre></div>
 </div>
 
   </div>

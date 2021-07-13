@@ -73,7 +73,7 @@ in the format used by the rLakeAnalyzer package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9003</span>
       </span>
     </div>
 
@@ -134,14 +134,7 @@ in the format used by the rLakeAnalyzer package." />
 in the format used by the rLakeAnalyzer package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>export_rLakeAnalyzer</span><span class='op'>(</span>
-  <span class='va'>df_data</span>,
-  col_depth <span class='op'>=</span> <span class='st'>"Depth"</span>,
-  <span class='va'>col_data</span>,
-  <span class='va'>col_rLA</span>,
-  dir_export <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
-  fn_export <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>export_rLakeAnalyzer</span><span class='op'>(</span><span class='va'>df_data</span>, col_depth <span class='op'>=</span> <span class='st'>"Depth"</span>, <span class='va'>col_data</span>, <span class='va'>col_rLA</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,21 +157,12 @@ rLakeAnalyzer.  Date time must be the first entry.</p></td>
       <td><p>Column names to use with rLakeAnalyzer.  See details for
 accepted entries.  datetime must be the first entry.</p></td>
     </tr>
-    <tr>
-      <th>dir_export</th>
-      <td><p>Directory for export data.
-Default = current working directory.</p></td>
-    </tr>
-    <tr>
-      <th>fn_export</th>
-      <td><p>File name of result to be exported.  If no name provided the
-data frame will not be exported.  Default = NULL.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a data frame with daily mean values by date.</p>
+    <p>Returns a data frame formatted (wide) for use with the rLakeAnalyzer
+package suite of functions.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The rLakeAnalyzer package is not included in the LakeMonitoR

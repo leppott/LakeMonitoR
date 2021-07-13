@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Heat Map — plot_heatmap • LakeMonitoR</title>
+<title>Plot Oxythermal — plot_oxythermal • LakeMonitoR</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="Plot Heat Map — plot_heatmap" />
-<meta property="og:description" content="Generates a heat map plot of measurements from depth profile
-data" />
+<meta property="og:title" content="Plot Oxythermal — plot_oxythermal" />
+<meta property="og:description" content="Generates a heat map of temperature from depth profile data.
+The data is filtered for temperature and dissolved oxygen levels prior to
+plotting." />
 
 
 
@@ -124,27 +125,33 @@ data" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot Heat Map</h1>
-    <small class="dont-index">Source: <a href='https://github.com/leppott/LakeMonitoR/blob/master/R/plot_heatmap.R'><code>R/plot_heatmap.R</code></a></small>
-    <div class="hidden name"><code>plot_heatmap.Rd</code></div>
+    <h1>Plot Oxythermal</h1>
+    <small class="dont-index">Source: <a href='https://github.com/leppott/LakeMonitoR/blob/master/R/plot_oxythermal.R'><code>R/plot_oxythermal.R</code></a></small>
+    <div class="hidden name"><code>plot_oxythermal.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generates a heat map plot of measurements from depth profile
-data</p>
+    <p>Generates a heat map of temperature from depth profile data.
+The data is filtered for temperature and dissolved oxygen levels prior to
+plotting.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_heatmap</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>plot_oxythermal</span><span class='op'>(</span>
   <span class='va'>data</span>,
   <span class='va'>col_datetime</span>,
   <span class='va'>col_depth</span>,
-  <span class='va'>col_measure</span>,
+  <span class='va'>col_temp</span>,
+  <span class='va'>col_do</span>,
+  thresh_temp <span class='op'>=</span> <span class='fl'>30</span>,
+  operator_temp <span class='op'>=</span> <span class='st'>"&gt;="</span>,
+  thresh_do <span class='op'>=</span> <span class='fl'>3</span>,
+  operator_do <span class='op'>=</span> <span class='st'>"&gt;="</span>,
   lab_datetime <span class='op'>=</span> <span class='cn'>NA</span>,
   lab_depth <span class='op'>=</span> <span class='cn'>NA</span>,
-  lab_measure <span class='op'>=</span> <span class='cn'>NA</span>,
+  lab_temp <span class='op'>=</span> <span class='cn'>NA</span>,
   lab_title <span class='op'>=</span> <span class='cn'>NA</span>,
-  contours <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  line_val <span class='op'>=</span> <span class='cn'>NA</span>
+  boo_interpolate <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  boo_contours <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -164,32 +171,55 @@ data</p>
       <td><p>Column name, Depth</p></td>
     </tr>
     <tr>
-      <th>col_measure</th>
-      <td><p>Column name, measurement for plotting</p></td>
+      <th>col_temp</th>
+      <td><p>Column name, Temperature</p></td>
+    </tr>
+    <tr>
+      <th>col_do</th>
+      <td><p>Column name, Dissolved Oxygen</p></td>
+    </tr>
+    <tr>
+      <th>thresh_temp</th>
+      <td><p>Threshold for temperature, Default = 30</p></td>
+    </tr>
+    <tr>
+      <th>operator_temp</th>
+      <td><p>Operator for temperature, Default is &gt;=
+Valid values of &gt;=, &gt;, &lt;=, &lt;</p></td>
+    </tr>
+    <tr>
+      <th>thresh_do</th>
+      <td><p>Threshold for dissolved oxygen, Default is 3</p></td>
+    </tr>
+    <tr>
+      <th>operator_do</th>
+      <td><p>Operator for dissolved oxygen, Default is &lt;=
+Valid values of &gt;=, &gt;, &lt;=, &lt;</p></td>
     </tr>
     <tr>
       <th>lab_datetime</th>
-      <td><p>Plot label for x-axis, Default = col_datetime</p></td>
+      <td><p>Plot label date time (x-axis), Default = col_datetime</p></td>
     </tr>
     <tr>
       <th>lab_depth</th>
-      <td><p>Plot label for legend, Default = col_depth</p></td>
+      <td><p>Plot label for depth (y-axis), Default = col_depth</p></td>
     </tr>
     <tr>
-      <th>lab_measure</th>
-      <td><p>Plot label for y-axis, Default = col_measure</p></td>
+      <th>lab_temp</th>
+      <td><p>Plot label for temperatue (legend), Default = col_measure</p></td>
     </tr>
     <tr>
       <th>lab_title</th>
       <td><p>Plot title, Default = NA</p></td>
     </tr>
     <tr>
-      <th>contours</th>
-      <td><p>Boolean to draw contours, Default = TRUE</p></td>
+      <th>boo_interpolate</th>
+      <td><p>Boolean as to use interpolate in geom_raster,
+Default = FALSE</p></td>
     </tr>
     <tr>
-      <th>line_val</th>
-      <td><p>Measurement value at which to draw a line, Default = NA</p></td>
+      <th>boo_contours</th>
+      <td><p>Boolean to draw contours, Default = FALSE</p></td>
     </tr>
     </table>
 
@@ -198,12 +228,13 @@ data</p>
     <p>a ggplot object</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Can be used with any parameter.  A plot is returned that can be
+    <p>Can be used with any parameters.  A plot is returned that can be
 saved with ggsave(filename).</p>
 <p>Labels (and title) are function input parameters.  If they are not used
 the plot will not be modified.</p>
 <p>The default theme is theme_bw().</p>
-<p>The plot is created with ggplot2::geom_tile().</p>
+<p>The plot is created with ggplot2::geom_raster().  Interpolation is possible
+with boo_interpolate (default is FALSE).</p>
 <p>The returned object is a ggplot object so it can be further manipulated.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -213,35 +244,55 @@ the plot will not be modified.</p>
 <span class='co'># Column Names</span>
 <span class='va'>col_datetime</span> <span class='op'>&lt;-</span> <span class='st'>"Date.Time"</span>
 <span class='va'>col_depth</span>    <span class='op'>&lt;-</span> <span class='st'>"Depth"</span>
-<span class='va'>col_measure</span>  <span class='op'>&lt;-</span> <span class='st'>"temp_F"</span>
+<span class='va'>col_temp</span>     <span class='op'>&lt;-</span> <span class='st'>"temp_F"</span>
+<span class='va'>col_do</span>       <span class='op'>&lt;-</span> <span class='st'>"DO_conc"</span>
+
+<span class='co'># Data values</span>
+<span class='va'>thresh_temp</span> <span class='op'>&lt;-</span> <span class='fl'>68</span>
+<span class='va'>operator_temp</span> <span class='op'>&lt;-</span> <span class='st'>"&gt;="</span>
+<span class='va'>thresh_do</span> <span class='op'>&lt;-</span> <span class='fl'>3</span>
+<span class='va'>operator_do</span> <span class='op'>&lt;-</span> <span class='st'>"&gt;="</span>
 
 <span class='co'># Plot Labels</span>
 <span class='va'>lab_datetime</span> <span class='op'>&lt;-</span> <span class='st'>"Date Time"</span>
 <span class='va'>lab_depth</span>    <span class='op'>&lt;-</span> <span class='st'>"Depth (m)"</span>
-<span class='va'>lab_measure</span>  <span class='op'>&lt;-</span> <span class='st'>"Temperature (F)"</span>
+<span class='va'>lab_temp</span>     <span class='op'>&lt;-</span> <span class='st'>"Temp (F)"</span>
 <span class='va'>lab_title</span>    <span class='op'>&lt;-</span> <span class='st'>"Test Lake"</span>
-<span class='va'>line_val</span>     <span class='op'>&lt;-</span> <span class='fl'>2</span>
 
 <span class='co'># Create Plot</span>
-<span class='va'>p_hm</span> <span class='op'>&lt;-</span> <span class='fu'>plot_heatmap</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>data</span>
+<span class='va'>p_ot</span> <span class='op'>&lt;-</span> <span class='fu'>plot_oxythermal</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>data</span>
                         , col_datetime <span class='op'>=</span> <span class='va'>col_datetime</span>
                         , col_depth <span class='op'>=</span> <span class='va'>col_depth</span>
-                        , col_measure <span class='op'>=</span> <span class='va'>col_measure</span>
+                        , col_temp <span class='op'>=</span> <span class='va'>col_temp</span>
+                        , col_do <span class='op'>=</span> <span class='va'>col_do</span>
+                        , thresh_temp <span class='op'>=</span> <span class='va'>thresh_temp</span>
+                        , operator_temp<span class='op'>=</span> <span class='va'>operator_temp</span>
+                        , thresh_do <span class='op'>=</span> <span class='va'>thresh_do</span>
+                        , operator_do <span class='op'>=</span> <span class='va'>operator_do</span>
                         , lab_datetime <span class='op'>=</span> <span class='va'>lab_datetime</span>
                         , lab_depth <span class='op'>=</span> <span class='va'>lab_depth</span>
-                        , lab_measure <span class='op'>=</span> <span class='va'>lab_measure</span>
-                        , lab_title <span class='op'>=</span> <span class='va'>lab_title</span>
-                        , contours <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+                        , lab_temp <span class='op'>=</span> <span class='va'>lab_temp</span>
+                        , lab_title <span class='op'>=</span> <span class='va'>lab_title</span><span class='op'>)</span>
 
 <span class='co'># Print Plot</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p_hm</span><span class='op'>)</span>
-</div><div class='img'><img src='plot_heatmap-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p_ot</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_oxythermal-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Demo ability to tweak the plot</span>
-<span class='va'>p_hm</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Example, LakeMonitoR::plot_heatmap()"</span><span class='op'>)</span>
-</div><div class='img'><img src='plot_heatmap-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'>## move gridlines on top of plot</span>
+<span class='va'>p_ot</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>panel.ontop <span class='op'>=</span> <span class='cn'>TRUE</span>
+               , panel.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='cn'>NA</span>, fill <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in element_rect(color = NA, fill = NA): could not find function "element_rect"</span></div><div class='input'><span class='co'>## Add caption</span>
+<span class='va'>p_ot</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"Gray = Areas outside of given temp and DO
+                     values."</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_oxythermal-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'>## Add Subtitle</span>
+<span class='va'>myST</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Temp "</span>, <span class='va'>operator_temp</span>, <span class='st'>" "</span>, <span class='va'>thresh_temp</span>
+             , <span class='st'>" and DO "</span>, <span class='va'>operator_do</span>, <span class='st'>" "</span>, <span class='va'>thresh_do</span><span class='op'>)</span>
+<span class='va'>p_ot</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>subtitle <span class='op'>=</span> <span class='va'>myST</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_oxythermal-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># save plot to temp directory</span>
 <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span> <span class='co'># show the temp directory</span>
-</div><div class='output co'>#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpne1Jwi"</div><div class='input'><span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"TestLake_tempF_plotHeatMap.png"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpne1Jwi"</div><div class='input'><span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"TestLake_plotOxythermal.png"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Saving 6.67 x 6.67 in image</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9003</span>
       </span>
     </div>
 
@@ -808,12 +808,20 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">l.t</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">l.t</span><span class="op">$</span><span class="va">layer.temp</span>, type<span class="op">=</span><span class="st">'l'</span>, 
       ylab<span class="op">=</span><span class="st">'Volumetrically averaged lake temperature'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/ts.layer.temperature-1.png" width="512"></p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># ggplot</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">l.t</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">layer.temp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Volumetrically averaged lake temperature"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="rLakeAnalyzer_files/figure-html/ts.layer.temperature-2.png" width="512"></p>
 </div>
 <div id="ts-meta-depths" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-meta-depths" class="anchor"></a>ts.meta.depths</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">exampleFilePath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
@@ -826,19 +834,31 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">m.d</span><span class="op">$</span><span class="va">top</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Meta Depths (m)'</span>, xlab<span class="op">=</span><span class="st">'Date'</span>, col<span class="op">=</span><span class="st">'blue'</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">m.d</span><span class="op">$</span><span class="va">bottom</span>, col<span class="op">=</span><span class="st">'red'</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/ts.meta.depths-1.png" width="512"></p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># ggplot</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">m.d</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">top</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"blue"</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Meta Depths (m)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">m.d</span>
+                     , <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">bottom</span><span class="op">)</span>
+                     , color <span class="op">=</span> <span class="st">"red"</span>
+                     , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="rLakeAnalyzer_files/figure-html/ts.meta.depths-2.png" width="512"></p>
 </div>
 <div id="ts-schmidt-stability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-schmidt-stability" class="anchor"></a>ts.schmidt.stability</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-thermo-depth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-thermo-depth" class="anchor"></a>ts.thermo.depth</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">exampleFilePath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
@@ -851,19 +871,27 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">t.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">t.d</span><span class="op">$</span><span class="va">thermo.depth</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Thermocline Depth (m)'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/ts.thermo.depth-1.png" width="512"></p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># ggplot</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">t.d</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">thermo.depth</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Thermocline Depth (m)"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="rLakeAnalyzer_files/figure-html/ts.thermo.depth-2.png" width="512"></p>
 </div>
 <div id="ts-ustar" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-ustar" class="anchor"></a>ts.uStar</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-wedderburn-number" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-wedderburn-number" class="anchor"></a>ts.wedderburn.number</h2>
 <p>Calculate Wedderburn number for a timeseries</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">wtr.path</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 <span class="va">wnd.path</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wnd'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
@@ -880,12 +908,20 @@
 <span class="va">w.n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.wedderburn.number.html">ts.wedderburn.number</a></span><span class="op">(</span><span class="va">sp.wtr</span>, <span class="va">sp.wnd</span>, <span class="va">wnd.height</span>, <span class="va">sp.bathy</span>, <span class="va">sp.area</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">w.n</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">w.n</span><span class="op">$</span><span class="va">wedderburn.number</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Wedderburn Number'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/ts.wedderburn.number-1.png" width="512"></p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># ggplot</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">w.n</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">wedderburn.number</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Wedderburn Number"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="rLakeAnalyzer_files/figure-html/ts.wedderburn.number-2.png" width="512"></p>
 </div>
 <div id="ustar" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ustar" class="anchor"></a>uStar</h2>
 <p>Calculates the water friction velocity, uStar</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wndSpeed</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.1</span>,<span class="fl">6.3</span>,<span class="fl">6.3</span>,<span class="fl">5.2</span>,<span class="fl">7</span>,<span class="fl">7.2</span><span class="op">)</span>
 <span class="va">wndHeight</span>   <span class="op">&lt;-</span>  <span class="fl">2</span>
 <span class="va">averageEpiDense</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">14.2</span>,<span class="fl">13</span>,<span class="fl">12</span>,<span class="fl">12</span><span class="op">)</span>
@@ -899,17 +935,25 @@
 <h2 class="hasAnchor">
 <a href="#water-density" class="anchor"></a>water.density</h2>
 <p>Estimate Water Density</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Plot water density for water between 1 and 30 deg C</span>
 <span class="va">dens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/water.density.html">water.density</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="va">dens</span>, xlab<span class="op">=</span><span class="st">"Temp(deg C)"</span>, ylab<span class="op">=</span><span class="st">"Density(kg/m^3)"</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/water.density-1.png" width="512"></p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># ggplot</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, y <span class="op">=</span> <span class="va">dens</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Temp (deg C)"</span>, y <span class="op">=</span> <span class="st">"Density (kg/m^3)"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="rLakeAnalyzer_files/figure-html/water.density-2.png" width="512"></p>
 </div>
 <div id="wedderburn-number" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wedderburn-number" class="anchor"></a>wedderburn.number</h2>
 <p>Calculates Wedderburn Number for a lake</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">delta_rho</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3.1</span>,<span class="fl">1.5</span><span class="op">)</span>
 <span class="va">metaT</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.5</span>,<span class="fl">2.4</span><span class="op">)</span>
 <span class="va">uSt</span>       <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0028</span>,<span class="fl">0.0032</span><span class="op">)</span>
@@ -922,14 +966,14 @@
 <h2 class="hasAnchor">
 <a href="#whole-lake-temperature" class="anchor"></a>whole.lake.temperature</h2>
 <p>Get volumetrically averaged whole lake temperature</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="wtr-layer" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wtr-layer" class="anchor"></a>wtr.layer</h2>
 <p>Exploration of lake water column layers</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"latesummer"</span><span class="op">)</span>
 <span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/wtr.layer.html">wtr.layer</a></span><span class="op">(</span>depth<span class="op">=</span><span class="va">latesummer</span><span class="op">$</span><span class="va">depth</span>, measure <span class="op">=</span> <span class="va">latesummer</span><span class="op">$</span><span class="va">temper</span><span class="op">)</span>
 <span class="va">df1</span><span class="op">$</span><span class="va">mld</span>
