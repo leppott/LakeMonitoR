@@ -5,8 +5,12 @@
 #' @details Uses the output of `daily_depth_means` and assumes units are
 #' degree Celcius and meters.
 #'
-#' Calculation is defined as greater than a 1 degree (C) difference over
-#' 1 meter anywhere in the water column.
+#' Calculation is defined as greater than or equal to  a 1 degree (C) difference
+#' over 1-meter anywhere in the water column.  **Unless** there are only 2
+#' depths.  If only 2 depths provided in the data it is assumed these are top
+#' and bottom measurements and depth is not considered.  That is, if only 2
+#' measurements then any difference greater than 1 degree (C) will be considered
+#' stratified.
 #'
 #' A list is returned with two data frames and a plot.
 #'
@@ -21,9 +25,9 @@
 #' For the minimum value for each event the value, date, depth, and number of
 #' occurrences appears in the second data frame.  Only the first value is shown.
 #'
-#' Units should be metric (meters and celsius).  If use Imperial units (feet and
-#' fahrenheit) they will be converted.  Accepted abberviations are m, ft, C, and
-#' F.
+#' Units should be metric (meters and celsius).  If Imperial units are provided
+#' (i.e., feet and fahrenheit) they will be converted to metric units.
+#' Accepted abbreviations are m, ft, C, and F.
 #'
 #' Input data is assumed to be a single lake location depth profile.
 #'
@@ -49,11 +53,12 @@
 #' and year (y).
 #'
 #' @examples
+#' ## Example 1, entire data set
+#'
 #' # data
 #' data <- laketemp_ddm
 #'
 #' # Columns
-#' #col_siteid  <- "SiteID"
 #' col_date    <- "Date"
 #' col_depth   <- "Depth"
 #' col_measure <- "Measurement"
@@ -72,8 +77,45 @@
 #' ls_strat$Stratification_Events
 #'
 #' # Results, Stratification Plot
-#' p <- ls_strat$Stratification_Plot
-#' print(p)
+#' p_strat <- ls_strat$Stratification_Plot
+#' p_strat <- p_strat + ggplot2::labs(caption = paste0("Stratification >= "
+#'                                            , "1 deg C difference over 1-m"))
+#' print(p_strat)
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~
+#'
+#' # Example 2, top and bottom only
+#'
+#' # data
+#' data <- laketemp_ddm
+#' min_depth <- min(data[, col_depth], na.rm = TRUE)
+#' max_depth <- max(data[, col_depth], na.rm = TRUE)
+#' data_tb <- data[data[, col_depth] == min_depth |
+#'              data[, col_depth] == max_depth, ]
+#'
+#' # Columns
+#' col_date    <- "Date"
+#' col_depth   <- "Depth"
+#' col_measure <- "Measurement"
+#'
+#' # Calculate Stratification
+#' ls_strat_tb <- stratification(data_tb
+#'                              , col_date
+#'                              , col_depth
+#'                              , col_measure
+#'                              , min_days = 1 )
+#'
+#' # Results, Stratification Dates
+#' head(ls_strat_tb$Stratification_Dates)
+#'
+#' # Results, Stratification Events
+#' ls_strat_tb$Stratification_Events
+#'
+#' # Results, Stratification Plot
+#' p_strat_tb <- ls_strat_tb$Stratification_Plot
+#' p_strat_tb <- p_strat_tb + ggplot2::labs(caption = paste0("Stratification >="
+#'                                           , " 1 deg C (only 2 depths)"))
+#' print(p_strat_tb)
 #
 #' @export
 stratification <- function(data
@@ -139,7 +181,12 @@ stratification <- function(data
     stratdate <- data[data[, col_date] == i, ]
     stratdate <- stratdate[!is.na(stratdate[, col_measure]), ]
     if (nrow(stratdate) > 1){
-      strat <- diff(stratdate[, col_measure])/diff(stratdate$Depth)
+      if(nrow(stratdate) == 2) {
+        # only 2 depths, don't use depth in calculation
+        strat <- diff(stratdate[, col_measure])
+      } else {
+        strat <- diff(stratdate[, col_measure])/diff(stratdate[, col_depth])
+      }## IF ~ nrow(stratdate) ~ END
 
       #Determine if depth range is stratified
       if (any(strat*-1 >= 1)){
@@ -323,6 +370,10 @@ stratification <- function(data
   # Plot ----
   # Results 3, plot
   if(exists("stratspan") == FALSE) {
+    p_se <- ggplot2::ggplot() +
+      ggplot2::theme_void() +
+      ggplot2::labs(title = "No stratification events")
+  } else if (sum(is.na(stratspan)) == 4) {
     p_se <- ggplot2::ggplot() +
       ggplot2::theme_void() +
       ggplot2::labs(title = "No stratification events")

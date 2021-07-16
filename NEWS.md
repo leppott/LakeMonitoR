@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-16 10:36:35
+    #> Last Update: 2021-07-16 13:42:43
+
+# LakeMonitoR 0.1.1.9007
+
+Release - 2021-07-16
+
+-   refactor: Stratification, update a hard coded column reference
+-   refactor: Stratification, update code to allow for only 2 depths,
+    Issue \#20
 
 # LakeMonitoR 0.1.1.9006
 

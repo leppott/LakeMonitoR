@@ -380,14 +380,24 @@ p_combo_3 <- gridExtra::grid.arrange(p_hm, p_profile, p_ts)
 ```
 
 ## stratification
+Stratification is calculated as greater than or equal to a 1 degree C difference
+over 1-m.  **Unless** there are only 2 measurements then stratification is 
+calculated as greater than or equal to a 1 degree C difference (i.e., depth is 
+not considered).
+
+The example below calculates stratification on the entire data set and then 
+again with only the top and bottom measurements.  Using only the top and bottom
+measurements results in more days of stratification and has 1 more event.
+
 ```{r stratification}
 library(LakeMonitoR)
+
+## Example 1, entire data set
 
 # data
 data <- laketemp_ddm
 
 # Columns
-#col_siteid  <- "SiteID"
 col_date    <- "Date"
 col_depth   <- "Depth"
 col_measure <- "Measurement"
@@ -406,8 +416,44 @@ head(ls_strat$Stratification_Dates)
 ls_strat$Stratification_Events
 
 # Results, Stratification Plot
-p <- ls_strat$Stratification_Plot
-print(p)
+p_strat <- ls_strat$Stratification_Plot
+p_strat <- p_strat + ggplot2::labs(caption = paste0("Stratification >= "
+                                           , "1 deg C difference over 1-m"))
+print(p_strat)
+
+#~~~~~~~~~~~~
+
+## Example 2, only top and bottom measurement
+
+# data
+data <- laketemp_ddm
+min_depth <- min(data[, col_depth], na.rm = TRUE)
+max_depth <- max(data[, col_depth], na.rm = TRUE)
+data_tb <- data[data[, col_depth] == min_depth |
+             data[, col_depth] == max_depth, ]
+
+# Columns
+col_date    <- "Date"
+col_depth   <- "Depth"
+col_measure <- "Measurement"
+
+# Calculate Stratification
+ls_strat_tb <- stratification(data_tb
+                             , col_date
+                             , col_depth
+                             , col_measure
+                             , min_days = 1 )
+# Results, Stratification Dates
+head(ls_strat_tb$Stratification_Dates)
+
+# Results, Stratification Events
+ls_strat_tb$Stratification_Events
+
+# Results, Stratification Plot
+p_strat_tb <- ls_strat_tb$Stratification_Plot
+p_strat_tb <- p_strat_tb + ggplot2::labs(caption = paste0("Stratification >="
+                                          , " 1 deg C (only 2 depths)"))
+print(p_strat_tb)
 ```
 
 ## export_rLakeAnalyzer
