@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9007</span>
       </span>
     </div>
 
@@ -188,8 +188,12 @@ and year (y).</p>
 
     <p>Uses the output of `daily_depth_means` and assumes units are
 degree Celcius and meters.</p>
-<p>Calculation is defined as greater than a 1 degree (C) difference over
-1 meter anywhere in the water column.</p>
+<p>Calculation is defined as greater than or equal to  a 1 degree (C) difference
+over 1-meter anywhere in the water column.  **Unless** there are only 2
+depths.  If only 2 depths provided in the data it is assumed these are top
+and bottom measurements and depth is not considered.  That is, if only 2
+measurements then any difference greater than 1 degree (C) will be considered
+stratified.</p>
 <p>A list is returned with two data frames and a plot.</p>
 <p>The first data frame has the dates and TRUE or FALSE for stratification.</p>
 <p>The second data frame has the start and end dates, time span, and minimum
@@ -198,17 +202,18 @@ value for each stratification event.</p>
 The minimum value is shown on the plot for each plot as a red circle.</p>
 <p>For the minimum value for each event the value, date, depth, and number of
 occurrences appears in the second data frame.  Only the first value is shown.</p>
-<p>Units should be metric (meters and celsius).  If use Imperial units (feet and
-fahrenheit) they will be converted.  Accepted abberviations are m, ft, C, and
-F.</p>
+<p>Units should be metric (meters and celsius).  If Imperial units are provided
+(i.e., feet and fahrenheit) they will be converted to metric units.
+Accepted abbreviations are m, ft, C, and F.</p>
 <p>Input data is assumed to be a single lake location depth profile.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># data</span>
+    <pre class="examples"><div class='input'><span class='co'>## Example 1, entire data set</span>
+
+<span class='co'># data</span>
 <span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>laketemp_ddm</span>
 
 <span class='co'># Columns</span>
-<span class='co'>#col_siteid  &lt;- "SiteID"</span>
 <span class='va'>col_date</span>    <span class='op'>&lt;-</span> <span class='st'>"Date"</span>
 <span class='va'>col_depth</span>   <span class='op'>&lt;-</span> <span class='st'>"Depth"</span>
 <span class='va'>col_measure</span> <span class='op'>&lt;-</span> <span class='st'>"Measurement"</span>
@@ -234,9 +239,54 @@ F.</p>
 </div><div class='output co'>#&gt;   Start_Date   End_Date Year Time_Span
 #&gt; 1 2017-06-05 2017-10-16 2017  133 days</div><div class='input'>
 <span class='co'># Results, Stratification Plot</span>
-<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='va'>ls_strat</span><span class='op'>$</span><span class='va'>Stratification_Plot</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
-</div><div class='img'><img src='stratification-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>p_strat</span> <span class='op'>&lt;-</span> <span class='va'>ls_strat</span><span class='op'>$</span><span class='va'>Stratification_Plot</span>
+<span class='va'>p_strat</span> <span class='op'>&lt;-</span> <span class='va'>p_strat</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Stratification &gt;= "</span>
+                                           , <span class='st'>"1 deg C difference over 1-m"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p_strat</span><span class='op'>)</span>
+</div><div class='img'><img src='stratification-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'>#~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class='co'># Example 2, top and bottom only</span>
+
+<span class='co'># data</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>laketemp_ddm</span>
+<span class='va'>min_depth</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>[</span>, <span class='va'>col_depth</span><span class='op'>]</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>max_depth</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>[</span>, <span class='va'>col_depth</span><span class='op'>]</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>data_tb</span> <span class='op'>&lt;-</span> <span class='va'>data</span><span class='op'>[</span><span class='va'>data</span><span class='op'>[</span>, <span class='va'>col_depth</span><span class='op'>]</span> <span class='op'>==</span> <span class='va'>min_depth</span> <span class='op'>|</span>
+             <span class='va'>data</span><span class='op'>[</span>, <span class='va'>col_depth</span><span class='op'>]</span> <span class='op'>==</span> <span class='va'>max_depth</span>, <span class='op'>]</span>
+
+<span class='co'># Columns</span>
+<span class='va'>col_date</span>    <span class='op'>&lt;-</span> <span class='st'>"Date"</span>
+<span class='va'>col_depth</span>   <span class='op'>&lt;-</span> <span class='st'>"Depth"</span>
+<span class='va'>col_measure</span> <span class='op'>&lt;-</span> <span class='st'>"Measurement"</span>
+
+<span class='co'># Calculate Stratification</span>
+<span class='va'>ls_strat_tb</span> <span class='op'>&lt;-</span> <span class='fu'>stratification</span><span class='op'>(</span><span class='va'>data_tb</span>
+                             , <span class='va'>col_date</span>
+                             , <span class='va'>col_depth</span>
+                             , <span class='va'>col_measure</span>
+                             , min_days <span class='op'>=</span> <span class='fl'>1</span> <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='input'>
+<span class='co'># Results, Stratification Dates</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>ls_strat_tb</span><span class='op'>$</span><span class='va'>Stratification_Dates</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         Date Stratified_1
+#&gt; 1 2017-01-19        FALSE
+#&gt; 2 2017-01-20        FALSE
+#&gt; 3 2017-01-21        FALSE
+#&gt; 4 2017-01-22        FALSE
+#&gt; 5 2017-01-23        FALSE
+#&gt; 6 2017-01-24        FALSE</div><div class='input'>
+<span class='co'># Results, Stratification Events</span>
+<span class='va'>ls_strat_tb</span><span class='op'>$</span><span class='va'>Stratification_Events</span>
+</div><div class='output co'>#&gt;   Start_Date   End_Date Year Time_Span
+#&gt; 1 2017-05-14 2017-05-20 2017    6 days
+#&gt; 2 2017-05-24 2017-10-25 2017  154 days</div><div class='input'>
+<span class='co'># Results, Stratification Plot</span>
+<span class='va'>p_strat_tb</span> <span class='op'>&lt;-</span> <span class='va'>ls_strat_tb</span><span class='op'>$</span><span class='va'>Stratification_Plot</span>
+<span class='va'>p_strat_tb</span> <span class='op'>&lt;-</span> <span class='va'>p_strat_tb</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Stratification &gt;="</span>
+                                          , <span class='st'>" 1 deg C (only 2 depths)"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>p_strat_tb</span><span class='op'>)</span>
+</div><div class='img'><img src='stratification-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

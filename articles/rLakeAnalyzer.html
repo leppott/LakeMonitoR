@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9007</span>
       </span>
     </div>
 
@@ -496,14 +496,17 @@
 <div id="stratification" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stratification" class="anchor"></a>stratification</h2>
+<p>Stratification is calculated as greater than or equal to a 1 degree C difference over 1-m. <strong>Unless</strong> there are only 2 measurements then stratification is calculated as greater than or equal to a 1 degree C difference (i.e., depth is not considered).</p>
+<p>The example below calculates stratification on the entire data set and then again with only the top and bottom measurements. Using only the top and bottom measurements results in more days of stratification and has 1 more event.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leppott/LakeMonitoR">LakeMonitoR</a></span><span class="op">)</span>
+
+<span class="co">## Example 1, entire data set</span>
 
 <span class="co"># data</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">laketemp_ddm</span>
 
 <span class="co"># Columns</span>
-<span class="co">#col_siteid  &lt;- "SiteID"</span>
 <span class="va">col_date</span>    <span class="op">&lt;-</span> <span class="st">"Date"</span>
 <span class="va">col_depth</span>   <span class="op">&lt;-</span> <span class="st">"Depth"</span>
 <span class="va">col_measure</span> <span class="op">&lt;-</span> <span class="st">"Measurement"</span>
@@ -533,15 +536,65 @@
 <span class="co">#&gt; 1 2017-06-05 2017-10-16 2017  133 days</span>
 
 <span class="co"># Results, Stratification Plot</span>
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="va">ls_strat</span><span class="op">$</span><span class="va">Stratification_Plot</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
+<span class="va">p_strat</span> <span class="op">&lt;-</span> <span class="va">ls_strat</span><span class="op">$</span><span class="va">Stratification_Plot</span>
+<span class="va">p_strat</span> <span class="op">&lt;-</span> <span class="va">p_strat</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Stratification &gt;= "</span>
+                                           , <span class="st">"1 deg C difference over 1-m"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p_strat</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/stratification-1.png" width="512"></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co">#~~~~~~~~~~~~</span>
+
+<span class="co">## Example 2, only top and bottom measurement</span>
+
+<span class="co"># data</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="va">laketemp_ddm</span>
+<span class="va">min_depth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="va">col_depth</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">max_depth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="va">col_depth</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">data_tb</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">[</span>, <span class="va">col_depth</span><span class="op">]</span> <span class="op">==</span> <span class="va">min_depth</span> <span class="op">|</span>
+             <span class="va">data</span><span class="op">[</span>, <span class="va">col_depth</span><span class="op">]</span> <span class="op">==</span> <span class="va">max_depth</span>, <span class="op">]</span>
+
+<span class="co"># Columns</span>
+<span class="va">col_date</span>    <span class="op">&lt;-</span> <span class="st">"Date"</span>
+<span class="va">col_depth</span>   <span class="op">&lt;-</span> <span class="st">"Depth"</span>
+<span class="va">col_measure</span> <span class="op">&lt;-</span> <span class="st">"Measurement"</span>
+
+<span class="co"># Calculate Stratification</span>
+<span class="va">ls_strat_tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stratification.html">stratification</a></span><span class="op">(</span><span class="va">data_tb</span>
+                             , <span class="va">col_date</span>
+                             , <span class="va">col_depth</span>
+                             , <span class="va">col_measure</span>
+                             , min_days <span class="op">=</span> <span class="fl">1</span> <span class="op">)</span>
+<span class="co">#&gt; Warning in stratification(data_tb, col_date, col_depth, col_measure, min_days =</span>
+<span class="co">#&gt; 1): NAs introduced by coercion</span>
+<span class="co"># Results, Stratification Dates</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ls_strat_tb</span><span class="op">$</span><span class="va">Stratification_Dates</span><span class="op">)</span>
+<span class="co">#&gt;         Date Stratified_1</span>
+<span class="co">#&gt; 1 2017-01-19        FALSE</span>
+<span class="co">#&gt; 2 2017-01-20        FALSE</span>
+<span class="co">#&gt; 3 2017-01-21        FALSE</span>
+<span class="co">#&gt; 4 2017-01-22        FALSE</span>
+<span class="co">#&gt; 5 2017-01-23        FALSE</span>
+<span class="co">#&gt; 6 2017-01-24        FALSE</span>
+
+<span class="co"># Results, Stratification Events</span>
+<span class="va">ls_strat_tb</span><span class="op">$</span><span class="va">Stratification_Events</span>
+<span class="co">#&gt;   Start_Date   End_Date Year Time_Span</span>
+<span class="co">#&gt; 1 2017-05-14 2017-05-20 2017    6 days</span>
+<span class="co">#&gt; 2 2017-05-24 2017-10-25 2017  154 days</span>
+
+<span class="co"># Results, Stratification Plot</span>
+<span class="va">p_strat_tb</span> <span class="op">&lt;-</span> <span class="va">ls_strat_tb</span><span class="op">$</span><span class="va">Stratification_Plot</span>
+<span class="va">p_strat_tb</span> <span class="op">&lt;-</span> <span class="va">p_strat_tb</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Stratification &gt;="</span>
+                                          , <span class="st">" 1 deg C (only 2 depths)"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p_strat_tb</span><span class="op">)</span></code></pre></div>
+<p><img src="rLakeAnalyzer_files/figure-html/stratification-2.png" width="512"></p>
 </div>
 <div id="export_rlakeanalyzer" class="section level2">
 <h2 class="hasAnchor">
 <a href="#export_rlakeanalyzer" class="anchor"></a>export_rLakeAnalyzer</h2>
 <p>Reorganize file for use with <code>rLakeAnalyzer</code> package.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leppott/LakeMonitoR">LakeMonitoR</a></span><span class="op">)</span>
 
 <span class="co"># Convert Data for use with rLakeAnalyzer</span>
@@ -644,7 +697,7 @@
 <h2 class="hasAnchor">
 <a href="#approx-bathy" class="anchor"></a>approx.bathy</h2>
 <p>Estimate hypsography curve</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Voldev.ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/approx.bathy.html">approx.bathy</a></span><span class="op">(</span>Zmax <span class="op">=</span> <span class="fl">25</span>, Zmean <span class="op">=</span> <span class="fl">12</span>, lkeArea <span class="op">=</span> <span class="fl">39400000</span>, method <span class="op">=</span> <span class="st">"voldev"</span><span class="op">)</span>
 <span class="va">Voldevshallow.ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/approx.bathy.html">approx.bathy</a></span><span class="op">(</span>Zmax <span class="op">=</span> <span class="fl">25</span>, Zmean <span class="op">=</span> <span class="fl">6</span>, lkeArea <span class="op">=</span> <span class="fl">39400000</span>, method <span class="op">=</span> <span class="st">"voldev"</span><span class="op">)</span>
 <span class="va">Cone.ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/approx.bathy.html">approx.bathy</a></span><span class="op">(</span>Zmax <span class="op">=</span> <span class="fl">25</span>, lkeArea <span class="op">=</span> <span class="fl">39400000</span>, method <span class="op">=</span> <span class="st">"cone"</span><span class="op">)</span>
@@ -659,7 +712,7 @@
 <h2 class="hasAnchor">
 <a href="#buoyancy-freq" class="anchor"></a>buoyancy.freq</h2>
 <p>Calculate buoyancy frequency</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># A vector of water temperatures</span>
 <span class="va">wtr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22.51</span>, <span class="fl">22.42</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.36</span>, <span class="fl">22.3</span>, <span class="fl">22.21</span>, <span class="fl">22.11</span>, <span class="fl">21.23</span>, <span class="fl">16.42</span>, 
     <span class="fl">15.15</span>, <span class="fl">14.24</span>, <span class="fl">13.35</span>, <span class="fl">10.94</span>, <span class="fl">10.43</span>, <span class="fl">10.36</span>, <span class="fl">9.94</span>, <span class="fl">9.45</span>, <span class="fl">9.1</span>, <span class="fl">8.91</span>, <span class="fl">8.58</span>, <span class="fl">8.43</span><span class="op">)</span>
@@ -679,7 +732,7 @@
 <h2 class="hasAnchor">
 <a href="#center-buoyancy" class="anchor"></a>center.buoyancy</h2>
 <p>Calculate the center of buoyancy</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># A vector of water temperatures</span>
 <span class="va">wtr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22.51</span>, <span class="fl">22.42</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.36</span>, <span class="fl">22.3</span>, <span class="fl">22.21</span>, <span class="fl">22.11</span>, <span class="fl">21.23</span>, <span class="fl">16.42</span>, 
     <span class="fl">15.15</span>, <span class="fl">14.24</span>, <span class="fl">13.35</span>, <span class="fl">10.94</span>, <span class="fl">10.43</span>, <span class="fl">10.36</span>, <span class="fl">9.94</span>, <span class="fl">9.45</span>, <span class="fl">9.1</span>, <span class="fl">8.91</span>, <span class="fl">8.58</span>, <span class="fl">8.43</span><span class="op">)</span>
@@ -696,21 +749,21 @@
 <h2 class="hasAnchor">
 <a href="#epi-temperature" class="anchor"></a>epi.temperature</h2>
 <p>Get volumetrically averaged epilimnion temp</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## No Example</span></code></pre></div>
 </div>
 <div id="hypo-temperature" class="section level2">
 <h2 class="hasAnchor">
 <a href="#hypo-temperature" class="anchor"></a>hypo.temperature</h2>
 <p>Get volumetrically averaged hypolimnion temp</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">##No Example</span></code></pre></div>
 </div>
 <div id="internal-energy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#internal-energy" class="anchor"></a>internal.energy</h2>
 <p>Internal energy function (Joules)</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bthA</span>   <span class="op">&lt;-</span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">900</span>,<span class="fl">864</span>,<span class="fl">820</span>,<span class="fl">200</span>,<span class="fl">10</span><span class="op">)</span>
 <span class="va">bthD</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2.3</span>,<span class="fl">2.5</span>,<span class="fl">4.2</span>,<span class="fl">5.8</span>,<span class="fl">7</span><span class="op">)</span>
 
@@ -726,7 +779,7 @@
 <h2 class="hasAnchor">
 <a href="#lake-number" class="anchor"></a>lake.number</h2>
 <p>Calculate Lake Number</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bthA</span>    <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">900</span>,<span class="fl">864</span>,<span class="fl">820</span>,<span class="fl">200</span>,<span class="fl">10</span><span class="op">)</span>
 <span class="va">bthD</span>    <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2.3</span>,<span class="fl">2.5</span>,<span class="fl">4.2</span>,<span class="fl">5.8</span>,<span class="fl">7</span><span class="op">)</span>
 <span class="va">uStar</span>   <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0032</span>,<span class="fl">0.0024</span><span class="op">)</span>
@@ -743,7 +796,7 @@
 <h2 class="hasAnchor">
 <a href="#layer-density" class="anchor"></a>layer.density</h2>
 <p>Returns the average density of a layer between two depths.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">top</span>     <span class="op">&lt;-</span> <span class="fl">2</span>
 <span class="va">bottom</span>  <span class="op">&lt;-</span> <span class="fl">6</span>
 <span class="va">wtr</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25.2</span>,<span class="fl">25.1</span>,<span class="fl">24.1</span>,<span class="fl">22.0</span>,<span class="fl">19.8</span>,<span class="fl">15.3</span>,<span class="fl">12.0</span>,<span class="fl">11.1</span><span class="op">)</span>
@@ -757,7 +810,7 @@
 <h2 class="hasAnchor">
 <a href="#layer-temperature" class="anchor"></a>layer.temperature</h2>
 <p>Returns the average temperature of a layer between two depths.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Supply input data</span>
 <span class="va">top</span>     <span class="op">&lt;-</span> <span class="fl">2</span>
 <span class="va">bottom</span>  <span class="op">&lt;-</span> <span class="fl">6</span>
@@ -774,7 +827,7 @@
 <h2 class="hasAnchor">
 <a href="#meta-depths" class="anchor"></a>meta.depths</h2>
 <p>Calculate the Top and Bottom Depths of the Metalimnion</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wtr</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22.51</span>, <span class="fl">22.42</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.36</span>, <span class="fl">22.3</span>, <span class="fl">22.21</span>, <span class="fl">22.11</span>, <span class="fl">21.23</span>, <span class="fl">16.42</span>, 
 <span class="fl">15.15</span>, <span class="fl">14.24</span>, <span class="fl">13.35</span>, <span class="fl">10.94</span>, <span class="fl">10.43</span>, <span class="fl">10.36</span>, <span class="fl">9.94</span>, <span class="fl">9.45</span>, <span class="fl">9.1</span>, <span class="fl">8.91</span>, <span class="fl">8.58</span>, <span class="fl">8.43</span><span class="op">)</span>
 
@@ -791,7 +844,7 @@
 <h2 class="hasAnchor">
 <a href="#schmidt-stability" class="anchor"></a>schmidt.stability</h2>
 <p>Calculate the Schmidt stability</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bthA</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">900</span>,<span class="fl">864</span>,<span class="fl">820</span>,<span class="fl">200</span>,<span class="fl">10</span><span class="op">)</span>
 <span class="va">bthD</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2.3</span>,<span class="fl">2.5</span>,<span class="fl">4.2</span>,<span class="fl">5.8</span>,<span class="fl">7</span><span class="op">)</span>
 
@@ -807,7 +860,7 @@
 <h2 class="hasAnchor">
 <a href="#thermo-depth" class="anchor"></a>thermo.depth</h2>
 <p>Calculate depth of the thermocline from a temperature profile</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># A vector of water temperatures</span>
 <span class="va">wtr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22.51</span>, <span class="fl">22.42</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.36</span>, <span class="fl">22.3</span>, <span class="fl">22.21</span>, <span class="fl">22.11</span>, <span class="fl">21.23</span>, <span class="fl">16.42</span>, 
         <span class="fl">15.15</span>, <span class="fl">14.24</span>, <span class="fl">13.35</span>, <span class="fl">10.94</span>, <span class="fl">10.43</span>, <span class="fl">10.36</span>, <span class="fl">9.94</span>, <span class="fl">9.45</span>, <span class="fl">9.1</span>, <span class="fl">8.91</span>, <span class="fl">8.58</span>, <span class="fl">8.43</span><span class="op">)</span>
@@ -825,7 +878,7 @@
 <h2 class="hasAnchor">
 <a href="#ts-buoyancy-freq" class="anchor"></a>ts.buoyancy.freq</h2>
 <p>Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">wtr.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
@@ -843,7 +896,7 @@
 <h2 class="hasAnchor">
 <a href="#ts-center-buoyancy" class="anchor"></a>ts.center.buoyancy</h2>
 <p>Calculates the center of buoyancy for multiple temperature profiles</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">wtr.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
@@ -867,21 +920,21 @@
 <h2 class="hasAnchor">
 <a href="#ts-internal-energy" class="anchor"></a>ts.internal.energy</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-lake-number" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-lake-number" class="anchor"></a>ts.lake.number</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-layer-temperature" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-layer-temperature" class="anchor"></a>ts.layer.temperature</h2>
 <p>Calculate volume-weighted average water temperature across a range of depths for a timeseries</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">wtr.path</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 <span class="va">bathy.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.bth'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
@@ -895,7 +948,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">l.t</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">l.t</span><span class="op">$</span><span class="va">layer.temp</span>, type<span class="op">=</span><span class="st">'l'</span>, 
       ylab<span class="op">=</span><span class="st">'Volumetrically averaged lake temperature'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/ts.layer.temperature-1.png" width="512"></p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">l.t</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">layer.temp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -908,7 +961,7 @@
 <h2 class="hasAnchor">
 <a href="#ts-meta-depths" class="anchor"></a>ts.meta.depths</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">exampleFilePath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
@@ -921,7 +974,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">m.d</span><span class="op">$</span><span class="va">top</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Meta Depths (m)'</span>, xlab<span class="op">=</span><span class="st">'Date'</span>, col<span class="op">=</span><span class="st">'blue'</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">m.d</span><span class="op">$</span><span class="va">bottom</span>, col<span class="op">=</span><span class="st">'red'</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/ts.meta.depths-1.png" width="512"></p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">m.d</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">top</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -938,14 +991,14 @@
 <h2 class="hasAnchor">
 <a href="#ts-schmidt-stability" class="anchor"></a>ts.schmidt.stability</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-thermo-depth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-thermo-depth" class="anchor"></a>ts.thermo.depth</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">exampleFilePath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
@@ -958,7 +1011,7 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">t.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">t.d</span><span class="op">$</span><span class="va">thermo.depth</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Thermocline Depth (m)'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/ts.thermo.depth-1.png" width="512"></p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">t.d</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">thermo.depth</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -971,14 +1024,14 @@
 <h2 class="hasAnchor">
 <a href="#ts-ustar" class="anchor"></a>ts.uStar</h2>
 <p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-wedderburn-number" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-wedderburn-number" class="anchor"></a>ts.wedderburn.number</h2>
 <p>Calculate Wedderburn number for a timeseries</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">wtr.path</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 <span class="va">wnd.path</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wnd'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
@@ -995,7 +1048,7 @@
 <span class="va">w.n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.wedderburn.number.html">ts.wedderburn.number</a></span><span class="op">(</span><span class="va">sp.wtr</span>, <span class="va">sp.wnd</span>, <span class="va">wnd.height</span>, <span class="va">sp.bathy</span>, <span class="va">sp.area</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">w.n</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">w.n</span><span class="op">$</span><span class="va">wedderburn.number</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Wedderburn Number'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/ts.wedderburn.number-1.png" width="512"></p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">w.n</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">wedderburn.number</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -1008,7 +1061,7 @@
 <h2 class="hasAnchor">
 <a href="#ustar" class="anchor"></a>uStar</h2>
 <p>Calculates the water friction velocity, uStar</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wndSpeed</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.1</span>,<span class="fl">6.3</span>,<span class="fl">6.3</span>,<span class="fl">5.2</span>,<span class="fl">7</span>,<span class="fl">7.2</span><span class="op">)</span>
 <span class="va">wndHeight</span>   <span class="op">&lt;-</span>  <span class="fl">2</span>
 <span class="va">averageEpiDense</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">14.2</span>,<span class="fl">13</span>,<span class="fl">12</span>,<span class="fl">12</span><span class="op">)</span>
@@ -1022,12 +1075,12 @@
 <h2 class="hasAnchor">
 <a href="#water-density" class="anchor"></a>water.density</h2>
 <p>Estimate Water Density</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Plot water density for water between 1 and 30 deg C</span>
 <span class="va">dens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/water.density.html">water.density</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="va">dens</span>, xlab<span class="op">=</span><span class="st">"Temp(deg C)"</span>, ylab<span class="op">=</span><span class="st">"Density(kg/m^3)"</span><span class="op">)</span></code></pre></div>
 <p><img src="rLakeAnalyzer_files/figure-html/water.density-1.png" width="512"></p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -1040,7 +1093,7 @@
 <h2 class="hasAnchor">
 <a href="#wedderburn-number" class="anchor"></a>wedderburn.number</h2>
 <p>Calculates Wedderburn Number for a lake</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">delta_rho</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3.1</span>,<span class="fl">1.5</span><span class="op">)</span>
 <span class="va">metaT</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.5</span>,<span class="fl">2.4</span><span class="op">)</span>
 <span class="va">uSt</span>       <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0028</span>,<span class="fl">0.0032</span><span class="op">)</span>
@@ -1053,14 +1106,14 @@
 <h2 class="hasAnchor">
 <a href="#whole-lake-temperature" class="anchor"></a>whole.lake.temperature</h2>
 <p>Get volumetrically averaged whole lake temperature</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="wtr-layer" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wtr-layer" class="anchor"></a>wtr.layer</h2>
 <p>Exploration of lake water column layers</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"latesummer"</span><span class="op">)</span>
 <span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/wtr.layer.html">wtr.layer</a></span><span class="op">(</span>depth<span class="op">=</span><span class="va">latesummer</span><span class="op">$</span><span class="va">depth</span>, measure <span class="op">=</span> <span class="va">latesummer</span><span class="op">$</span><span class="va">temper</span><span class="op">)</span>
 <span class="va">df1</span><span class="op">$</span><span class="va">mld</span>
