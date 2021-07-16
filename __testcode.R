@@ -54,4 +54,6 @@ p_td <- ggplot(N2, aes(x = datetime, y = n2)) +
 # Schmidt ----
 df_rLA_ss <- ts.schmidt.stability(df_rLA_wtr, df_data2)
 
+#####
+
 

@@ -21,13 +21,13 @@ function(){
                            , label = "Plot, Measurement, Depth (m)"
                            , placeholder = "Depth_m")
                , textInput("col_plot_msr"
-                           , label = "Plot, Measurement, Measurement 1"
+                           , label = "Plot, Measurement, Value 1 (Temp)"
                            , placeholder = "Water_Temp_C")
                , textInput("col_plot_msr2"
-                           , label = "Plot, Measurement, Measurement 2"
+                           , label = "Plot, Measurement, Value 2 (DO)"
                            , placeholder = "DO")
                , textInput("col_plot_msr3"
-                           , label = "Plot, Measurement, Measurement 3"
+                           , label = "Plot, Measurement, Value 3 (WSPD)"
                            , placeholder = "WSPD")
                #
                , h4("3.B. Define Plot Labels")
@@ -40,16 +40,16 @@ function(){
                            , placeholder = "Depth (m)"
                            , value = "Depth (m)")
                , textInput("lab_plot_msr"
-                           , label = "Plot, Measurement 1"
+                           , label = "Plot, Value 1 (Temp)"
                            , placeholder = "Water Temperature (C)")
                , textInput("lab_plot_msr2"
-                           , label = "Plot, Measurement 2"
+                           , label = "Plot, Value 2 (DO)"
                            , placeholder = "Dissolved Oxygen (mg/L)")
                , textInput("lab_plot_msr3"
-                           , label = "Plot, Measurement 3"
+                           , label = "Plot, Value 3 (WSPD)"
                            , placeholder = "Wind Speed (m/s)")
                , textInput("lab_plot_title"
-                           , label = "Plot, Measurement, Measurement"
+                           , label = "Plot, Title"
                            , value = NA
                            , placeholder = "Title")
                , numericInput("line_val_plot_hm"
@@ -70,12 +70,11 @@ function(){
 
 
              )##sidebarPanel~END
-           ) ## div ~ END
 
              # Main Panel ####
              , mainPanel(
-               actionButton("toggleSidebar_plot", "Toggle sidebar")
-               , p("Larger files take longer to plot and change labels.")
+              # actionButton("toggleSidebar_plot", "Toggle sidebar"),
+                p("Larger files take longer to plot and change labels.")
                , h4("Plot, Depth Profile, Measurement 1")
                #, plotOutput("p_depth")
                , plotlyOutput("p_depth_ly")
@@ -87,6 +86,6 @@ function(){
                , plotlyOutput("p_ts_ly")
              )##mainPanel~END
 
-           #)##sidebarLayout~END
+           )##sidebarLayout~END  (div ~ END)
   )##tabPanel ~ END
 }## FUNCTION ~ END

@@ -12,7 +12,7 @@ function(){
           #, checkboxInput('header', 'Header', TRUE)
           , radioButtons('sep', 'Separator',
                          c(Comma=',',
-                           #Semicolon=';',
+                          # Semicolon=';',
                            Tab='\t'),
                          ',')
           , fileInput('fn_input', 'Choose file to upload',
@@ -30,7 +30,7 @@ function(){
           , h4("1.B. Load File, Lake Areas")
           , radioButtons('sep2', 'Separator',
                          c(Comma=',',
-                           #Semicolon=';',
+                         #  Semicolon=';',
                            Tab='\t'),
                          ',')
           , fileInput('fn_input2', 'Choose file to upload',
@@ -48,7 +48,7 @@ function(){
           , h4("1.C. Load File, Measure, No Depth")
           , radioButtons('sep3', 'Separator',
                          c(Comma=',',
-                           Semicolon=';',
+                         #  Semicolon=';',
                            Tab='\t'),
                          ',')
           , fileInput('fn_input3', 'Choose file to upload',

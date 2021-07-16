@@ -137,7 +137,7 @@ agg_depth_files <- function(filename_import
       myMsg <- "SKIPPED (file blank)"
       myItems.Skipped <- myItems.Skipped + 1
       myItems.Log[intCounter,2] <- myMsg
-      fun.write.log(myItems.Log,myDate,myTime)
+      fun.write.log(myItems.Log, myDate,myTime)
       fun.Msg.Status(myMsg, intCounter, intItems.Total, strFile)
       utils::flush.console()
       # go to next Item

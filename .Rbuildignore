@@ -11,3 +11,4 @@
 ^LICENSE\.md$
 ^NEWS.rmd$
 ^README.RMD$
+^__testcode.R$

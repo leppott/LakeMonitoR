@@ -91,7 +91,7 @@ col_do       <- "DO_conc"
 
 # Data values
 thresh_temp <- 68
-operator_temp <- ">="
+operator_temp <- "<="
 thresh_do <- 3
 operator_do <- ">="
 
@@ -124,16 +124,49 @@ print(p_ot)
 p_ot + ggplot2::theme(panel.ontop = TRUE
                , panel.background = ggplot2::element_rect(color = NA
                                                           , fill = NA))
-## Add caption
-p_ot + ggplot2::labs(caption = "Gray = Areas outside of given temp and DO
-                     values.")
-
-## Add Subtitle
+## Add subtitle and caption
 myST <- paste0("Temp ", operator_temp, " ", thresh_temp
              , " and DO ", operator_do, " ", thresh_do)
-p_ot + ggplot2::labs(subtitle = myST)
+p_ot <- p_ot +
+  ggplot2::labs(subtitle = myST) +
+  ggplot2::labs(caption = paste0("Gray = Areas outside of given"
+                             , " temp and DO values."))
 
 # save plot to temp directory
 tempdir() # show the temp directory
-ggplot2::ggsave(file.path(tempdir(), "TestLake_plotOxythermal.png"))
+ggplot2::ggsave(file.path(tempdir(), "TestLake_plotOxythermal.png")
+                , plot = p_ot)
+
+# For Comparison, heatmaps of Temperature and DO
+
+# heat map, Temp
+p_hm_temp <- plot_heatmap(data = data
+                     , col_datetime = col_datetime
+                     , col_depth = col_depth
+                     , col_measure = col_temp
+                     , lab_datetime = lab_datetime
+                     , lab_depth = lab_depth
+                     , lab_measure = lab_temp
+                     , lab_title = lab_title
+                     , contours = FALSE)
+
+# heat map, DO
+p_hm_do <- plot_heatmap(data = data
+                          , col_datetime = col_datetime
+                          , col_depth = col_depth
+                          , col_measure = col_do
+                          , lab_datetime = lab_datetime
+                          , lab_depth = lab_depth
+                          , lab_measure = "DO (mg/L)"
+                          , lab_title = lab_title
+                          , contours = FALSE)
+
+# Plot, Combine all 3
+p_oxy3 <- gridExtra::grid.arrange(p_ot, p_hm_temp, p_hm_do)
+p_oxy3
+
+# save plot to temp directory
+tempdir() # show the temp directory
+ggplot2::ggsave(file.path(tempdir(), "TestLake_plotOxythermal_3.png")
+                          , plot = p_oxy3)
 }

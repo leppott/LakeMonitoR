@@ -4,7 +4,45 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-09 11:31:46
+    #> Last Update: 2021-07-16 06:59:23
+
+# LakeMonitoR 0.1.1.9005
+
+Release - 2021-07-16
+
+-   fix: Revert Shiny app to v0.1.1 and redo changes
+    -   Shiny app Help as HTML conflicts with file upload. Redesign as
+        non-HTML
+    -   Remove semicolon as available delimiter for import files
+    -   Shiny Calculate tab labels ‘measurement’ to ‘value’
+    -   Ensure all uploaded data files going to Results/data\_input
+    -   Add tooltips to tab\_Calc
+    -   Add `ShinyBS` to global.R
+-   feat: Add missing function fun.write.log() to fun.Helper.R
+-   refactor: Rename log files with prefix “*log*”
+-   refactor: Use global “path\_results” in server.R
+-   docs: Update Vignette with `plot_oxythermal()` function
+-   docs: Update oxythermal plot example to use &lt;= 68 rather
+    than &gt;= 68
+    -   function and vignette
+
+# LakeMonitoR 0.1.1.9004
+
+Release - 2021-07-13
+
+-   fix: Unwind some changes to Shiny app. App won’t allow for upload of
+    files
+    -   Combine files tab is now working.
+-   fix: `AggregateFiles()` to `agg_depth_files()` in server.R
+-   fix: Shiny, in Aggregate section replace “import” folder with
+    “Results/data\_input” folder
+
+# LakeMonitoR 0.1.1.9003
+
+Release - 2021-07-13
+
+-   refactor: Shiny app update.
+-   docs: Update README with example to run Shiny app.
 
 # LakeMonitoR 0.1.1.9002
 

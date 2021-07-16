@@ -19,6 +19,25 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.1.9005
+===========
+Release - 2021-07-16
+
+* fix: Revert Shiny app to v0.1.1 and redo changes
+    + Shiny app Help as HTML conflicts with file upload.  Redesign as non-HTML
+    + Remove semicolon as available delimiter for import files
+    + Shiny Calculate tab labels 'measurement' to 'value'
+    + Ensure all uploaded data files going to Results/data_input
+    + Add tooltips to tab_Calc
+    + Add `ShinyBS` to global.R
+* feat: Add missing function fun.write.log() to fun.Helper.R
+* refactor: Rename log files with prefix "_log_"
+* refactor: Use global "path_results" in server.R
+* docs: Update Vignette with `plot_oxythermal()` function
+* docs: Update oxythermal plots in function help and vignette
+    + example to use <= 68 rather than >= 68
+    + Combination plot; oxythermal, heat map temp, heat map DO
+
 LakeMonitoR 0.1.1.9004
 ===========
 Release - 2021-07-13

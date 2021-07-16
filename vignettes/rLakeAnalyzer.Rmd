@@ -212,6 +212,88 @@ p_ts <- plot_ts(data = data
 print(p_ts)
 ```
 
+## plot_oxythermal
+For oxythermal habitat for coldwater fish a plot that shows depths at which 
+suitable oxythermal habitat exists during deployment period.  The user can 
+enter thresholds for temperature and dissolved oxygen.
+
+```{r plot_oxythermal}
+# Data (Test Lake)
+data         <- laketest
+
+# Column Names
+col_datetime <- "Date.Time"
+col_depth    <- "Depth"
+col_temp     <- "temp_F"
+col_do       <- "DO_conc"
+
+# Data values
+thresh_temp <- 68
+operator_temp <- "<="
+thresh_do <- 3
+operator_do <- ">="
+
+# Plot Labels
+lab_datetime <- "Date Time"
+lab_depth    <- "Depth (m)"
+lab_temp     <- "Temp (F)"
+lab_title    <- "Test Lake"
+
+# Create Plot
+p_ot <- plot_oxythermal(data = data
+                        , col_datetime = col_datetime
+                        , col_depth = col_depth
+                        , col_temp = col_temp
+                        , col_do = col_do
+                        , thresh_temp = thresh_temp
+                        , operator_temp= operator_temp
+                        , thresh_do = thresh_do
+                        , operator_do = operator_do
+                        , lab_datetime = lab_datetime
+                        , lab_depth = lab_depth
+                        , lab_temp = lab_temp
+                        , lab_title = lab_title)
+
+## Add Subtitle and Caption
+myST <- paste0("Temp ", operator_temp, " ", thresh_temp
+             , " and DO ", operator_do, " ", thresh_do)
+p_ot <- p_ot + 
+  ggplot2::labs(subtitle = myST) + 
+  ggplot2::labs(caption = paste0("Gray = Areas outside of given temp and DO "
+                , "values."))
+
+print(p_ot)
+
+# For Comparison, heatmaps of Temperature and DO
+
+# heat map, Temp
+p_hm_temp <- plot_heatmap(data = data
+                    , col_datetime = col_datetime
+                    , col_depth = col_depth
+                    , col_measure = col_temp
+                    , lab_datetime = lab_datetime
+                    , lab_depth = lab_depth
+                    , lab_measure = lab_temp
+                    , lab_title = lab_title
+                    , contours = FALSE)
+print(p_hm_temp)
+
+# heat map, DO
+p_hm_do <- plot_heatmap(data = data
+                         , col_datetime = col_datetime
+                         , col_depth = col_depth
+                         , col_measure = col_do
+                         , lab_datetime = lab_datetime
+                         , lab_depth = lab_depth
+                         , lab_measure = "DO (mg/L)"
+                         , lab_title = lab_title
+                         , contours = FALSE)
+print(p_hm_do)
+
+# Plot, Combine all 3
+gridExtra::grid.arrange(p_ot, p_hm_temp, p_hm_do)
+```
+
 ## Combining Plots
 The shiny app combines the depth plot with the heat map and saves it to the 
 Results folder.  Combining the plots is not a default feature of the package

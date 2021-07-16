@@ -45,3 +45,5 @@ Meta
 ^_other
 NEWS.rmd
 README.RMD
+^__testcode.R$
+__testcode.R
