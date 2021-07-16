@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-16 13:42:43
+    #> Last Update: 2021-07-16 16:57:58
+
+# LakeMonitoR 0.1.1.9008
+
+Release - 2021-07-16
+
+-   fix: Stratification, update column reference. Undo change in
+    v0.1.1.9007
+-   feature: Add TDOx function, Issue \#21
 
 # LakeMonitoR 0.1.1.9007
 

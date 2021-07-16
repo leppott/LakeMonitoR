@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.1.9008
+===========
+Release - 2021-07-16
+
+* fix: Stratification, update column reference.  Undo change in v0.1.1.9007
+* feature: Add TDOx function, Issue #21
+
 LakeMonitoR 0.1.1.9007
 ===========
 Release - 2021-07-16

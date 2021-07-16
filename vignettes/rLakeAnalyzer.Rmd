@@ -455,6 +455,30 @@ p_strat_tb <- p_strat_tb + ggplot2::labs(caption = paste0("Stratification >="
                                           , " 1 deg C (only 2 depths)"))
 print(p_strat_tb)
 ```
+## TDOx
+Temperature at Dissolved Oxygen x value.
+
+```{r tdox}
+# data
+data <- laketest
+
+# Columns
+col_date  <- "Date.Time"
+col_depth <- "Depth"
+col_temp  <- "temp_F"
+col_do    <- "DO_conc"
+do_x_val  <- 3
+
+tdox_3 <- tdox(data = data
+               , col_date = col_date
+               , col_depth = col_depth
+               , col_temp = col_temp
+               , col_do = col_do
+               , do_x_val = do_x_val)
+
+head(tdox_3)
+```
+
 
 ## export_rLakeAnalyzer
 Reorganize file for use with `rLakeAnalyzer` package.

@@ -199,7 +199,7 @@ stratification <- function(data
       Stratification <- rbind(Stratification, stratrow)
     }## IF ~ nrow ~ END
   }## FOR ~ i ~ END
-  Stratification <- Stratification[order(Stratification[, col_date]),]
+  Stratification <- Stratification[order(Stratification[, "Date"]),]
 
   # Calc, Start/End Dates ####
   #Determine the Start and End dates of lake stratification
