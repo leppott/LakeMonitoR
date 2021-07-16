@@ -23,7 +23,7 @@ mb_limit <- 200
 options(shiny.maxRequestSize = mb_limit * 1024^2)
 
 # "Results" folder, NAMES ----
-path_results <- file.path(".", "Results")
+path_results <- file.path("Results")
 ## Result Folder Subfolders
 dn_results_data_input     <- "data_input"
 # dn_results_data_output    <- "data_output"

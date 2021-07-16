@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-16 06:59:23
+    #> Last Update: 2021-07-16 10:36:35
+
+# LakeMonitoR 0.1.1.9006
+
+Release - 2021-07-16
+
+-   fix: Change Results folder reference in global to drop “.”
+    -   Fails in Linux with the “.” in file.path
 
 # LakeMonitoR 0.1.1.9005
 
@@ -22,9 +29,9 @@ Release - 2021-07-16
 -   refactor: Rename log files with prefix “*log*”
 -   refactor: Use global “path\_results” in server.R
 -   docs: Update Vignette with `plot_oxythermal()` function
--   docs: Update oxythermal plot example to use &lt;= 68 rather
-    than &gt;= 68
-    -   function and vignette
+-   docs: Update oxythermal plots in function help and vignette
+    -   example to use &lt;= 68 rather than &gt;= 68
+    -   Combination plot; oxythermal, heat map temp, heat map DO
 
 # LakeMonitoR 0.1.1.9004
 

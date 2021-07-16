@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.1.9006
+===========
+Release - 2021-07-16
+
+* fix: Change Results folder reference in global to drop "."
+   + Fails in Linux with the "." in file.path
+
 LakeMonitoR 0.1.1.9005
 ===========
 Release - 2021-07-16
