@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9006</span>
       </span>
     </div>
 
@@ -126,6 +126,18 @@
       <small>Source: <a href='https://github.com/leppott/LakeMonitoR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="lakemonitor-0119006" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.1.9006">
+<a href="#lakemonitor-0119006" class="anchor"></a>LakeMonitoR 0.1.1.9006</h1>
+<p>Release - 2021-07-16</p>
+<ul>
+<li>fix: Change Results folder reference in global to drop “.”
+<ul>
+<li>Fails in Linux with the “.” in file.path</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="lakemonitor-0119005" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.1.9005">
 <a href="#lakemonitor-0119005" class="anchor"></a>LakeMonitoR 0.1.1.9005</h1>
@@ -145,9 +157,10 @@
 <li>refactor: Rename log files with prefix “<em>log</em>”</li>
 <li>refactor: Use global “path_results” in server.R</li>
 <li>docs: Update Vignette with <code><a href="../reference/plot_oxythermal.html">plot_oxythermal()</a></code> function</li>
-<li>docs: Update oxythermal plot example to use &lt;= 68 rather than &gt;= 68
+<li>docs: Update oxythermal plots in function help and vignette
 <ul>
-<li>function and vignette</li>
+<li>example to use &lt;= 68 rather than &gt;= 68</li>
+<li>Combination plot; oxythermal, heat map temp, heat map DO</li>
 </ul>
 </li>
 </ul>
