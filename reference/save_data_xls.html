@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>run LakeMonitoR Shiny Example — runShiny • LakeMonitoR</title>
+<title>Save data to multi-worksheet Excel file — save_data_xls • LakeMonitoR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="run LakeMonitoR Shiny Example — runShiny" />
-<meta property="og:description" content="Launches Shiny app for LakeMonitoR" />
+<meta property="og:title" content="Save data to multi-worksheet Excel file — save_data_xls" />
+<meta property="og:description" content="Saves multiple data frames to a single Excel file." />
 
 
 
@@ -114,32 +114,64 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>run LakeMonitoR Shiny Example</h1>
-    <small class="dont-index">Source: <a href='https://github.com/leppott/LakeMonitoR/blob/master/R/runShiny.R'><code>R/runShiny.R</code></a></small>
-    <div class="hidden name"><code>runShiny.Rd</code></div>
+    <h1>Save data to multi-worksheet Excel file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/leppott/LakeMonitoR/blob/master/R/save_files_xls.R'><code>R/save_files_xls.R</code></a></small>
+    <div class="hidden name"><code>save_data_xls.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Launches Shiny app for LakeMonitoR</p>
+    <p>Saves multiple data frames to a single Excel file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>runShiny</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>save_data_xls</span><span class='op'>(</span><span class='va'>data_names</span>, <span class='va'>path</span>, col_names <span class='op'>=</span> <span class='cn'>TRUE</span>, format_headers <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data_names</th>
+      <td><p>data frame or named list of data frames</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>Path, including filename, for Excel file.</p></td>
+    </tr>
+    <tr>
+      <th>col_names</th>
+      <td><p>Logical to include column names.  Default = TRUE</p></td>
+    </tr>
+    <tr>
+      <th>format_headers</th>
+      <td><p>Logical to format headers (bold and centered).
+Default = TRUE</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a saved Excel file with named data saved to individual worksheets.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The Shiny app based on the R package LakeMonitoR is included in the
-R package.
-This function launches that app.</p>
-<p>The Shiny app is online at:
-https://tetratech-wtr-wne.shinyapps.io/LakeMonitoR/</p>
+    <p>Saves multiple data frames to a multiple worksheets in a single Excel
+file.</p>
+<p>The data must be loaded into R.</p>
+<p>The `writexl` package is used so that Java is not necessary.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Run Function</span>
-<span class='fu'>runShiny</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data (Test Lake)</span>
+<span class='va'>data</span>         <span class='op'>&lt;-</span> <span class='va'>laketest</span>
+
+
+<span class='va'>path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext <span class='op'>=</span> <span class='st'>".xlsx"</span><span class='op'>)</span>
+<span class='va'>data_names</span> <span class='op'>&lt;-</span> <span class='va'>list</span>
+
+
+<span class='co'># Save to Excel</span>
+<span class='fu'>save_data_xls</span><span class='op'>(</span><span class='va'>path</span>
+              , <span class='va'>data_names</span>
+              , col_names <span class='op'>=</span> <span class='cn'>TRUE</span>
+              , format_headers <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(x): there is no package called ‘writexl’</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

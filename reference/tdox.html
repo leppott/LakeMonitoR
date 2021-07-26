@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9009</span>
       </span>
     </div>
 
@@ -85,19 +85,10 @@
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/LakeMonitoR.html">Get started</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/rLakeAnalyzer.html">rLakeAnalyzer Examples</a>
-    </li>
-  </ul>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -206,7 +197,7 @@ present in the data.</p>
                , do_x_val <span class='op'>=</span> <span class='va'>do_x_val</span><span class='op'>)</span>
 
 <span class='va'>tdox_3</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 104 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 104 × 6</span>
 #&gt;    TimeFrame_Name TimeFrame_Value TDO_x_value   min  mean   max
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> Year           2018                      3  50.9  59.9  64.2
@@ -242,11 +233,65 @@ present in the data.</p>
                , do_x_val <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 
 <span class='va'>tdox_4</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 6</span>
 #&gt;   TimeFrame_Name TimeFrame_Value TDO_x_value   min  mean   max
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> Year           2021                      3  23.7  23.7  23.7
-#&gt; <span style='color: #BCBCBC;'>2</span> Date           2021-07-16                3  23.7  23.7  23.7</div></pre>
+#&gt; <span style='color: #BCBCBC;'>2</span> Date           2021-07-26                3  23.7  23.7  23.7</div><div class='input'>
+<span class='co'>#~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class='co'>## Example 3, Single profile with plot</span>
+
+<span class='co'># Data</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>laketest</span>
+
+<span class='co'># Columns</span>
+<span class='va'>col_date</span>  <span class='op'>&lt;-</span> <span class='st'>"Date.Time"</span>
+<span class='va'>col_depth</span> <span class='op'>&lt;-</span> <span class='st'>"Depth"</span>
+<span class='va'>col_temp</span>  <span class='op'>&lt;-</span> <span class='st'>"temp_F"</span>
+<span class='va'>col_do</span>    <span class='op'>&lt;-</span> <span class='st'>"DO_conc"</span>
+<span class='va'>do_x_val</span>  <span class='op'>&lt;-</span> <span class='fl'>3</span>
+
+<span class='va'>df_plot</span> <span class='op'>&lt;-</span> <span class='va'>data</span><span class='op'>[</span><span class='va'>data</span><span class='op'>[</span>, <span class='st'>"Date.Time"</span><span class='op'>]</span> <span class='op'>==</span> <span class='st'>"2018-07-03 12:00"</span>, <span class='op'>]</span>
+
+<span class='va'>tdox_3_plot</span> <span class='op'>&lt;-</span> <span class='fu'>tdox</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>df_plot</span>
+                    , col_date <span class='op'>=</span> <span class='va'>col_date</span>
+                    , col_depth <span class='op'>=</span> <span class='va'>col_depth</span>
+                    , col_temp <span class='op'>=</span> <span class='va'>col_temp</span>
+                    , col_do <span class='op'>=</span> <span class='va'>col_do</span>
+                    , do_x_val <span class='op'>=</span> <span class='va'>do_x_val</span><span class='op'>)</span>
+
+<span class='va'>tdox_3_plot</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 6</span>
+#&gt;   TimeFrame_Name TimeFrame_Value TDO_x_value   min  mean   max
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> Year           2018                      3  53.7  53.7  53.7
+#&gt; <span style='color: #BCBCBC;'>2</span> Date           2018-07-03                3  53.7  53.7  53.7</div><div class='input'>
+<span class='co'># Plot</span>
+<span class='co'>## Temp, x-bottom, circles</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>df_plot</span><span class='op'>$</span><span class='va'>temp_F</span>, <span class='va'>df_plot</span><span class='op'>$</span><span class='va'>Depth</span>, col <span class='op'>=</span> <span class='st'>"black"</span>
+     , ylim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>df_plot</span><span class='op'>$</span><span class='va'>Depth</span><span class='op'>)</span><span class='op'>)</span>
+     , xlab <span class='op'>=</span> <span class='st'>"Temperature (F)"</span>, ylab <span class='op'>=</span> <span class='st'>"Depth (m)"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/lines.html'>lines</a></span><span class='op'>(</span><span class='va'>df_plot</span><span class='op'>$</span><span class='va'>temp_F</span>, <span class='va'>df_plot</span><span class='op'>$</span><span class='va'>Depth</span>, col <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span><span class='op'>(</span>v <span class='op'>=</span> <span class='fl'>53.66</span>, col <span class='op'>=</span> <span class='st'>"black"</span>, lty <span class='op'>=</span> <span class='fl'>3</span>, lwd <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='input'><span class='co'>## plot on top of existing plot</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>new<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='co'>## Add DO</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>df_plot</span><span class='op'>$</span><span class='va'>DO_conc</span>, <span class='va'>df_plot</span><span class='op'>$</span><span class='va'>Depth</span>, col <span class='op'>=</span> <span class='st'>"blue"</span>, pch <span class='op'>=</span> <span class='fl'>17</span>
+     , ylim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>df_plot</span><span class='op'>$</span><span class='va'>Depth</span><span class='op'>)</span><span class='op'>)</span>
+     , xaxt <span class='op'>=</span> <span class='st'>"n"</span>, yaxt <span class='op'>=</span> <span class='st'>"n"</span>, xlab <span class='op'>=</span> <span class='cn'>NA</span>, ylab <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/lines.html'>lines</a></span><span class='op'>(</span><span class='va'>df_plot</span><span class='op'>$</span><span class='va'>DO_conc</span>, <span class='va'>df_plot</span><span class='op'>$</span><span class='va'>Depth</span>, col <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/axis.html'>axis</a></span><span class='op'>(</span>side <span class='op'>=</span> <span class='fl'>3</span>, col.axis <span class='op'>=</span> <span class='st'>"blue"</span>, col.lab <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/mtext.html'>mtext</a></span><span class='op'>(</span><span class='st'>"Dissolved Oxygen (mg/L)"</span>, side <span class='op'>=</span> <span class='fl'>3</span>, line <span class='op'>=</span> <span class='fl'>3</span>, col <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span><span class='op'>(</span>v <span class='op'>=</span> <span class='fl'>3</span>, col <span class='op'>=</span> <span class='st'>"blue"</span>, lty <span class='op'>=</span> <span class='fl'>3</span>, lwd <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='input'><span class='co'>## Legend</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/legend.html'>legend</a></span><span class='op'>(</span><span class='st'>"bottomright"</span>
+       , <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Temperature"</span>, <span class='st'>"Temp = 53.66 @ DO = 3"</span>, <span class='st'>"Dissolved Oxygen"</span>, <span class='st'>"DO = 3"</span><span class='op'>)</span>
+       , col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"black"</span>, <span class='st'>"black"</span>, <span class='st'>"blue"</span>, <span class='st'>"blue"</span><span class='op'>)</span>
+       , pch <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>21</span>, <span class='cn'>NA</span>, <span class='fl'>17</span>, <span class='cn'>NA</span><span class='op'>)</span>
+       , lty <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>
+       , lwd <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='tdox-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
