@@ -93,4 +93,54 @@ tdox_4 <- tdox(data = data2
                , do_x_val = 3)
 
 tdox_4
+
+#~~~~~~~~~~~~~~~~~~~~
+
+## Example 3, Single profile with plot
+
+# Data
+data <- laketest
+
+# Columns
+col_date  <- "Date.Time"
+col_depth <- "Depth"
+col_temp  <- "temp_F"
+col_do    <- "DO_conc"
+do_x_val  <- 3
+
+df_plot <- data[data[, "Date.Time"] == "2018-07-03 12:00", ]
+
+tdox_3_plot <- tdox(data = df_plot
+                    , col_date = col_date
+                    , col_depth = col_depth
+                    , col_temp = col_temp
+                    , col_do = col_do
+                    , do_x_val = do_x_val)
+
+tdox_3_plot
+
+# Plot
+## Temp, x-bottom, circles
+plot(df_plot$temp_F, df_plot$Depth, col = "black"
+     , ylim = rev(range(df_plot$Depth))
+     , xlab = "Temperature (F)", ylab = "Depth (m)")
+lines(df_plot$temp_F, df_plot$Depth, col = "black")
+abline(v = 53.66, col = "black", lty = 3, lwd = 2)
+## plot on top of existing plot
+par(new=TRUE)
+## Add DO
+plot(df_plot$DO_conc, df_plot$Depth, col = "blue", pch = 17
+     , ylim = rev(range(df_plot$Depth))
+     , xaxt = "n", yaxt = "n", xlab = NA, ylab = NA)
+lines(df_plot$DO_conc, df_plot$Depth, col = "blue")
+axis(side = 3, col.axis = "blue", col.lab = "blue")
+mtext("Dissolved Oxygen (mg/L)", side = 3, line = 3, col = "blue")
+abline(v = 3, col = "blue", lty = 3, lwd = 2)
+## Legend
+legend("bottomright"
+       , c("Temperature", "Temp = 53.66 @ DO = 3", "Dissolved Oxygen", "DO = 3")
+       , col = c("black", "black", "blue", "blue")
+       , pch = c(21, NA, 17, NA)
+       , lty = c(1, 3, 1, 3)
+       , lwd = c(1, 2, 1, 2))
 }

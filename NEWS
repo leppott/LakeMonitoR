@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-16 16:57:58
+    #> Last Update: 2021-07-26 13:48:06
+
+# LakeMonitoR 0.1.1.9009
+
+Release - 2021-07-26
+
+-   docs: Rename vignette
+-   docs: Add plotting example for TDO3 to vignette, Issue \#21
 
 # LakeMonitoR 0.1.1.9008
 
