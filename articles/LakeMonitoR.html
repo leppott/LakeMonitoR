@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9009</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9010</span>
       </span>
     </div>
 
@@ -794,7 +794,7 @@
 <div id="approx-bathy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#approx-bathy" class="anchor"></a>approx.bathy</h2>
-<p>Estimate hypsography curve</p>
+<p>Estimate hypsography curve.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Voldev.ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/approx.bathy.html">approx.bathy</a></span><span class="op">(</span>Zmax <span class="op">=</span> <span class="fl">25</span>, Zmean <span class="op">=</span> <span class="fl">12</span>, lkeArea <span class="op">=</span> <span class="fl">39400000</span>, method <span class="op">=</span> <span class="st">"voldev"</span><span class="op">)</span>
 <span class="va">Voldevshallow.ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/approx.bathy.html">approx.bathy</a></span><span class="op">(</span>Zmax <span class="op">=</span> <span class="fl">25</span>, Zmean <span class="op">=</span> <span class="fl">6</span>, lkeArea <span class="op">=</span> <span class="fl">39400000</span>, method <span class="op">=</span> <span class="st">"voldev"</span><span class="op">)</span>
@@ -809,7 +809,7 @@
 <div id="buoyancy-freq" class="section level2">
 <h2 class="hasAnchor">
 <a href="#buoyancy-freq" class="anchor"></a>buoyancy.freq</h2>
-<p>Calculate buoyancy frequency</p>
+<p>Calculate buoyancy frequency.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># A vector of water temperatures</span>
 <span class="va">wtr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22.51</span>, <span class="fl">22.42</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.36</span>, <span class="fl">22.3</span>, <span class="fl">22.21</span>, <span class="fl">22.11</span>, <span class="fl">21.23</span>, <span class="fl">16.42</span>, 
@@ -829,7 +829,7 @@
 <div id="center-buoyancy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#center-buoyancy" class="anchor"></a>center.buoyancy</h2>
-<p>Calculate the center of buoyancy</p>
+<p>Calculate the center of buoyancy.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># A vector of water temperatures</span>
 <span class="va">wtr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22.51</span>, <span class="fl">22.42</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.36</span>, <span class="fl">22.3</span>, <span class="fl">22.21</span>, <span class="fl">22.11</span>, <span class="fl">21.23</span>, <span class="fl">16.42</span>, 
@@ -846,21 +846,21 @@
 <div id="epi-temperature" class="section level2">
 <h2 class="hasAnchor">
 <a href="#epi-temperature" class="anchor"></a>epi.temperature</h2>
-<p>Get volumetrically averaged epilimnion temp</p>
+<p>Get volumetrically averaged epilimnion temp.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## No Example</span></code></pre></div>
 </div>
 <div id="hypo-temperature" class="section level2">
 <h2 class="hasAnchor">
 <a href="#hypo-temperature" class="anchor"></a>hypo.temperature</h2>
-<p>Get volumetrically averaged hypolimnion temp</p>
+<p>Get volumetrically averaged hypolimnion temp.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">##No Example</span></code></pre></div>
 </div>
 <div id="internal-energy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#internal-energy" class="anchor"></a>internal.energy</h2>
-<p>Internal energy function (Joules)</p>
+<p>Internal energy function (Joules).</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bthA</span>   <span class="op">&lt;-</span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">900</span>,<span class="fl">864</span>,<span class="fl">820</span>,<span class="fl">200</span>,<span class="fl">10</span><span class="op">)</span>
 <span class="va">bthD</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2.3</span>,<span class="fl">2.5</span>,<span class="fl">4.2</span>,<span class="fl">5.8</span>,<span class="fl">7</span><span class="op">)</span>
@@ -876,7 +876,7 @@
 <div id="lake-number" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lake-number" class="anchor"></a>lake.number</h2>
-<p>Calculate Lake Number</p>
+<p>Calculate Lake Number.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bthA</span>    <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">900</span>,<span class="fl">864</span>,<span class="fl">820</span>,<span class="fl">200</span>,<span class="fl">10</span><span class="op">)</span>
 <span class="va">bthD</span>    <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2.3</span>,<span class="fl">2.5</span>,<span class="fl">4.2</span>,<span class="fl">5.8</span>,<span class="fl">7</span><span class="op">)</span>
@@ -924,7 +924,8 @@
 <div id="meta-depths" class="section level2">
 <h2 class="hasAnchor">
 <a href="#meta-depths" class="anchor"></a>meta.depths</h2>
-<p>Calculate the Top and Bottom Depths of the Metalimnion</p>
+<p>Calculate the Top and Bottom Depths of the Metalimnion.</p>
+<p>To get the thickness of Metalimnion subtract the two values.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wtr</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22.51</span>, <span class="fl">22.42</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.4</span>, <span class="fl">22.36</span>, <span class="fl">22.3</span>, <span class="fl">22.21</span>, <span class="fl">22.11</span>, <span class="fl">21.23</span>, <span class="fl">16.42</span>, 
 <span class="fl">15.15</span>, <span class="fl">14.24</span>, <span class="fl">13.35</span>, <span class="fl">10.94</span>, <span class="fl">10.43</span>, <span class="fl">10.36</span>, <span class="fl">9.94</span>, <span class="fl">9.45</span>, <span class="fl">9.1</span>, <span class="fl">8.91</span>, <span class="fl">8.58</span>, <span class="fl">8.43</span><span class="op">)</span>
@@ -933,15 +934,20 @@
              <span class="fl">17</span>, <span class="fl">18</span>, <span class="fl">19</span>, <span class="fl">20</span><span class="op">)</span>
              
 <span class="va">m.d</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/meta.depths.html">meta.depths</a></span><span class="op">(</span><span class="va">wtr</span>, <span class="va">depths</span>, slope<span class="op">=</span><span class="fl">0.1</span>, seasonal<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'The top depth of the metalimnion is:'</span>, <span class="va">m.d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; The top depth of the metalimnion is: 5.943727</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">'The bottom depth of the metalimnion is:'</span>, <span class="va">m.d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; The bottom depth of the metalimnion is: 11.0914</span></code></pre></div>
+<span class="co">#&gt; The bottom depth of the metalimnion is: 11.0914</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"The thickness of the metalimnion is: "</span>, <span class="va">m.d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">m.d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="co">#&gt; The thickness of the metalimnion is:  5.147674</span></code></pre></div>
 </div>
 <div id="schmidt-stability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#schmidt-stability" class="anchor"></a>schmidt.stability</h2>
-<p>Calculate the Schmidt stability</p>
+<p>Calculate the Schmidt stability.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bthA</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">900</span>,<span class="fl">864</span>,<span class="fl">820</span>,<span class="fl">200</span>,<span class="fl">10</span><span class="op">)</span>
 <span class="va">bthD</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2.3</span>,<span class="fl">2.5</span>,<span class="fl">4.2</span>,<span class="fl">5.8</span>,<span class="fl">7</span><span class="op">)</span>
@@ -975,10 +981,12 @@
 <div id="ts-buoyancy-freq" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-buoyancy-freq" class="anchor"></a>ts.buoyancy.freq</h2>
-<p>Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile</p>
+<p>Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
-<span class="va">wtr.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
+<span class="va">wtr.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>
+                        , <span class="st">'Sparkling.daily.wtr'</span>
+                        , package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
 <span class="co">#Load data for example lake, Sparkilng Lake, Wisconsin.</span>
 <span class="va">sp.wtr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/load.ts.html">load.ts</a></span><span class="op">(</span><span class="va">wtr.path</span><span class="op">)</span>
@@ -989,12 +997,113 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">N2</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Buoyancy Frequency'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">SN2</span>, col<span class="op">=</span><span class="st">'red'</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/ts.buoyancy.freq-1.png" width="512"></p>
+<div id="ts-buoyancy-freq-lakemonitor" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ts-buoyancy-freq-lakemonitor" class="anchor"></a>ts.buoyancy.freq, LakeMonitoR</h3>
+<p>Using LakeMonitoR data.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leppott/LakeMonitoR">LakeMonitoR</a></span><span class="op">)</span>
+
+<span class="co"># Convert Data for use with rLakeAnalyzer</span>
+
+<span class="co"># Data</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="va">laketemp_ddm</span>
+
+<span class="co"># Columns, date listed first</span>
+<span class="va">col_depth</span> <span class="op">&lt;-</span> <span class="st">"Depth"</span>
+<span class="va">col_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Date"</span>, <span class="st">"Measurement"</span><span class="op">)</span>
+<span class="va">col_rLA</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"datetime"</span>, <span class="st">"wtr"</span><span class="op">)</span>
+
+<span class="co"># Run function</span>
+<span class="va">df_rLA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/export_rLakeAnalyzer.html">export_rLakeAnalyzer</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">col_depth</span>, <span class="va">col_data</span>, <span class="va">col_rLA</span><span class="op">)</span>
+
+<span class="co"># Calculate</span>
+<span class="va">N2</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.buoyancy.freq.html">ts.buoyancy.freq</a></span><span class="op">(</span><span class="va">df_rLA</span>, seasonal<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">SN2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.buoyancy.freq.html">ts.buoyancy.freq</a></span><span class="op">(</span><span class="va">df_rLA</span>, seasonal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">N2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">datetime</th>
+<th align="right">n2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2017-01-19</td>
+<td align="right">5.38e-05</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-20</td>
+<td align="right">5.33e-05</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-21</td>
+<td align="right">5.38e-05</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-22</td>
+<td align="right">5.68e-05</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-23</td>
+<td align="right">6.34e-05</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-24</td>
+<td align="right">6.77e-05</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">SN2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">datetime</th>
+<th align="right">n2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2017-01-19</td>
+<td align="right">5.38e-05</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-20</td>
+<td align="right">5.33e-05</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-21</td>
+<td align="right">5.38e-05</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-22</td>
+<td align="right">5.68e-05</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-23</td>
+<td align="right">6.34e-05</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-24</td>
+<td align="right">6.77e-05</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">N2</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Buoyancy Frequency'</span>, xlab<span class="op">=</span><span class="st">'Date'</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">SN2</span>, col<span class="op">=</span><span class="st">'red'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>
+       , legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"N2"</span>, <span class="st">"SN2"</span><span class="op">)</span>
+       , col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span><span class="op">)</span>
+       , lwd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="LakeMonitoR_files/figure-html/unnamed-chunk-3-1.png" width="512"></p>
+</div>
 </div>
 <div id="ts-center-buoyancy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-center-buoyancy" class="anchor"></a>ts.center.buoyancy</h2>
-<p>Calculates the center of buoyancy for multiple temperature profiles</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<p>Calculates the center of buoyancy for multiple temperature profiles.</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">wtr.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
@@ -1013,26 +1122,94 @@
    lty<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,
    lwd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>,<span class="fl">1.5</span><span class="op">)</span>,col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"red"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/ts.center.buoyancy-1.png" width="512"></p>
+<div id="ts-center-buoyancy-lakemonitor" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ts-center-buoyancy-lakemonitor" class="anchor"></a>ts.center.buoyancy, LakeMonitoR</h3>
+<p>Using LakeMonitoR data.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leppott/LakeMonitoR">LakeMonitoR</a></span><span class="op">)</span>
+
+<span class="co"># Convert Data for use with rLakeAnalyzer</span>
+
+<span class="co"># Data</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="va">laketemp_ddm</span>
+
+<span class="co"># Columns, date listed first</span>
+<span class="va">col_depth</span> <span class="op">&lt;-</span> <span class="st">"Depth"</span>
+<span class="va">col_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Date"</span>, <span class="st">"Measurement"</span><span class="op">)</span>
+<span class="va">col_rLA</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"datetime"</span>, <span class="st">"wtr"</span><span class="op">)</span>
+
+<span class="co"># Run function</span>
+<span class="va">df_rLA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/export_rLakeAnalyzer.html">export_rLakeAnalyzer</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">col_depth</span>, <span class="va">col_data</span>, <span class="va">col_rLA</span><span class="op">)</span>
+
+<span class="co"># Calculate</span>
+<span class="va">t.d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.thermo.depth.html">ts.thermo.depth</a></span><span class="op">(</span><span class="va">df_rLA</span><span class="op">)</span>
+
+<span class="va">center.N2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.center.buoyancy.html">ts.center.buoyancy</a></span><span class="op">(</span><span class="va">df_rLA</span><span class="op">)</span>
+
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">center.N2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">datetime</th>
+<th align="right">cent.n2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2017-01-19</td>
+<td align="right">14.53531</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-20</td>
+<td align="right">14.52814</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-21</td>
+<td align="right">14.56947</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-22</td>
+<td align="right">14.55145</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-23</td>
+<td align="right">14.43304</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-24</td>
+<td align="right">14.26047</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">center.N2</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Depth (m)'</span>, xlab<span class="op">=</span><span class="st">'Date'</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">19</span>,<span class="fl">0</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">t.d</span>, type<span class="op">=</span><span class="st">'l'</span>, col<span class="op">=</span><span class="st">'red'</span>, lwd <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">t.d</span><span class="op">[</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="fl">.25</span>,
+   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'center of buoyancy'</span>,<span class="st">'thermocline depth'</span><span class="op">)</span>,
+   lty<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,
+   lwd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>,<span class="fl">1.5</span><span class="op">)</span>,col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"red"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></code></pre></div>
+<p><img src="LakeMonitoR_files/figure-html/unnamed-chunk-4-1.png" width="512"></p>
+</div>
 </div>
 <div id="ts-internal-energy" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-internal-energy" class="anchor"></a>ts.internal.energy</h2>
-<p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<p>Calculate physical indices for a timeseries.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-lake-number" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-lake-number" class="anchor"></a>ts.lake.number</h2>
-<p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<p>Calculate physical indices for a timeseries.</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-layer-temperature" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-layer-temperature" class="anchor"></a>ts.layer.temperature</h2>
-<p>Calculate volume-weighted average water temperature across a range of depths for a timeseries</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<p>Calculate volume-weighted average water temperature across a range of depths for a timeseries.</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">wtr.path</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 <span class="va">bathy.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.bth'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
@@ -1046,7 +1223,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">l.t</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">l.t</span><span class="op">$</span><span class="va">layer.temp</span>, type<span class="op">=</span><span class="st">'l'</span>, 
       ylab<span class="op">=</span><span class="st">'Volumetrically averaged lake temperature'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/ts.layer.temperature-1.png" width="512"></p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">l.t</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">layer.temp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -1058,21 +1235,102 @@
 <div id="ts-meta-depths" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-meta-depths" class="anchor"></a>ts.meta.depths</h2>
-<p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<p>Calculate physical indices for a timeseries.</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
-<span class="va">exampleFilePath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
+<span class="va">exampleFilePath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>
+                               , <span class="st">'Sparkling.daily.wtr'</span>
+                               , package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
 <span class="co">#Load</span>
 <span class="va">sparkling.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/load.ts.html">load.ts</a></span><span class="op">(</span><span class="va">exampleFilePath</span><span class="op">)</span>
 
-<span class="co">#calculate and plot the metalimnion depths</span>
+<span class="co"># Calculate and plot the metalimnion depths</span>
 <span class="va">m.d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.meta.depths.html">ts.meta.depths</a></span><span class="op">(</span><span class="va">sparkling.temp</span><span class="op">)</span>
+<span class="va">m.d</span><span class="op">$</span><span class="va">thickness</span> <span class="op">&lt;-</span> <span class="va">m.d</span><span class="op">$</span><span class="va">bottom</span> <span class="op">-</span> <span class="va">m.d</span><span class="op">$</span><span class="va">top</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">m.d</span><span class="op">$</span><span class="va">top</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Meta Depths (m)'</span>, xlab<span class="op">=</span><span class="st">'Date'</span>, col<span class="op">=</span><span class="st">'blue'</span><span class="op">)</span>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">datetime</th>
+<th align="right">top</th>
+<th align="right">bottom</th>
+<th align="right">thickness</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2009-05-02 10:00:00</td>
+<td align="right">7.543954</td>
+<td align="right">7.543954</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">2009-05-03 10:00:00</td>
+<td align="right">7.488136</td>
+<td align="right">7.488136</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">2009-05-04 10:00:00</td>
+<td align="right">7.259722</td>
+<td align="right">7.259722</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">2009-05-05 10:00:00</td>
+<td align="right">4.585259</td>
+<td align="right">4.585259</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">2009-05-06 10:00:00</td>
+<td align="right">6.878275</td>
+<td align="right">6.878275</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">2009-05-07 10:00:00</td>
+<td align="right">2.386936</td>
+<td align="right">2.386936</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">2009-05-08 10:00:00</td>
+<td align="right">2.533029</td>
+<td align="right">3.174465</td>
+<td align="right">0.6414363</td>
+</tr>
+<tr class="even">
+<td align="left">2009-05-09 10:00:00</td>
+<td align="right">3.209228</td>
+<td align="right">4.311154</td>
+<td align="right">1.1019260</td>
+</tr>
+<tr class="odd">
+<td align="left">2009-05-10 10:00:00</td>
+<td align="right">3.534072</td>
+<td align="right">4.543989</td>
+<td align="right">1.0099178</td>
+</tr>
+<tr class="even">
+<td align="left">2009-05-11 10:00:00</td>
+<td align="right">3.769027</td>
+<td align="right">4.788044</td>
+<td align="right">1.0190164</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">$</span><span class="va">datetime</span>
+     , <span class="va">m.d</span><span class="op">$</span><span class="va">top</span>
+     , type<span class="op">=</span><span class="st">'l'</span>
+     , ylab<span class="op">=</span><span class="st">'Meta Depths (m)'</span>
+     , xlab<span class="op">=</span><span class="st">'Date'</span>
+     , col<span class="op">=</span><span class="st">'blue'</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">m.d</span><span class="op">$</span><span class="va">bottom</span>, col<span class="op">=</span><span class="st">'red'</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/ts.meta.depths-1.png" width="512"></p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">m.d</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">top</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -1084,19 +1342,270 @@
                      , color <span class="op">=</span> <span class="st">"red"</span>
                      , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/ts.meta.depths-2.png" width="512"></p>
+<div id="ts-meta-depths-lakemonitor" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ts-meta-depths-lakemonitor" class="anchor"></a>ts.meta.depths, LakeMonitoR</h3>
+<p>Using LakeMonitoR data.</p>
+<p>Then calculate for epilimnion and hypolimnion temp difference.</p>
+<p>Red is hypolimnion and blue is metalimnion.</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leppott/LakeMonitoR">LakeMonitoR</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:xts':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     first, last</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+
+<span class="co"># Convert Data for use with rLakeAnalyzer</span>
+
+<span class="co"># Data</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="va">laketemp_ddm</span>
+
+<span class="co"># Columns, date listed first</span>
+<span class="va">col_depth</span> <span class="op">&lt;-</span> <span class="st">"Depth"</span>
+<span class="va">col_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Date"</span>, <span class="st">"Measurement"</span><span class="op">)</span>
+<span class="va">col_rLA</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"datetime"</span>, <span class="st">"wtr"</span><span class="op">)</span>
+
+<span class="co"># Run function</span>
+<span class="va">df_rLA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/export_rLakeAnalyzer.html">export_rLakeAnalyzer</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">col_depth</span>, <span class="va">col_data</span>, <span class="va">col_rLA</span><span class="op">)</span>
+
+<span class="co"># Calculate</span>
+<span class="va">m.d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.meta.depths.html">ts.meta.depths</a></span><span class="op">(</span><span class="va">df_rLA</span><span class="op">)</span>
+<span class="va">m.d</span><span class="op">$</span><span class="va">thickness</span> <span class="op">&lt;-</span> <span class="va">m.d</span><span class="op">$</span><span class="va">bottom</span> <span class="op">-</span> <span class="va">m.d</span><span class="op">$</span><span class="va">top</span>
+
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">m.d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">datetime</th>
+<th align="right">top</th>
+<th align="right">bottom</th>
+<th align="right">thickness</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2017-01-19</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-20</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-21</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-22</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-23</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-24</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-25</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-26</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-27</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-28</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># ggplot</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">m.d</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">top</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"blue"</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Meta Depths (m)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">m.d</span>
+                     , <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">bottom</span><span class="op">)</span>
+                     , color <span class="op">=</span> <span class="st">"red"</span>
+                     , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="LakeMonitoR_files/figure-html/unnamed-chunk-5-1.png" width="512"></p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+
+<span class="co"># temp diff epi and hypo</span>
+<span class="va">df_merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">m.d</span>, by.x <span class="op">=</span> <span class="st">"Date"</span>, by.y <span class="op">=</span> <span class="st">"datetime"</span><span class="op">)</span>
+
+<span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Epi"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Depth"</span><span class="op">]</span> <span class="op">&lt;</span> <span class="va">df_merge</span><span class="op">[</span>,  <span class="st">"top"</span><span class="op">]</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Meta"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+<span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Hypo"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Depth"</span><span class="op">]</span> <span class="op">&gt;</span> <span class="va">df_merge</span><span class="op">[</span>,  <span class="st">"bottom"</span><span class="op">]</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Meta"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Epi"</span><span class="op">]</span> <span class="op">+</span> <span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Hypo"</span><span class="op">]</span> <span class="op">==</span> <span class="fl">0</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Layer"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Epi"</span><span class="op">]</span> <span class="op">==</span> <span class="cn">TRUE</span>
+                            , <span class="st">"Epi"</span>
+                            , <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Meta"</span><span class="op">]</span> <span class="op">==</span>  <span class="cn">TRUE</span>
+                                  , <span class="st">"Meta"</span>
+                                  , <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Hypo"</span><span class="op">]</span> <span class="op">==</span>  <span class="cn">TRUE</span>
+                                          , <span class="st">"Hypo"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">col_datetime</span> <span class="op">&lt;-</span> <span class="st">"Date"</span>
+<span class="va">col_depth</span> <span class="op">&lt;-</span> <span class="st">"Depth"</span>
+<span class="va">col_measure</span> <span class="op">&lt;-</span> <span class="st">"Measurement"</span>
+<span class="va">col_layer</span> <span class="op">&lt;-</span> <span class="st">"Layer"</span>
+
+<span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Layer"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">df_merge</span><span class="op">[</span>, <span class="st">"Layer"</span><span class="op">]</span>
+                               , levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Epi"</span>, <span class="st">"Meta"</span>, <span class="st">"Hypo"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">stats_layers</span> <span class="op">&lt;-</span> <span class="va">df_merge</span> <span class="op">%&gt;%</span>
+      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_datetime</span><span class="op">]</span><span class="op">]</span>, <span class="va">.data</span><span class="op">[[</span><span class="va">col_layer</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span>
+      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>.groups <span class="op">=</span> <span class="st">"keep"</span>
+                       <span class="co">#, groupname = col_datetime</span>
+                       , n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+                       , ndays <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_datetime</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+                       , mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , median <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                                , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , range <span class="op">=</span> <span class="va">max</span> <span class="op">-</span> <span class="va">min</span>
+                       , sd <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , var <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , cv <span class="op">=</span> <span class="va">sd</span><span class="op">/</span><span class="va">mean</span>
+                       , q01 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.01</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , q05 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.05</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , q10 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.10</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , q25 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.25</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , q50 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.50</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , q75 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.75</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , q90 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.90</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , q95 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.95</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       , q99 <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">col_measure</span><span class="op">]</span><span class="op">]</span>
+                                               , probs <span class="op">=</span> <span class="fl">.99</span>
+                                               , na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+                       <span class="co">#, n_below = sum(.data[["below"]], na.rm = TRUE)</span>
+      <span class="op">)</span>
+
+<span class="co"># pivot wider, min layer temp</span>
+
+<span class="va">layers_min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span><span class="va">stats_layers</span>
+                          , id_cols <span class="op">=</span> <span class="st">"Date"</span>
+                          , names_from <span class="op">=</span> <span class="st">"Layer"</span>
+                          , names_sort <span class="op">=</span> <span class="cn">TRUE</span>
+                          , values_from <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span>
+
+<span class="va">layers_min</span><span class="op">[</span>, <span class="st">"diff_EH"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">layers_min</span><span class="op">[</span>, <span class="st">"Hypo"</span><span class="op">]</span> <span class="op">-</span> <span class="va">layers_min</span><span class="op">[</span>, <span class="st">"Epi"</span><span class="op">]</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">layers_min</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 × 6</span>
+<span class="co">#&gt; # Groups:   Date [6]</span>
+<span class="co">#&gt;   Date         Epi  Meta  Hypo  `NA` diff_EH</span>
+<span class="co">#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 2017-01-19 0.961    NA  1.07    NA   0.110</span>
+<span class="co">#&gt; 2 2017-01-20 0.967    NA  1.08    NA   0.109</span>
+<span class="co">#&gt; 3 2017-01-21 0.973    NA  1.08    NA   0.111</span>
+<span class="co">#&gt; 4 2017-01-22 0.973    NA  1.09    NA   0.117</span>
+<span class="co">#&gt; 5 2017-01-23 0.969    NA  1.10    NA   0.131</span>
+<span class="co">#&gt; 6 2017-01-24 0.960    NA  1.10    NA   0.139</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">layers_min</span><span class="op">$</span><span class="va">diff_EH</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></code></pre></div>
+<p><img src="LakeMonitoR_files/figure-html/unnamed-chunk-5-2.png" width="512"></p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">layers_min</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">diff_EH</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>
+                , y <span class="op">=</span> <span class="st">"Temperature Difference (C)"</span>
+                , title <span class="op">=</span> <span class="st">"Comparison of Epilimnion and Hypolimnion"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>  </code></pre></div>
+<p><img src="LakeMonitoR_files/figure-html/unnamed-chunk-5-3.png" width="512"></p>
+</div>
 </div>
 <div id="ts-schmidt-stability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-schmidt-stability" class="anchor"></a>ts.schmidt.stability</h2>
-<p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<p>Calculate physical indices for a timeseries.</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
+<div id="ts-schmidt-stability-lakemonitor" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ts-schmidt-stability-lakemonitor" class="anchor"></a>ts.schmidt.stability, LakeMonitor</h3>
+<p>Using LakeMonitoR data. Requires bathymetry data.</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leppott/LakeMonitoR">LakeMonitoR</a></span><span class="op">)</span>
+
+<span class="co"># Convert Data for use with rLakeAnalyzer</span>
+
+<span class="co"># Data</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="va">laketemp_ddm</span>
+<span class="va">bathy</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+
+<span class="co"># Columns, date listed first</span>
+<span class="va">col_depth</span> <span class="op">&lt;-</span> <span class="st">"Depth"</span>
+<span class="va">col_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Date"</span>, <span class="st">"Measurement"</span><span class="op">)</span>
+<span class="va">col_rLA</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"datetime"</span>, <span class="st">"wtr"</span><span class="op">)</span>
+
+<span class="co"># Run function</span>
+<span class="va">df_rLA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/export_rLakeAnalyzer.html">export_rLakeAnalyzer</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">col_depth</span>, <span class="va">col_data</span>, <span class="va">col_rLA</span><span class="op">)</span>
+
+
+<span class="co"># Calculate</span>
+<span class="va">s.s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.schmidt.stability.html">ts.schmidt.stability</a></span><span class="op">(</span><span class="va">df_rLA</span>, <span class="va">bathy</span><span class="op">)</span></code></pre></div>
+</div>
 </div>
 <div id="ts-thermo-depth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-thermo-depth" class="anchor"></a>ts.thermo.depth</h2>
-<p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<p>Calculate physical indices for a timeseries.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">exampleFilePath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 
@@ -1109,7 +1618,7 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">t.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">t.d</span><span class="op">$</span><span class="va">thermo.depth</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Thermocline Depth (m)'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/ts.thermo.depth-1.png" width="512"></p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">t.d</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">thermo.depth</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -1117,19 +1626,1492 @@
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Thermocline Depth (m)"</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/ts.thermo.depth-2.png" width="512"></p>
+<div id="ts-thermo-depth-lakemonitor" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ts-thermo-depth-lakemonitor" class="anchor"></a>ts.thermo.depth, LakeMonitoR</h3>
+<p>Using LakeMonitoR data.</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/leppott/LakeMonitoR">LakeMonitoR</a></span><span class="op">)</span>
+
+<span class="co"># Convert Data for use with rLakeAnalyzer</span>
+
+<span class="co"># Data</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="va">laketemp_ddm</span>
+
+<span class="co"># Columns, date listed first</span>
+<span class="va">col_depth</span> <span class="op">&lt;-</span> <span class="st">"Depth"</span>
+<span class="va">col_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Date"</span>, <span class="st">"Measurement"</span><span class="op">)</span>
+<span class="va">col_rLA</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"datetime"</span>, <span class="st">"wtr"</span><span class="op">)</span>
+
+<span class="co"># Run function</span>
+<span class="va">df_rLA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/export_rLakeAnalyzer.html">export_rLakeAnalyzer</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">col_depth</span>, <span class="va">col_data</span>, <span class="va">col_rLA</span><span class="op">)</span>
+
+<span class="co"># Calculate</span>
+<span class="va">t.d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.thermo.depth.html">ts.thermo.depth</a></span><span class="op">(</span><span class="va">df_rLA</span><span class="op">)</span>
+
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">t.d</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">datetime</th>
+<th align="right">thermo.depth</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2017-01-19</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-20</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-21</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-22</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-23</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-24</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-25</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-26</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-27</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-28</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-29</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-01-30</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-01-31</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-01</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-02</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-03</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-04</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-05</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-06</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-07</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-08</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-09</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-10</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-11</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-12</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-13</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-14</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-15</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-16</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-17</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-18</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-19</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-20</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-21</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-22</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-23</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-24</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-25</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-26</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-02-27</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-02-28</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-01</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-02</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-03</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-04</td>
+<td align="right">27.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-05</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-06</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-07</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-08</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-09</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-10</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-11</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-12</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-13</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-14</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-15</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-16</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-17</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-18</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-19</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-20</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-21</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-22</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-23</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-24</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-25</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-26</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-27</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-28</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-29</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-03-30</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-03-31</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-01</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-02</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-03</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-04</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-05</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-06</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-07</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-08</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-09</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-10</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-11</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-12</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-13</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-14</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-15</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-16</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-17</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-18</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-19</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-20</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-21</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-22</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-23</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-24</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-25</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-26</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-27</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-28</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-04-29</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-04-30</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-01</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-02</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-03</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-04</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-05</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-06</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-07</td>
+<td align="right">3.284830</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-08</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-09</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-10</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-11</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-12</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-13</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-14</td>
+<td align="right">3.802347</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-15</td>
+<td align="right">5.391132</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-16</td>
+<td align="right">7.667339</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-17</td>
+<td align="right">6.646725</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-18</td>
+<td align="right">21.376423</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-19</td>
+<td align="right">3.434829</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-20</td>
+<td align="right">8.638544</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-21</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-22</td>
+<td align="right">9.689473</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-23</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-24</td>
+<td align="right">9.439528</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-25</td>
+<td align="right">9.160325</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-26</td>
+<td align="right">5.655402</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-27</td>
+<td align="right">7.790945</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-28</td>
+<td align="right">5.202491</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-29</td>
+<td align="right">5.620274</td>
+</tr>
+<tr class="even">
+<td align="left">2017-05-30</td>
+<td align="right">6.419509</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-05-31</td>
+<td align="right">8.800339</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-01</td>
+<td align="right">5.853646</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-02</td>
+<td align="right">6.712963</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-03</td>
+<td align="right">6.279293</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-04</td>
+<td align="right">2.500000</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-05</td>
+<td align="right">4.289918</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-06</td>
+<td align="right">3.938150</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-07</td>
+<td align="right">3.455073</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-08</td>
+<td align="right">3.635360</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-09</td>
+<td align="right">3.647089</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-10</td>
+<td align="right">3.654095</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-11</td>
+<td align="right">4.359969</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-12</td>
+<td align="right">5.153683</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-13</td>
+<td align="right">6.303631</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-14</td>
+<td align="right">7.344473</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-15</td>
+<td align="right">6.527467</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-16</td>
+<td align="right">5.554975</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-17</td>
+<td align="right">7.173254</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-18</td>
+<td align="right">6.627206</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-19</td>
+<td align="right">6.450266</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-20</td>
+<td align="right">6.867136</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-21</td>
+<td align="right">7.240633</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-22</td>
+<td align="right">7.311512</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-23</td>
+<td align="right">6.940466</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-24</td>
+<td align="right">7.434198</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-25</td>
+<td align="right">7.725967</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-26</td>
+<td align="right">7.887077</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-27</td>
+<td align="right">7.734881</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-28</td>
+<td align="right">8.305078</td>
+</tr>
+<tr class="even">
+<td align="left">2017-06-29</td>
+<td align="right">8.487167</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-06-30</td>
+<td align="right">8.329614</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-01</td>
+<td align="right">8.331836</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-02</td>
+<td align="right">8.183822</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-03</td>
+<td align="right">8.617945</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-04</td>
+<td align="right">8.488681</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-05</td>
+<td align="right">8.542467</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-06</td>
+<td align="right">8.602410</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-07</td>
+<td align="right">8.579287</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-08</td>
+<td align="right">8.488995</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-09</td>
+<td align="right">8.532686</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-10</td>
+<td align="right">8.182233</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-11</td>
+<td align="right">8.427379</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-12</td>
+<td align="right">8.430751</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-13</td>
+<td align="right">9.089747</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-14</td>
+<td align="right">8.818500</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-15</td>
+<td align="right">9.139379</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-16</td>
+<td align="right">9.166213</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-17</td>
+<td align="right">9.189469</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-18</td>
+<td align="right">9.155849</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-19</td>
+<td align="right">9.323324</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-20</td>
+<td align="right">8.912751</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-21</td>
+<td align="right">9.033694</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-22</td>
+<td align="right">8.830206</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-23</td>
+<td align="right">8.740018</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-24</td>
+<td align="right">8.532066</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-25</td>
+<td align="right">8.917550</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-26</td>
+<td align="right">8.099596</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-27</td>
+<td align="right">8.872625</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-28</td>
+<td align="right">8.442855</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-29</td>
+<td align="right">8.878239</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-07-30</td>
+<td align="right">8.781629</td>
+</tr>
+<tr class="even">
+<td align="left">2017-07-31</td>
+<td align="right">8.701066</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-01</td>
+<td align="right">8.850472</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-02</td>
+<td align="right">8.492697</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-03</td>
+<td align="right">8.253386</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-04</td>
+<td align="right">8.201994</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-05</td>
+<td align="right">8.410185</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-06</td>
+<td align="right">8.542401</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-07</td>
+<td align="right">8.418511</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-08</td>
+<td align="right">8.480679</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-09</td>
+<td align="right">8.663666</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-10</td>
+<td align="right">8.703328</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-11</td>
+<td align="right">8.713950</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-12</td>
+<td align="right">8.593776</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-13</td>
+<td align="right">8.839154</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-14</td>
+<td align="right">8.853545</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-15</td>
+<td align="right">8.895220</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-16</td>
+<td align="right">8.928241</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-17</td>
+<td align="right">9.069025</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-18</td>
+<td align="right">9.019637</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-19</td>
+<td align="right">9.364213</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-20</td>
+<td align="right">9.586704</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-21</td>
+<td align="right">9.570465</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-22</td>
+<td align="right">9.448087</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-23</td>
+<td align="right">9.678293</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-24</td>
+<td align="right">10.103180</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-25</td>
+<td align="right">10.131317</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-26</td>
+<td align="right">10.152901</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-27</td>
+<td align="right">10.142558</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-28</td>
+<td align="right">10.238963</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-29</td>
+<td align="right">10.357870</td>
+</tr>
+<tr class="even">
+<td align="left">2017-08-30</td>
+<td align="right">10.302136</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-08-31</td>
+<td align="right">10.527764</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-01</td>
+<td align="right">10.441742</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-02</td>
+<td align="right">10.288528</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-03</td>
+<td align="right">10.485610</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-04</td>
+<td align="right">10.430610</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-05</td>
+<td align="right">10.641988</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-06</td>
+<td align="right">11.172582</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-07</td>
+<td align="right">11.421321</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-08</td>
+<td align="right">11.483356</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-09</td>
+<td align="right">11.475660</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-10</td>
+<td align="right">11.608258</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-11</td>
+<td align="right">11.401008</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-12</td>
+<td align="right">11.648354</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-13</td>
+<td align="right">11.646436</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-14</td>
+<td align="right">11.557353</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-15</td>
+<td align="right">11.791195</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-16</td>
+<td align="right">11.633258</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-17</td>
+<td align="right">11.433915</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-18</td>
+<td align="right">11.680526</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-19</td>
+<td align="right">11.707639</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-20</td>
+<td align="right">11.910977</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-21</td>
+<td align="right">11.920629</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-22</td>
+<td align="right">11.995853</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-23</td>
+<td align="right">11.927172</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-24</td>
+<td align="right">12.207390</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-25</td>
+<td align="right">11.978423</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-26</td>
+<td align="right">11.942517</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-27</td>
+<td align="right">11.713066</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-28</td>
+<td align="right">12.936353</td>
+</tr>
+<tr class="even">
+<td align="left">2017-09-29</td>
+<td align="right">12.461025</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-09-30</td>
+<td align="right">13.250670</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-01</td>
+<td align="right">13.362192</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-02</td>
+<td align="right">13.405887</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-03</td>
+<td align="right">13.368996</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-04</td>
+<td align="right">13.380743</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-05</td>
+<td align="right">13.441138</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-06</td>
+<td align="right">13.534457</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-07</td>
+<td align="right">13.459392</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-08</td>
+<td align="right">13.467986</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-09</td>
+<td align="right">13.492698</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-10</td>
+<td align="right">13.632765</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-11</td>
+<td align="right">15.310838</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-12</td>
+<td align="right">15.410030</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-13</td>
+<td align="right">15.389351</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-14</td>
+<td align="right">15.439705</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-15</td>
+<td align="right">15.440204</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-16</td>
+<td align="right">15.486434</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-17</td>
+<td align="right">15.918054</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-18</td>
+<td align="right">17.352906</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-19</td>
+<td align="right">17.343016</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-20</td>
+<td align="right">19.608773</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-21</td>
+<td align="right">19.549633</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-22</td>
+<td align="right">19.519894</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-23</td>
+<td align="right">19.624329</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-24</td>
+<td align="right">19.828650</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-25</td>
+<td align="right">25.605379</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-26</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-27</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-28</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-29</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-10-30</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-10-31</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-01</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-02</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-03</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-04</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-05</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-06</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-07</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-08</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-09</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-10</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-11</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-12</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-13</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-14</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-15</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-16</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-17</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-18</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-19</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-20</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-21</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-22</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-23</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-24</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-25</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-26</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-27</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-28</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-11-29</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-11-30</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-01</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-02</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-03</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-04</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-05</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-06</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-07</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-08</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-09</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-10</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-11</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-12</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-13</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-14</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-15</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-16</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-17</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-18</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-19</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-20</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-21</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-22</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-23</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-24</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-25</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-26</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-27</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-28</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-29</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2017-12-30</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2017-12-31</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2018-01-01</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-01-02</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2018-01-03</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-01-04</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2018-01-05</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-01-06</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2018-01-07</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-01-08</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2018-01-09</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2018-01-10</td>
+<td align="right">NaN</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">t.d</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">t.d</span><span class="op">$</span><span class="va">thermo.depth</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Thermocline Depth (m)'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
+<p><img src="LakeMonitoR_files/figure-html/unnamed-chunk-7-1.png" width="512"></p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># ggplot</span>
+<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">t.d</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">thermo.depth</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Thermocline Depth (m)"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="LakeMonitoR_files/figure-html/unnamed-chunk-7-2.png" width="512"></p>
+</div>
 </div>
 <div id="ts-ustar" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-ustar" class="anchor"></a>ts.uStar</h2>
-<p>Calculate physical indices for a timeseries</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<p>Calculate physical indices for a timeseries.</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="ts-wedderburn-number" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ts-wedderburn-number" class="anchor"></a>ts.wedderburn.number</h2>
-<p>Calculate Wedderburn number for a timeseries</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<p>Calculate Wedderburn number for a timeseries.</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Get the path for the package example file included</span>
 <span class="va">wtr.path</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wtr'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
 <span class="va">wnd.path</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, <span class="st">'Sparkling.daily.wnd'</span>, package<span class="op">=</span><span class="st">"rLakeAnalyzer"</span><span class="op">)</span>
@@ -1146,7 +3128,7 @@
 <span class="va">w.n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/ts.wedderburn.number.html">ts.wedderburn.number</a></span><span class="op">(</span><span class="va">sp.wtr</span>, <span class="va">sp.wnd</span>, <span class="va">wnd.height</span>, <span class="va">sp.bathy</span>, <span class="va">sp.area</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">w.n</span><span class="op">$</span><span class="va">datetime</span>, <span class="va">w.n</span><span class="op">$</span><span class="va">wedderburn.number</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">'Wedderburn Number'</span>, xlab<span class="op">=</span><span class="st">'Date'</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/ts.wedderburn.number-1.png" width="512"></p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">w.n</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">datetime</span>, y <span class="op">=</span> <span class="va">wedderburn.number</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -1158,8 +3140,8 @@
 <div id="ustar" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ustar" class="anchor"></a>uStar</h2>
-<p>Calculates the water friction velocity, uStar</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<p>Calculates the water friction velocity, uStar.</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wndSpeed</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.1</span>,<span class="fl">6.3</span>,<span class="fl">6.3</span>,<span class="fl">5.2</span>,<span class="fl">7</span>,<span class="fl">7.2</span><span class="op">)</span>
 <span class="va">wndHeight</span>   <span class="op">&lt;-</span>  <span class="fl">2</span>
 <span class="va">averageEpiDense</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">14.2</span>,<span class="fl">13</span>,<span class="fl">12</span>,<span class="fl">12</span><span class="op">)</span>
@@ -1172,13 +3154,13 @@
 <div id="water-density" class="section level2">
 <h2 class="hasAnchor">
 <a href="#water-density" class="anchor"></a>water.density</h2>
-<p>Estimate Water Density</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<p>Estimate Water Density.</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Plot water density for water between 1 and 30 deg C</span>
 <span class="va">dens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/water.density.html">water.density</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, <span class="va">dens</span>, xlab<span class="op">=</span><span class="st">"Temp(deg C)"</span>, ylab<span class="op">=</span><span class="st">"Density(kg/m^3)"</span><span class="op">)</span></code></pre></div>
 <p><img src="LakeMonitoR_files/figure-html/water.density-1.png" width="512"></p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># ggplot</span>
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -1190,8 +3172,8 @@
 <div id="wedderburn-number" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wedderburn-number" class="anchor"></a>wedderburn.number</h2>
-<p>Calculates Wedderburn Number for a lake</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<p>Calculates Wedderburn Number for a lake.</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">delta_rho</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3.1</span>,<span class="fl">1.5</span><span class="op">)</span>
 <span class="va">metaT</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.5</span>,<span class="fl">2.4</span><span class="op">)</span>
 <span class="va">uSt</span>       <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0028</span>,<span class="fl">0.0032</span><span class="op">)</span>
@@ -1203,15 +3185,15 @@
 <div id="whole-lake-temperature" class="section level2">
 <h2 class="hasAnchor">
 <a href="#whole-lake-temperature" class="anchor"></a>whole.lake.temperature</h2>
-<p>Get volumetrically averaged whole lake temperature</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<p>Get volumetrically averaged whole lake temperature.</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># No Example</span></code></pre></div>
 </div>
 <div id="wtr-layer" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wtr-layer" class="anchor"></a>wtr.layer</h2>
-<p>Exploration of lake water column layers</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<p>Exploration of lake water column layers.</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"latesummer"</span><span class="op">)</span>
 <span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rLakeAnalyzer/man/wtr.layer.html">wtr.layer</a></span><span class="op">(</span>depth<span class="op">=</span><span class="va">latesummer</span><span class="op">$</span><span class="va">depth</span>, measure <span class="op">=</span> <span class="va">latesummer</span><span class="op">$</span><span class="va">temper</span><span class="op">)</span>
 <span class="va">df1</span><span class="op">$</span><span class="va">mld</span>
