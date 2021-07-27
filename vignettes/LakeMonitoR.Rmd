@@ -8,12 +8,12 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.dim = c(8, 6)/1.5
-  #out.width = "50%"
-)
+knitr::opts_chunk$set(collapse = TRUE
+                      , comment = "#>"
+                      , fig.dim = c(8, 6)/1.5
+                      , fig.show='asis'
+                      #, out.width = "50%"
+                      )
 library(LakeMonitoR)
 ```
 
@@ -26,6 +26,7 @@ For rLakeAnalyzer examples, in most cases, are using examples provided by
 # LakeMonitoR
 
 ## agg_depth_files
+
 ```{r agg_depth_files, echo=TRUE, eval=FALSE}
 # Data Files
 myFile_import <- c("Ellis--1.0m_Water_20180524_20180918.csv"
@@ -40,6 +41,7 @@ agg_depth_files(filename_import = myFile_import
 ```
 
 ## daily_depth_means
+
 ```{r daily_depth_means}
 # Packages
 library(xts)
@@ -68,6 +70,7 @@ summary(data_ddm)
 ```
 
 ## lake_summary_stats
+
 ```{r lake_summary_stats}
 # data
 data <- laketemp_ddm
@@ -90,6 +93,7 @@ head(df_lss)
 ```
 
 ## plot_depth
+
 ```{r plot_depth}
 library(LakeMonitoR)
 
@@ -154,6 +158,7 @@ print(p_profile2)
 
 
 ## plot_heatmap
+
 ```{r plot_heatmap}
 library(LakeMonitoR)
 
@@ -188,6 +193,7 @@ print(p_hm)
 ```
 
 ## plot_ts
+
 ```{r plot_ts}
 # Data (Test Lake)
 data         <- laketest_wind
@@ -301,6 +307,7 @@ Results folder.  Combining the plots is not a default feature of the package
 but can be done with the use of the `gridExtra` package.
 
 Move legends to the bottom and remove titles to get more space.
+
 ```{r plot_combine}
 library(LakeMonitoR)
 
@@ -537,6 +544,7 @@ legend("bottomright"
 
 ## export_rLakeAnalyzer
 Reorganize file for use with `rLakeAnalyzer` package.
+
 ```{r}
 library(LakeMonitoR)
 
@@ -566,13 +574,14 @@ After exporting file format for `rLakeAnalyzer` can use the functions from that
 package.
 
 ## Help
+
 ```{r help, echo = FALSE}
 library(rLakeAnalyzer)
 print(lsf.str("package:rLakeAnalyzer"))
 ```
 
 ## approx.bathy
-Estimate hypsography curve
+Estimate hypsography curve.
 
 ```{r approx.bathy}
 Voldev.ex <- approx.bathy(Zmax = 25, Zmean = 12, lkeArea = 39400000, method = "voldev")
@@ -586,7 +595,8 @@ points(Voldevshallow.ex$depths ~ Voldevshallow.ex$Area.at.z, col = "blue")
 ```
 
 ## buoyancy.freq
-Calculate buoyancy frequency
+Calculate buoyancy frequency.
+
 ```{r buoyancy.freq}
 # A vector of water temperatures
 wtr <- c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
@@ -604,7 +614,8 @@ plot(b.f, attr(b.f, 'depths'), type='b'
 ```
 
 ## center.buoyancy
-Calculate the center of buoyancy
+Calculate the center of buoyancy.
+
 ```{r center.buoyancy}
 # A vector of water temperatures
 wtr <- c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
@@ -619,19 +630,21 @@ c.b
 ```
 
 ## epi.temperature
-Get volumetrically averaged epilimnion temp
+Get volumetrically averaged epilimnion temp.
+
 ```{r epi.temperature}
 ## No Example
 ```
 
 ## hypo.temperature
-Get volumetrically averaged hypolimnion temp
+Get volumetrically averaged hypolimnion temp.
+
 ```{r hypo.temperature}
 ##No Example
 ```
 
 ## internal.energy
-Internal energy function (Joules)
+Internal energy function (Joules).
 
 ```{r internal.energy}
 bthA   <-	c(1000,900,864,820,200,10)
@@ -645,7 +658,8 @@ cat(internal.energy(wtr, depths, bthA, bthD))
 ```
 
 ## lake.number
-Calculate Lake Number
+Calculate Lake Number.
+
 ```{r lake.number}
 bthA	<-	c(1000,900,864,820,200,10)
 bthD	<-	c(0,2.3,2.5,4.2,5.8,7)
@@ -660,6 +674,7 @@ cat(lake.number( bthA, bthD, uStar, St, metaT, metaB, averageHypoDense) )
 
 ## layer.density
 Returns the average density of a layer between two depths.
+
 ```{r layer.density}
 top     <- 2
 bottom  <- 6
@@ -672,6 +687,7 @@ layer.density(top,bottom,wtr,depths,bthA,bthD)
 
 ## layer.temperature
 Returns the average temperature of a layer between two depths.
+
 ```{r layer.temperature}
 # Supply input data
 top     <- 2
@@ -686,7 +702,10 @@ layer.temperature(top,bottom,wtr,depths,bthA,bthD)
 ```
 
 ## meta.depths
-Calculate the Top and Bottom Depths of the Metalimnion
+Calculate the Top and Bottom Depths of the Metalimnion.
+
+To get the thickness of Metalimnion subtract the two values.
+
 ```{r meta.depths}
 wtr = c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
 15.15, 14.24, 13.35, 10.94, 10.43, 10.36, 9.94, 9.45, 9.1, 8.91, 8.58, 8.43)
@@ -695,13 +714,18 @@ depths = c(0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
 			 17, 18, 19, 20)
 			 
 m.d = meta.depths(wtr, depths, slope=0.1, seasonal=FALSE)
+
 cat('The top depth of the metalimnion is:', m.d[1])
+
 cat('The bottom depth of the metalimnion is:', m.d[2])
+
+cat("The thickness of the metalimnion is: ", m.d[2] - m.d[1])
 
 ```
 
 ## schmidt.stability
-Calculate the Schmidt stability
+Calculate the Schmidt stability.
+
 ```{r schmidt.stability}
 bthA    <- c(1000,900,864,820,200,10)
 bthD    <- c(0,2.3,2.5,4.2,5.8,7)
@@ -715,6 +739,7 @@ cat(schmidt.stability(wtr, depths, bthA, bthD))
 
 ## thermo.depth
 Calculate depth of the thermocline from a temperature profile
+
 ```{r thermo.depth}
 # A vector of water temperatures
 wtr <- c(22.51, 22.42, 22.4, 22.4, 22.4, 22.36, 22.3, 22.21, 22.11, 21.23, 16.42, 
@@ -730,10 +755,13 @@ cat('The thermocline depth is:', t.d)
 ```
 
 ## ts.buoyancy.freq
-Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile
+Calculate the buoyancy (Brunt-Vaisala) frequency for a temperature profile.
+
 ```{r ts.buoyancy.freq}
 #Get the path for the package example file included
-wtr.path <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+wtr.path <- system.file('extdata'
+                        , 'Sparkling.daily.wtr'
+                        , package="rLakeAnalyzer")
 
 #Load data for example lake, Sparkilng Lake, Wisconsin.
 sp.wtr <- load.ts(wtr.path)
@@ -745,8 +773,43 @@ plot(N2, type='l', ylab='Buoyancy Frequency', xlab='Date')
 lines(SN2, col='red')
 ```
 
+### ts.buoyancy.freq, LakeMonitoR
+Using LakeMonitoR data.
+
+```{r}
+library(LakeMonitoR)
+
+# Convert Data for use with rLakeAnalyzer
+
+# Data
+data <- laketemp_ddm
+
+# Columns, date listed first
+col_depth <- "Depth"
+col_data <- c("Date", "Measurement")
+col_rLA  <- c("datetime", "wtr")
+
+# Run function
+df_rLA <- export_rLakeAnalyzer(data, col_depth, col_data, col_rLA)
+
+# Calculate
+N2  <- ts.buoyancy.freq(df_rLA, seasonal=FALSE)
+SN2 <- ts.buoyancy.freq(df_rLA, seasonal=TRUE)
+
+knitr::kable(head(N2))
+knitr::kable(head(SN2))
+
+plot(N2, type='l', ylab='Buoyancy Frequency', xlab='Date', lwd = 3)
+lines(SN2, col='red')
+legend("topleft"
+       , legend = c("N2", "SN2")
+       , col = c("black", "red")
+       , lwd = c(1, 3))
+```
+
 ## ts.center.buoyancy
-Calculates the center of buoyancy for multiple temperature profiles
+Calculates the center of buoyancy for multiple temperature profiles.
+
 ```{r ts.center.buoyancy}
 #Get the path for the package example file included
 wtr.path <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
@@ -767,20 +830,57 @@ legend(x = t.d[3,1], y = .25,
    lwd=c(1.5,1.5),col=c("black","red"), bty = "n")
 ```
 
+### ts.center.buoyancy, LakeMonitoR
+Using LakeMonitoR data.
+
+```{r}
+library(LakeMonitoR)
+
+# Convert Data for use with rLakeAnalyzer
+
+# Data
+data <- laketemp_ddm
+
+# Columns, date listed first
+col_depth <- "Depth"
+col_data <- c("Date", "Measurement")
+col_rLA  <- c("datetime", "wtr")
+
+# Run function
+df_rLA <- export_rLakeAnalyzer(data, col_depth, col_data, col_rLA)
+
+# Calculate
+t.d <- ts.thermo.depth(df_rLA)
+
+center.N2 = ts.center.buoyancy(df_rLA)
+
+knitr::kable(head(center.N2))
+
+plot(center.N2, type='l', ylab='Depth (m)', xlab='Date', ylim=c(19,0), lwd = 1.5)
+lines(t.d, type='l', col='red', lwd = 1.5)
+legend(x = t.d[3,1], y = .25,
+   c('center of buoyancy','thermocline depth'),
+   lty=c(1,1),
+   lwd=c(1.5,1.5),col=c("black","red"), bty = "n")
+```
+
 ## ts.internal.energy
-Calculate physical indices for a timeseries
+Calculate physical indices for a timeseries.
+
 ```{r ts.internal.energy}
 # No Example
 ```
 
 ## ts.lake.number
-Calculate physical indices for a timeseries
+Calculate physical indices for a timeseries.
+
 ```{r ts.lake.number}
 # No Example
 ```
 
 ## ts.layer.temperature
-Calculate volume-weighted average water temperature across a range of depths for a timeseries
+Calculate volume-weighted average water temperature across a range of depths for a timeseries.
+
 ```{r ts.layer.temperature}
 #Get the path for the package example file included
 wtr.path   <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
@@ -803,18 +903,29 @@ ggplot2::ggplot(data = l.t, ggplot2::aes(x = datetime, y = layer.temp)) +
 ```
 
 ## ts.meta.depths
-Calculate physical indices for a timeseries
-```{r ts.meta.depths}
+Calculate physical indices for a timeseries.
+
+```{r ts.meta.depths, }
 #Get the path for the package example file included
-exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
+exampleFilePath <- system.file('extdata'
+                               , 'Sparkling.daily.wtr'
+                               , package="rLakeAnalyzer")
 
 #Load
 sparkling.temp <- load.ts(exampleFilePath)
 
-#calculate and plot the metalimnion depths
+# Calculate and plot the metalimnion depths
 m.d <- ts.meta.depths(sparkling.temp)
+m.d$thickness <- m.d$bottom - m.d$top
 
-plot(m.d$datetime, m.d$top, type='l', ylab='Meta Depths (m)', xlab='Date', col='blue')
+knitr::kable(m.d[1:10, ])
+
+plot(m.d$datetime
+     , m.d$top
+     , type='l'
+     , ylab='Meta Depths (m)'
+     , xlab='Date'
+     , col='blue')
 lines(m.d$datetime, m.d$bottom, col='red')
 
 # ggplot
@@ -828,14 +939,176 @@ ggplot2::ggplot(data = m.d, ggplot2::aes(x = datetime, y = top)) +
                      , na.rm = TRUE)
 ```
 
+### ts.meta.depths, LakeMonitoR
+Using LakeMonitoR data.
+
+Then calculate for epilimnion and hypolimnion temp difference.
+
+Red is hypolimnion and blue is metalimnion.
+
+```{r}
+library(LakeMonitoR)
+library(dplyr)
+library(tidyr)
+
+# Convert Data for use with rLakeAnalyzer
+
+# Data
+data <- laketemp_ddm
+
+# Columns, date listed first
+col_depth <- "Depth"
+col_data <- c("Date", "Measurement")
+col_rLA  <- c("datetime", "wtr")
+
+# Run function
+df_rLA <- export_rLakeAnalyzer(data, col_depth, col_data, col_rLA)
+
+# Calculate
+m.d <- ts.meta.depths(df_rLA)
+m.d$thickness <- m.d$bottom - m.d$top
+
+knitr::kable(m.d[1:10, ])
+
+# ggplot
+ggplot2::ggplot(data = m.d, ggplot2::aes(x = datetime, y = top)) +
+  ggplot2::geom_line(color = "blue", na.rm = TRUE) + 
+  ggplot2::labs(x = "Date", y = "Meta Depths (m)") +
+  ggplot2::theme_bw() + 
+  ggplot2::geom_line(data = m.d
+                     , ggplot2::aes(x = datetime, y = bottom)
+                     , color = "red"
+                     , na.rm = TRUE)
+
+
+# temp diff epi and hypo
+df_merge <- merge(data, m.d, by.x = "Date", by.y = "datetime")
+
+df_merge[, "Epi"] <- ifelse(df_merge[, "Depth"] < df_merge[,  "top"], TRUE, FALSE)
+df_merge[, "Meta"] <- NA
+df_merge[, "Hypo"] <- ifelse(df_merge[, "Depth"] > df_merge[,  "bottom"], TRUE, FALSE)
+df_merge[, "Meta"] <- ifelse(df_merge[, "Epi"] + df_merge[, "Hypo"] == 0, TRUE, FALSE)
+df_merge[, "Layer"] <- ifelse(df_merge[, "Epi"] == TRUE
+                            , "Epi"
+                            , ifelse(df_merge[, "Meta"] ==  TRUE
+                                  , "Meta"
+                                  , ifelse(df_merge[, "Hypo"] ==  TRUE
+                                          , "Hypo", NA)))
+
+col_datetime <- "Date"
+col_depth <- "Depth"
+col_measure <- "Measurement"
+col_layer <- "Layer"
+
+df_merge[, "Layer"] <- factor(df_merge[, "Layer"]
+                               , levels = c("Epi", "Meta", "Hypo", NA))
+
+stats_layers <- df_merge %>%
+      dplyr::group_by(.data[[col_datetime]], .data[[col_layer]]) %>%
+      dplyr::summarize(.groups = "keep"
+                       #, groupname = col_datetime
+                       , n = length(.data[[col_measure]])
+                       , ndays = length(unique(.data[[col_datetime]]))
+                       , mean = mean(.data[[col_measure]], na.rm = TRUE)
+                       , median = stats::median(.data[[col_measure]]
+                                                , na.rm = TRUE)
+                       , min = min(.data[[col_measure]], na.rm = TRUE)
+                       , max = max(.data[[col_measure]], na.rm = TRUE)
+                       , range = max - min
+                       , sd = stats::sd(.data[[col_measure]], na.rm = TRUE)
+                       , var = stats::var(.data[[col_measure]], na.rm = TRUE)
+                       , cv = sd/mean
+                       , q01 = stats::quantile(.data[[col_measure]]
+                                               , probs = .01
+                                               , na.rm = TRUE)
+                       , q05 = stats::quantile(.data[[col_measure]]
+                                               , probs = .05
+                                               , na.rm = TRUE)
+                       , q10 = stats::quantile(.data[[col_measure]]
+                                               , probs = .10
+                                               , na.rm = TRUE)
+                       , q25 = stats::quantile(.data[[col_measure]]
+                                               , probs = .25
+                                               , na.rm = TRUE)
+                       , q50 = stats::quantile(.data[[col_measure]]
+                                               , probs = .50
+                                               , na.rm = TRUE)
+                       , q75 = stats::quantile(.data[[col_measure]]
+                                               , probs = .75
+                                               , na.rm = TRUE)
+                       , q90 = stats::quantile(.data[[col_measure]]
+                                               , probs = .90
+                                               , na.rm = TRUE)
+                       , q95 = stats::quantile(.data[[col_measure]]
+                                               , probs = .95
+                                               , na.rm = TRUE)
+                       , q99 = stats::quantile(.data[[col_measure]]
+                                               , probs = .99
+                                               , na.rm = TRUE)
+                       #, n_below = sum(.data[["below"]], na.rm = TRUE)
+      )
+
+# pivot wider, min layer temp
+
+layers_min <- pivot_wider(stats_layers
+                          , id_cols = "Date"
+                          , names_from = "Layer"
+                          , names_sort = TRUE
+                          , values_from = "min")
+
+layers_min[, "diff_EH"] <- layers_min[, "Hypo"] - layers_min[, "Epi"]
+
+head(layers_min)
+
+plot(layers_min$diff_EH, type = "l")
+
+ggplot2::ggplot(data = layers_min, ggplot2::aes(x = Date, y = diff_EH)) +
+  ggplot2::geom_line(color = "black", na.rm = TRUE) + 
+  ggplot2::labs(x = "Date"
+                , y = "Temperature Difference (C)"
+                , title = "Comparison of Epilimnion and Hypolimnion") +
+  ggplot2::theme_bw()  
+
+
+```
+
+
 ## ts.schmidt.stability
-Calculate physical indices for a timeseries
+Calculate physical indices for a timeseries.
+
 ```{r ts.schmidt.stability}
 # No Example
 ```
 
+### ts.schmidt.stability, LakeMonitor
+Using LakeMonitoR data.  Requires bathymetry data.
+
+```{r, eval=FALSE}
+library(LakeMonitoR)
+
+# Convert Data for use with rLakeAnalyzer
+
+# Data
+data <- laketemp_ddm
+bathy <- NA
+
+# Columns, date listed first
+col_depth <- "Depth"
+col_data <- c("Date", "Measurement")
+col_rLA  <- c("datetime", "wtr")
+
+# Run function
+df_rLA <- export_rLakeAnalyzer(data, col_depth, col_data, col_rLA)
+
+
+# Calculate
+s.s <- ts.schmidt.stability(df_rLA, bathy)
+
+```
+
 ## ts.thermo.depth
-Calculate physical indices for a timeseries
+Calculate physical indices for a timeseries.
+
 ```{r ts.thermo.depth}
 #Get the path for the package example file included
 exampleFilePath <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
@@ -856,14 +1129,49 @@ ggplot2::ggplot(data = t.d, ggplot2::aes(x = datetime, y = thermo.depth)) +
   ggplot2::theme_bw()
 ```
 
+### ts.thermo.depth, LakeMonitoR
+Using LakeMonitoR data.
+
+```{r}
+library(LakeMonitoR)
+
+# Convert Data for use with rLakeAnalyzer
+
+# Data
+data <- laketemp_ddm
+
+# Columns, date listed first
+col_depth <- "Depth"
+col_data <- c("Date", "Measurement")
+col_rLA  <- c("datetime", "wtr")
+
+# Run function
+df_rLA <- export_rLakeAnalyzer(data, col_depth, col_data, col_rLA)
+
+# Calculate
+t.d <- ts.thermo.depth(df_rLA)
+
+knitr::kable(t.d)
+
+plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
+
+# ggplot
+ggplot2::ggplot(data = t.d, ggplot2::aes(x = datetime, y = thermo.depth)) +
+  ggplot2::geom_line(na.rm = TRUE) +
+  ggplot2::labs(x = "Date", y = "Thermocline Depth (m)") + 
+  ggplot2::theme_bw()
+```
+
 ## ts.uStar
-Calculate physical indices for a timeseries
+Calculate physical indices for a timeseries.
+
 ```{r ts.uStar}
 # No Example
 ```
 
 ## ts.wedderburn.number
-Calculate Wedderburn number for a timeseries
+Calculate Wedderburn number for a timeseries.
+
 ```{r ts.wedderburn.number}
 #Get the path for the package example file included
 wtr.path   <- system.file('extdata', 'Sparkling.daily.wtr', package="rLakeAnalyzer")
@@ -889,7 +1197,8 @@ ggplot2::ggplot(data = w.n, ggplot2::aes(x = datetime, y = wedderburn.number)) +
 ```
 
 ## uStar
-Calculates the water friction velocity, uStar
+Calculates the water friction velocity, uStar.
+
 ```{r uStar}
 wndSpeed  <- c(5.1,6.3,6.3,5.2,7,7.2)
 wndHeight	<-	2
@@ -900,7 +1209,8 @@ cat(uStar(wndSpeed,wndHeight,averageEpiDense))
 ```
 
 ## water.density
-Estimate Water Density
+Estimate Water Density.
+
 ```{r water.density}
 #Plot water density for water between 1 and 30 deg C
 dens <- water.density(1:30)
@@ -914,7 +1224,8 @@ ggplot2::ggplot() +
 ```
 
 ## wedderburn.number
-Calculates Wedderburn Number for a lake
+Calculates Wedderburn Number for a lake.
+
 ```{r wedderburn.number}
 delta_rho <- c(3.1,1.5)
 metaT     <- c(5.5,2.4)
@@ -925,13 +1236,15 @@ wedderburn.number(delta_rho, metaT, uSt, Ao, AvHyp_rho)
 ```
 
 ## whole.lake.temperature
-Get volumetrically averaged whole lake temperature
+Get volumetrically averaged whole lake temperature.
+
 ```{r whole.lake.temperature}
 # No Example
 ```
 
 ## wtr.layer
-Exploration of lake water column layers
+Exploration of lake water column layers.
+
 ```{r wtr.layer}
 data("latesummer")
 df1 <- wtr.layer(depth=latesummer$depth, measure = latesummer$temper)

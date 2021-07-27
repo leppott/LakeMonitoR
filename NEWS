@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-26 13:48:06
+    #> Last Update: 2021-07-26 20:02:54
+
+# LakeMonitoR 0.1.1.9010
+
+Release - 2021-07-26
+
+-   docs: Update vignette examples
 
 # LakeMonitoR 0.1.1.9009
 
