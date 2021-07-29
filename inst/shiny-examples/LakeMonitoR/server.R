@@ -1012,7 +1012,7 @@ shinyServer(function(input, output) {
         # rLA functions crash hard when don't have the right data
 
         ## __rLA, wtr.heat.map----
-        fn_rLA_hm <- file.path(path_results, "plot_heatmap_rLA.png")
+        fn_rLA_hm <- file.path(path_results, "plot_rLA_heatmap.png")
         #
         tryCatch({
           grDevices::png(filename = fn_rLA_hm)

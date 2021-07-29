@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.1.9013
+===========
+Release - 2021-07-29
+
+* refactor: Update Shiny rLA plot names to be consistent.
+    + Use plot_rLA_x.png
+    
 LakeMonitoR 0.1.1.9012
 ===========
 Release - 2021-07-29
