@@ -856,12 +856,21 @@ center.N2 = ts.center.buoyancy(df_rLA)
 
 knitr::kable(head(center.N2))
 
-plot(center.N2, type='l', ylab='Depth (m)', xlab='Date', ylim=c(19,0), lwd = 1.5)
-lines(t.d, type='l', col='red', lwd = 1.5)
-legend(x = t.d[3,1], y = .25,
+plot_cb_y_max <- max(max(center.N2[, 2], na.rm = TRUE)
+                             , max(t.d[, 2], na.rm = TRUE)
+                             , na.rm = TRUE)
+
+plot(center.N2
+     , type = 'l'
+     , ylab = 'Depth (m)'
+     , xlab = 'Date'
+     , ylim = c(plot_cb_y_max, 0)
+     , lwd = 1.5)
+lines(t.d, type = 'l', col = 'red', lwd = 1.5)
+legend("topright",
    c('center of buoyancy','thermocline depth'),
-   lty=c(1,1),
-   lwd=c(1.5,1.5),col=c("black","red"), bty = "n")
+   lty = c(1, 1),
+   lwd = c(1.5, 1.5), col = c("black","red"), bty = "n")
 ```
 
 ## ts.internal.energy
@@ -978,7 +987,8 @@ ggplot2::ggplot(data = m.d, ggplot2::aes(x = datetime, y = top)) +
   ggplot2::geom_line(data = m.d
                      , ggplot2::aes(x = datetime, y = bottom)
                      , color = "red"
-                     , na.rm = TRUE)
+                     , na.rm = TRUE) + 
+  ggplot2::scale_y_reverse()
 
 
 # temp diff epi and hypo
@@ -1132,6 +1142,8 @@ ggplot2::ggplot(data = t.d, ggplot2::aes(x = datetime, y = thermo.depth)) +
 ### ts.thermo.depth, LakeMonitoR
 Using LakeMonitoR data.
 
+For ggplot reverse the y-axis.
+
 ```{r}
 library(LakeMonitoR)
 
@@ -1151,7 +1163,7 @@ df_rLA <- export_rLakeAnalyzer(data, col_depth, col_data, col_rLA)
 # Calculate
 t.d <- ts.thermo.depth(df_rLA)
 
-knitr::kable(t.d)
+knitr::kable(head(t.d))
 
 plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xlab='Date')
 
@@ -1159,7 +1171,8 @@ plot(t.d$datetime, t.d$thermo.depth, type='l', ylab='Thermocline Depth (m)', xla
 ggplot2::ggplot(data = t.d, ggplot2::aes(x = datetime, y = thermo.depth)) +
   ggplot2::geom_line(na.rm = TRUE) +
   ggplot2::labs(x = "Date", y = "Thermocline Depth (m)") + 
-  ggplot2::theme_bw()
+  ggplot2::theme_bw() + 
+  ggplot2::scale_y_reverse()
 ```
 
 ## ts.uStar

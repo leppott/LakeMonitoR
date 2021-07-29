@@ -4,7 +4,22 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-26 20:02:54
+    #> Last Update: 2021-07-28 20:48:04
+
+# LakeMonitoR 0.1.1.9011
+
+Release - 2021-07-27
+
+-   refactor: Change default temp operator in plot\_oxythermal
+    -   Update help text and function defaults to match example
+-   refactor: Update Shiny app
+    -   Calculation
+        -   Add Stratification method pull down
+        -   Add oxythermal inputs (temp and do)
+        -   Add TDOx value input
+-   function: Add Shiny app function to calculate stratification with
+    different methods based on user input
+-   docs: Add tidyr package to DESCRIPTION
 
 # LakeMonitoR 0.1.1.9010
 

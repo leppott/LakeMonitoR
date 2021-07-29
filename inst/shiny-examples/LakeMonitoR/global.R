@@ -12,9 +12,11 @@ library(plotly)
 library(gridExtra)
 library(shinyBS) # for bsTooltip()
 library(writexl)
+library(tidyr)  # meta layer calcs
 
 # Drop-down boxes
 Calc_Options <- c("daily depth means", "stratification", "both")
+Strat_Method_Options <- c(">=1 deg C over 1-m", "top vs. bottom")
 
 # File Size
 # By default, the file size limit is 5MB. It can be changed by

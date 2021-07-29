@@ -19,6 +19,21 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 0.1.1.9011
+===========
+Release - 2021-07-27
+
+* refactor: Change default temp operator in plot_oxythermal
+    + Update help text and function defaults to match example
+* refactor: Update Shiny app
+    + Calculation
+        - Add Stratification method pull down
+        - Add oxythermal inputs (temp and do)
+        - Add TDOx value input
+* function: Add Shiny app function to calculate stratification with different
+methods based on user input
+* docs: Add tidyr package to DESCRIPTION
+
 LakeMonitoR 0.1.1.9010
 ===========
 Release - 2021-07-26

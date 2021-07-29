@@ -4,15 +4,18 @@
 #' The data is filtered for temperature and dissolved oxygen levels prior to
 #' plotting.
 #'
-#' @details Can be used with any parameters.  A plot is returned that can be
-#' saved with ggsave(filename).
+#'
+#' @details The heat map will show the acceptable habitat based on user inputs.
+#' Can be used with any parameters.
+#'
+#' A plot is returned that can be saved with `ggsave(filename)`.
 #'
 #' Labels (and title) are function input parameters.  If they are not used
 #' the plot will not be modified.
 #'
-#' The default theme is theme_bw().
+#' The default theme is `theme_bw()`.
 #'
-#' The plot is created with ggplot2::geom_raster().  Interpolation is possible
+#' The plot is created with `ggplot2::geom_raster()`.  Interpolation is possible
 #' with boo_interpolate (default is FALSE).
 #'
 #' The returned object is a ggplot object so it can be further manipulated.
@@ -24,10 +27,10 @@
 #' @param col_temp Column name, Temperature
 #' @param col_do Column name, Dissolved Oxygen
 #' @param thresh_temp Threshold for temperature, Default = 30
-#' @param operator_temp Operator for temperature, Default is >=
+#' @param operator_temp Operator for temperature, Default is <=
 #' Valid values of >=, >, <=, <
 #' @param thresh_do Threshold for dissolved oxygen, Default is 3
-#' @param operator_do Operator for dissolved oxygen, Default is <=
+#' @param operator_do Operator for dissolved oxygen, Default is >=
 #' Valid values of >=, >, <=, <
 #' @param lab_datetime Plot label date time (x-axis), Default = col_datetime
 #' @param lab_depth Plot label for depth (y-axis), Default = col_depth
@@ -137,7 +140,7 @@ plot_oxythermal <- function(data
                             , col_temp
                             , col_do
                             , thresh_temp = 30
-                            , operator_temp = ">="
+                            , operator_temp = "<="
                             , thresh_do = 3
                             , operator_do = ">="
                             , lab_datetime = NA

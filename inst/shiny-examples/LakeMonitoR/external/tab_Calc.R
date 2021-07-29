@@ -9,6 +9,8 @@ function(){
                , p("Define columns below for each box")
                , p("Displayed text is a hint not an actual value.")
                , p("Actual tables are displayed to the right.")
+               #
+               # _cols ----
                , h4("2.A.1. Define Columns, Measured Values")
                # Future version use selectize input and use columns from file.
                , textInput("col_msr_datetime"
@@ -39,23 +41,27 @@ function(){
                , textInput("col_msrND_msr"
                            , label = "Input, Measure No Date, Value (WSPD)"
                            , placeholder = "Wind")
-               #
+               # _calc ----
                , h4("2.B. Calculate")
+               # _calc, Strat ----
+               , selectInput("strat_method"
+                           , label = "Stratification Calculation Method"
+                           , choices = c(">=1 deg C over 1-m"
+                                         , "top vs. bottom")
+                           , selected = ">=1 deg C over 1-m")
                , numericInput("strat_min_days"
                               , label = "Stratification, minimum days"
                               , value = 1)
-            , bsTooltip(id = "strat_min_days"
-                , title = "Stratification based on 1 deg C change over 1-meter"
+                , bsTooltip(id = "strat_min_days"
+            , title = "Minimum number of days required to define stratification"
                            , placement = "top")
+               # _calc, other ----
                , numericInput("minlimit"
                               , label = "Minimum Value 1 (Temp)"
                               , value = 2)
                , bsTooltip(id = "minlimit"
         , title = "Number below which to calculate in stats for Value 1 (Temp)"
                         , placement = "top")
-
-
-
             , numericInput("minlimit2"
                            , label = "Minimum Value 2 (DO)"
                            , value = 2)
@@ -63,15 +69,36 @@ function(){
                         , title = "Number to include on plots for Value 2 (DO)"
                         , placement = "top")
 
+              # _calc, Oxy ----
+               , numericInput("oxy_temp"
+                              , label = "Oxythermal Plot, Temperature"
+                              , value = 30)
+               , bsTooltip(id = "oxy_temp"
+                    , title = "Oxythermal plot, Temp, <="
+                    , placement = "top")
+               , numericInput("oxy_do"
+                              , label = "Oxythermal Plot, Dissolved Oxygen"
+                              , value = 3)
+              , bsTooltip(id = "oxy_do"
+                          , title = "Oxythermal plot, DO, >="
+                          , placement = "top")
+               # _calc, TDOx ----
 
+              , numericInput("tdox_val"
+                             , label = "TDOx - Temp at DO value 'x'"
+                             , value = 3)
+              , bsTooltip(id = "tdox_val"
+                          , title = "Value of 'x' in TDOx."
+                          , placement = "top")
 
+                # _calc, button ----
                , p("Data view must be visible to the right before clicking
                    calculate below.")
                , p("Statistics are generated from daily depth means calculation.
                    This process interpolates to integers.")
 
                , shinyjs::disabled(actionButton("b_Calc", "Calculate"))
-               #
+               # _download ----
                , h4("2.C. Download Results")
                # Button
                , p("Select button to download zip file with input and results.")

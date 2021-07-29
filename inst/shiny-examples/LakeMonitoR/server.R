@@ -348,7 +348,6 @@ shinyServer(function(input, output) {
                                   , message = msg_col_data_missing))
       ## validate ~ END
 
-
       # _b_Calc, Step 3, DDM and Strat ####
       # Increment the progress bar, and update the detail text.
       n_step <- n_step + 1
@@ -413,7 +412,22 @@ shinyServer(function(input, output) {
       col_strat_date    <- "Date"
       col_strat_depth   <- "Depth"
       col_strat_measure <- "Measurement"
-      ls_strat <- LakeMonitoR::stratification(df_ddm
+
+      # method
+      ## could extend to ddm vs raw
+      if(input$strat_method == ">=1 deg C over 1-m") {
+        df_strat_calc <- df_ddm
+      } else if (input$strat_method == "top vs. bottom") {
+        # basic filter
+        # won't give expected results if min and max vary across time
+        min_depth <- min(df_ddm[, col_strat_depth], na.rm = TRUE)
+        max_depth <- max(df_ddm[, col_strat_depth], na.rm = TRUE)
+        df_strat_calc <- df_ddm[df_ddm[, col_strat_depth] == min_depth |
+                            df_ddm[, col_strat_depth] == max_depth, ]
+      } ## IF ~ input$strat_method ~ END
+
+      # Calc
+      ls_strat <- LakeMonitoR::stratification(df_strat_calc
                                               , col_strat_date
                                               , col_strat_depth
                                               , col_strat_measure
@@ -618,6 +632,67 @@ shinyServer(function(input, output) {
       #, by="+1 day"), "%m-%d")
       #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+      #_b_Calc_DO ----
+      if(col_measure2 == "") {
+        # do nothing
+      } else {
+        # __Plot, Oxythermal ----
+        # Data values
+        thresh_temp <- input$oxy_temp # 68
+        operator_temp <- "<="
+        thresh_do <- input$oxy_do
+        operator_do <- ">="
+        #
+        # Plot Labels
+        lab_datetime <- "Date Time"
+        lab_depth    <- "Depth"
+        lab_temp     <- "Temperature"
+        #
+        # Create Plot
+        p_ot <- plot_oxythermal(data = data_plot
+                                , col_datetime = col_date
+                                , col_depth = col_depth
+                                , col_temp = col_measure
+                                , col_do = col_measure2
+                                , thresh_temp = thresh_temp
+                                , operator_temp= operator_temp
+                                , thresh_do = thresh_do
+                                , operator_do = operator_do
+                                , lab_datetime = lab_datetime
+                                , lab_depth = lab_depth
+                                , lab_temp = lab_temp
+                                , lab_title = NA)
+        #
+        # Add subtitle and caption
+        myST <- paste0("Temp ", operator_temp, " ", thresh_temp
+                       , " and DO ", operator_do, " ", thresh_do)
+        p_ot <- p_ot +
+          ggplot2::labs(subtitle = myST) +
+          ggplot2::labs(caption = paste0("Gray = Areas outside of given"
+                                         , " temp and DO values."))
+        # Save
+        fn_p_ot <- file.path(path_results, "plot_oxythermal.png")
+        ggplot2::ggsave(filename = p_ot, plot = p_ot)
+
+        # __TDOx ----
+        #
+        # inputs
+        do_x_val  <- input$tdox_val  #3
+        #
+        tdox_x <- tdox(data = data_plot
+                       , col_date = col_date
+                       , col_depth = col_depth
+                       , col_temp = col_measure
+                       , col_do = col_measure2
+                       , do_x_val = do_x_val)
+        # save
+        fn_tdox <- file.path(path_results
+                             , paste0("tdox_", do_x_val), ".csv")
+        write.csv(tdox_x, fn_tdox, row.names = FALSE)
+      } ## IF ~ is.null(col_measure2)
+
+
+
       # _b_Calc, Step 5, QC Area ####
       # Increment the progress bar, and qc_taxa
       n_step <- n_step + 1
@@ -716,7 +791,7 @@ shinyServer(function(input, output) {
                                 , message = "Missing 'Input, Area, Area (m2)'")
       )## validate ~ END
 
-      # Check for mispelled column names
+      # Check for misspelled column names
       col_data2 <- c(col_area_depth, col_area_area)
       sum_col_data2_in <- sum(col_data2 %in% names(df_data2))
       col_data2_missing <- col_data2[!(col_data2 %in% names(df_data2))]
@@ -811,45 +886,290 @@ shinyServer(function(input, output) {
         ##__rLA, ts.bouyancy.freq ----
         ### Calc
         df_rLA_bf <- rLakeAnalyzer::ts.buoyancy.freq(df_rLA_wtr)
+        ### Save, Data
         fn_rLA_bf <- file.path(path_results, "rLA_buoyancy_frequency.csv")
         write.csv(df_rLA_bf, file = fn_rLA_bf, row.names = FALSE)
-        ### Plot
-        # grDevices::png(file.path(path_results, "plot_rLA_bf.png"))
-        #   plot(df_rLA_bf, type='l', ylab='Buoyancy Frequency', xlab='Date')
-        # grDevices::dev.off()
-        ### Save
+        ### Plot (and Save)
+        # munge date format
+        # df_rLA_bf$datetime <- as.POSIXct(df_rLA_bf$datetime
+        #                                  , format = "%Y-%m-%d %H:%M")
 
-        ##__rLA, ts.center.bouyancy ----
-        df_rLA_cb <- rLakeAnalyzer::ts.center.buoyancy(df_rLA_wtr)
-        fn_rLA_cb <- file.path(path_results, "rLA_center_buoyancy.csv")
-        write.csv(df_rLA_cb, file = fn_rLA_cb, row.names = FALSE)
+        fn_p_rLA_bf <- file.path(path_results, "plot_rLA_bf.png")
 
-        ##__rLA, ts.schmidt.stability ----
-        # df_rLA_ss <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr
-        #                                                  , bathy = df_data2)
-        # fn_rLA_ss <- file.path(path_results, "rLA_schmidt_stability.csv")
-        # write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
+          tryCatch({
+            grDevices::png(fn_p_rLA_bf)
+              plot(df_rLA_bf, type='l', ylab='Buoyancy Frequency', xlab='Date')
+            grDevices::dev.off()
+          },
+          error = function(err) {
+            p_rLA_bf <- ggplot2::ggplot() +
+            ggplot2::labs(title = "rLA, Buoyancy Frequency"
+                         , subtitle = "ERROR") +
+            ggplot2::theme_void()
+            #
+            ggplot2::ggsave(filename = fn_p_rLA_bf, plot = p_rLA_bf)
+          } ## error ~ END
+          )## tryCatch ~ END
+
+
+        ##__rLA, ts.center.buoyancy ----
+        #
+        fn_rLA_cb <- file.path(path_results, "rLA_central_buoyancy.csv")
+        #
+        tryCatch({
+          df_rLA_td <- rLakeAnalyzer::ts.thermo.depth(df_rLA_wtr)
+          df_rLA_cb <- rLakeAnalyzer::ts.center.buoyancy(df_rLA_td)
+          write.csv(df_rLA_cb, file = fn_rLA_cb, row.names = FALSE)
+        },
+        error = function(err) {
+          df_rLA_cb <- data.frame(rLA_central.buoyancy = "ERROR")
+          write.csv(df_rLA_cb, file = fn_rLA_cb, row.names = FALSE)
+        } ## error ~ END
+        )## tryCatch ~ END
+
+        ## Plot (and Save)
+        fn_p_rLA_cb <- file.path(path_results, "plot_rLA_cb.png")
+        #
+        if(exists("df_rLA_cb")) {
+          tryCatch({
+            plot_cb_y_max <- max(max(df_rLA_cb[, 2], na.rm = TRUE)
+                                 , max(df_rLA_td[, 2], na.rm = TRUE)
+                                 , na.rm = TRUE)
+            grDevices::png(fn_p_rLA_cb)
+              plot(df_rLA_cb
+                   , type= 'l'
+                   , ylab= 'Depth'
+                   , xlab= 'Date'
+                   , ylim= c(plot_cb_y_max, 0)
+                   , lwd = 1.5)
+              lines(df_rLA_td, type='l', col='red', lwd = 1.5)
+              legend("topright",
+                     c('center of buoyancy','thermocline depth'),
+                     lty=c(1, 1),
+                     lwd=c(1.5, 1.5), col=c("black","red"), bty = "n")
+            grDevices::dev.off()
+          },
+          error = function(err) {
+            p_rLA_cb <- ggplot2::ggplot() +
+              ggplot2::labs(title = "rLA, center buoyancy"
+                            , subtitle = "ERROR") +
+              ggplot2::theme_void()
+            #
+            ggplot2::ggsave(filename = fn_rLA_cb, plot = p_rLA_cb)
+          } ## error ~ END
+          )## tryCatch ~ END
+
+
+        }## IF ~ exists("df_rLA_cb") ~ END
+
 
         ##__rLA, ts.thermo.depth ----
-        df_rLA_td <- rLakeAnalyzer::ts.thermo.depth(df_rLA_wtr)
+        ### Calc (already calculated above)
+        #df_rLA_td <- rLakeAnalyzer::ts.thermo.depth(df_rLA_wtr)
+        ### Save
         fn_rLA_td <- file.path(path_results, "rLA_thermo_depth.csv")
         write.csv(df_rLA_td, file = fn_rLA_td, row.names = FALSE)
+        ### Plot
+        fn_p_rLA_td <- file.path(path_results, "plot_rLA_td.png")
+        #
+        tryCatch({
+          p_rLA_td <- ggplot2::ggplot(data = df_rLA_td
+                                      , ggplot2::aes(x = datetime
+                                                     , y = thermo.depth)) +
+            ggplot2::geom_line(na.rm = TRUE) +
+            ggplot2::labs(x = "Date", y = "Thermocline Depth") +
+            ggplot2::theme_bw()
+        },
+        error = function(err) {
+          p_rLA_td <- ggplot2::ggplot() +
+            ggplot2::labs(title = "rLA, thermo depth"
+                          , subtitle = "ERROR") +
+            ggplot2::theme_void()
+          #
+          ggplot2::ggsave(filename = fn_rLA_hm, plot = p_rLA_hm)
+        } ## error ~ END
+        )## tryCatch ~ END
+        #
+        ggplot2::ggsave(filename = fn_p_rLA_td, plot = p_rLA_td)
+
+
+        ##__rLA, ts.schmidt.stability ----
+        fn_rLA_ss <- file.path(path_results, "rLA_schmidt_stability.csv")
+        #
+        tryCatch({
+          df_rLA_ss <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr
+                                                           , bathy = df_data2)
+          write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
+        },
+        error = function(err) {
+          df_rLA_ss <- data.frame(rLA_schmidt.stability = "ERROR")
+          write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
+        } ## error ~ END
+        )## tryCatch ~ END
+
 
         # two plots not working for all data
         # rLA functions crash hard when don't have the right data
 
-        # ## __rLA, wtr.heat.map----
-        # fn_hm <- file.path(path_results, "plot_heatmap_rLA.png")
-        # grDevices::png(filename = fn_hm)
-        #   rLakeAnalyzer::wtr.heat.map(df_rLA_wtr)
-        # grDevices::dev.off()
+        ## __rLA, wtr.heat.map----
+        fn_rLA_hm <- file.path(path_results, "plot_heatmap_rLA.png")
         #
-        # ## __rLA, schmidt.plot----
-        # fn_sp <- file.path(path_results, "rLA_plot_Schmidt.png")
-        # grDevices::png(filename = fn_sp)
-        #   rLakeAnalyzer::schmidt.plot(df_rLA_wtr, df_rLA_bath)
-        # grDevices::dev.off()
+        tryCatch({
+          grDevices::png(filename = fn_rLA_hm)
+            rLakeAnalyzer::wtr.heat.map(df_rLA_wtr)
+          grDevices::dev.off()
+        },
+        error = function(err) {
+          p_rLA_hm <- ggplot2::ggplot() +
+            ggplot2::labs(title = "rLA, heat map"
+                          , subtitle = "ERROR") +
+            ggplot2::theme_void()
+          #
+          ggplot2::ggsave(filename = fn_rLA_hm, plot = p_rLA_hm)
+        } ## error ~ END
+        )## tryCatch ~ END
 
+
+        ## __rLA, schmidt.plot----
+        fn_rLA_sp <- file.path(path_results, "rLA_plot_Schmidt.png")
+        #
+        tryCatch({
+          grDevices::png(fn_rLA_sp)
+            rLakeAnalyzer::schmidt.plot(df_rLA_wtr, df_rLA_bath)
+          grDevices::dev.off()
+        },
+        error = function(err) {
+          p_rLA_sp <- ggplot2::ggplot() +
+            ggplot2::labs(title = "rLA, Schmidt Plot"
+                          , subtitle = "ERROR") +
+            ggplot2::theme_void()
+          #
+          ggplot2::ggsave(filename = fn_rLA_sp, plot = p_rLA_sp)
+        } ## error ~ END
+        )## tryCatch ~ END
+
+
+        ## __rLA, meta depths ----
+        ### Calc, meta depths
+        df_rLA_md <- ts.meta.depths(df_rLA_wtr)
+        df_rLA_md$thickness <- df_rLA_md$bottom - df_rLA_md$top
+        ### Save
+        fn_rLA_md <- file.path(path_results, "rLA_meta_depths.csv")
+        write.csv(df_rLA_md, file = fn_rLA_md, row.names = FALSE)
+        ### Plot
+        # p_rLA_md <- ggplot2::ggplot(data = df_rLA_md
+        #                             , ggplot2::aes(x = datetime, y = top)) +
+        #   ggplot2::geom_line(color = "blue", na.rm = TRUE) +
+        #   ggplot2::labs(x = "Date", y = "Meta Depths (m)") +
+        #   ggplot2::theme_bw() +
+        #   ggplot2::geom_line(data = df_rLA_md
+        #                      , ggplot2::aes(x = datetime, y = bottom)
+        #                      , color = "red"
+        #                      , na.rm = TRUE) +
+        #   ggplot2::scale_y_reverse()
+        # #
+        # fn_p_rLA_md <- file.path(path_results
+        #                          , "plot_rLA_md.png")
+        # ggplot2::ggsave(filename = fn_p_rLA_md, plot = p_rLA_md)
+
+        ## Layer Calcs ----
+        # (need rLA meta.depths above)
+        # temp diff epi and hypo
+        df_merge <- merge(df_data, df_rLA_md
+                          , by.x = col_date, by.y = "datetime")
+
+        df_merge[, "Epi"] <- ifelse(df_merge[, col_depth] < df_merge[,  "top"], TRUE, FALSE)
+        df_merge[, "Meta"] <- NA
+        df_merge[, "Hypo"] <- ifelse(df_merge[, col_depth] > df_merge[,  "bottom"], TRUE, FALSE)
+        df_merge[, "Meta"] <- ifelse(df_merge[, "Epi"] + df_merge[, "Hypo"] == 0, TRUE, FALSE)
+        df_merge[, "Layer"] <- ifelse(df_merge[, "Epi"] == TRUE
+                                      , "Epi"
+                                      , ifelse(df_merge[, "Meta"] ==  TRUE
+                                               , "Meta"
+                                               , ifelse(df_merge[, "Hypo"] ==  TRUE
+                                                        , "Hypo", NA)))
+
+        # col_datetime <- "Date"
+        # col_depth <- "Depth"
+        # col_measure <- "Measurement"
+        col_layer <- "Layer"
+
+        df_merge[, "Layer"] <- factor(df_merge[, "Layer"]
+                                      , levels = c("Epi", "Meta", "Hypo", NA))
+
+
+        stats_layers <- df_merge %>%
+          dplyr::group_by(.data[[col_date]], .data[[col_layer]]) %>%
+          dplyr::summarize(.groups = "keep"
+                           #, groupname = col_date
+                           , n = length(.data[[col_measure]])
+                           , ndays = length(unique(.data[[col_date]]))
+                           , mean = mean(.data[[col_measure]], na.rm = TRUE)
+                           , median = stats::median(.data[[col_measure]]
+                                                    , na.rm = TRUE)
+                           , min = min(.data[[col_measure]], na.rm = TRUE)
+                           , max = max(.data[[col_measure]], na.rm = TRUE)
+                           , range = max - min
+                           , sd = stats::sd(.data[[col_measure]], na.rm = TRUE)
+                           , var = stats::var(.data[[col_measure]], na.rm = TRUE)
+                           , cv = sd/mean
+                           , q01 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .01
+                                                   , na.rm = TRUE)
+                           , q05 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .05
+                                                   , na.rm = TRUE)
+                           , q10 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .10
+                                                   , na.rm = TRUE)
+                           , q25 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .25
+                                                   , na.rm = TRUE)
+                           , q50 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .50
+                                                   , na.rm = TRUE)
+                           , q75 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .75
+                                                   , na.rm = TRUE)
+                           , q90 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .90
+                                                   , na.rm = TRUE)
+                           , q95 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .95
+                                                   , na.rm = TRUE)
+                           , q99 = stats::quantile(.data[[col_measure]]
+                                                   , probs = .99
+                                                   , na.rm = TRUE)
+                           #, n_below = sum(.data[["below"]], na.rm = TRUE)
+          )
+
+
+        layers_min <- pivot_wider(stats_layers
+                                  , id_cols = all_of(col_date)
+                                  , names_from = "Layer"
+                                  , names_sort = TRUE
+                                  , values_from = "min")
+
+        layers_min[, "diff_EH"] <- layers_min[, "Hypo"] - layers_min[, "Epi"]
+
+        # Save
+        fn_stats_layers <- file.path(path_results, "rLA_layers_stats.csv")
+        write.csv(stats_layers, file = fn_stats_layers, row.names = FALSE)
+        fn_layers_min <- file.path(path_results, "rLA_layers_min.csv")
+        write.csv(layers_min, file = fn_layers_min, row.names = FALSE)
+
+        # Plot
+        # p_layers_diff <- ggplot2::ggplot(data = layers_min
+        #                                 , ggplot2::aes_string(x = col_date, y = "diff_EH")) +
+        #   ggplot2::geom_line(color = "black", na.rm = TRUE) +
+        #   ggplot2::labs(x = "Date"
+        #                 , y = "Temperature Difference"
+        #                 , title = "Comparison of Epilimnion and Hypolimnion") +
+        #   ggplot2::theme_bw()
+        # #
+        # fn_p_layers_diff <- file.path(path_results
+        #                          , "plot_layers_diff.png")
+        # ggplot2::ggsave(filename = fn_p_layers_diff, plot = p_layers_diff)
 
 
         # _b_Calc, Save to XLS, B ----

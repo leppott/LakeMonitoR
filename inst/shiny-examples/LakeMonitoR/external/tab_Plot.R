@@ -8,7 +8,7 @@ function(){
              sidebarPanel(
                h4("3.A. Define Columns")
                , p("Define columns below for each box")
-               , p("Displayed text is a hint not an actual value.")
+               , p("Displayed gray text is a hint not an actual value.")
                # Future version use selectize input and use columns from file.
                , textInput("col_plot_datetime"
                            , label = "Plot, Measurement, DateTime"
