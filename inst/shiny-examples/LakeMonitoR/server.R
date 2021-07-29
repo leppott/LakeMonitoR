@@ -1031,7 +1031,7 @@ shinyServer(function(input, output) {
 
 
         ## __rLA, schmidt.plot----
-        fn_rLA_sp <- file.path(path_results, "rLA_plot_Schmidt.png")
+        fn_rLA_sp <- file.path(path_results, "plot_rLA_Schmidt.png")
         #
         tryCatch({
           grDevices::png(fn_rLA_sp)

@@ -4,11 +4,18 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-28 20:48:04
+    #> Last Update: 2021-07-29 07:42:44
+
+# LakeMonitoR 0.1.1.9012
+
+Release - 2021-07-29
+
+-   refactor: Update Shiny rLA plot names to be consistent.
+    -   Use plot\_rLA\_x.png
 
 # LakeMonitoR 0.1.1.9011
 
-Release - 2021-07-27
+Release - 2021-07-28
 
 -   refactor: Change default temp operator in plot\_oxythermal
     -   Update help text and function defaults to match example
