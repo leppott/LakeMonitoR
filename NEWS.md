@@ -4,7 +4,24 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-29 08:23:19
+    #> Last Update: 2021-07-29 13:36:02
+
+# LakeMonitoR 0.1.1.9014
+
+Release - 2021-07-29
+
+-   refactor: Update Shiny Server.R
+    -   Rework directory exists code, make consistent
+    -   Update sink message for area file
+    -   Update file name for oxythermal plot output
+    -   Move DO plots inside of DO if statement with oxythermal and TDOx
+    -   Add error condition for oxythermal plot when no data to plot
+        -   For when have units (F) different than default threshold
+            (30 C)
+    -   Change TDOx file output name
+    -   Update plots for measurement 2
+        -   heat map 2
+        -   depth profile 2
 
 # LakeMonitoR 0.1.1.9013
 

@@ -52,10 +52,18 @@ shinyServer(function(input, output) {
 
     #message(getwd())
 
-    # Add "Results" folder if missing
-    boo_Results <- dir.exists(file.path(path_results))
-    if(boo_Results == FALSE){
-      dir.create(file.path(path_results))
+    # Add folder, if missing, "Results"
+    fn_folder <- file.path(path_results)
+    boo_folder <- dir.exists(fn_folder)
+    if(isFALSE(boo_folder)){
+      dir.create(fn_folder)
+    }
+
+    # Add folder, if missing, "Results/data_input"
+    fn_folder <- file.path(path_results, "data_input")
+    boo_folder <- dir.exists(fn_folder)
+    if(isFALSE(boo_folder)){
+      dir.create(fn_folder)
     }
 
     # Remove all files in "Results" folder
@@ -114,11 +122,20 @@ shinyServer(function(input, output) {
 
     #message(getwd())
 
-    # Add "Results" folder if missing
-    boo_Results <- dir.exists(file.path(path_results))
-    if(boo_Results == FALSE){
-      dir.create(file.path(path_results))
+    # Add folder, if missing, "Results"
+    fn_folder <- file.path(path_results)
+    boo_folder <- dir.exists(fn_folder)
+    if(isFALSE(boo_folder)){
+      dir.create(fn_folder)
     }
+
+    # Add folder, if missing, "Results/data_input"
+    fn_folder <- file.path(path_results, "data_input")
+    boo_folder <- dir.exists(fn_folder)
+    if(isFALSE(boo_folder)){
+      dir.create(fn_folder)
+    }
+
 
     # will not remove files.
 
@@ -174,10 +191,18 @@ shinyServer(function(input, output) {
 
     #message(getwd())
 
-    # Add "Results" folder if missing
-    boo_Results <- dir.exists(file.path(path_results))
-    if(boo_Results == FALSE){
-      dir.create(file.path(path_results))
+    # Add folder, if missing, "Results"
+    fn_folder <- file.path(path_results)
+    boo_folder <- dir.exists(fn_folder)
+    if(isFALSE(boo_folder)){
+      dir.create(fn_folder)
+    }
+
+    # Add folder, if missing, "Results/data_input"
+    fn_folder <- file.path(path_results, "data_input")
+    boo_folder <- dir.exists(fn_folder)
+    if(isFALSE(boo_folder)){
+      dir.create(fn_folder)
     }
 
     # will not remove files.
@@ -251,7 +276,7 @@ shinyServer(function(input, output) {
       inFile <- input$fn_input
       message(paste0("file, measurement = ", inFile$name))
       inFile2 <- input$fn_input2
-      message(paste0("file, area = ", inFile$name))
+      message(paste0("file, area = ", inFile2$name))
       message("If area file is null then only stratification metrics are
               calculated.")
       # Input variables
@@ -440,7 +465,6 @@ shinyServer(function(input, output) {
                                               , col_strat_measure
                                              , below_threshold = input$minlimit)
 
-
       # Save Results
       # Results, Stratification Dates
       fn_strat_dates <- file.path(path_results, "strat_dates.csv")
@@ -570,18 +594,19 @@ shinyServer(function(input, output) {
                            , lab_title = lab_title_hm
                            , contours = TRUE)
       fn_p_hm <- file.path(path_results, "plot_heatmap.png")
-      ggplot2::ggsave(fn_p_hm)
+      ggplot2::ggsave(filename = fn_p_hm, plot = p_hm)
 
 
-      # __Plot, Measure 2 ----
-      lab_error <- "No plot"
-      lab_title_2 <- NA
-      p_profile2 <- ggplot() +
-        theme_void() +
-      geom_text(aes(0, 0, label = lab_error))
-      fn_p_profile2 <- file.path(path_results
-                                , "plot_depth_profile2.png")
-      ggplot2::ggsave(filename = fn_p_profile2, plot = p_profile2)
+      # Move to DO section, only plot if have the data
+      # # __Plot, Measure 2 (xx) ----
+      # lab_error <- "No plot"
+      # lab_title_2 <- NA
+      # p_profile2 <- ggplot2::ggplot() +
+      #   ggplot2::labs(title = "Plot, Measure 2") +
+      #   ggplot2::theme_void() +
+      #   ggplot2::geom_text(aes(0, 0, label = lab_error))
+      # fn_p_profile2 <- file.path(path_results, "plot_depth_profile2.png")
+      # ggplot2::ggsave(filename = fn_p_profile2, plot = p_profile2)
 
       # __Plot, time series----
       # **Needs different data source***
@@ -599,8 +624,7 @@ shinyServer(function(input, output) {
 
       # __Plot, Combined 2 ----
       p_combo_2 <- gridExtra::grid.arrange(p_hm, p_depth)
-      fn_p_combo_2 <- file.path(path_results
-                                , "plot_combo2.png")
+      fn_p_combo_2 <- file.path(path_results, "plot_combo2.png")
       ggplot2::ggsave(filename = fn_p_combo_2, plot = p_combo_2)
 
       # __Plot, Combined 3 ----
@@ -647,32 +671,63 @@ shinyServer(function(input, output) {
         lab_datetime <- "Date Time"
         lab_depth    <- "Depth"
         lab_temp     <- "Temperature"
-        #
-        # Create Plot
-        p_ot <- plot_oxythermal(data = data_plot
-                                , col_datetime = col_date
-                                , col_depth = col_depth
-                                , col_temp = col_measure
-                                , col_do = col_measure2
-                                , thresh_temp = thresh_temp
-                                , operator_temp= operator_temp
-                                , thresh_do = thresh_do
-                                , operator_do = operator_do
-                                , lab_datetime = lab_datetime
-                                , lab_depth = lab_depth
-                                , lab_temp = lab_temp
-                                , lab_title = NA)
-        #
-        # Add subtitle and caption
-        myST <- paste0("Temp ", operator_temp, " ", thresh_temp
-                       , " and DO ", operator_do, " ", thresh_do)
-        p_ot <- p_ot +
-          ggplot2::labs(subtitle = myST) +
-          ggplot2::labs(caption = paste0("Gray = Areas outside of given"
-                                         , " temp and DO values."))
-        # Save
+
+        # QC, Check if DO and Temp thresh are in data
+        # range_temp <- range(data_plot[, col_measure], na.rm = TRUE)
+        # range_do <- range(data_plot[, col_measure2], na.rm = TRUE)
+
+        data_plot_test <- as.data.frame(data_plot)
+        data_plot_test[, col_measure] <- ifelse(data_plot_test[, col_measure] <=
+                                                                    thresh_temp
+                                           , 1
+                                           , 0)
+        data_plot_test[, col_measure2] <- ifelse(data_plot_test[, col_measure2] >=
+                                                                     thresh_do
+                                           , 1
+                                           , 0)
+        data_plot_test[, "qc_test"] <- data_plot_test[, col_measure] *
+                                                data_plot_test[, col_measure2]
+        qc_data_rows <- sum(data_plot_test[, "qc_test"], na.rm = TRUE)
+        rm(data_plot_test)
+
+        # Plot
         fn_p_ot <- file.path(path_results, "plot_oxythermal.png")
-        ggplot2::ggsave(filename = p_ot, plot = p_ot)
+        #
+        if(qc_data_rows == 0) {
+          # bad plot
+          p_ot <- ggplot2::ggplot() +
+            ggplot2::labs(title = "Oxythermal"
+                          , subtitle = "No data to plot, check thresholds") +
+            ggplot2::theme_void()
+          #
+          ggplot2::ggsave(filename = fn_p_ot, plot = p_ot)
+        } else {
+          # Create Plot
+          p_ot <- plot_oxythermal(data = data_plot
+                                  , col_datetime = col_date
+                                  , col_depth = col_depth
+                                  , col_temp = col_measure
+                                  , col_do = col_measure2
+                                  , thresh_temp = thresh_temp
+                                  , operator_temp= operator_temp
+                                  , thresh_do = thresh_do
+                                  , operator_do = operator_do
+                                  , lab_datetime = lab_datetime
+                                  , lab_depth = lab_depth
+                                  , lab_temp = lab_temp
+                                  , lab_title = NA)
+          #
+          # Add subtitle and caption
+          myST <- paste0("Temp ", operator_temp, " ", thresh_temp
+                         , " and DO ", operator_do, " ", thresh_do)
+          p_ot <- p_ot +
+            ggplot2::labs(subtitle = myST) +
+            ggplot2::labs(caption = paste0("Gray = Areas outside of given"
+                                           , " temp and DO values."))
+          # Save
+          ggplot2::ggsave(filename = fn_p_ot, plot = p_ot)
+
+        }## IF ~ nrow(data_plot_test) ~ END
 
         # __TDOx ----
         #
@@ -686,9 +741,39 @@ shinyServer(function(input, output) {
                        , col_do = col_measure2
                        , do_x_val = do_x_val)
         # save
-        fn_tdox <- file.path(path_results
-                             , paste0("tdox_", do_x_val), ".csv")
+        fn_tdox <- file.path(path_results, paste0("tdox_", do_x_val, ".csv"))
         write.csv(tdox_x, fn_tdox, row.names = FALSE)
+
+        # __ Plot, Depth Profile 2 ----
+        lab_title_depth2 <- "Depth Profile"
+        p_depth2 <- plot_depth(data = data_plot
+                              , col_datetime = col_date
+                              , col_depth = col_depth
+                              , col_measure = col_measure2
+                              , lab_datetime = lab_datetime
+                              , lab_depth = lab_depth
+                              , lab_measure = "Dissolved Oxygen"
+                              , lab_title = lab_title_depth2)
+
+        # Plot, Save
+       fn_p_depth2 <- file.path(path_results, "plot_depth_profile_measure2.png")
+        ggplot2::ggsave(filename = fn_p_depth2, plot = p_depth2)
+
+        # __ Plot, Heat Map 2----
+        lab_title_hm2 <- NA
+        p_hm2 <- plot_heatmap(data = data_plot
+                              , col_datetime = col_date
+                              , col_depth = col_depth
+                              , col_measure = col_measure2
+                              , lab_datetime = lab_datetime
+                              , lab_depth = lab_depth
+                              , lab_measure = "DO"
+                              , lab_title = lab_title_hm2
+                              , contours = TRUE)
+        fn_p_hm2 <- file.path(path_results, "plot_heatmap_measure2.png")
+        ggplot2::ggsave(filename = fn_p_hm2, plot = p_hm2)
+
+
       } ## IF ~ is.null(col_measure2)
 
 
@@ -1684,16 +1769,15 @@ shinyServer(function(input, output) {
 
       # Ensure folders exist
       #
-      # if(isFALSE(dir.exists(file.path(path_results)))){
-      #   dir.create(file.path(path_results))
-      # }## IF ~ Results ~ END
-      # #
-      # if(isFALSE(dir.exists(file.path("data_input")))){
-      #   dir.create(file.path("data_input"))
-      # }## IF ~ import ~ END
+      if(isFALSE(dir.exists(file.path(path_results)))){
+        dir.create(file.path(path_results))
+      }## IF ~ Results ~ END
+      #
+      if(isFALSE(dir.exists(file.path("data_input")))){
+        dir.create(file.path(path_results, "data_input"))
+      }## IF ~ import ~ END
 
       #
-# ** Not Working ***
       ## Empty Folder, Results ----
       fn_results <- list.files(file.path(path_results), full.names=TRUE)
       file.remove(fn_results)
