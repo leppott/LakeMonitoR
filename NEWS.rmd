@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 1.0.0
+===========
+Release - 2021-08-02
+
+* docs: Bump to version 1.0 for release
+
 LakeMonitoR 0.1.1.9016
 ===========
 Release - 2021-08-02
