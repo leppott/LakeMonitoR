@@ -4,7 +4,16 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-07-29 13:36:02
+    #> Last Update: 2021-08-02 10:56:59
+
+# LakeMonitoR 0.1.1.9015
+
+Release - 2021-08-02
+
+-   fix: Update Shiny app order of operations for import/upload of files
+    -   Code was removing the Results/data-input folder and not
+        recreating it
+-   refactor: Change default oxythermal temp from 30 to 20 in Shiny app
 
 # LakeMonitoR 0.1.1.9014
 

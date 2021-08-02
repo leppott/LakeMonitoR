@@ -72,7 +72,7 @@ function(){
               # _calc, Oxy ----
                , numericInput("oxy_temp"
                               , label = "Oxythermal Plot, Temperature"
-                              , value = 30)
+                              , value = 20)
                , bsTooltip(id = "oxy_temp"
                     , title = "Oxythermal plot, Temp, <="
                     , placement = "top")

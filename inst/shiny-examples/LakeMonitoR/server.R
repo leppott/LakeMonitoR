@@ -57,6 +57,9 @@ shinyServer(function(input, output) {
     boo_folder <- dir.exists(fn_folder)
     if(isFALSE(boo_folder)){
       dir.create(fn_folder)
+    } else {
+ #     fn_remove <- list.files(file.path(path_results), full.names=TRUE)
+#      file.remove(fn_remove)
     }
 
     # Add folder, if missing, "Results/data_input"
@@ -64,11 +67,10 @@ shinyServer(function(input, output) {
     boo_folder <- dir.exists(fn_folder)
     if(isFALSE(boo_folder)){
       dir.create(fn_folder)
+    } else {
+   #   fn_remove <- list.files(file.path(path_results, "data_input"), full.names=TRUE)
+   #   file.remove(fn_remove)
     }
-
-    # Remove all files in "Results" folder
-    fn_results <- list.files(file.path(path_results), full.names=TRUE)
-    file.remove(fn_results)
 
     # Read user imported file
     df_input <- read.table(inFile$datapath
@@ -127,6 +129,9 @@ shinyServer(function(input, output) {
     boo_folder <- dir.exists(fn_folder)
     if(isFALSE(boo_folder)){
       dir.create(fn_folder)
+    } else {
+  #    fn_remove <- list.files(file.path(path_results), full.names=TRUE)
+  #    file.remove(fn_remove)
     }
 
     # Add folder, if missing, "Results/data_input"
@@ -134,8 +139,10 @@ shinyServer(function(input, output) {
     boo_folder <- dir.exists(fn_folder)
     if(isFALSE(boo_folder)){
       dir.create(fn_folder)
+    } else {
+   #   fn_remove <- list.files(file.path(path_results, "data_input"), full.names=TRUE)
+  #    file.remove(fn_remove)
     }
-
 
     # will not remove files.
 
@@ -196,6 +203,9 @@ shinyServer(function(input, output) {
     boo_folder <- dir.exists(fn_folder)
     if(isFALSE(boo_folder)){
       dir.create(fn_folder)
+    } else {
+  #    fn_remove <- list.files(file.path(path_results, "data_input"), full.names=TRUE)
+  #    file.remove(fn_remove)
     }
 
     # Add folder, if missing, "Results/data_input"
@@ -203,6 +213,9 @@ shinyServer(function(input, output) {
     boo_folder <- dir.exists(fn_folder)
     if(isFALSE(boo_folder)){
       dir.create(fn_folder)
+    } else {
+   #   fn_remove <- list.files(file.path(path_results, "data_input"), full.names=TRUE)
+   #   file.remove(fn_remove)
     }
 
     # will not remove files.
@@ -432,7 +445,7 @@ shinyServer(function(input, output) {
       # save ddm
       fn_ddm <- file.path(path_results, "data_ddm.csv")
       write.csv(df_ddm, fn_ddm, row.names = FALSE)
-
+browser()
       # __Calc, Stratification ----
       col_strat_date    <- "Date"
       col_strat_depth   <- "Depth"
@@ -464,6 +477,14 @@ shinyServer(function(input, output) {
                                               , col_strat_depth
                                               , col_strat_measure
                                              , below_threshold = input$minlimit)
+
+      # Add line to Strat plot for date range
+      # data_strat <- ls_strat$Stratification_Dates
+      # data_strat$Year <- x$Year <- format(x$Date, "%Y")
+      # plot_strat <- ls_strat$Stratification_Plot
+      # plot_strat <- ggplot2::ggplot(data_strat, ggplot2::aes(x = "Date"
+      #                                                        , y = "Year")) +
+      #                 ggplot2::geom_line()
 
       # Save Results
       # Results, Stratification Dates
