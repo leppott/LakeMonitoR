@@ -24,7 +24,7 @@ tab_Plot    <- source("external/tab_Plot.R", local = TRUE)$value
 
 # Define UI
 shinyUI(
-  navbarPage("LakeMonitoR, v0.1.1.9015"
+  navbarPage("LakeMonitoR, v0.1.1.9016"
     , tab_Help()
     , tab_Combine()
     , tab_Import()

@@ -445,7 +445,7 @@ shinyServer(function(input, output) {
       # save ddm
       fn_ddm <- file.path(path_results, "data_ddm.csv")
       write.csv(df_ddm, fn_ddm, row.names = FALSE)
-browser()
+
       # __Calc, Stratification ----
       col_strat_date    <- "Date"
       col_strat_depth   <- "Depth"
@@ -1790,22 +1790,27 @@ browser()
 
       # Ensure folders exist
       #
-      if(isFALSE(dir.exists(file.path(path_results)))){
-        dir.create(file.path(path_results))
-      }## IF ~ Results ~ END
+      fn_folder <- file.path(path_results)
+      boo_folder <- dir.exists(fn_folder)
+      if(isFALSE(boo_folder)){
+        dir.create(fn_folder)
+      } else {
+        # nothing, doesn't work
+        ## Empty Folder, Results ----
+        # fn_results <- list.files(fn_folder, full.names=TRUE)
+        # file.remove(fn_results)
+      }
+      ## IF ~ Results ~ END
       #
-      if(isFALSE(dir.exists(file.path("data_input")))){
-        dir.create(file.path(path_results, "data_input"))
-      }## IF ~ import ~ END
-
-      #
-      ## Empty Folder, Results ----
-      fn_results <- list.files(file.path(path_results), full.names=TRUE)
-      file.remove(fn_results)
-
-      ## Empty Folder, import ----
-      fn_import <- list.files(file.path(path_results, "data_input"), full.names=TRUE)
-      file.remove(fn_import)
+      fn_folder <- file.path(path_results, "data_input")
+      boo_folder <- dir.exists(fn_folder)
+      if(isFALSE(boo_folder)){
+        dir.create(fn_folder)
+      } else {
+        ## Empty Folder, import ----
+        # fn_import <- list.files(fn_folder, full.names=TRUE)
+        # file.remove(fn_import)
+      } ## IF ~ import ~ END
 
       ## Sink, start ----
       # create file, ok on Windows but not Linux

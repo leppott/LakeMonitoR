@@ -1,7 +1,7 @@
 Package: LakeMonitoR
 Type: Package
 Title: Suite of Functions and Tools for Lake Monitoring
-Version: 0.1.1.9015
+Version: 0.1.1.9016
 Author: Erik W Leppo, Tim Martin
 Maintainer: Erik W Leppo <Erik.Leppo@tetratech.com>
 Description: Tools for analyzing lake depth profiles.
