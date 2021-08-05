@@ -387,12 +387,23 @@ stratification <- function(data
     df_plot$Min_j <- as.numeric(format(df_plot$min_date, "%j"))
 
     # Use a leap year (2004) to put julian dates in the same scale
-    df_plot$Start_j2 <- as.Date(df_plot$Start_j
+    # %j starts with 1 so subtract 1 to keep Jan 1 as first day
+    df_plot$Start_j2 <- as.Date(df_plot$Start_j - 1
                                 , origin = as.Date("2004-01-01"))
-    df_plot$End_j2 <- as.Date(df_plot$End_j
+    df_plot$End_j2 <- as.Date(df_plot$End_j - 1
                               , origin = as.Date("2004-01-01"))
-    df_plot$Min_j2 <- as.Date(df_plot$Min_j
+    df_plot$Min_j2 <- as.Date(df_plot$Min_j - 1
                               , origin = as.Date("2004-01-01"))
+
+    df_plot[, "PlotSize"] <- 3
+
+    # Data for date range
+    df_plot2 <- Stratification
+    df_plot2[, "Year"] <- format(df_plot2[, "Date"], "%Y")
+    df_plot2[, "PlotDate"] <- as.Date(as.numeric(format(df_plot2[, "Date"]
+                                                        , "%j")) - 1
+                                      , origin = as.Date("2004-01-01"))
+    df_plot2[, "PlotSize"] <- 0.67
 
     #
     p_se <- ggplot2::ggplot(data = df_plot
@@ -403,12 +414,40 @@ stratification <- function(data
                             , expand = c(0, 0)) +
       ggplot2::labs(x = "Date"
                     , y = "Year"
-                    , title = "Stratification Events") +
+                    , title = "Stratification") +
       ggplot2::geom_segment(ggplot2::aes(x = Start_j2
                                          , xend = End_j2
                                          , y = Year
-                                         , yend = Year)
-                            , size = 3) #+
+                                         , yend = Year
+                                         , size = PlotSize
+                                         )
+                            ) +
+      ggplot2::theme_bw() +
+      ggplot2::geom_line(data = df_plot2
+                         , ggplot2::aes(x = PlotDate, y = Year, size = PlotSize)
+                         ) +
+      ggplot2::scale_size_identity(name = ""
+                                   , breaks = c(1, 3)
+                                   , labels = c("Collection Dates"
+                                               , "Stratification Events")
+                                   , guide = "legend"
+                                    ) +
+      ggplot2::theme(legend.position = "bottom")
+
+      # manual legend
+      # https://aosmith.rbind.io/2018/07/19/manual-legends-ggplot2/
+
+
+                          #+
+      # ggplot2::scale_size_manual(""
+      #                            , values = PlotSize
+      #                            , labels = c("all", "strat")
+      #                            , guide = ggplot2::guide_legend(
+    #override.aes = list(size = c(1,3))))
+
+    # scale_size_manual - put size inside aes to get legend
+
+    #+
       # ggplot2::geom_point(ggplot2::aes(x = Min_j2, y = Year)
       #                     , col = "red"
       #                     , size = 4) +
@@ -416,6 +455,8 @@ stratification <- function(data
     # # segments
     # https://stackoverflow.com/questions/34124599/
     # r-plot-julian-day-in-x-axis-using-ggplot2
+
+
   }## IF ~ exists("stratspan") ~ END  (Plot)
 
 

@@ -4,7 +4,32 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-08-02 10:56:59
+    #> Last Update: 2021-08-05 10:57:27
+
+# LakeMonitoR 1.0.0.9001
+
+Release - 2021-08-05
+
+-   fix: Update stratification() plot for julian day
+    -   %j starts with 1 so subtract 1 to keep Jan 1 as day 1 with
+        origin date of “2004-01-01”.
+-   refactor: Update stratification() plot with range of data, Issue
+    \#22
+-   refactor: Update stratification() plot with theme\_bw() to match
+    other plots
+
+# LakeMonitoR 1.0.0
+
+Release - 2021-08-02
+
+-   docs: Bump to version 1.0 for release
+
+# LakeMonitoR 0.1.1.9016
+
+Release - 2021-08-02
+
+-   fix: Update Shiny app folder for aggregate function
+    -   Needed the same fix as Calculation files
 
 # LakeMonitoR 0.1.1.9015
 

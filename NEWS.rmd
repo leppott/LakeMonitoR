@@ -19,6 +19,16 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 1.0.0.9001
+===========
+Release - 2021-08-05
+
+* fix: Update stratification() plot for julian day
+    + %j starts with 1 so subtract 1 to keep Jan 1 as day 1 with origin date of
+    "2004-01-01".
+* refactor: Update stratification() plot with range of data, Issue #22
+* refactor: Update stratification() plot with theme_bw() to match other plots
+
 LakeMonitoR 1.0.0
 ===========
 Release - 2021-08-02
