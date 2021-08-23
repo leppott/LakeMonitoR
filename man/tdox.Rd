@@ -90,7 +90,7 @@ tdox_4 <- tdox(data = data2
                , col_depth = "depth"
                , col_temp = "temp"
                , col_do = "do"
-               , do_x_val = 3)
+               , do_x_val = 4)
 
 tdox_4
 

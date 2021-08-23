@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-08-05 10:57:27
+    #> Last Update: 2021-08-23 12:46:40
+
+# LakeMonitoR 1.0.0.9002
+
+Release - 2021-08-23
+
+-   fix: Update tdox() to use input value for DO instead of 3
+-   refactor: Update tdox() example for tdox\_4
 
 # LakeMonitoR 1.0.0.9001
 

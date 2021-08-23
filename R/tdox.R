@@ -75,7 +75,7 @@
 #'                , col_depth = "depth"
 #'                , col_temp = "temp"
 #'                , col_do = "do"
-#'                , do_x_val = 3)
+#'                , do_x_val = 4)
 #'
 #' tdox_4
 #'
@@ -175,7 +175,8 @@ tdox <- function(data
     # Calc LM
     lm_tdox <- lm(temp ~ do)
     # Predict Value
-    predict_tdox <- max(predict.lm(lm_tdox, data.frame("do" = 3)), na.rm = TRUE)
+    predict_tdox <- max(predict.lm(lm_tdox, data.frame("do" = do_x_val))
+                        , na.rm = TRUE)
 
 
     singledate <- unique(calcdate[, col_date])

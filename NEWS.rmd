@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 1.0.0.9002
+===========
+Release - 2021-08-23
+
+* fix: Update tdox() to use input value for DO instead of 3
+* refactor: Update tdox() example for tdox_4
+
 LakeMonitoR 1.0.0.9001
 ===========
 Release - 2021-08-05
