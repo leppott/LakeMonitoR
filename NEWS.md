@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-08-23 12:46:40
+    #> Last Update: 2021-08-24 11:41:09
+
+# LakeMonitoR 1.0.0.9003
+
+Release - 2021-08-24
+
+-   fix: Update tdox() from lm to glm for calculation
 
 # LakeMonitoR 1.0.0.9002
 

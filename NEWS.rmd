@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+LakeMonitoR 1.0.0.9003
+===========
+Release - 2021-08-24
+
+* fix: Update tdox() from lm to glm for calculation
+
 LakeMonitoR 1.0.0.9002
 ===========
 Release - 2021-08-23

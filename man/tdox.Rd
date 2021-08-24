@@ -42,8 +42,8 @@ oxythermal habitat in Minnesota lakes: influence of total phosphorus, July
 air temperature, and relative depth.  Canadian Journal of Fisheries and
 Aquatic Sciences 67(12):2002-2013.  DOI 10.1139/F10-115
 
-The calculation is achieved in R by using the function `lm(temp ~ do)` for
-each temperature and DO profile at each date and time.  Then `predict.lm()`
+The calculation is achieved in R by using the function `glm(temp ~ do)` for
+each temperature and DO profile at each date and time.  Then `predict.glm()`
 is used to generate the temperature at a DO value of x.
 
 From these calculations min, mean, and max is generated for each day and year

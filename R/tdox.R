@@ -18,8 +18,8 @@
 #' air temperature, and relative depth.  Canadian Journal of Fisheries and
 #' Aquatic Sciences 67(12):2002-2013.  DOI 10.1139/F10-115
 #'
-#' The calculation is achieved in R by using the function `lm(temp ~ do)` for
-#' each temperature and DO profile at each date and time.  Then `predict.lm()`
+#' The calculation is achieved in R by using the function `glm(temp ~ do)` for
+#' each temperature and DO profile at each date and time.  Then `predict.glm()`
 #' is used to generate the temperature at a DO value of x.
 #'
 #' From these calculations min, mean, and max is generated for each day and year
@@ -173,9 +173,9 @@ tdox <- function(data
     temp <- calcdate[, col_temp]
     do <- calcdate[, col_do]
     # Calc LM
-    lm_tdox <- lm(temp ~ do)
+    lm_tdox <- glm(temp ~ do)
     # Predict Value
-    predict_tdox <- max(predict.lm(lm_tdox, data.frame("do" = do_x_val))
+    predict_tdox <- max(predict.glm(lm_tdox, data.frame("do" = do_x_val))
                         , na.rm = TRUE)
 
 
