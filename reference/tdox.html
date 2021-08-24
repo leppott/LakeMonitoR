@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9003</span>
       </span>
     </div>
 
@@ -170,8 +170,8 @@ temperature.</p>
 oxythermal habitat in Minnesota lakes: influence of total phosphorus, July
 air temperature, and relative depth.  Canadian Journal of Fisheries and
 Aquatic Sciences 67(12):2002-2013.  DOI 10.1139/F10-115</p>
-<p>The calculation is achieved in R by using the function `lm(temp ~ do)` for
-each temperature and DO profile at each date and time.  Then `predict.lm()`
+<p>The calculation is achieved in R by using the function `glm(temp ~ do)` for
+each temperature and DO profile at each date and time.  Then `predict.glm()`
 is used to generate the temperature at a DO value of x.</p>
 <p>From these calculations min, mean, and max is generated for each day and year
 present in the data.</p>
@@ -237,7 +237,7 @@ present in the data.</p>
 #&gt;   TimeFrame_Name TimeFrame_Value TDO_x_value   min  mean   max
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> Year           2021                      4  24.1  24.1  24.1
-#&gt; <span style='color: #BCBCBC;'>2</span> Date           2021-08-23                4  24.1  24.1  24.1</div><div class='input'>
+#&gt; <span style='color: #BCBCBC;'>2</span> Date           2021-08-24                4  24.1  24.1  24.1</div><div class='input'>
 <span class='co'>#~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class='co'>## Example 3, Single profile with plot</span>
