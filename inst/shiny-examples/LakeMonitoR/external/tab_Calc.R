@@ -34,12 +34,12 @@ function(){
                            , label = "Input, Area, Area (m2)"
                            , placeholder = "Area")
                #
-               , h4("2.A.3. Define Columns, Measure No Date")
+               , h4("2.A.3. Define Columns, Measure No Depth")
                , textInput("col_msrND_datetime"
-                           , label = "Input, Measure No Date, DateTime"
+                           , label = "Input, Measure No Depth, DateTime"
                            , placeholder = "Date_Time")
                , textInput("col_msrND_msr"
-                           , label = "Input, Measure No Date, Value (WSPD)"
+                           , label = "Input, Measure No Depth, Value"
                            , placeholder = "Wind")
                # _calc ----
                , h4("2.B. Calculate")

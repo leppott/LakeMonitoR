@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-08-24 11:41:09
+    #> Last Update: 2021-09-30 08:33:42
+
+# LakeMonitoR 1.0.0.9004
+
+Release - 2021-09-30
+
+-   refactor: Update Shiny calculate sidebar “No Date” to “No Depth”
+-   refactor: Update Shiny calculate sidebar to remove WSPD from label
 
 # LakeMonitoR 1.0.0.9003
 
