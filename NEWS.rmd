@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+
+LakeMonitoR 1.0.0.9006
+===========
+Release - 2022-10-21
+
+* fix: typo in plot_heatmap updates
+* refactor: Change shiny to use rLA style heat map.
+
 LakeMonitoR 1.0.0.9005
 ===========
 Release - 2022-10-21

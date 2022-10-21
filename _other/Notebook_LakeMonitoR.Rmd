@@ -46,7 +46,7 @@ library(devtools)
 devtools::document()
 ## Install New Package (locally)
 setwd("..") # return to root directory first
-devtools::install(myPkg, quick=FALSE, reload=TRUE, build_vignettes = FALSE)
+devtools::install(myPkg, quick=FALSE, reload=TRUE, build_vignettes = TRUE)
 
 ## Reload library
 library(myPkg, character.only = TRUE)

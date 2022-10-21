@@ -80,7 +80,7 @@ plot_heatmap <- function(data
                       , line_val = NA) {
   # QC, testing
   boo_QC <- FALSE
-  if(isTRUE(booQC)) {
+  if(isTRUE(boo_QC)) {
     data = data
     col_datetime = col_datetime
     col_depth = col_depth

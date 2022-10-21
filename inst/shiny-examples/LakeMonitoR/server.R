@@ -605,17 +605,79 @@ shinyServer(function(input, output) {
 
       # __Plot, heat map ----
       lab_title_hm <- NA
-      p_hm <- plot_heatmap(data = data_plot
-                           , col_datetime = col_date
-                           , col_depth = col_depth
-                           , col_measure = col_measure
-                           , lab_datetime = lab_datetime
-                           , lab_depth = lab_depth
-                           , lab_measure = lab_measure
-                           , lab_title = lab_title_hm
-                           , contours = FALSE)
-      fn_p_hm <- file.path(path_results, "plot_heatmap.png")
-      ggplot2::ggsave(filename = fn_p_hm, plot = p_hm)
+      #hm_style <- "ggplot"  # defined in global.R
+      if(hm_style == "ggplot") {
+        p_hm <- plot_heatmap(data = data_plot
+                             , col_datetime = col_date
+                             , col_depth = col_depth
+                             , col_measure = col_measure
+                             , lab_datetime = lab_datetime
+                             , lab_depth = lab_depth
+                             , lab_measure = lab_measure
+                             , lab_title = lab_title_hm
+                             , contours = FALSE)
+        fn_p_hm <- file.path(path_results, "plot_heatmap.png")
+        ggplot2::ggsave(filename = fn_p_hm, plot = p_hm)
+      } else if(hm_style == "rLA") {
+        fun.myGraphicType <- "png"
+        fun.myGraphicType <- tolower(fun.myGraphicType)
+        fun.myFile.Graphics <- file.path("Results"
+                                         , paste0("plot_heatmap_rLA."
+                                                  , fun.myGraphicType))
+        Graphic_width <- 1024
+        Graphic_height <- 768
+        Graphic_quality <- 100
+        Graphic_pointsize <- 16
+        if(fun.myGraphicType == "jpg") {##IF.myGraphicType.START
+          grDevices::jpeg(filename = fun.myFile.Graphics
+                          , width = Graphic_width
+                          , height = Graphic_height
+                          , quality = Graphic_quality
+                          , pointsize = Graphic_pointsize)
+        } else if(fun.myGraphicType == "tif") {
+          grDevices::tiff(filename = fun.myFile.Graphics
+                          , width = Graphic_width
+                          , height = Graphic_height
+                          , compression = "lzw"
+                          , pointsize = 10
+                          , antialias = "cleartype"
+                          , res = 144)
+        } else if(fun.myGraphicType == "emf") {
+          grDevices::win.metafile(filename = fun.myFile.Graphics
+                                  , width = 12
+                                  , height = 10
+                                  , pointsize = Graphic_pointsize
+                                  , restoreConsole = TRUE)
+        } else if(fun.myGraphicType == "png") {
+          grDevices::png(filename = fun.myFile.Graphics
+                         , width = Graphic_width
+                         , height = Graphic_height
+                         , pointsize = Graphic_pointsize)
+        } else { #default to jpg, spell out filename
+          grDevices::jpeg(filename = fun.myFile.Graphics
+                          , width = Graphic_width
+                          , height = Graphic_height
+                          , quality = Graphic_quality
+                          , pointsize = Graphic_pointsize)
+        }##fun.myGraphicType
+
+        p_fill_n <- 7
+        p_fill_colors_LM <- rev(rainbow(p_fill_n))
+        p_fill_colors_rLA <- c("violet", "blue", "cyan", "green3", "yellow", "orange", "red")
+        p_fill_colors <- p_fill_colors_rLA
+
+        # reformat for rLA format
+        # Columns, date listed first
+        col_depth <- col_depth
+        col_data <- c(col_date, col_measure)
+        col_rLA  <- c("datetime", "wtr")
+        # new data frame
+        df_rLA <- export_rLakeAnalyzer(data_plot, col_depth, col_data, col_rLA)
+        # plot
+        wtr.heat.map(df_rLA)
+
+        grDevices::dev.off()
+      }## IF ~ hm_style
 
 
       # Move to DO section, only plot if have the data

@@ -14,6 +14,11 @@ library(shinyBS) # for bsTooltip()
 library(writexl)
 library(tidyr)  # meta layer calcs
 
+# heatmap style
+hm_style1 <- "ggplot"
+hm_style2 <- "rLA"
+hm_style <- hm_style1
+
 # Drop-down boxes
 Calc_Options <- c("daily depth means", "stratification", "both")
 Strat_Method_Options <- c(">=1 deg C over 1-m", "top vs. bottom")

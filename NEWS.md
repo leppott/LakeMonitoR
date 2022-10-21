@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-10-21 11:12:16
+    #> Last Update: 2022-10-21 13:25:05
+
+# LakeMonitoR 1.0.0.9006
+
+Release - 2022-10-21
+
+-   fix: typo in plot_heatmap updates
+-   refactor: Change shiny to use rLA style heat map.
 
 # LakeMonitoR 1.0.0.9005
 
