@@ -613,7 +613,7 @@ shinyServer(function(input, output) {
                            , lab_depth = lab_depth
                            , lab_measure = lab_measure
                            , lab_title = lab_title_hm
-                           , contours = TRUE)
+                           , contours = FALSE)
       fn_p_hm <- file.path(path_results, "plot_heatmap.png")
       ggplot2::ggsave(filename = fn_p_hm, plot = p_hm)
 

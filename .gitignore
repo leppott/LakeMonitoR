@@ -47,3 +47,5 @@ NEWS.rmd
 README.RMD
 ^__testcode.R$
 __testcode.R
+/doc/
+/Meta/

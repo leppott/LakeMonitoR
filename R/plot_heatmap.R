@@ -54,7 +54,7 @@
 #'                         , lab_depth = lab_depth
 #'                         , lab_measure = lab_measure
 #'                         , lab_title = lab_title
-#'                         , contours = TRUE)
+#'                         , contours = FALSE)
 #'
 #' # Print Plot
 #' print(p_hm)
@@ -65,6 +65,7 @@
 #' # save plot to temp directory
 #' tempdir() # show the temp directory
 #' ggplot2::ggsave(file.path(tempdir(), "TestLake_tempF_plotHeatMap.png"))
+#'
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @export
 plot_heatmap <- function(data
@@ -75,8 +76,21 @@ plot_heatmap <- function(data
                       , lab_depth = NA
                       , lab_measure = NA
                       , lab_title = NA
-                      , contours = TRUE
+                      , contours = FALSE
                       , line_val = NA) {
+  # QC, testing
+  boo_QC <- FALSE
+  if(isTRUE(booQC)) {
+    data = data
+    col_datetime = col_datetime
+    col_depth = col_depth
+    col_measure = col_measure
+    lab_datetime = lab_datetime
+    lab_depth = lab_depth
+    lab_measure = lab_measure
+    lab_title = lab_title
+    contours = FALSE
+  }## IF ~ boo_QC
 
   # QC ----
   col2check <- c(col_datetime, col_depth, col_measure)
@@ -105,7 +119,7 @@ plot_heatmap <- function(data
     ggplot2::theme_bw()
 
   # Add Plot Elements ----
-  #
+
   ## Add Contours
   if(isTRUE(contours)){
     p <- p + ggplot2::stat_contour(ggplot2::aes_string(z = col_measure)
@@ -113,27 +127,51 @@ plot_heatmap <- function(data
                           , na.rm = TRUE)
 
   }## IF ~ isTRUE(contours)
-  #
+
   # Add line
   if(is.numeric(line_val)){
     p <- p + ggplot2::geom_hline(yintercept = line_val, size = 1.25)
   }## IF ~ is.numeric(hline_val)
-  #
+
   ## Add Labels
   if(is.na(lab_datetime) == FALSE){
     p <- p + ggplot2::labs(x = lab_datetime)
   }## IF ~ is.na(lab_datetime)
-  #
+
+  # add depth label
   if(is.na(lab_depth) == FALSE){
     p <- p + ggplot2::labs(y = lab_depth)
   }## IF ~ is.na(lab_depth)
-  # #
-  if(is.na(lab_measure) == FALSE){
-    p <- p + ggplot2::scale_fill_viridis_b(name = lab_measure)
-  } else {
-    p <- p + ggplot2::scale_fill_viridis_b()
-  }## IF ~ is.na(lab_measure)
   #
+
+  # # color
+  # if(is.na(lab_measure) == FALSE){
+  #   p <- p + ggplot2::scale_fill_viridis_b(name = lab_measure)
+  # } else {
+  #   p <- p + ggplot2::scale_fill_viridis_b()
+  # }## IF ~ is.na(lab_measure)
+
+  p_fill_n <- 7
+  # rainbow (need to reverse), terrain.colors, hcl.colors (viridis)
+  p_fill_colors_LM <- rev(rainbow(p_fill_n))
+  p_fill_colors_rLA <- c("violet"
+                         , "blue"
+                         , "cyan"
+                         , "green3"
+                         , "yellow"
+                         , "orange"
+                         , "red")
+  p_fill_colors <- p_fill_colors_rLA
+
+  if(is.na(lab_measure) == FALSE){
+    p <- p + ggplot2::scale_fill_gradientn(colors = p_fill_colors
+                                           , name = lab_measure)
+  } else {
+    p <- p + ggplot2::scale_fill_gradientn(colors = p_fill_colors)
+  }## IF ~ is.na(lab_measure)
+
+
+  # title
   if(is.na(lab_title) == FALSE){
     p <- p + ggplot2::labs(title = lab_title)
   }## IF ~ is.na(lab_measure)

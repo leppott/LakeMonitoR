@@ -42,11 +42,11 @@ library(devtools)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Document, Install, and Reload Library
 ## Generate Documentation
-setwd(paste0("./", myPkg))
+#setwd(paste0("./", myPkg))
 devtools::document()
 ## Install New Package (locally)
 setwd("..") # return to root directory first
-devtools::install(myPkg, quick=FALSE, reload=TRUE, build_vignettes = TRUE)
+devtools::install(myPkg, quick=FALSE, reload=TRUE, build_vignettes = FALSE)
 
 ## Reload library
 library(myPkg, character.only = TRUE)

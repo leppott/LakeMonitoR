@@ -13,7 +13,7 @@ plot_heatmap(
   lab_depth = NA,
   lab_measure = NA,
   lab_title = NA,
-  contours = TRUE,
+  contours = FALSE,
   line_val = NA
 )
 }
@@ -84,7 +84,7 @@ p_hm <- plot_heatmap(data = data
                         , lab_depth = lab_depth
                         , lab_measure = lab_measure
                         , lab_title = lab_title
-                        , contours = TRUE)
+                        , contours = FALSE)
 
 # Print Plot
 print(p_hm)
@@ -95,4 +95,5 @@ p_hm + ggplot2::labs(caption = "Example, LakeMonitoR::plot_heatmap()")
 # save plot to temp directory
 tempdir() # show the temp directory
 ggplot2::ggsave(file.path(tempdir(), "TestLake_tempF_plotHeatMap.png"))
+
 }
