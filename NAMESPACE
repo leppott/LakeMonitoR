@@ -3,6 +3,8 @@
 export(agg_depth_files)
 export(daily_depth_means)
 export(export_rLakeAnalyzer)
+export(fun.DateTimeFormat)
+export(fun.dt.Type2)
 export(lake_summary_stats)
 export(plot_depth)
 export(plot_heatmap)

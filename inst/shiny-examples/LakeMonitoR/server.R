@@ -386,6 +386,16 @@ shinyServer(function(input, output) {
                                   , message = msg_col_data_missing))
       ## validate ~ END
 
+      ## **_b_Calc, datetime format, data** ----
+      df_data_dt_format <- LakeMonitoR::fun.DateTimeFormat(df_data[, col_date]
+                                                           , "datetime")
+      msg <- paste0("DateTime format for file 1 is ", df_data_dt_format)
+      message(msg)
+      df_data[, col_date] <- as.POSIXct(df_data[, col_date]
+                                        , format = df_data_dt_format
+                                        , tz = "UTC")
+
+
       # _b_Calc, Step 3, DDM and Strat ####
       # Increment the progress bar, and update the detail text.
       n_step <- n_step + 1
@@ -859,7 +869,7 @@ shinyServer(function(input, output) {
 
       } ## IF ~ is.null(col_measure2)
 
-
+# **Add datetime QC ** ----
 
       # _b_Calc, Step 5, QC Area ####
       # Increment the progress bar, and qc_taxa
@@ -1147,14 +1157,14 @@ shinyServer(function(input, output) {
             ggplot2::geom_line(na.rm = TRUE) +
             ggplot2::labs(x = "Date", y = "Thermocline Depth") +
             ggplot2::theme_bw()
-        },
-        error = function(err) {
-          p_rLA_td <- ggplot2::ggplot() +
-            ggplot2::labs(title = "rLA, thermo depth"
-                          , subtitle = "ERROR") +
-            ggplot2::theme_void()
-          #
-          ggplot2::ggsave(filename = fn_rLA_hm, plot = p_rLA_hm)
+        }
+        , error = function(err) {
+            p_rLA_td <- ggplot2::ggplot() +
+              ggplot2::labs(title = "rLA, thermo depth"
+                            , subtitle = "ERROR") +
+              ggplot2::theme_void()
+            #
+            ggplot2::ggsave(filename = fn_rLA_hm, plot = p_rLA_hm)
         } ## error ~ END
         )## tryCatch ~ END
         #

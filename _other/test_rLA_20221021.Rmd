@@ -1,0 +1,35 @@
+---
+title: "LakeMonitoR, test data"
+author: "Erik.Leppo@tetratech.com"
+date: "2022-10-21"
+output: html_notebook
+---
+
+# Purpose
+Test data from Jen, emaile 2022-10-12.
+
+Many outputs in rLakeAnalyzer Shiny app not working.
+
+# Test in R Console
+Confirmed not getting outputs in shiny.
+
+Test with plain R code.
+
+```{r}
+# Packages
+library(LakeMonitoR)
+library(rLakeAnalyzer)
+
+# Data
+dn_data <- "C:\\Users\\Erik.Leppo\\Downloads\\_test\\LakeMonitoR\\_inputs\\20221012b"
+fn_data1 <- "VT_HOLLA_TempAllDepths__20201028.csv"
+fn_data2 <- "HOLLA_hypso_JS.csv"
+df_data1 <- read.csv(file.path(dn_data, fn_data1))
+df_data2 <- read.csv(file.path(dn_data, fn_data2))
+
+
+
+
+
+```
+

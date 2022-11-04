@@ -4,7 +4,16 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-10-21 13:25:05
+    #> Last Update: 2022-11-04 14:53:42
+
+# LakeMonitoR 1.0.0.9007
+
+Release - 2022-11-04
+
+-   feat: Add function to aid in transforming date time fields
+    -   fun.DateTimeFormat
+    -   Update Vignette to show its use
+    -   Update Shiny app to use the new function on imported data
 
 # LakeMonitoR 1.0.0.9006
 

@@ -23,6 +23,72 @@ Show users how to use functions in `LakeMonitoR` and those from `rLakeAnalyzer`.
 For rLakeAnalyzer examples, in most cases, are using examples provided by 
 `rLakeAnalyzer`.
 
+# Dates and Times
+The core functions of `LakeMonitoR` assume a date, time, or datetime field
+that is correctly formated.  R uses year-month-day and 24 hour time.  The year
+is 4 digits and both month and day are 2 digit.  
+
+A helper function, `fun.DateFormat`, is provided to help discern the format of a
+date, time, or datetime field.  Only the first record is examined and used to 
+convert an entire column to the R standard format.
+
+It is up to the user to implement the use of this function when using 
+`LakeMonitoR` in the R console.  In the included Shiny app the datetime field
+selected by the user is checked with the format helper function.
+
+It is advised to use timezone "UTC" in all conversions as this timezone does
+not observe daylight saving time so there are no potential gaps or overlaps of
+times in the Spring or Fall.
+
+One note of caution when using Excel to view data files.  Excel can auto-fix
+fields and this can lead to a mix of formats in the same column.  If a file 
+is failing with the `LakeMonitoR` functions it could be a result of a mixture
+of good and bad date formats.
+
+## Formats
+
+```{r dt_formats, echo=TRUE}
+# Date
+date1 <- "2022-11-05"
+date2 <- "11-05-2022"
+
+# Format
+format1 <- fun.DateTimeFormat(date1, "date")
+format2 <- fun.DateTimeFormat(date2, "date")
+
+# Convert
+convert1 <- as.POSIXct(date1, format = format1, tz = "UTC")
+convert2 <- as.POSIXct(date2, format = format2, tz = "UTC")
+
+# Display
+df_fix <- data.frame(date = c(date1, date2)
+                     , format = c(format1, format2)
+                     , convert = c(convert1, convert2))
+str(df_fix)
+knitr::kable(df_fix)
+
+```
+
+## Example
+This example can be used when importing any data set to ensure no issues with 
+other functions.
+
+```{r dt_example, echo=TRUE, eval=TRUE}
+# Data
+fn_data <- "Ellis--1.0m_Water_20180524_20180918.csv"
+path_data <- file.path(system.file("extdata", package = "LakeMonitoR"), fn_data)
+df_data <- read.csv(path_data)
+
+# Change date format
+format1 <- fun.DateTimeFormat(df_data$Date.Time, "datetime")
+df_data$Date.Time2 <- as.POSIXct(df_data$Date.Time
+                                 , format = format1
+                                 , tz = "UTC")
+
+# Display
+str(df_data)
+```
+
 # LakeMonitoR
 
 ## agg_depth_files
