@@ -869,7 +869,7 @@ shinyServer(function(input, output) {
 
       } ## IF ~ is.null(col_measure2)
 
-# **Add datetime QC ** ----
+      # **Add datetime QC ** ----
 
       # _b_Calc, Step 5, QC Area ####
       # Increment the progress bar, and qc_taxa
@@ -896,56 +896,56 @@ shinyServer(function(input, output) {
         #
       }## IF ~ file.exists ~ END
 
-      # QC, FAIL if TRUE
-      if (is.null(df_data2)){
-    msg_noArea <-"No area data provided.  No rLakeAnalyzer analyses performed."
-        message(msg_noArea)
-        #return(NULL)
-        shinyjs::enable("b_downloadData")
-        #
-  prog_detail <- "QC
-  , No area data provided.  No rLakeAnalyzer analyses performed.'"
-        incProgress(0, detail = prog_detail)
-        Sys.sleep(sleep_time_qc)
-        #
-
-        # _b_Calc, Save to XLS, A ----
-        ls_x <- list("daily_depth_means" = df_ddm
-                     , "strat_dates" = ls_strat$Stratification_Dates
-                     , "strat_events" = ls_strat$Stratification_Events
-                     , "summary_stats" = df_lss)
-        writexl::write_xlsx(ls_x
-                           , path = file.path(path_results, "Results.xlsx")
-                           , col_names = TRUE
-                           , format_headers = TRUE)
-
-
-        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # _b_Calc, Step 7a, Zip Results ####
-        # Increment the progress bar, and update the detail text.
-        n_step <- n_step + 1
-        prog_detail <- paste0("Step ", n_step, "; Create, Zip.")
-        incProgress(1/n_inc, detail = prog_detail)
-        Sys.sleep(sleep_time)
-
-        # Create zip file
-        fn_4zip <- list.files(path = file.path(path_results)
-                              , pattern = "*"
-                              , full.names = TRUE)
-        zip(file.path(path_results, "results.zip"), fn_4zip)
-
-        # enable download button
-        shinyjs::enable("b_downloadData")
-
-        # #
-        # end sink
-        #flush.console()
-        sink() # console and message
-        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        shiny::validate(shiny::need(is.null(df_data2) != TRUE
-                                    , message = msg_noArea))
-        #
-      }## IF ~ is.null(df_data2) ~ END
+  #     # QC, FAIL if TRUE
+  #     if (is.null(df_data2)){
+  #   msg_noArea <-"No area data provided.  Limited rLakeAnalyzer analyses performed."
+  #       message(msg_noArea)
+  #       #return(NULL)
+  #     #  shinyjs::enable("b_downloadData")
+  #       #
+  # prog_detail <- "QC
+  # , No area data provided.  Limited rLakeAnalyzer analyses performed.'"
+  #       incProgress(0, detail = prog_detail)
+  #       Sys.sleep(sleep_time_qc)
+  #       #
+  #
+  #       # _b_Calc, Save to XLS, A ----
+  #       ls_x <- list("daily_depth_means" = df_ddm
+  #                    , "strat_dates" = ls_strat$Stratification_Dates
+  #                    , "strat_events" = ls_strat$Stratification_Events
+  #                    , "summary_stats" = df_lss)
+  #       writexl::write_xlsx(ls_x
+  #                          , path = file.path(path_results, "Results.xlsx")
+  #                          , col_names = TRUE
+  #                          , format_headers = TRUE)
+  #
+  #
+  #       #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  #       # _b_Calc, Step 7a, Zip Results ####
+  #       # Increment the progress bar, and update the detail text.
+  #       n_step <- n_step + 1
+  #       prog_detail <- paste0("Step ", n_step, "; Create, Zip.")
+  #       incProgress(1/n_inc, detail = prog_detail)
+  #       Sys.sleep(sleep_time)
+  #
+  #       # Create zip file
+  #       fn_4zip <- list.files(path = file.path(path_results)
+  #                             , pattern = "*"
+  #                             , full.names = TRUE)
+  #       zip(file.path(path_results, "results.zip"), fn_4zip)
+  #
+  #       # enable download button
+  #       shinyjs::enable("b_downloadData")
+  #
+  #       # #
+  #       # end sink
+  #       #flush.console()
+  #       sink() # console and message
+  #       #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  #       shiny::validate(shiny::need(is.null(df_data2) != TRUE
+  #                                   , message = msg_noArea))
+  #       #
+  #     }## IF ~ is.null(df_data2) ~ END
 
       # Columns ("" if no user entry)
       col_area_depth <- input$col_area_depth #"Depth"
@@ -963,11 +963,12 @@ shinyServer(function(input, output) {
       }
 
       # silent exit from routine, keeps app running, message above
-      shiny::validate(shiny::need(col_area_depth != ""
-                                 , message = "Missing 'Input, Area, Depth (m)'")
-                      , shiny::need(col_area_area != ""
-                                , message = "Missing 'Input, Area, Area (m2)'")
-      )## validate ~ END
+      # shiny::validate(shiny::need(col_area_depth != ""
+      #                            , message = "Missing 'Input, Area, Depth (m)'")
+      #                 , shiny::need(col_area_area != ""
+      #                           , message = "Missing 'Input, Area, Area (m2)'")
+      # )## validate ~ END
+      # 20221110, no longer *need* area, can do limited calcs without it
 
       # Check for misspelled column names
       col_data2 <- c(col_area_depth, col_area_area)
@@ -982,8 +983,9 @@ shinyServer(function(input, output) {
         Sys.sleep(sleep_time_qc)
       }
 
-      shiny::validate(shiny::need(sum_col_data2_in == 2
-                                  , message = msg_col_data2_missing))
+      # 20221110, remove validate
+      # shiny::validate(shiny::need(sum_col_data2_in == 2
+      #                             , message = msg_col_data2_missing))
       ## validate ~ END
 
       ## _b_Calc, Step 6, rLA ####
@@ -993,73 +995,85 @@ shinyServer(function(input, output) {
       incProgress(1/n_inc, detail = prog_detail)
       Sys.sleep(sleep_time)
 
+
+      # Convert to rLA format
+      # Convert Data for use with rLakeAnalyzer
+      # df_ddm created above
+      if(boo_DEBUG == FALSE){
+        # Data
+        df_ddm <- df_ddm
+        df_area <- df_data2
+      } else{
+        # Data
+        df_ddm <- laketemp_ddm
+        df_area <- data.frame(depths=c(3,6,9), areas=c(300,200,100))
+      }## IF ~ boo_DEBUG ~ END
+
+      # date to date format
+      df_ddm[, "Date"] <- as.Date(df_ddm[, "Date"])
+      # depth to numeric
+      df_ddm$Depth <- as.numeric(df_ddm$Depth)
+      # Run function
+      col_rLA_depth <- "Depth"
+      col_rLA_data <- c("Date", "Measurement")
+      col_rLA  <- c("datetime", "wtr")
+      df_rLA <- LakeMonitoR::export_rLakeAnalyzer(df_ddm
+                                                  , col_rLA_depth
+                                                  , col_rLA_data
+                                                  , col_rLA)
+  #     # Check for decimals
+  #   check_decimal <- grepl("\\.", names(df_rLA))
+  #names(df_rLA)[!check_decimal][-1] <- paste0(names(df_rLA)[!check_decimal][-1]
+  #                                             , ".0")
+
+      #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      # Save
+      # write.csv(df_rLA
+      #           , file.path(path_results, "data_rLA.csv")
+      #           , row.names = FALSE)
+      # Not sure why above section but keep for now, EWL, 20210716
+      #
+      #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      # use rLakeAnalyzer
+      # Filter Data for only wtr (temperature
+      col_wtr <- colnames(df_rLA)[grepl("wtr_", colnames(df_rLA))]
+      df_rLA_wtr <- df_rLA[, c("datetime", col_wtr)]
+      # Date format
+      df_rLA_wtr$datetime <- as.POSIXct(df_rLA_wtr$datetime)
+
+      # ##__rLA, convert ----
+      # col_depth_rLA <- col_depth
+      # col_data_rLA <- c(col_date, col_measure)
+      # col_rLA_rLA <- c("datetime", "wtr")
+      dir_export_rLA <- file.path(path_results)
+      fn_export_rLA <- "rLA_export.csv"
+      # df_rLA_wtr <- LakeMonitoR::export_rLakeAnalyzer(df_data
+      #                                                 , col_depth = col_depth_rLA
+      #                                                 , col_data = col_data_rLA
+      #                                                 , col_rLA = col_rLA_rLA)
+
+      print("rLA export")
+      print(head(df_rLA))
+
+      # save
+      write.csv(df_rLA_wtr
+                , file.path(dir_export_rLA, fn_export_rLA)
+                , row.names = FALSE)
+
+
+
+
+
       # QC, FAIL if TRUE
       if (is.null(df_data2)){
-        message("No area data provided.  No rLakeAnalyzer analyses performed.")
+        message("No area data provided.  Limited rLakeAnalyzer analyses performed.")
         #return(NULL)
-
-      } else {
-        print(fn_input2)
-        print(head(df_data2))
-        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # Convert Data for use with rLakeAnalyzer
-        if(boo_DEBUG == FALSE){
-          # Data
-          df_ddm <- df_ddm
-          df_area <- df_data2
-        } else{
-          # Data
-          df_ddm <- laketemp_ddm
-          df_area <- data.frame(depths=c(3,6,9), areas=c(300,200,100))
-        }## IF ~ boo_DEBUG ~ END
-
-        # date to date format
-        df_ddm[, "Date"] <- as.Date(df_ddm[, "Date"])
-        # Run function
-        col_rLA_depth <- "Depth"
-        col_rLA_data <- c("Date", "Measurement")
-        col_rLA  <- c("datetime", "wtr")
-        df_rLA <- LakeMonitoR::export_rLakeAnalyzer(df_ddm
-                                                    , col_rLA_depth
-                                                    , col_rLA_data
-                                                    , col_rLA)
-        print("rLA export")
-        print(head(df_rLA))
-        # Save
-        # write.csv(df_rLA
-        #           , file.path(path_results, "data_rLA.csv")
-        #           , row.names = FALSE)
-        # Not sure why above section but keep for now, EWL, 20210716
-        #
-        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # use rLakeAnalyzer
-        # Filter Data for only temperature
-        col_wtr <- colnames(df_rLA)[grepl("wtr_", colnames(df_rLA))]
-        df_rLA_wtr <- df_rLA[, c("datetime", col_wtr)]
-        # Date format
-        df_rLA_wtr$datetime <- as.POSIXct(df_rLA_wtr$datetime)
-
-        # Bathymetry data frame
-        df_rLA_bath <- df_area[, c(col_area_depth, col_area_area)]
-        # rLA expected column names
-        names(df_rLA_bath) <- c("depths", "areas")
+      }## IF ~ is.null(df_data2)
 
 
-        ##__rLA, convert ----
-        col_depth_rLA <- col_depth
-        col_data_rLA <- c(col_date, col_measure)
-        col_rLA_rLA <- c("datetime", "wtr")
-        dir_export_rLA <- file.path(path_results)
-        fn_export_rLA <- "rLA_export.csv"
-        df_rLA_wtr <- LakeMonitoR::export_rLakeAnalyzer(df_data
-                                                        , col_depth = col_depth_rLA
-                                                        , col_data = col_data_rLA
-                                                        , col_rLA = col_rLA_rLA)
-        # save
-        write.csv(df_rLA_wtr
-                  , file.path(dir_export_rLA, fn_export_rLA)
-                  , row.names = FALSE)
-
+        ## rLA, bathy NO----
 
         ##__rLA, ts.bouyancy.freq ----
         ### Calc
@@ -1074,21 +1088,20 @@ shinyServer(function(input, output) {
 
         fn_p_rLA_bf <- file.path(path_results, "plot_rLA_bf.png")
 
-          tryCatch({
-            grDevices::png(fn_p_rLA_bf)
-              plot(df_rLA_bf, type='l', ylab='Buoyancy Frequency', xlab='Date')
-            grDevices::dev.off()
-          },
-          error = function(err) {
-            p_rLA_bf <- ggplot2::ggplot() +
+        tryCatch({
+          grDevices::png(fn_p_rLA_bf)
+          plot(df_rLA_bf, type='l', ylab='Buoyancy Frequency', xlab='Date')
+          grDevices::dev.off()
+        },
+        error = function(err) {
+          p_rLA_bf <- ggplot2::ggplot() +
             ggplot2::labs(title = "rLA, Buoyancy Frequency"
-                         , subtitle = "ERROR") +
+                          , subtitle = "ERROR") +
             ggplot2::theme_void()
-            #
-            ggplot2::ggsave(filename = fn_p_rLA_bf, plot = p_rLA_bf)
-          } ## error ~ END
-          )## tryCatch ~ END
-
+          #
+          ggplot2::ggsave(filename = fn_p_rLA_bf, plot = p_rLA_bf)
+        } ## error ~ END
+        )## tryCatch ~ END
 
         ##__rLA, ts.center.buoyancy ----
         #
@@ -1096,7 +1109,7 @@ shinyServer(function(input, output) {
         #
         tryCatch({
           df_rLA_td <- rLakeAnalyzer::ts.thermo.depth(df_rLA_wtr)
-          df_rLA_cb <- rLakeAnalyzer::ts.center.buoyancy(df_rLA_td)
+          df_rLA_cb <- rLakeAnalyzer::ts.center.buoyancy(df_rLA_wtr)
           write.csv(df_rLA_cb, file = fn_rLA_cb, row.names = FALSE)
         },
         error = function(err) {
@@ -1114,17 +1127,17 @@ shinyServer(function(input, output) {
                                  , max(df_rLA_td[, 2], na.rm = TRUE)
                                  , na.rm = TRUE)
             grDevices::png(fn_p_rLA_cb)
-              plot(df_rLA_cb
-                   , type= 'l'
-                   , ylab= 'Depth'
-                   , xlab= 'Date'
-                   , ylim= c(plot_cb_y_max, 0)
-                   , lwd = 1.5)
-              lines(df_rLA_td, type='l', col='red', lwd = 1.5)
-              legend("topright",
-                     c('center of buoyancy','thermocline depth'),
-                     lty=c(1, 1),
-                     lwd=c(1.5, 1.5), col=c("black","red"), bty = "n")
+            plot(df_rLA_cb
+                 , type= 'l'
+                 , ylab= 'Depth'
+                 , xlab= 'Date'
+                 , ylim= c(plot_cb_y_max, 0)
+                 , lwd = 1.5)
+            lines(df_rLA_td, type='l', col='red', lwd = 1.5)
+            legend("topright",
+                   c('center of buoyancy','thermocline depth'),
+                   lty=c(1, 1),
+                   lwd=c(1.5, 1.5), col=c("black","red"), bty = "n")
             grDevices::dev.off()
           },
           error = function(err) {
@@ -1137,13 +1150,11 @@ shinyServer(function(input, output) {
           } ## error ~ END
           )## tryCatch ~ END
 
-
         }## IF ~ exists("df_rLA_cb") ~ END
-
 
         ##__rLA, ts.thermo.depth ----
         ### Calc (already calculated above)
-        #df_rLA_td <- rLakeAnalyzer::ts.thermo.depth(df_rLA_wtr)
+        df_rLA_td <- rLakeAnalyzer::ts.thermo.depth(df_rLA_wtr)
         ### Save
         fn_rLA_td <- file.path(path_results, "rLA_thermo_depth.csv")
         write.csv(df_rLA_td, file = fn_rLA_td, row.names = FALSE)
@@ -1159,31 +1170,18 @@ shinyServer(function(input, output) {
             ggplot2::theme_bw()
         }
         , error = function(err) {
-            p_rLA_td <- ggplot2::ggplot() +
-              ggplot2::labs(title = "rLA, thermo depth"
-                            , subtitle = "ERROR") +
-              ggplot2::theme_void()
-            #
-            ggplot2::ggsave(filename = fn_rLA_hm, plot = p_rLA_hm)
+          p_rLA_td <- ggplot2::ggplot() +
+            ggplot2::labs(title = "rLA, thermo depth"
+                          , subtitle = "ERROR") +
+            ggplot2::theme_void()
+          #
+          ggplot2::ggsave(filename = fn_rLA_hm, plot = p_rLA_hm)
         } ## error ~ END
         )## tryCatch ~ END
         #
         ggplot2::ggsave(filename = fn_p_rLA_td, plot = p_rLA_td)
 
 
-        ##__rLA, ts.schmidt.stability ----
-        fn_rLA_ss <- file.path(path_results, "rLA_schmidt_stability.csv")
-        #
-        tryCatch({
-          df_rLA_ss <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr
-                                                           , bathy = df_data2)
-          write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
-        },
-        error = function(err) {
-          df_rLA_ss <- data.frame(rLA_schmidt.stability = "ERROR")
-          write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
-        } ## error ~ END
-        )## tryCatch ~ END
 
 
         # two plots not working for all data
@@ -1194,7 +1192,7 @@ shinyServer(function(input, output) {
         #
         tryCatch({
           grDevices::png(filename = fn_rLA_hm)
-            rLakeAnalyzer::wtr.heat.map(df_rLA_wtr)
+          rLakeAnalyzer::wtr.heat.map(df_rLA_wtr)
           grDevices::dev.off()
         },
         error = function(err) {
@@ -1204,25 +1202,6 @@ shinyServer(function(input, output) {
             ggplot2::theme_void()
           #
           ggplot2::ggsave(filename = fn_rLA_hm, plot = p_rLA_hm)
-        } ## error ~ END
-        )## tryCatch ~ END
-
-
-        ## __rLA, schmidt.plot----
-        fn_rLA_sp <- file.path(path_results, "plot_rLA_Schmidt.png")
-        #
-        tryCatch({
-          grDevices::png(fn_rLA_sp)
-            rLakeAnalyzer::schmidt.plot(df_rLA_wtr, df_rLA_bath)
-          grDevices::dev.off()
-        },
-        error = function(err) {
-          p_rLA_sp <- ggplot2::ggplot() +
-            ggplot2::labs(title = "rLA, Schmidt Plot"
-                          , subtitle = "ERROR") +
-            ggplot2::theme_void()
-          #
-          ggplot2::ggsave(filename = fn_rLA_sp, plot = p_rLA_sp)
         } ## error ~ END
         )## tryCatch ~ END
 
@@ -1250,22 +1229,28 @@ shinyServer(function(input, output) {
         #                          , "plot_rLA_md.png")
         # ggplot2::ggsave(filename = fn_p_rLA_md, plot = p_rLA_md)
 
-        ## Layer Calcs ----
+        ## __Layer Calcs ----
         # (need rLA meta.depths above)
         # temp diff epi and hypo
         df_merge <- merge(df_data, df_rLA_md
                           , by.x = col_date, by.y = "datetime")
 
-        df_merge[, "Epi"] <- ifelse(df_merge[, col_depth] < df_merge[,  "top"], TRUE, FALSE)
+        df_merge[, "Epi"] <- ifelse(df_merge[, col_depth] < df_merge[,  "top"]
+                                    , TRUE
+                                    , FALSE)
         df_merge[, "Meta"] <- NA
-        df_merge[, "Hypo"] <- ifelse(df_merge[, col_depth] > df_merge[,  "bottom"], TRUE, FALSE)
-        df_merge[, "Meta"] <- ifelse(df_merge[, "Epi"] + df_merge[, "Hypo"] == 0, TRUE, FALSE)
+      df_merge[, "Hypo"] <- ifelse(df_merge[, col_depth] > df_merge[,  "bottom"]
+                                     , TRUE
+                                     , FALSE)
+        df_merge[, "Meta"] <- ifelse(df_merge[, "Epi"] + df_merge[, "Hypo"] == 0
+                                     , TRUE
+                                     , FALSE)
         df_merge[, "Layer"] <- ifelse(df_merge[, "Epi"] == TRUE
                                       , "Epi"
                                       , ifelse(df_merge[, "Meta"] ==  TRUE
-                                               , "Meta"
-                                               , ifelse(df_merge[, "Hypo"] ==  TRUE
-                                                        , "Hypo", NA)))
+                                            , "Meta"
+                                            , ifelse(df_merge[, "Hypo"] ==  TRUE
+                                                     , "Hypo", NA)))
 
         # col_datetime <- "Date"
         # col_depth <- "Depth"
@@ -1359,6 +1344,58 @@ shinyServer(function(input, output) {
         #                    , format_headers = TRUE
         #                    )
 
+
+
+       ## rLA, bathy, YES----
+        if (!is.null(df_data2)){
+          print(fn_input2)
+          print(head(df_data2))
+
+          # Bathymetry data frame
+          df_rLA_bath <- df_area[, c(col_area_depth, col_area_area)]
+          # rLA expected column names
+          names(df_rLA_bath) <- c("depths", "areas")
+
+          ##__rLA, ts.schmidt.stability ----
+          fn_rLA_ss <- file.path(path_results, "rLA_schmidt_stability.csv")
+          #
+          tryCatch({
+            df_rLA_ss <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr
+                                                             , bathy = df_data2)
+            write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
+          },
+          error = function(err) {
+            df_rLA_ss <- data.frame(rLA_schmidt.stability = "ERROR")
+            write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
+          } ## error ~ END
+          )## tryCatch ~ END
+
+
+
+          ## __rLA,  schmidt.plot----
+          fn_rLA_sp <- file.path(path_results, "plot_rLA_Schmidt.png")
+          #
+          tryCatch({
+            grDevices::png(fn_rLA_sp)
+            rLakeAnalyzer::schmidt.plot(df_rLA_wtr, df_rLA_bath)
+            grDevices::dev.off()
+          },
+          error = function(err) {
+            p_rLA_sp <- ggplot2::ggplot() +
+              ggplot2::labs(title = "rLA, Schmidt Plot"
+                            , subtitle = "ERROR") +
+              ggplot2::theme_void()
+            #
+            ggplot2::ggsave(filename = fn_rLA_sp, plot = p_rLA_sp)
+          } ## error ~ END
+          )## tryCatch ~ END
+
+        }## IF ~ is.null(df_data2)
+
+
+
+
+
         # end sink
         #flush.console()
         sink() # console and message
@@ -1385,9 +1422,6 @@ shinyServer(function(input, output) {
         # #flush.console()
         # sink() # console and message
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-      }## IF ~ is.null(df_data2) ~ END
-
 
 
       #

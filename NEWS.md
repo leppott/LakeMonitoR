@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-11-04 14:53:42
+    #> Last Update: 2022-11-11 14:49:10
+
+# LakeMonitoR 1.0.0.9008
+
+Release - 2022-11-11
+
+-   fix: Update rLakeAnalyzer portion of Shiny app
 
 # LakeMonitoR 1.0.0.9007
 
