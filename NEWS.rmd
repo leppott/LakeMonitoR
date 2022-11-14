@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 1.0.0.9009
+===========
+Release - 2022-11-14
+
+* fix: Update shiny display plots to work with non-standard dates
+
 LakeMonitoR 1.0.0.9008
 ===========
 Release - 2022-11-11

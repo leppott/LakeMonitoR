@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-11-11 14:49:10
+    #> Last Update: 2022-11-14 07:34:13
+
+# LakeMonitoR 1.0.0.9009
+
+Release - 2022-11-14
+
+-   fix: Update shiny display plots to work with non-standard dates
 
 # LakeMonitoR 1.0.0.9008
 

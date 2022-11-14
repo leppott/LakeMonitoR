@@ -1549,6 +1549,7 @@ shinyServer(function(input, output) {
       lab_error <- paste(lab_error, "Column_Measurement 1", collapse = ", ")
     }
 
+
     # Plot
     if(lab_error == lab_error_base){
       # Read user imported file
@@ -1574,6 +1575,16 @@ shinyServer(function(input, output) {
       if(present_col_msr == FALSE) {
         lab_error <- paste(lab_error, "Column_Measurement 1", collapse = ", ")
       }
+
+      ## __datetime fix ----
+      dt_format <- LakeMonitoR::fun.DateTimeFormat(df_plot[, inCol_plot_datetime]
+                                                   , "datetime")
+      msg <- paste0("DateTime format for file 1 is ", dt_format)
+      message(msg)
+      df_plot[, inCol_plot_datetime] <- as.POSIXct(df_plot[, inCol_plot_datetime]
+                                                   , format = dt_format
+                                                   , tz = "UTC")
+
 
       if(lab_error == lab_error_base){
       # plot
@@ -1641,11 +1652,6 @@ shinyServer(function(input, output) {
                             , quote = "\""
                             , stringsAsFactors = FALSE)
 
-
-      df_plot[, inCol_plot_datetime] <- as.POSIXct(df_plot[
-                                                         , inCol_plot_datetime])
-
-
       #
       inFile_Cols <- names(df_plot)
       present_col_datetime <- inCol_plot_datetime %in% inFile_Cols
@@ -1662,6 +1668,15 @@ shinyServer(function(input, output) {
       if(present_col_msr == FALSE) {
         lab_error <- paste(lab_error, "Column_Measurement 1", collapse = ", ")
       }
+
+      ## __datetime fix ----
+      dt_format <- LakeMonitoR::fun.DateTimeFormat(df_plot[, inCol_plot_datetime]
+                                                   , "datetime")
+      msg <- paste0("DateTime format for file 1 is ", dt_format)
+      message(msg)
+      df_plot[, inCol_plot_datetime] <- as.POSIXct(df_plot[, inCol_plot_datetime]
+                                                       , format = dt_format
+                                                       , tz = "UTC")
 
       if(lab_error == lab_error_base){
 
@@ -1767,6 +1782,15 @@ shinyServer(function(input, output) {
         lab_error <- paste(lab_error, "Column_Measurement 2", collapse = ", ")
       }
 
+      ## __datetime fix ----
+      dt_format <- LakeMonitoR::fun.DateTimeFormat(df_plot[, inCol_plot_datetime]
+                                                   , "datetime")
+      msg <- paste0("DateTime format for file 1 is ", dt_format)
+      message(msg)
+      df_plot[, inCol_plot_datetime] <- as.POSIXct(df_plot[, inCol_plot_datetime]
+                                                   , format = dt_format
+                                                   , tz = "UTC")
+
       if(lab_error == lab_error_base){
         # plot
         p_profile2 <- plot_depth(data = df_plot
@@ -1840,6 +1864,15 @@ shinyServer(function(input, output) {
       if(present_col_msr3 == FALSE) {
         lab_error <- paste(lab_error, "Column_Measurement 3", collapse = ", ")
       }
+
+      ## __datetime fix ----
+      dt_format <- LakeMonitoR::fun.DateTimeFormat(df_plot[, inCol_plot_datetime]
+                                                   , "datetime")
+      msg <- paste0("DateTime format for file 1 is ", dt_format)
+      message(msg)
+      df_plot[, inCol_plot_datetime] <- as.POSIXct(df_plot[, inCol_plot_datetime]
+                                                   , format = dt_format
+                                                   , tz = "UTC")
 
       if(lab_error == lab_error_base){
         # plot
