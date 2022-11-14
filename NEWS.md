@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-11-14 10:41:45
+    #> Last Update: 2022-11-14 11:32:31
+
+# LakeMonitoR 1.0.0.9011
+
+Release - 2022-11-14
+
+-   fix: Update handling of data to allow schmidt data and plot function
+    to work
 
 # LakeMonitoR 1.0.0.9010
 

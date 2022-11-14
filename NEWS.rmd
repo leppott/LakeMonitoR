@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 1.0.0.9011
+===========
+Release - 2022-11-14
+
+* fix: Update handling of data to allow schmidt data and plot function to work
+
 LakeMonitoR 1.0.0.9010
 ===========
 Release - 2022-11-14

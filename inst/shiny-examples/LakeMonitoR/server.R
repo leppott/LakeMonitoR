@@ -1360,7 +1360,7 @@ shinyServer(function(input, output) {
           #
           tryCatch({
             df_rLA_ss <- rLakeAnalyzer::ts.schmidt.stability(df_rLA_wtr
-                                                             , bathy = df_data2)
+                                                          , bathy = df_rLA_bath)
             write.csv(df_rLA_ss, file = fn_rLA_ss, row.names = FALSE)
           },
           error = function(err) {
@@ -1370,9 +1370,10 @@ shinyServer(function(input, output) {
           )## tryCatch ~ END
 
 
-
           ## __rLA,  schmidt.plot----
           fn_rLA_sp <- file.path(path_results, "plot_rLA_Schmidt.png")
+          # needs date not datetime
+          df_rLA_wtr$datetime <- as.Date(df_rLA_wtr$datetime)
           #
           tryCatch({
             grDevices::png(fn_rLA_sp)
