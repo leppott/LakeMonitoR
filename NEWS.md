@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-11-14 07:34:13
+    #> Last Update: 2022-11-14 10:41:45
+
+# LakeMonitoR 1.0.0.9010
+
+Release - 2022-11-14
+
+-   refactor: Shiny heatmap display not working with all files as plotly
+    -   Change to static ggmap object
 
 # LakeMonitoR 1.0.0.9009
 

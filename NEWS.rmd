@@ -20,6 +20,13 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 1.0.0.9010
+===========
+Release - 2022-11-14
+
+* refactor: Shiny heatmap display not working with all files as plotly
+    + Change to static ggmap object
+
 LakeMonitoR 1.0.0.9009
 ===========
 Release - 2022-11-14

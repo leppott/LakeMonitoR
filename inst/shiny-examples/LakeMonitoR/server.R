@@ -1065,7 +1065,6 @@ shinyServer(function(input, output) {
 
 
 
-
       # QC, FAIL if TRUE
       if (is.null(df_data2)){
         message("No area data provided.  Limited rLakeAnalyzer analyses performed.")
@@ -1618,7 +1617,8 @@ shinyServer(function(input, output) {
 
 
   ## _Plot, heatmap, plotly ----
-  output$p_hm_ly <- renderPlotly({
+  output$p_hm_ly <- renderPlot({
+ # output$p_hm_ly <- renderPlotly({
     # if no data put in blank
 
     inFile <- input$fn_input
@@ -1689,7 +1689,7 @@ shinyServer(function(input, output) {
                             , lab_depth = input$lab_plot_depth
                             , lab_measure = input$lab_plot_msr
                             , lab_title = input$lab_plot_title
-                            , contours = TRUE
+                            , contours = FALSE
                             #, line_val = input$hline_val_plot_hm
                             )
 
@@ -1712,7 +1712,7 @@ shinyServer(function(input, output) {
         #   p_h <- p_h + ggplot2::labs(title = incol_plot_title)
         # }## IF ~ is.na(lab_measure)
       } else {
-        p_depth <- ggplot() +
+        p_h <- ggplot() +
           theme_void() +
           geom_text(aes(0, 0, label = lab_error))
       }## 2nd lab_error check
@@ -1727,7 +1727,8 @@ shinyServer(function(input, output) {
     #partial_bundle(toWebGL(ggplotly(p = p_hm)))
     # faster but lots of warnings
     # but need for larger files (1 hr * 1 yr = 8k records * N depths)
-    ggplotly(p = p_h, dynamicTicks = TRUE)
+    p_h
+   # ggplotly(p = p_h, dynamicTicks = TRUE)
 
   })## output$p_depth_ly ~ END
 
