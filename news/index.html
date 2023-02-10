@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LakeMonitoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9012</span>
       </span>
     </div>
 
@@ -50,6 +50,10 @@
       <small>Source: <a href="https://github.com/leppott/LakeMonitoR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0.9012" id="lakemonitor-1009012">LakeMonitoR 1.0.0.9012<a class="anchor" aria-label="anchor" href="#lakemonitor-1009012"></a></h2>
+<p>Release - 2023-02-10</p>
+<ul><li>fix: Use <code>na.omit</code> for <code>tdox</code> calculation in Shiny, Issue <a href="https://github.com/leppott/LakeMonitoR/issues/24" class="external-link">#24</a><ul><li>Shiny would crash with too many mismatched DO and temperature measurements</li></ul></li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0.9011" id="lakemonitor-1009011">LakeMonitoR 1.0.0.9011<a class="anchor" aria-label="anchor" href="#lakemonitor-1009011"></a></h2>
 <p>Release - 2022-11-14</p>
@@ -129,7 +133,7 @@
 <li>Update sink message for area file</li>
 <li>Update file name for oxythermal plot output</li>
 <li>Move DO plots inside of DO if statement with oxythermal and TDOx</li>
-<li>Add error condition for oxythermal plot when no data to plot<ul><li>For when have units (F) different than default threshold (30<ol start="3" style="list-style-type: upper-alpha"><li></ol></li></ul></li>
+<li>Add error condition for oxythermal plot when no data to plot<ul><li>For when have units (F) different than default threshold (30 C)</li></ul></li>
 <li>Change TDOx file output name</li>
 <li>Update plots for measurement 2<ul><li>heat map 2</li>
 <li>depth profile 2</li>
@@ -578,7 +582,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
