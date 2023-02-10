@@ -827,7 +827,14 @@ shinyServer(function(input, output) {
         # inputs
         do_x_val  <- input$tdox_val  #3
         #
-        tdox_x <- tdox(data = data_plot
+        # only use data with both DO and temp
+        ## too many mismatches and get glm.fit error
+        data_tdox <- na.omit(data_plot[, c(col_data
+                                           , col_depth
+                                           , col_measure
+                                           , col_measure2)])
+
+        tdox_x <- tdox(data = data_tdox
                        , col_date = col_date
                        , col_depth = col_depth
                        , col_temp = col_measure

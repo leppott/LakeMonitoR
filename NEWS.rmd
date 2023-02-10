@@ -20,6 +20,13 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 1.0.0.9012
+===========
+Release - 2023-02-10
+
+* fix: Use `na.omit` for `tdox` calculation in Shiny, Issue #24
+    + Shiny would crash with too many mismatched DO and temperature measurements
+
 LakeMonitoR 1.0.0.9011
 ===========
 Release - 2022-11-14
