@@ -20,6 +20,18 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+LakeMonitoR 1.0.0.9013
+===========
+Release - 2023-08-17
+
+* fix: rLakeAnalyzer plot center buoyancy plot name incorrect
+    + CSV instead of PNG so ggsave failed
+
+* fix: rLakeAnalyzer layers if not defined
+    
+* refactor: Add hooks in Shiny for selectInput boxes for column selections to 
+use data instead of free text, Issue #11
+
 LakeMonitoR 1.0.0.9012
 ===========
 Release - 2023-02-10

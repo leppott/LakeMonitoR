@@ -25,6 +25,11 @@ function(){
                , textInput("col_msr_msr2"
                            , label = "Input, Measurement, Value 2 (DO)"
                            , placeholder = "DO_conc")
+               # , uiOutput("UI_msr_col_datetime")
+               # , uiOutput("UI_msr_col_depth")
+               # , uiOutput("UI_msr_col_val1")
+               # , uiOutput("UI_msr_col_val2")
+
                #
                , h4("2.A.2. Define Columns, Lake Areas")
                , textInput("col_area_depth"

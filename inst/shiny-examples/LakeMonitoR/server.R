@@ -24,9 +24,141 @@ shinyServer(function(input, output) {
   # Misc Names ####
   output$fn_input_display <- renderText({input$fn_input})
 
+  # UI ----
+
+  ## UI, msr ----
+  output$UI_msr_col_datetime <- renderUI({
+    str_col <- "Input, Measurement, DateTime"
+    selectInput("msr_col_datetime"
+                , label = str_col
+                , choices = c("", names(df_import()))
+                , selected = "Date_Time"
+                , multiple = FALSE)
+  })## UI_msr_col_datetime
+
+  output$UI_msr_col_depth <- renderUI({
+    str_col <- "Input, Measurement, Depth (m)"
+    selectInput("msr_col_depth"
+                , label = str_col
+                , choices = c("", names(df_import()))
+                , selected = "Depth_m"
+                , multiple = FALSE)
+  })## UI_msr_col_depth
+
+  output$UI_msr_col_val1 <- renderUI({
+    str_col <- "Input, Measurement, Value 1 (Temp)"
+    selectInput("msr_col_val1"
+                , label = str_col
+                , choices = c("", names(df_import()))
+                , selected = "Water_Temp_C"
+                , multiple = FALSE)
+  })## UI_msr_col_val1
+
+  output$UI_msr_col_val2 <- renderUI({
+    str_col <- "Input, Measurement, Value 2 (DO)"
+    selectInput("msr_col_val2"
+                , label = str_col
+                , choices = c("", names(df_import()))
+                , selected = "DO_conc"
+                , multiple = FALSE)
+  })## UI_msr_col_val2
+
+  ## UI, area ----
+
+  output$UI_area_col_depth <- renderUI({
+    str_col <- "Input, Area, Depth (m)"
+    selectInput("area_col_depth"
+                , label = str_col
+                , choices = c("", names(df_import2()))
+                , selected = "Contour_Depth"
+                , multiple = FALSE)
+  })## UI_area_col_depth
+
+  output$UI_area_col_area <- renderUI({
+    str_col <- "Input, Area, Area (m2)"
+    selectInput("area_col_area"
+                , label = str_col
+                , choices = c("", names(df_import2()))
+                , selected = "Area"
+                , multiple = FALSE)
+  })## UI_area_col_area
+
+
+  ## UI, msrnodepth ----
+
+  output$UI_msrnodepth_col_depth <- renderUI({
+    str_col <- "Input, Measure No Depth, DateTime"
+    selectInput("msrnodepth_col_depth"
+                , label = str_col
+                , choices = c("", names(df_import3()))
+                , selected = "Date_Time"
+                , multiple = FALSE)
+  })## UI_msrnodepth_col_depth
+
+  output$UI_msrnodepth_col_area <- renderUI({
+    str_col <- "Input, Measure No Depth, Value"
+    selectInput("msrnodepth_col_area"
+                , label = str_col
+                , choices = c("", names(df_import3()))
+                , selected = "Wind"
+                , multiple = FALSE)
+  })## UI_msrnodepth_col_area
+
+
+
+  ## UI, plot ----
+  output$UI_plot_col_datetime <- renderUI({
+    str_col <- "Plot, Measurement, DateTime"
+    selectInput("plot_col_datetime"
+                , label = str_col
+                , choices = c("", names(df_import()))
+                , selected = "Date_Time"
+                , multiple = FALSE)
+  })## UI_plot_col_datetime
+
+  output$UI_plot_col_depth <- renderUI({
+    str_col <- "Plot, Measurement, Depth (m)"
+    selectInput("plot_col_depth"
+                , label = str_col
+                , choices = c("", names(df_import()))
+                , selected = "Depth_m"
+                , multiple = FALSE)
+  })## UI_plot_col_depth
+
+  output$UI_plot_col_val1 <- renderUI({
+    str_col <- "Plot, Measurement, Value 1 (Temp)"
+    selectInput("plot_col_val1"
+                , label = str_col
+                , choices = c("", names(df_import()))
+                , selected = "Water_Temp_C"
+                , multiple = FALSE)
+  })## UI_plot_col_val1
+
+  output$UI_plot_col_val2 <- renderUI({
+    str_col <- "Plot, Measurement, Value 2 (DO)"
+    selectInput("plot_col_val2"
+                , label = str_col
+                , choices = c("", names(df_import()))
+                , selected = "DO"
+                , multiple = FALSE)
+  })## UI_plot_col_val2
+
+  output$UI_plot_col_val3 <- renderUI({
+    str_col <- "Plot, Measurement, Value 2 (WSPD)"
+    selectInput("plot_col_val2"
+                , label = str_col
+                , choices = c("", names(df_import3()))
+                , selected = "WSPD"
+                , multiple = FALSE)
+  })## UI_plot_col_val3
+
+
+
+
+
+
     # CALCULATE ----
 
-  # df_import ####
   output$df_import_DT <- renderDT({
     # input$df_import will be NULL initially. After the user selects
     # and uploads a file, it will be a data frame with 'name',
@@ -786,7 +918,7 @@ shinyServer(function(input, output) {
         # Plot
         fn_p_ot <- file.path(path_results, "plot_oxythermal.png")
         #
-        if(qc_data_rows == 0) {
+        if (qc_data_rows == 0) {
           # bad plot
           p_ot <- ggplot2::ggplot() +
             ggplot2::labs(title = "Oxythermal"
@@ -802,7 +934,7 @@ shinyServer(function(input, output) {
                                   , col_temp = col_measure
                                   , col_do = col_measure2
                                   , thresh_temp = thresh_temp
-                                  , operator_temp= operator_temp
+                                  , operator_temp = operator_temp
                                   , thresh_do = thresh_do
                                   , operator_do = operator_do
                                   , lab_datetime = lab_datetime
@@ -1152,7 +1284,7 @@ shinyServer(function(input, output) {
                             , subtitle = "ERROR") +
               ggplot2::theme_void()
             #
-            ggplot2::ggsave(filename = fn_rLA_cb, plot = p_rLA_cb)
+            ggplot2::ggsave(filename = fn_p_rLA_cb, plot = p_rLA_cb)
           } ## error ~ END
           )## tryCatch ~ END
 
@@ -1318,6 +1450,25 @@ shinyServer(function(input, output) {
                                   , names_from = "Layer"
                                   , names_sort = TRUE
                                   , values_from = "min")
+
+        # QC,
+        # might not have all layers (Epi, Meta, Hypo)
+        # Add as NA if missing
+        qc_col_epi  <- "Epi"  %in% names(layers_min)
+        qc_col_meta <- "Meta" %in% names(layers_min)
+        qc_col_hypo <- "Hypo" %in% names(layers_min)
+
+        if (!qc_col_epi) {
+          layers_min[, "Epi"] <- NA_real_
+        }
+        if (!qc_col_meta) {
+          layers_min[, "Meta"] <- NA_real_
+        }
+        if (!qc_col_hypo) {
+          layers_min[, "Hypo"] <- NA_real_
+        }
+
+
 
         layers_min[, "diff_EH"] <- layers_min[, "Hypo"] - layers_min[, "Epi"]
 

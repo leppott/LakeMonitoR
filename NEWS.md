@@ -4,7 +4,20 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-02-10 14:12:23
+    #> Last Update: 2023-08-17 16:57:21.743107
+
+# LakeMonitoR 1.0.0.9013
+
+Release - 2023-08-17
+
+- fix: rLakeAnalyzer plot center buoyancy plot name incorrect
+
+  - CSV instead of PNG so ggsave failed
+
+- fix: rLakeAnalyzer layers if not defined
+
+- refactor: Add hooks in Shiny for selectInput boxes for column
+  selections to use data instead of free text, Issue \#11
 
 # LakeMonitoR 1.0.0.9012
 
